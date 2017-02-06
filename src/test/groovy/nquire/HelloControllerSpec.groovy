@@ -15,8 +15,11 @@ class HelloControllerSpec extends Specification {
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
+    void "test index"() {
+        when:
+        controller.index()
+
+        then:
+        response.text == "Hello World!"
     }
 }
