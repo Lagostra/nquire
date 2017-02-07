@@ -3,6 +3,9 @@ Thumbs.db
 .gradle
 build/
 classes/
+grails-app/conf/application-development.yml
+grails-app/conf/application-production.yml
+grails-app/conf/application-test.yml
 .idea
 *.iml
 *.ipr
