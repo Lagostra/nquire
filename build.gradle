@@ -32,6 +32,8 @@ dependencyManagement {
     applyMavenExclusions false
 }
 
+ext['tomcat.version'] = '7.0.59'
+
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-logging"
     compile "org.springframework.boot:spring-boot-autoconfigure"
@@ -63,4 +65,8 @@ bootRun {
 assets {
     minifyJs = true
     minifyCss = true
+}
+
+war {
+    archiveName "nquire.war"
 }
