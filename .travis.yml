@@ -4,7 +4,7 @@ branches:
   - master
 script: "./grailsw test-app"
 addons:
-  ssh_known_hosts: 
+  ssh_known_hosts: nquire.andreassen.info
 before_deploy:
   - openssl aes-256-cbc -K $encrypted_01d828e8bf7c_key -iv $encrypted_01d828e8bf7c_iv -in travis_deploy.enc -out /tmp/travis_deploy -d
   - eval "$(ssh-agent -s)"
