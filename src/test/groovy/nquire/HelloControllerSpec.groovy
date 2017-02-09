@@ -14,12 +14,4 @@ class HelloControllerSpec extends Specification {
 
     def cleanup() {
     }
-
-    void "test index"() {
-        when:
-        controller.index()
-
-        then:
-        response.text == "Hello World!"
-    }
 }
