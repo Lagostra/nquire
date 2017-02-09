@@ -14,11 +14,11 @@ deploy:
 - provider: script
   skip_cleanup: true
   #script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/* nquire@nquire.andreassen.info:/home/nquire/test
-  script: scp $TRAVIS_BUILD_DIR/build/libs/nquire.war nquire@nquire.andreassen.info:/tmp/
+  script: scp $TRAVIS_BUILD_DIR/build/libs/nquire.war nquire@nquire.andreassen.info:/home/nquire/deploy_temp/
   on:
     branch: master
 - provider: script
   skip_cleanup: true
-  script: mv /tmp/nquire.war /var/lib/tomcat7/webapps/ROOT.war
+  script: mv /home/nquire/deploy_temp/nquire.war /var/lib/tomcat7/webapps/ROOT.war
   on:
     branch: master
