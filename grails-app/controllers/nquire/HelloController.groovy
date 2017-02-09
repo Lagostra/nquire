@@ -3,6 +3,6 @@ package nquire
 class HelloController {
 
     def index() {
-        render("Hello World!");
+        render("Hello World! We now deploy automatically!");
     }
 }
