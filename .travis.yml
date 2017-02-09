@@ -11,14 +11,14 @@ before_deploy:
   - chmod 600 /tmp/travis_deploy
   - ssh-add /tmp/travis_deploy
 deploy:
-  provider: script
+- provider: script
   skip_cleanup: true
   #script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/* nquire@nquire.andreassen.info:/home/nquire/test
   script: scp $TRAVIS_BUILD_DIR/build/libs/nquire.war nquire@nquire.andreassen.info:/tmp/
   on:
     branch: master
-  provider: script
-    skip_cleanup: true
-    script: mv /tmp/nquire.war /var/lib/tomcat7/webapps/ROOT.war
-    on:
-      branch: master
+- provider: script
+  skip_cleanup: true
+  script: mv /tmp/nquire.war /var/lib/tomcat7/webapps/ROOT.war
+  on:
+    branch: master
