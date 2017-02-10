@@ -19,8 +19,6 @@ deploy:
     branch: master
 - provider: script
   skip_cleanup: true
-  script: ssh nquire@nquire.andreassen.info 'rm -f /home/nquire/deploy_temp/nquire.war.old &&
-          mv /var/lib/tomcat7/webapps/ROOT.war /home/nquire/deploy_temp/nquire.war.old &&
-          mv /home/nquire/deploy_temp/nquire.war /var/lib/tomcat7/webapps/ROOT.war'
+  script: ssh nquire@nquire.andreassen.info 'sudo /home/nquire/deploy_temp/deploy'
   on:
     branch: master
