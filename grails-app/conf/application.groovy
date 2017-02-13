@@ -26,3 +26,5 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 	[pattern: '/**',             filters: 'JOINED_FILTERS']
 ]
 
+rememberMe.cookieName = 'nquire_remember_me'
+rememberMe.key = "jkl893ajgah80"
