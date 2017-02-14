@@ -17,6 +17,29 @@ var pdfDoc = null,
  * Get page info from document, resize canvas accordingly, and render page.
  * @param num Page number.
  */
+
+
+//Adding event listener for arrow keys
+document.addEventListener('keydown', function (event) {
+    var direction;
+    var keyCodes = {
+        37: 'left',
+        39: 'right',
+        38: 'up',
+        40: 'down'
+    }
+    var keyCode = event.keyCode;
+
+    if (keyCode == 37 || keyCode == 38 || keyCode == 39 || keyCode == 40){
+        direction = keyCodes[keyCode];
+    }
+
+    console.log(direction)
+});
+
+
+
+
 function renderPage(num) {
 
     if(renderTask){
