@@ -2,15 +2,13 @@
  * Created by Lavrans on 14.02.2017.
  */
 var url = window.grailsSupport.PDF;
-
+var renderTask = null;
 
 // The workerSrc property shall be specified.
 PDFJS.workerSrc = window.grailsSupport.PDFWorker;
 
 var pdfDoc = null,
     pageNum = 1,
-    pageRendering = false,
-    pageNumPending = null,
     scale = 0.8,
     canvas = document.getElementById('the-canvas'),
     ctx = canvas.getContext('2d');
@@ -20,7 +18,11 @@ var pdfDoc = null,
  * @param num Page number.
  */
 function renderPage(num) {
-    pageRendering = true;
+
+    if(renderTask){
+        renderTask.cancel();
+        renderTask = null;
+    }
     // Using promise to fetch the page
     pdfDoc.getPage(num).then(function(page) {
         var viewport = page.getViewport(scale);
@@ -32,33 +34,9 @@ function renderPage(num) {
             canvasContext: ctx,
             viewport: viewport
         };
-        var renderTask = page.render(renderContext);
-
-        // Wait for rendering to finish
-        renderTask.promise.then(function() {
-            pageRendering = false;
-            if (pageNumPending !== null) {
-                // New page rendering is pending
-                renderPage(pageNumPending);
-                pageNumPending = null;
-            }
+        renderTask = page.render(renderContext).promise.catch(function (reason) {
         });
-    });
-
-    // Update page counters
-    //document.getElementById('page_num').textContent = pageNum;
-}
-
-/**
- * If another page rendering in progress, waits until the rendering is
- * finised. Otherwise, executes rendering immediately.
- */
-function queueRenderPage(num) {
-    if (pageRendering) {
-        pageNumPending = num;
-    } else {
-        renderPage(num);
-    }
+    })
 }
 
 /**
@@ -69,7 +47,7 @@ function onPrevPage() {
         return;
     }
     pageNum--;
-    queueRenderPage(pageNum);
+    renderPage(pageNum);
 }
 //document.getElementById('prev').addEventListener('click', onPrevPage);
 
@@ -81,7 +59,7 @@ function onNextPage() {
         return;
     }
     pageNum++;
-    queueRenderPage(pageNum);
+    renderPage(pageNum);
 }
 //document.getElementById('next').addEventListener('click', onNextPage);
 
