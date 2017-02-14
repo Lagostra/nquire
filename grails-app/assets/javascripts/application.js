@@ -9,6 +9,8 @@
 //= require bootstrap
 //= require_tree .
 //= require_self
+//= require pdf
+//= require pdf.worker
 
 if (typeof jQuery !== 'undefined') {
     (function($) {
