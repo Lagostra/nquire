@@ -34,3 +34,5 @@ rememberMe.cookieName = 'nquire_remember_me'
 rememberMe.key = "jkl893ajgah80" // Set custom cookie salting key for security
 
 grails.plugin.springsecurity.password.algorithm = 'bcrypt' // Set password hashing algorithm to bcrypt for security
+grails.plugin.springsecurity.rejectIfNoRule = false // Disable pessimistic lockdown
+grails.plugin.springsecurity.fii.rejectPublicInvocations = false
