@@ -10,7 +10,7 @@
                         Register
                     </div>
                     <div class="panel-body">
-                        <g:form name="registerForm" url="[controller:'user', action:'save']">
+                        <g:form name="registerForm" url="[controller:'user', action:'save']" onsubmit="return validateRegisterForm()" >
                             <div class="form-group">
                                 <label for="firstName">First name:</label>
                                 <g:textField name="firstName" class="form-control" id="firstName"></g:textField>
@@ -18,6 +18,10 @@
                             <div class="form-group">
                                 <label for="lastName">Last name:</label>
                                 <g:textField name="lastName" class="form-control" id="lastName"></g:textField>
+                            </div>
+                            <div class="form-group">
+                                <label for="username">Username:</label>
+                                <g:textField name="username" class="form-control" id="username"></g:textField>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email:</label>
