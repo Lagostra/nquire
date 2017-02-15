@@ -18,7 +18,7 @@ class UserController {
     }
 
     def save() {
-        if(isLoggedIn) {
+        if(isLoggedIn()) {
             return;
         }
 
