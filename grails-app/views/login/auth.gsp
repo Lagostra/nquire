@@ -13,7 +13,7 @@
                     <g:if test='${flash.message}'>
                         <div class="login_message">${flash.message}</div>
                     </g:if>
-                    <form action="${postUrl ?: '/login/authenticate'}" name="loginForm" id="loginForm">
+                    <form action="${postUrl ?: '/login/authenticate'}" name="loginForm" id="loginForm" method="POST">
                         <div class="form-group">
                             <label for="username">Username:</label>
                             <g:textField name="${usernameParameter ?: 'username'}" class="form-control" id="username"></g:textField>
