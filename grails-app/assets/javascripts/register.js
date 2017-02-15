@@ -1,6 +1,4 @@
-function validateRegisterForm() {
-    var form = document.forms['registerForm'];
-
+function validateNameAndEmail(form) {
     if(form['firstName'].value == "") {
         alert("Please fill out first name");
         return false;
@@ -10,6 +8,16 @@ function validateRegisterForm() {
         alert("Please fill out last name");
         return false;
     }
+
+    if(form['email'].value == "") {
+        alert("Please fill out E-mail address");
+        return false;
+    }
+    return true;
+}
+
+function validateRegisterForm() {
+    var form = document.forms['registerForm'];
 
     if(form['username'].value == "") {
         alert("Please fill out username");
@@ -21,8 +29,7 @@ function validateRegisterForm() {
         return false;
     }
 
-    if(form['email'].value == "") {
-        alert("Please fill out E-mail address");
+    if(!validateNameAndEmail(form)) {
         return false;
     }
 
@@ -35,4 +42,11 @@ function validateRegisterForm() {
         alert("Passwords do not match.");
         return false;
     }
+    return true;
+}
+
+function validateEditForm() {
+    var form = document.forms['editForm'];
+
+    return validateNameAndEmail(form);
 }
