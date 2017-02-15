@@ -6,6 +6,8 @@ import nquire.UserRole;
 
 class UserController {
 
+    static allowedMethods = [register: 'GET', save: 'POST']
+
     def index() {}
 
     def register() {
