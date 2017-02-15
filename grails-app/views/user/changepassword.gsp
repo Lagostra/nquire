@@ -7,24 +7,24 @@
     <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Edit profile information
+                Change password
             </div>
             <div class="panel-body">
                 <g:if test="${message}">
                     <div class="info-message">${message}</div>
                 </g:if>
-                <g:form name="registerForm" url="[controller:'user', action:'edit_save']" onsubmit="return validateEditForm()" >
+                <g:form name="passwordForm" url="[controller:'user', action:'password_save']" onsubmit="return validatePasswordForm()" >
                     <div class="form-group">
-                        <label for="firstName">First name:</label>
-                        <g:textField name="firstName" class="form-control" id="firstName" value="${firstName}"></g:textField>
+                        <label for="oldPassword">Old password:</label>
+                        <g:passwordField name="oldPassword" class="form-control" id="oldPassword"></g:passwordField>
                     </div>
                     <div class="form-group">
-                        <label for="lastName">Last name:</label>
-                        <g:textField name="lastName" class="form-control" id="lastName"  value="${lastName}"></g:textField>
+                        <label for="password">New password:</label>
+                        <g:passwordField name="password" class="form-control" id="password"></g:passwordField>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email:</label>
-                        <g:textField name="email" class="form-control" id="email"  value="${email}"></g:textField>
+                        <label for="password-confirm">Confirm new password:</label>
+                        <g:passwordField name="password-confirm" class="form-control" id="password-confirm"></g:passwordField>
                     </div>
                     <div class="form-group pull-right">
                         <input type="submit" class="btn btn-primary" />

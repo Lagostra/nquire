@@ -16,6 +16,19 @@ function validateNameAndEmail(form) {
     return true;
 }
 
+function validatePassword(form) {
+    if(form['password'].value.length < 6) {
+        alert("Password must be at least 6 characters long.");
+        return false;
+    }
+
+    if(form['password'].value != form['password-confirm'].value) {
+        alert("Passwords do not match.");
+        return false;
+    }
+    return true;
+}
+
 function validateRegisterForm() {
     var form = document.forms['registerForm'];
 
@@ -33,15 +46,10 @@ function validateRegisterForm() {
         return false;
     }
 
-    if(form['password'].value.length < 6) {
-        alert("Password must be at least 6 characters long.");
+    if(!validatePassword(form)) {
         return false;
     }
 
-    if(form['password'].value != form['password-confirm'].value) {
-        alert("Passwords do not match.");
-        return false;
-    }
     return true;
 }
 
@@ -49,4 +57,15 @@ function validateEditForm() {
     var form = document.forms['editForm'];
 
     return validateNameAndEmail(form);
+}
+
+function validatePasswordForm() {
+    var form = document.forms['passwordForm'];
+
+    if(form['oldPassword'].value.length < 6) {
+        alert("Please enter old password.");
+        return false;
+    }
+
+    return validatePassword(form);
 }
