@@ -9,6 +9,7 @@ class UserController {
     static allowedMethods = [register: 'GET', save: 'POST', edit: 'GET', edit_save: 'POST']
 
     def springSecurityService;
+    def passwordEncoder;
 
     def index() {}
 
@@ -53,10 +54,16 @@ class UserController {
             return;
         }
 
+        def message = null;
+
+        if(params.status == '1') {
+            message = "Your changes were saved successfully";
+        }
+
         User user = getAuthenticatedUser();
 
-        render(view: "edit", model: [firstName: user.firstName, lastName: user.lastName, email: user.email]);
-        //render(view: "edit", model: [firstName: "Test2", lastName: "Testsson", email: "test@test.com"]);
+        render(view: "edit", model: [firstName: user.firstName, lastName: user.lastName,
+                                     email: user.email, message: message]);
     }
 
     def edit_save() {
@@ -81,8 +88,54 @@ class UserController {
         user.email = email;
         user.save(flush: true);
 
-        springSecurityService.reauthenticate(user.username)
+        springSecurityService.reauthenticate(user.username);
 
-        redirect(uri: "/");
+        redirect(action: 'edit', params: [status: 1]);
+    }
+
+    def change_password() {
+        if(!isLoggedIn()) {
+            redirect(uri: "/");
+            return;
+        }
+
+        def message = null;
+
+        if(params.status == '1') {
+            message = "Old password did not match our records.";
+        } else if(params.status == '2') {
+            message = "Password changed successfully!";
+        }
+
+        render(view: 'changepassword', model: [message: message])
+    }
+
+    def password_save() {
+        if(!isLoggedIn()) {
+            redirect(uri: "/");
+            return;
+        }
+
+        def password = params.password;
+        def oldPassword = params.oldPassword;
+
+        if(password.length() < 6) {
+            // Invalid request
+            response.sendError(400);
+            return;
+        }
+
+        User user = getAuthenticatedUser();
+        if(!passwordEncoder.isPasswordValid(user.password, oldPassword, null)) {
+            redirect(action: 'change_password', params: [status: 1]);
+            return;
+        }
+
+        user.password = password;
+        user.save(flush: true);
+
+        springSecurityService.reauthenticate(user.username);
+
+        redirect(action: 'change_password', params: [status: 2]);
     }
 }
