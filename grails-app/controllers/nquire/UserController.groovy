@@ -6,7 +6,8 @@ import nquire.UserRole;
 
 class UserController {
 
-    static allowedMethods = [register: 'GET', save: 'POST', edit: 'GET', edit_save: 'POST']
+    static allowedMethods = [register: 'GET', save: 'POST', edit: 'GET', edit_save: 'POST',
+                             change_password: 'GET', password_save: 'POST']
 
     def springSecurityService;
     def passwordEncoder;
