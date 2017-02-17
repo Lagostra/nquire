@@ -15,7 +15,7 @@ class UserController {
     def index() {}
 
     def register() {
-        if(isLoggedIn()) {
+        if(loggedIn) {
             redirect(uri: "/");
             return;
         }
@@ -24,7 +24,7 @@ class UserController {
     }
 
     def save() {
-        if(isLoggedIn()) {
+        if(loggedIn) {
             redirect(uri: "/");
             return;
         }

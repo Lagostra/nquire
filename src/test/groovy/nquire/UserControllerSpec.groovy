@@ -17,7 +17,8 @@ import nquire.UserRole;
 class UserControllerSpec extends Specification {
 
     def setup() {
-        UserController.metaClass.isLoggedIn = {-> false};
+        UserController.metaClass.getLoggedIn = {-> false};
+        Role lecturerRole = new Role(authority: 'ROLE_LECTURER').save(failOnError: true)
     }
 
     def cleanup() {
@@ -48,7 +49,7 @@ class UserControllerSpec extends Specification {
     def "test UserController.register accepts GET requests"() {
         when:
         request.method = 'GET'
-        controller.index()
+        controller.register()
 
         then:
         response.status == 200
@@ -67,7 +68,7 @@ class UserControllerSpec extends Specification {
         method << ['GET', 'DELETE', 'PUT']
     }
 
-    def "test UserController.save accepts POST requests"() {
+    def "test UserController.save"() {
         controller.params.username = "test";
         controller.params.firstName = "Test";
         controller.params.lastName = "Testsson";
@@ -80,5 +81,7 @@ class UserControllerSpec extends Specification {
 
         then:
         response.status == 302
+        User.count() == 1
+        UserRole.count() == 1
     }
 }
