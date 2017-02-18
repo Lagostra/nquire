@@ -134,4 +134,7 @@ environments:
                 testWhileIdle: true
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
-                defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+                defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED|
+
+        grails:
+            serverURL: https://nquire.andreassen.info
