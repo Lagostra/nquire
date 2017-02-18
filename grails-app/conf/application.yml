@@ -116,7 +116,7 @@ environments:
             password: TbUg5cmodyHtpD60pyDY
 
             dbCreate: update
-            url: jdbc:mysql://127.0.0.1:3306/nquire
+            url: jdbc:mysql://127.0.0.1:3306/nquire?useSSL=false
             properties:
                 jmxEnabled: true
                 initialSize: 5
