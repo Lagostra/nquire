@@ -12,12 +12,9 @@ class UserController {
     def springSecurityService;
     def passwordEncoder;
 
-    def index() {}
-
     def register() {
         if(loggedIn) {
             redirect(uri: "/");
-            return;
         }
 
         render(view: "register");
@@ -50,9 +47,8 @@ class UserController {
     }
 
     def edit() {
-        if(!isLoggedIn()) {
+        if(!loggedIn) {
             redirect(uri: "/");
-            return;
         }
 
         def message = null;
@@ -61,16 +57,15 @@ class UserController {
             message = "Your changes were saved successfully";
         }
 
-        User user = getAuthenticatedUser();
+        User user = authenticatedUser;
 
         render(view: "edit", model: [firstName: user.firstName, lastName: user.lastName,
                                      email: user.email, message: message]);
     }
 
     def edit_save() {
-        if(!isLoggedIn()) {
+        if(!loggedIn) {
             redirect(uri: "/");
-            return;
         }
 
         def firstName = params.firstName;
@@ -83,7 +78,7 @@ class UserController {
             return;
         }
 
-        User user = getAuthenticatedUser();
+        User user = authenticatedUser;
         user.firstName = firstName;
         user.lastName = lastName;
         user.email = email;
@@ -95,9 +90,8 @@ class UserController {
     }
 
     def change_password() {
-        if(!isLoggedIn()) {
+        if(!loggedIn) {
             redirect(uri: "/");
-            return;
         }
 
         def message = null;
@@ -112,9 +106,8 @@ class UserController {
     }
 
     def password_save() {
-        if(!isLoggedIn()) {
+        if(!loggedIn) {
             redirect(uri: "/");
-            return;
         }
 
         def password = params.password;
@@ -126,7 +119,7 @@ class UserController {
             return;
         }
 
-        User user = getAuthenticatedUser();
+        User user = authenticatedUser;
         if(!passwordEncoder.isPasswordValid(user.password, oldPassword, null)) {
             redirect(action: 'change_password', params: [status: 1]);
             return;
