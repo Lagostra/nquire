@@ -3,6 +3,8 @@ package nquire
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 
+import nquire.Presentation
+
 @EqualsAndHashCode(includes='username')
 @ToString(includes='username', includeNames=true, includePackage=false)
 class User implements Serializable {
@@ -46,7 +48,10 @@ class User implements Serializable {
 		username blank: false, unique: true
 	}
 
+	static hasMany = [presentations: Presentation]
+
 	static mapping = {
 		password column: '`password`'
+		presentations column: 'Owner_Id'
 	}
 }
