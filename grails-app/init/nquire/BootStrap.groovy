@@ -10,8 +10,9 @@ class BootStrap {
 
     def init = { servletContext ->
         // Create lecturer role if it does not exist in database
-        if(Role.find(new Role(authority: 'ROLE_LECTURER')) == null)
-            Role lecturerRole = new Role(authority: 'ROLE_LECTURER').save(failOnError: true)
+        Role lecturerRole = Role.find(new Role(authority: 'ROLE_LECTURER'));
+        if(lecturerRole == null)
+            lecturerRole = new Role(authority: 'ROLE_LECTURER').save(failOnError: true)
 
         if(Environment.current == Environment.DEVELOPMENT) {
             // Create test user if in development environment
