@@ -63,6 +63,10 @@ grails:
             maxsize: 1000
     controllers:
         defaultScope: singleton
+
+        upload:
+            maxFileSize: 20971520 # 20 MB
+            maxRequestSize: 20971520
     converters:
         encoding: UTF-8
     views:
@@ -101,6 +105,8 @@ environments:
             password:
             dbCreate: create-drop
             url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+
+        presentationRoot: /
     test:
         dataSource:
             driverClassName: org.h2.Driver
@@ -135,6 +141,8 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED|
+
+        presentationRoot: /app-res/presentations
 
         grails:
             serverURL: https://nquire.andreassen.info
