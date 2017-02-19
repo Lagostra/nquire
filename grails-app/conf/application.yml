@@ -142,7 +142,7 @@ environments:
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED|
 
-        presentationRoot: /app-res/presentations
+        presentationRoot: /app-res/presentations/
 
         grails:
             serverURL: https://nquire.andreassen.info
