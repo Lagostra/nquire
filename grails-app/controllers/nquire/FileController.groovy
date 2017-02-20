@@ -36,7 +36,7 @@ class FileController {
         println grailsApplication.config.getProperty('presentationRoot');
 
         User user = authenticatedUser;
-        Presentation pres = new Presentation(title: title, fileName: filename, owner: user).save(flush: true, failOnError: true);
+        Presentation pres = new Presentation(title: title, fileName: filename, owner: user).save(flush: true);
 
         redirect(action: 'index');
     }
