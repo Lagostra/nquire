@@ -33,7 +33,6 @@ class FileController {
 
         //f.transferTo(new File("D:\\Eivind\\workspaces\\Java2\\presentations\\test.pdf"));
         f.transferTo(new File(grailsApplication.config.getProperty('presentationRoot') + filename + ".pdf"));
-        println grailsApplication.config.getProperty('presentationRoot');
 
         User user = authenticatedUser;
         Presentation pres = new Presentation(title: title, fileName: filename, owner: user).save(flush: true);
