@@ -16,8 +16,7 @@
                 <li><a href="#">App version:
                     <g:meta name="info.app.version"/></a>
                 </li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Grails version:
+                <li role= i><a href="#">Grails version:
                     <g:meta name="info.app.grailsVersion"/></a>
                 </li>
                 <li><a href="#">Groovy version: ${GroovySystem.getVersion()}</a></li>
