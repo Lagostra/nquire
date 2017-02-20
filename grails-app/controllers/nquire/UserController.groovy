@@ -41,7 +41,12 @@ class UserController {
         User user = new User(username: username, firstName: firstName, lastName: lastName,
                             email: email, password: password).save();
 
-        UserRole.create(user, Role.findByAuthority('ROLE_LECTURER'));
+        UserRole.create(user, Role.findByAuthority("ROLE_LECTURER"));
+
+        UserRole.withSession {
+            it.flush();
+            it.clear();
+        }
 
         redirect(controller: 'login');
     }
