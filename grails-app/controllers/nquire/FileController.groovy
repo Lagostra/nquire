@@ -46,13 +46,13 @@ class FileController {
 
         if(pres == null) {
             // Presentation does not exist
-            request.sendError(404);
+            response.sendError(404);
             return;
         }
 
         if(pres.owner != authenticatedUser) {
             // Presentation is not owned by signed in user
-            request.sendError(403);
+            response.sendError(403);
             return;
         }
 
