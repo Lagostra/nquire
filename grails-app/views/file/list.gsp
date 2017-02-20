@@ -15,7 +15,7 @@
     </g:if>
     <g:each in="${presentations}">
         <div class="col-md-3">
-            <g:link action="show" id="${it.id}" class="btn btn-default btn-block" >
+            <g:link action="get" id="${it.id}" class="btn btn-default btn-block" >
                 ${it.title}
             </g:link>
         </div>

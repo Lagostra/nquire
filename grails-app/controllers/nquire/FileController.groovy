@@ -9,7 +9,7 @@ import nquire.User;
 @Secured('ROLE_LECTURER')
 class FileController {
 
-    static allowedMethods = [index: 'GET', upload: 'GET', save: 'POST', show: 'GET'];
+    static allowedMethods = [index: 'GET', upload: 'GET', save: 'POST', get: 'GET'];
 
     def index() {
         render(view: 'list', model: [presentations: authenticatedUser.presentations]);
@@ -41,7 +41,7 @@ class FileController {
         redirect(action: 'index');
     }
 
-    def show() {
+    def get() {
         Presentation pres = Presentation.findById(params.id);
 
         if(pres == null) {
