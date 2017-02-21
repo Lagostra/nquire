@@ -9,7 +9,7 @@
     </div>
 </div>
 <div class="row margin-top-20">
-    <g:if test="${presentations.size() == 0}">
+    <g:if test="${presentations.size() == 0}"><!---->
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default">
                 <div class="panel-body">
