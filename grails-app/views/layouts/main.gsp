@@ -31,10 +31,38 @@
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="/">Home</a></li>
-                    <li><g:link controller="file" action="index" >Presentations</g:link></li>
+                    <sec:ifAllGranted roles="ROLE_LECTURER">
+                        <li><g:link controller="file" action="index" >Presentations</g:link></li>
+                    </sec:ifAllGranted>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <sec:ifLoggedIn>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <sec:loggedInUserInfo field='fullName'/>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><g:link controller="user" action="edit">Edit profile</g:link></li>
+                                <li><g:link controller="user" action="change_password">Change password</g:link></li>
+                                <li>
+                                    <g:link controller="logout" action="index" onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">Log out</g:link>
+                                </li>
+                                <g:form id="logout-form" url="[action:'index',controller:'logout']" method="POST" style="display: none;">
+                                </g:form>
+                            </ul>
+                        </li>
+                    </sec:ifLoggedIn>
+                    <sec:ifNotLoggedIn>
+                        <li><g:link controller="login" action="index" >Log in</g:link></li>
+                        <li><g:link controller="user" action="register" >Register</g:link></li>
+                    </sec:ifNotLoggedIn>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
+
     </nav>
 
     <div class="container-fluid">
