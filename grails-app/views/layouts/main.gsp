@@ -17,6 +17,7 @@
     <g:layoutHead/>
 </head>
 <body>
+<<<<<<< HEAD
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -44,6 +45,6 @@
         <div class="footer" role="contentinfo"></div>
 
         <asset:javascript src="application.js"/>
-    <div>
+    </div>
 </body>
 </html>
