@@ -49,7 +49,7 @@
             </form>
         </div>
     </nav>
-s
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">
@@ -58,9 +58,7 @@ s
             <div class="col-md-8">
                 swag
             </div>
-
         </div>
-
 
 
         <g:layoutBody/>
@@ -68,6 +66,6 @@ s
         <div class="footer" role="contentinfo"></div>
 
         <asset:javascript src="application.js"/>
-    <div>
+    </div>
 </body>
 </html>
