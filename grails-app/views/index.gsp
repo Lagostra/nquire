@@ -41,13 +41,5 @@
         </footer>
     </div> <!-- /container -->
 
-    <div class="container-fluid">
-        <g:layoutBody/>
-
-        <div class="footer" role="contentinfo"></div>
-
-        <asset:javascript src="application.js"/>
-    </div>
-
 </body>
 </html>
