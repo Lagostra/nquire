@@ -91,14 +91,13 @@ class FileController {
     }
 
     private BufferedImage createThumbnail(File pdfDocument) {
+        PDDocument pdDocument;
         try {
-            PDDocument pdDocument = PDDocument.load(pdfDocument);
+            pdDocument = PDDocument.load(pdfDocument);
         } catch(FileNotFoundException e) {
             // Can't find the specified pdf. 
             return null;
         }
-
-        log.error(Integer.toString(pdDocument.getNumberOfPages()))
 
         PDFRenderer renderer = new PDFRenderer(pdDocument);
 
