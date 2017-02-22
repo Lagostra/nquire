@@ -65,7 +65,7 @@
 
     </nav>
 
-    <div class="container-fluid">
+    <div class="container">
         <g:layoutBody/>
 
         <div class="footer" role="contentinfo"></div>
