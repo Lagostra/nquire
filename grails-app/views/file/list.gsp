@@ -4,8 +4,8 @@
 </head>
 <body>
 <div class="row">
-    <div class="col-md-2">
-        <g:link action="upload" controller="file" class="btn btn-primary btn-lg btn-block">Upload presentation</g:link>
+    <div class="col-md-12">
+        <g:link action="upload" controller="file" class="btn btn-primary btn-lg">Upload presentation</g:link>
     </div>
 </div>
 <div class="row margin-top-20">
