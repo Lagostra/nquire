@@ -29,14 +29,6 @@ class LectureEndpoint implements ServletContextListener {
     void contextInitialized(ServletContextEvent sce) {
         ServletContext servletContext = sce.servletContext
         ServerContainer serverContainer = servletContext.getAttribute("javax.websocket.server.ServerContainer")
-
-        try {
-            // Necessary to make Grails add endpoint in development
-            if(Environment.current == Environment.DEVELOPMENT)
-                serverContainer.addEndpoint(LectureEndpoint)
-        } catch(IOException e) {
-            // TODO Print error in some way
-        }
     }
 
     @Override
