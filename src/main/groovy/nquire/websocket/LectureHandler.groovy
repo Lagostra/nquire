@@ -33,6 +33,8 @@ class LectureHandler {
     public void onMessage(String message, Session userSession) {
         def mObject = new JsonSlurper().parseText(message)
 
+
+
         if(lecturers.contains(userSession)) {
             // The message was sent by a lecturer
 
@@ -48,6 +50,17 @@ class LectureHandler {
         for(Session student : students) {
             student.getAsyncRemote().sendText(message)
         }
+    }
+
+    private sendToAllLecturers(String message) {
+        for(Session lecturer : lecturers) {
+            lecturer.getAsyncRemote().sendText(message)
+        }
+    }
+
+    private sendToAll(String message) {
+        sendToAllStudents(message)
+        sendToAllLecturers(message)
     }
 
     public List getAllUsers() {

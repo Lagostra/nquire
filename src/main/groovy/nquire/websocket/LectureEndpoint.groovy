@@ -17,7 +17,7 @@ import javax.websocket.Session
 import javax.websocket.server.ServerContainer
 import javax.websocket.server.ServerEndpoint
 
-@ServerEndpoint("/lecture")
+@ServerEndpoint("/lectureStream")
 @WebListener
 class LectureEndpoint implements ServletContextListener {
 
@@ -82,6 +82,14 @@ class LectureEndpoint implements ServletContextListener {
     @OnError
     public void onError(Throwable t) {
         // TODO Print error in some way
+    }
+
+    public static boolean addLecture(LectureHandler lecture, int id) {
+        if(lectures.containsKey(id)) {
+            return false
+        }
+        lectures.put(id, lecture)
+        return true
     }
 
     public void closeLecture(int id) {
