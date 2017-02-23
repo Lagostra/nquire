@@ -12,7 +12,7 @@ class Application extends GrailsAutoConfiguration {
     }
 
     @Bean
-    public LectureEndpoint lecture() {
+    public LectureEndpoint lectureStream() {
         return new LectureEndpoint()
     }
 }
