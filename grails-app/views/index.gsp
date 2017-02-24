@@ -20,21 +20,26 @@
         <!-- Example row of columns -->
         <div class="row">
             <div class="col-md-4">
-                <h2>Vanskelighetsgrad</h2>
-                <p></p>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
-                malesuada magna mollis euismod. Donec sed odio dui. </p>
+                <h2>Vanskelighetsgrad.</h2>
+                <p>Gjennom nquire's dynamiske presentasjonsviser kan studenter enkelt få oversikt over
+                presentasjonen, under forelesning. Brukeren kan markere deler av presentasjonen som er
+                utfordrende, slik at foreleser vet hva som trenger videre gjennomgang. Hvis et område blir
+                markert av mange vises dette på forelesers plan, så føler man seg ikke alene om man
+                ikke forstår alt!</p>
                 <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
             </div>
             <div class="col-md-4">
-                <h2>Spørsmål</h2>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                <h2>Spørsmål?</h2>
+                <p>Lurer du på noe under forelesning? Ved bruk av nquire's "ask-feature" kan man stille spørsmål
+                med lav terskel, uten å føle at man sinker forelesningen, eller trenger å snakke høyt i
+                en sal med mange mennesker. </p>
                 <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
             </div>
             <div class="col-md-4">
-                <h2>Fart</h2>
-                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                <h2>Hastighet!</h2>
+                <p>Går forelesningen for fort? Eller kanskje sovner du av kjedsomhet? I nquire kan man
+                med et enkelt klikk gi tilbakemelding på om forelesningen suser av gårde eller snegler seg fram.
+                Dette blir dynamisk kommunisert til foreleser slik at tempoet kan tilpasses fortløpende.</p>
                 <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
             </div>
         </div>
