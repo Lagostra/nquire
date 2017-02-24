@@ -11,7 +11,7 @@
             <h1 class="display-3">nquire</h1>
             <p>Velkommen til <em>nquire!</em> Dette programmet er en av de ledende inovatørene innen undervisning på
             universitetsnivå. Vår visjon for prosjektet er at hver forelesning skal forbedres iterativt,
-            gjennom interaksjon mellom foreleser og sal.</p>
+            basert på tilbakemeldinger fra studentene i salen.</p>
             <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
         </div>
     </div>
