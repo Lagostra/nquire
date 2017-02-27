@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>If you read this, respect</title>
+    <title>nquire</title>
 </head>
 <body>
     <!-- Main jumbotron for a primary marketing message or call to action -->
