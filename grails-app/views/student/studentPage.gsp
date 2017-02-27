@@ -18,7 +18,7 @@
 
 </head>
 <body>
-    <canvas id="the-canvas" style="display:Block"></canvas>
+    <canvas id="the-canvas" style="display:Block; "></canvas>
 
     <asset:javascript src="application.js"/>
     <asset:javascript src="student.js"/>

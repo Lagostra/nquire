@@ -24,29 +24,31 @@ var pdfData = atob(
     'MDAwIG4gCjAwMDAwMDAzODAgMDAwMDAgbiAKdHJhaWxlcgo8PAogIC9TaXplIDYKICAvUm9v' +
     'dCAxIDAgUgo+PgpzdGFydHhyZWYKNDkyCiUlRU9G');
 
-
+//http://stackoverflow.com/questions/12092633/pdf-js-rendering-a-pdf-file-using-a-base64-file-source-instead-of-url
 
 // Disable workers to avoid yet another cross-origin issue (workers need
 // the URL of the script to be loaded, and dynamically loading a cross-origin
 // script does not work).
-// PDFJS.disableWorker = true;
+ PDFJS.disableWorker = true;
 
 // The workerSrc property shall be specified.
 PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 
 // Using DocumentInitParameters object to load binary data.
+
 var loadingTask = PDFJS.getDocument({data: pdfData});
 
-loadingTask.promise.then(function(pdf) {
-    console.log('PDF loaded');
+// Have singeled out the issue to the following line. the loadingtask promise gets resolved twice.
+// the caulprit might be workersrc ipoorting badly into grails, it is not being imported from local storage.
+loadingTask.then(function(pdf) {
+    console.log('PDF loaded:',pdf);
 
     // Fetch the first page
     var pageNumber = 1;
     pdf.getPage(pageNumber).then(function(page) {
-        console.log('Page loaded');
-
+        console.log('Page loaded:',page);
         if (renderTask) {
-            renderTask.cancel();
+            //renderTask.cancel();
         }
 
         var scale = 1;
@@ -63,11 +65,10 @@ loadingTask.promise.then(function(pdf) {
             canvasContext: context,
             viewport: viewport
         };
-        if (!pageRendering){
+
+        if (!pageRendering && !renderTask){
             pageRendering = true;
             renderTask = page.render(renderContext);
-
-
 
             renderTask.promise.then(function () {
                 pageRendering = false;
