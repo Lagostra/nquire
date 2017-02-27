@@ -12,8 +12,18 @@ var main = function(){
 /*From Lecturer.js call this function on event*/
 var addQuestion = function(question) {
     questions.append(question);
+    displayQuestions();
+    notifyNewQuestion();
 }
 
-var
+//show questions on lecturer screen
+var displayQuestions = function () {
+
+}
+
+//notify the lecturer of a new question
+var notifyNewQestion = function(){
+
+}
 
 
