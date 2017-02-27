@@ -7,7 +7,7 @@
 <body>
 <div class="container">
 
-   <div id="questions" class="">
+   <div id="question_container" class="hidden">
       <div class="question">
          <p id="default_question">No questions yet</p> <!-- mulig fjern -->
       </div>

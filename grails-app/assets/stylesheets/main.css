@@ -13,3 +13,8 @@
 .margin-top-20 {
     margin-top: 20px;
 }
+
+.hidden{
+    /*visibility: hidden; */
+    display: none;
+}
