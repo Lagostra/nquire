@@ -13,7 +13,6 @@
     <g:javascript>
         window.grailsSupport = {
             PDFWorker : "${assetPath(src: 'pdf.worker.js')}",
-            PDF : "${assetPath(src: 'test.pdf')}"
         };
     </g:javascript>
 
