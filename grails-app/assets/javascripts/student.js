@@ -3,8 +3,8 @@
  */
 
 
-var url = window.grailsSupport.PDF;
 var renderTask = null;
+var pageRendering = false;
 
 // atob() is used to convert base64 encoded PDF to binary-like data.
 // (See also https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/
@@ -24,6 +24,8 @@ var pdfData = atob(
     'MDAwIG4gCjAwMDAwMDAzODAgMDAwMDAgbiAKdHJhaWxlcgo8PAogIC9TaXplIDYKICAvUm9v' +
     'dCAxIDAgUgo+PgpzdGFydHhyZWYKNDkyCiUlRU9G');
 
+
+
 // Disable workers to avoid yet another cross-origin issue (workers need
 // the URL of the script to be loaded, and dynamically loading a cross-origin
 // script does not work).
@@ -34,6 +36,7 @@ PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 
 // Using DocumentInitParameters object to load binary data.
 var loadingTask = PDFJS.getDocument({data: pdfData});
+
 loadingTask.promise.then(function(pdf) {
     console.log('PDF loaded');
 
@@ -41,6 +44,10 @@ loadingTask.promise.then(function(pdf) {
     var pageNumber = 1;
     pdf.getPage(pageNumber).then(function(page) {
         console.log('Page loaded');
+
+        if (renderTask) {
+            renderTask.cancel();
+        }
 
         var scale = 1;
         var viewport = page.getViewport(scale);
@@ -56,10 +63,18 @@ loadingTask.promise.then(function(pdf) {
             canvasContext: context,
             viewport: viewport
         };
-        var renderTask = page.render(renderContext);
-        renderTask.then(function () {
-            console.log('Page rendered');
-        });
+        if (!pageRendering){
+            pageRendering = true;
+            renderTask = page.render(renderContext);
+
+
+
+            renderTask.promise.then(function () {
+                pageRendering = false;
+                console.log("after page render")
+            });
+        }
+
     });
 }, function (reason) {
     // PDF loading error
