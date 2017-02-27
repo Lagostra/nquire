@@ -4,11 +4,16 @@
 </head>
 <body>
 <div class="row">
-    <g:if test="${presentations.size() == 0}">
+    <div class="col-md-12">
+        <g:link action="upload" controller="file" class="btn btn-primary btn-lg">Upload presentation</g:link>
+    </div>
+</div>
+<div class="row margin-top-20">
+    <g:if test="${presentations.size() == 0}"><!---->
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    You have no presentations! <g:link action="upload">Upload one now!</g:link>
+                    You have no presentations! <!--<g:link action="upload">Upload one now!</g:link>-->
                 </div>
             </div>
         </div>
@@ -16,6 +21,7 @@
     <g:each in="${presentations}">
         <div class="col-md-3">
             <g:link action="get" id="${it.id}" class="btn btn-default btn-block" >
+                <g:img class="img-thumbnail img-responsive center-block" uri="/file/get_thumbnail/${it.id}"/>
                 ${it.title}
             </g:link>
         </div>
