@@ -19,18 +19,7 @@
 
 </head>
 <body>
-
-
-
-    hello world
     <canvas id="the-canvas"></canvas>
-
-
-
-
-
-
-
 
     <asset:javascript src="application.js"/>
     <asset:javascript src="student.js"/>
