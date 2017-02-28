@@ -32,18 +32,3 @@ var removeNotification = function () {
 
 }
 
-//does element have cls?
-var has_class = function(element, cls) {
-    return ((' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1);
-}
-
-//add class to element safely
-var add_class = function(element, cls) {
-    element.className += cls;
-}
-
-//remove class from element safely
-var remove_class = function(element, cls) {
-    element.className = e.className.replace( /(?:^|\s)cls(?!\S)/g , '' );
-}
-/* TODO: FIX DDENNE REGEXEN ^ */
