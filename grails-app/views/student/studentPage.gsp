@@ -10,6 +10,8 @@
 
     <asset:stylesheet src="application.css"/>
     <asset:stylesheet src="student.css"/>
+    <asset:stylesheet src="bootstrap.css"/>
+    <asset:stylesheet src="bootstrap.min.css"/>
 
     <g:javascript>
         window.grailsSupport = {
@@ -23,6 +25,7 @@
     <canvas id="the-canvas"></canvas>
 
     <asset:javascript src="application.js"/>
+    <asset:javascript src="pdfRenderer.js"/>
     <asset:javascript src="student.js"/>
 </body>
 </html>
