@@ -80,10 +80,10 @@ function calculateScale(viewport,page){
     var pageWidth = document.documentElement.clientWidth;
 
     if (height/pageHeight > width / pageWidth){
-        return page.getViewport(pageWidth/width);
+        return page.getViewport(pageHeight/height);
     }
     else {
+        return page.getViewport(pageWidth/width);
 
-        return page.getViewport(pageHeight/height);
     }
 }
