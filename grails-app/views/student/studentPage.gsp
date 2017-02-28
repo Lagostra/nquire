@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <asset:stylesheet src="application.css"/>
+    <asset:stylesheet src="student.css"/>
 
     <g:javascript>
         window.grailsSupport = {
@@ -18,7 +19,7 @@
 
 </head>
 <body>
-    <canvas id="the-canvas" style="display:Block; "></canvas>
+    <canvas id="the-canvas" style="display:Block; border-style:solid; border-width: 5px 5px 5px 5px;"></canvas>
 
     <asset:javascript src="application.js"/>
     <asset:javascript src="student.js"/>
