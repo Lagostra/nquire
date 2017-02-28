@@ -7,12 +7,12 @@
 <body>
 <div class="container">
 
-   <!-- denne må endres etterhvert -->
-   <div class="question_btn btn btn-primary btn-md"></div>
+   <!-- denne må endres etterhvert. har "new" tag når det er nytt q-->
+   <div id="display_question_btn" class="btn btn-primary btn-md"></div>
 
    <div id="question_container" class="hidden">
-      <div class="question">
-         <p id="default_question">No questions yet</p> <!-- mulig fjern -->
+      <div id="default_question" class="question">
+         <p>No questions yet</p> <!-- mulig fjern -->
       </div>
    </div>
 
