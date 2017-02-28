@@ -19,6 +19,16 @@
     display: none;
 }
 
+.question_container{
+    outline: 1px solid darkslateblue;
+}
+
+.question{
+    display: block;
+    padding: 2em;
+    outline: 1px solid black;
+}
+
 #question_container{
     overflow: scroll;
 }
