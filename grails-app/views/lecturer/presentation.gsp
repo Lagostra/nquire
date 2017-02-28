@@ -7,6 +7,9 @@
 <body>
 <div class="container">
 
+   <!-- denne må endres etterhvert -->
+   <div class="question_btn btn btn-primary btn-md"></div>
+
    <div id="question_container" class="hidden">
       <div class="question">
          <p id="default_question">No questions yet</p> <!-- mulig fjern -->

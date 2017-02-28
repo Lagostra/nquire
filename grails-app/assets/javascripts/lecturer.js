@@ -10,21 +10,28 @@ var question_container = document.getElementById('question_container');
 /*call this function upon event, when new question is received*/
 var addQuestion = function(question) {
     questions.append(question);
-    displayQuestions();
+    questionsToggleHidden();
     notifyNewQuestion();
 }
 
-//show/hide questions on lecturer screen (on/off)
-var displayQuestions = function (on) {
-    if (!has_class(question_container, hidden)) {
-        on ? add_class(question_container, hidden)
-            : remove_class(question_container, hidden);
-    }
-}
 
 //notify the lecturer of a new question
 var notifyNewQuestion = function () {
+    if (getQuestionsToggled()){
+        return
+    }
 
+
+}
+
+//are questions displayed?
+var getQuestionsToggled = function() {
+    question_container.classList.contains("hidden");
+}
+
+//show/hide questions on lecturer screen
+var questionsToggleHidden = function () {
+    question_container.classList.toggle("hidden");
 }
 
 //remove notification of new question
