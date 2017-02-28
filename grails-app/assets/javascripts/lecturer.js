@@ -2,18 +2,23 @@
  * Created by lars on 27.02.2017.
  */
 
+
+var questions = [];
+var question_container;
+var html_questions;
+var display_question_btn;
+var default_question;
+
+var class_hidden = "hidden";
+var class_new_btn = "new_btn";
+var class_new_question = "new_question"
+
 //list of strings
 var init = function() {
-    var questions = [];
-    var question_container = document.getElementById("question_container");
-    var display_question_btn = document.getElementById("display_question_btn");
-    var default_question = document.getElementById("default_question");
-    var html_questions = document.getElementsByClassName("question");
-
-    const class_hidden = "hidden";
-    const class_new_btn = "new_btn";
-    const class_new_question = "new_question"
-
+    question_container = document.getElementById("question_container");
+    display_question_btn = document.getElementById("display_question_btn");
+    default_question = document.getElementById("default_question");
+    html_questions = document.getElementsByClassName("question");
 
     /* EVENTS */
     display_question_btn.addEventListener("click",questionsSetHidden(false));
@@ -21,9 +26,9 @@ var init = function() {
 
 /*call this function upon event, when new question is received*/
 var addQuestion = function(question) {
-    questions.append(question);
+    questions.push(question);
     notifyNewQuestion();
-    default_question.classList.add(hidden);
+    default_question.classList.add(class_hidden);
     question_container.innerHTML +=
         '<div class="question new_question">' + question + ' </div> ';
 }
@@ -61,5 +66,9 @@ var questionsSetHidden = function (on) {
 }
 
 
-init();
-addQuestion("Test: hvem heter jeg?");
+window.onload = function(){
+    init();
+    addQuestion("Test: hvem heter jeg?");
+    addQuestion("Whatchu doin?");
+    addQuestion("Swag?");
+}

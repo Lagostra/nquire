@@ -9,7 +9,7 @@
    <div class="container">
 
       <!-- denne må endres etterhvert. har "new" tag når det er nytt q-->
-      <div id="display_question_btn" class="btn btn-primary btn-md"></div>
+      <div id="display_question_btn" class="btn btn-primary btn-md">!</div>
 
       <div id="question_container" class="hidden">
          <div id="default_question" class="question">
