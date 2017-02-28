@@ -21,6 +21,7 @@
     <g:each in="${presentations}">
         <div class="col-md-3">
             <g:link action="get" id="${it.id}" class="btn btn-default btn-block" >
+                <g:img class="img-thumbnail img-responsive center-block" uri="/file/get_thumbnail/${it.id}"/>
                 ${it.title}
             </g:link>
         </div>
