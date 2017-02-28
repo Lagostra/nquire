@@ -14,7 +14,7 @@
         var lectureId = <sec:loggedInUserInfo field='currentLecture'/>;
         var token = "<sec:loggedInUserInfo field='lectureToken'/>"
 
-        if(false && lectureId == 0) {
+        if(lectureId == 0) {
             alert("No lecture started!");
         } else {
             window.onload = init;
