@@ -5,6 +5,10 @@
 
 var renderTask = null;
 var pageRendering = false;
+var pageLoading = true;
+var pdf = false;
+var pageNumPending = null;
+var currentPage = 1;
 
 // atob() is used to convert base64 encoded PDF to binary-like data.
 // (See also https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/
@@ -18,30 +22,32 @@ var pdfData = atob(
 // the URL of the script to be loaded, and dynamically loading a cross-origin
 // script does not work).
  PDFJS.disableWorker = true;
-
 // The workerSrc property shall be specified.
 PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 
-// Using DocumentInitParameters object to load binary data.
+// loading the document
+var loadingTask = PDFJS.getDocument({data: pdfData}).then(function(pdf) {
+    this.pageLoading = false;
+    this.pdf = pdf;
+    document.getElementById('page_count').textContent = pdf.numPages;
+    console.log('PDF loaded:',pdf);
+    this.renderPage(1);
 
-var loadingTask = PDFJS.getDocument({data: pdfData});
+}, function (reason) {
+    // PDF loading error
+    console.error(reason);
+});
 
 // Have singeled out the issue to the following line. the loadingtask promise gets resolved twice.
 // the caulprit might be workersrc ipoorting badly into grails, it is not being imported from local storage.
-loadingTask.then(function(pdf) {
-    console.log('PDF loaded:',pdf);
+function renderPage(pageNumber) {
 
-    // Fetch the first page
-    var pageNumber = 1;
     pdf.getPage(pageNumber).then(function(page) {
-        console.log('Page loaded:',page);
-        if (renderTask) {
-            //renderTask.cancel();
-        }
+        pageRendering = true;
+
 
         var scale = 1;
         var viewport = page.getViewport(scale);
-
         viewport = calculateScale(viewport,page);
 
         // Prepare canvas using PDF page dimensions
@@ -55,22 +61,28 @@ loadingTask.then(function(pdf) {
             canvasContext: context,
             viewport: viewport
         };
+        console.log(renderTask)
+        if (renderTask) {
+            renderTask.cancel();
+        }
 
-        if (!pageRendering && !renderTask){
-            pageRendering = true;
             renderTask = page.render(renderContext);
 
             renderTask.promise.then(function () {
+                console.log("page rendered")
+                this.currentPage = pageNumber;
+                document.getElementById('page_num').textContent = pageNumber;
                 pageRendering = false;
-                console.log("after page render")
+                if (pageNumPending !== null) {
+                    // New page rendering is pending
+                    renderPage(pageNumPending);
+                    pageNumPending = null;
+                }
             });
-        }
+
 
     });
-}, function (reason) {
-    // PDF loading error
-    console.error(reason);
-});
+}
 
 // returns a new viewport with a scale that fits the page
 function calculateScale(viewport,page){
@@ -80,10 +92,15 @@ function calculateScale(viewport,page){
     var pageWidth = document.documentElement.clientWidth;
 
     if (height/pageHeight > width / pageWidth){
+        console.log(page.getViewport(pageHeight/height))
         return page.getViewport(pageHeight/height);
     }
     else {
+        console.log(page.getViewport(pageWidth/width))
         return page.getViewport(pageWidth/width);
-
     }
+}
+
+window.onresize = function(){
+    renderPage(this.currentPage);
 }

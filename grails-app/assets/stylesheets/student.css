@@ -1,9 +1,10 @@
 #the-canvas {
 
     margin: auto;
-
+    display:Block;
+    outline: 1px solid;
 
 }
 body {
-    height: 100vh;
+    height: 100%;
 }

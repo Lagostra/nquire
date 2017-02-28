@@ -19,7 +19,8 @@
 
 </head>
 <body>
-    <canvas id="the-canvas" style="display:Block; border-style:solid; border-width: 5px 5px 5px 5px;"></canvas>
+    <div style="position: fixed;"><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>
+    <canvas id="the-canvas"></canvas>
 
     <asset:javascript src="application.js"/>
     <asset:javascript src="student.js"/>
