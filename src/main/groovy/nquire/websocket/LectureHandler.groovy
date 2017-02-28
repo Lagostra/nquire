@@ -1,7 +1,8 @@
 package nquire.websocket
 
 import groovy.json.JsonSlurper
-
+import org.apache.commons.logging.Log
+import org.apache.commons.logging.LogFactory
 import org.springframework.web.socket.WebSocketSession
 import org.springframework.web.socket.TextMessage
 import org.springframework.web.socket.CloseStatus
@@ -11,12 +12,17 @@ class LectureHandler {
     private List<WebSocketSession> students;
     private List<WebSocketSession> lecturers;
 
+    static Log log = LogFactory.getLog(getClass())
+
     private int id;
     private String lecturerToken;
 
     LectureHandler(int id, String lecturerToken) {
         this.id = id
         this.lecturerToken = lecturerToken
+
+        students = new ArrayList<>();
+        lecturers = new ArrayList<>();
     }
 
     public boolean addLecturer(WebSocketSession lecturer, String token) {

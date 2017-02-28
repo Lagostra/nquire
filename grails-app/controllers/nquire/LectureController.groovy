@@ -24,17 +24,19 @@ class LectureController {
             // TODO Send message that a lecture is already running
             return
         }
-        int id = new Random().nextInt(8999) + 1000
+
+        int id = 0
         String token = new BigInteger(130, new SecureRandom()).toString()
 
         boolean isAdded = false
         while(!isAdded) {
+            id = new Random().nextInt(8999) + 1000
             isAdded = LectureEndpoint.addLecture(new LectureHandler(id, token), id)
         }
 
         principal.currentLecture = id
         principal.lectureToken = token
 
-        redirect(action: present)
+        redirect(action: 'present')
     }
 }
