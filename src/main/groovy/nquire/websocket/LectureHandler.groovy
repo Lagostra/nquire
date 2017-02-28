@@ -2,13 +2,14 @@ package nquire.websocket
 
 import groovy.json.JsonSlurper
 
-import javax.websocket.CloseReason
-import javax.websocket.Session
+import org.springframework.web.socket.WebSocketSession
+import org.springframework.web.socket.TextMessage
+import org.springframework.web.socket.CloseStatus
 
 class LectureHandler {
 
-    private List<Session> students;
-    private List<Session> lecturers;
+    private List<WebSocketSession> students;
+    private List<WebSocketSession> lecturers;
 
     private int id;
     private String lecturerToken;
@@ -18,7 +19,7 @@ class LectureHandler {
         this.lecturerToken = lecturerToken
     }
 
-    public boolean addLecturer(Session lecturer, String token) {
+    public boolean addLecturer(WebSocketSession lecturer, String token) {
         if(token == lecturerToken) {
             lecturers.add(lecturer)
             return true
@@ -26,14 +27,12 @@ class LectureHandler {
         return false
     }
 
-    public void addStudent(Session student) {
+    public void addStudent(WebSocketSession student) {
         students.add(student)
     }
 
-    public void onMessage(String message, Session userSession) {
+    public void onMessage(String message, WebSocketSession userSession) {
         def mObject = new JsonSlurper().parseText(message)
-
-
 
         if(lecturers.contains(userSession)) {
             // The message was sent by a lecturer
@@ -47,14 +46,14 @@ class LectureHandler {
     }
 
     private sendToAllStudents(String message) {
-        for(Session student : students) {
-            student.getAsyncRemote().sendText(message)
+        for(WebSocketSession student : students) {
+            student.sendText(new TextMessage(message))
         }
     }
 
     private sendToAllLecturers(String message) {
-        for(Session lecturer : lecturers) {
-            lecturer.getAsyncRemote().sendText(message)
+        for(WebSocketSession lecturer : lecturers) {
+            lecturer.sendText(new TextMessage(message))
         }
     }
 
@@ -64,7 +63,7 @@ class LectureHandler {
     }
 
     public List getAllUsers() {
-        List result = new ArrayList(students)
+        List<WebSocketSession> result = new ArrayList<>(students)
         result.addAll(lecturers)
         return result
     }
@@ -73,12 +72,12 @@ class LectureHandler {
      * Closes all connections to this lecture.
      * */
     public void close() {
-        for (Session student : students) {
-            student.close(new CloseReason(CloseReason.CloseCodes.GOING_AWAY, "Lecture has been closed."))
+        for (WebSocketSession student : students) {
+            student.close(CloseStatus.GOING_AWAY)
         }
 
-        for (Session lecturer : lecturers) {
-            lecturer.close(new CloseReason(CloseReason.CloseCodes.GOING_AWAY, "Lecture has been closed."))
+        for (WebSocketSession lecturer : lecturers) {
+            lecturer.close(CloseStatus.GOING_AWAY)
         }
     }
 

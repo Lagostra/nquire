@@ -1,58 +1,39 @@
 package nquire.websocket
 
-import grails.util.Environment
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
+import org.springframework.web.socket.WebSocketHandler
+import org.springframework.web.socket.WebSocketSession
+import org.springframework.web.socket.WebSocketMessage
+import org.springframework.web.socket.TextMessage
+import org.springframework.web.socket.CloseStatus
 
-import javax.servlet.ServletContext
-import javax.servlet.ServletContextEvent
-import javax.servlet.ServletContextListener
-import javax.servlet.annotation.WebListener
-import javax.websocket.CloseReason
-import javax.websocket.OnClose
-import javax.websocket.OnError
-import javax.websocket.OnMessage
-import javax.websocket.OnOpen
-import javax.websocket.Session
-import javax.websocket.server.ServerContainer
-import javax.websocket.server.ServerEndpoint
-
-@ServerEndpoint("/lectureStream")
-@WebListener
-class LectureEndpoint implements ServletContextListener {
+class LectureEndpoint implements WebSocketHandler {
 
     private static Map<Integer, LectureHandler> lectures = new HashMap<>()
-    private static Map<Session, LectureHandler> lecturesByUser = new HashMap<>()
-    private static List<Session> unassignedUsers = new ArrayList<>()
+    private static Map<WebSocketSession, LectureHandler> lecturesByUser = new HashMap<>()
+    private static List<WebSocketSession> unassignedUsers = new ArrayList<>()
 
     @Override
-    void contextInitialized(ServletContextEvent sce) {
-        ServletContext servletContext = sce.servletContext
-        ServerContainer serverContainer = servletContext.getAttribute("javax.websocket.server.ServerContainer")
+    public void afterConnectionEstablished(final WebSocketSession session) throws Exception {
+        unassignedUsers.add(session);
     }
 
     @Override
-    void contextDestroyed(ServletContextEvent sce) {
-    }
+    void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
+        String msg = message?.payload;
 
-    @OnOpen
-    public void onOpen(Session userSession) {
-        unassignedUsers.add(userSession)
-    }
-
-    @OnMessage
-    public void onMessage(String message, Session userSession) {
         if(unassignedUsers.contains(userSession)) {
             // User is not assigned to a lecture - check if this is a connect message
-            def mObject = new JsonSlurper().parseText(message)
+            def mObject = new JsonSlurper().parseText(msg)
 
             if(mObject.type == "connect") {
                 if(!lectures.containsKey(mObject.lectureId)) {
                     // Lecture does not exist
-                    String msg = JsonOutput.toJson([type: 'error',
-                                                    code: 404,
+                    String errorMessage = JsonOutput.toJson([type   : 'error',
+                                                    code   : 404,
                                                     message: 'No lecture with the provided ID exists!'])
-                    userSession.getBasicRemote().sendText(msg)
+                    session.sendText(new TextMessage(errorMessage))
                     return
                 }
 
@@ -60,28 +41,33 @@ class LectureEndpoint implements ServletContextListener {
                     lectures.get(mObject.lectureId).addStudent(userSession)
                 } else if(mObject.role == "lecturer") {
                     if(!lectures.get(mObject.lectureId).addLecturer(userSession, mObject.token)) {
-                        String msg = JsonOutput.toJson([type: 'error',
+                        String errorMsg = JsonOutput.toJson([type: 'error',
                                                         code: 403,
                                                         message: 'The provided token did not authenticate against the lecture.'])
-                        userSession.getBasicRemote().sendText(msg)
+                        session.sendMessage(new TextMessage(errorMsg))
                     }
                 }
             }
 
         } else {
-            lecturesByUser.get(userSession).onMessage(message, userSession)
+            lecturesByUser.get(userSession).onMessage(msg, session)
         }
     }
 
-    @OnClose
-    public void onClose(Session userSession, CloseReason closeReason) {
-        lecturesByUser.remove(userSession)
-        unassignedUsers.remove(userSession)
+    @Override
+    void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
+        // TODO Print error
     }
 
-    @OnError
-    public void onError(Throwable t) {
-        // TODO Print error in some way
+    @Override
+    void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
+        lecturesByUser.remove(session)
+        unassignedUsers.remove(session)
+    }
+
+    @Override
+    boolean supportsPartialMessages() {
+        return false
     }
 
     public static boolean addLecture(LectureHandler lecture, int id) {
@@ -93,7 +79,7 @@ class LectureEndpoint implements ServletContextListener {
     }
 
     public void closeLecture(int id) {
-        for(Session user : lectures.get(id)) {
+        for(WebSocketSession user : lectures.get(id)) {
             lecturesByUser.remove(user)
         }
         lectures.get(id).close()
@@ -103,4 +89,5 @@ class LectureEndpoint implements ServletContextListener {
     public boolean isAlive(int id) {
         return lectures.containsKey(id)
     }
+
 }

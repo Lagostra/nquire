@@ -10,7 +10,7 @@ function init() {
             "lectureId": lectureId,
             "role": "lecturer",
             "token": token};
-        socket.send()
+        socket.send(msg)
     }
 
     socket.onmessage = function(e) {
