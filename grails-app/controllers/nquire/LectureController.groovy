@@ -34,5 +34,7 @@ class LectureController {
 
         principal.currentLecture = id
         principal.lectureToken = token
+
+        redirect(action: present)
     }
 }
