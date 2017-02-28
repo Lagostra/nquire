@@ -3,17 +3,21 @@
  */
 
 //list of strings
-var questions = [];
-var question_container = document.getElementById("question_container");
-var display_question_btn = document.getElementById("display_question_btn");
-var default_question = document.getElementById("default_question");
-var html_questions = document.getElementsByClassName("question");
+var init = function() {
+    var questions = [];
+    var question_container = document.getElementById("question_container");
+    var display_question_btn = document.getElementById("display_question_btn");
+    var default_question = document.getElementById("default_question");
+    var html_questions = document.getElementsByClassName("question");
+
+    const class_hidden = "hidden";
+    const class_new_btn = "new_btn";
+    const class_new_question = "new_question"
 
 
-const class_hidden = "hidden";
-const class_new_btn = "new_btn";
-const class_new_question = "new_question"
-
+    /* EVENTS */
+    display_question_btn.addEventListener("click",questionsSetHidden(false));
+}
 
 /*call this function upon event, when new question is received*/
 var addQuestion = function(question) {
@@ -22,7 +26,6 @@ var addQuestion = function(question) {
     default_question.classList.add(hidden);
     question_container.innerHTML +=
         '<div class="question new_question">' + question + ' </div> ';
-
 }
 
 //notify the lecturer of a new question
@@ -58,6 +61,5 @@ var questionsSetHidden = function (on) {
 }
 
 
-/* EVENTS */
-
-display_question_btn.addEventListener("click",questionsSetHidden(false));
+init();
+addQuestion("Test: hvem heter jeg?");
