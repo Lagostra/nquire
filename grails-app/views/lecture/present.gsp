@@ -9,7 +9,7 @@
 
     <script>
         var url = "${createLink(uri: '/lectureStream', absolute: true)
-                        .replaceFirst(/https/, /ws/)
+                        .replaceFirst(/https/, /wss/)
                         .replaceFirst(/http/, /ws/)}";
         var lectureId = <sec:loggedInUserInfo field='currentLecture'/>;
         var token = "<sec:loggedInUserInfo field='lectureToken'/>"
