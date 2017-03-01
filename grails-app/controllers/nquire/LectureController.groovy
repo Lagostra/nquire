@@ -41,7 +41,13 @@ class LectureController {
         if(principal.currentLecture != 0 && LectureEndpoint.isAlive(principal.currentLecture)) {
             // TODO Send message that a lecture is already running
             redirect(action: 'present')
+            return
         }
+
+        Presentation pres = Presentation.findById(params.int('presentationId'));
+        String filePath = null;
+        if(pres != null)
+            filePath = grailsApplication.config.getProperty('presentationRoot') + pres.fileName + ".pdf";
 
         int id = 0
         String token = new BigInteger(130, new SecureRandom()).toString()
@@ -49,7 +55,11 @@ class LectureController {
         boolean isAdded = false
         while(!isAdded) {
             id = new Random().nextInt(8999) + 1000
-            isAdded = LectureEndpoint.addLecture(new LectureHandler(id, token), id)
+
+            if(filePath == null)
+                isAdded = LectureEndpoint.addLecture(new LectureHandler(id, token), id)
+            else
+                isAdded = LectureEndpoint.addLecture(new LectureHandler(id, token, filePath), id)
         }
 
         principal.currentLecture = id

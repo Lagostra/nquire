@@ -59,7 +59,6 @@ class LectureEndpoint implements WebSocketHandler {
             }
 
         } else {
-            log.error("1")
             lecturesByUser.get(session).onMessage(msg, session)
         }
     }

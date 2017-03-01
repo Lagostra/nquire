@@ -15,7 +15,16 @@ function initLecturer() {
     }
 
     socket.onmessage = function(e) {
-        console.log(e.data);
+        var msg = JSON.parse(e.data)
+
+        switch(msg.type) {
+            case "connected": // Successfully connected to lecture
+                socket.send(JSON.stringify({"type": "requestPresentation"}));
+                break;
+            case "presentation": // Received presentation file
+
+                break;
+        }
     }
 
     socket.onerror = function(e) {
