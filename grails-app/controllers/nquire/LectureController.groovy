@@ -19,6 +19,24 @@ class LectureController {
         render(view: 'present')
     }
 
+    @Secured('permitAll')
+    def connect() {
+        if(params.id == null) {
+            // No lecture id given
+            redirect("/")
+            // TODO Redirect to form for lecture connection
+        }
+
+        int id = params.int('id')
+
+        if(!LectureEndpoint.isAlive(id)) {
+            // Lecture does not exist
+            // TODO Handle this...
+        }
+
+        render(view: 'student', model: [lectureId: id])
+    }
+
     def create_lecture() {
         if(principal.currentLecture != 0) {
             // TODO Send message that a lecture is already running

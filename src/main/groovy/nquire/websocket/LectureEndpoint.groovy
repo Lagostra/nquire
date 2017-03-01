@@ -27,13 +27,9 @@ class LectureEndpoint implements WebSocketHandler {
     void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
         String msg = message?.payload;
 
-        log.error(msg)
-
         if(unassignedUsers.contains(session)) {
             // User is not assigned to a lecture - check if this is a connect message
             def mObject = new JsonSlurper().parseText(msg)
-
-            log.error(lectures)
 
             if(mObject.type == "connect") {
                 if(!lectures.containsKey(mObject.lectureId)) {
@@ -41,7 +37,7 @@ class LectureEndpoint implements WebSocketHandler {
                     String errorMessage = JsonOutput.toJson([type   : 'error',
                                                     code   : 404,
                                                     message: 'No lecture with the provided ID exists!'])
-                    session.sendText(new TextMessage(errorMessage))
+                    session.sendMessage(new TextMessage(errorMessage))
                     return
                 }
 
@@ -98,7 +94,7 @@ class LectureEndpoint implements WebSocketHandler {
         lectures.remove(id)
     }
 
-    boolean isAlive(int id) {
+    static boolean isAlive(int id) {
         return lectures.containsKey(id)
     }
 

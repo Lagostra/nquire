@@ -5,7 +5,7 @@
     <asset:javascript src="lecturer.js"/>
 </head>
 <body>
-
+    <h1>Lecture ID: <sec:loggedInUserInfo field='currentLecture'/></h1>
 
     <script>
         var url = "${createLink(uri: '/lectureStream', absolute: true)
