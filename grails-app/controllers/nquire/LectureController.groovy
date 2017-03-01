@@ -38,9 +38,9 @@ class LectureController {
     }
 
     def create_lecture() {
-        if(principal.currentLecture != 0) {
+        if(principal.currentLecture != 0 && LectureEndpoint.isAlive(principal.currentLecture)) {
             // TODO Send message that a lecture is already running
-            return
+            redirect(action: 'present')
         }
 
         int id = 0

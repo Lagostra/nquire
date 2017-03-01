@@ -43,6 +43,7 @@ class LectureEndpoint implements WebSocketHandler {
 
                 if(mObject.role == "student") {
                     lectures.get(mObject.lectureId).addStudent(session)
+                    lecturesByUser.put(session, lectures.get(mObject.lectureId))
                     unassignedUsers.remove(session)
                 } else if(mObject.role == "lecturer") {
                     if(!lectures.get(mObject.lectureId).addLecturer(session, mObject.token)) {
@@ -51,12 +52,14 @@ class LectureEndpoint implements WebSocketHandler {
                                                         message: 'The provided token did not authenticate against the lecture.'])
                         session.sendMessage(new TextMessage(errorMsg))
                     } else {
+                        lecturesByUser.put(session, lectures.get(mObject.lectureId))
                         unassignedUsers.remove(session)
                     }
                 }
             }
 
         } else {
+            log.error("1")
             lecturesByUser.get(session).onMessage(msg, session)
         }
     }

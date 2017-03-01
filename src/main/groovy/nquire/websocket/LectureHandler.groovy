@@ -53,13 +53,13 @@ class LectureHandler {
 
     private sendToAllStudents(String message) {
         for(WebSocketSession student : students) {
-            student.sendText(new TextMessage(message))
+            student.sendMessage(new TextMessage(message))
         }
     }
 
     private sendToAllLecturers(String message) {
         for(WebSocketSession lecturer : lecturers) {
-            lecturer.sendText(new TextMessage(message))
+            lecturer.sendMessage(new TextMessage(message))
         }
     }
 

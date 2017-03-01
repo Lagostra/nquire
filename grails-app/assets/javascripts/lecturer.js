@@ -1,4 +1,5 @@
 var socket;
+var currentPage = 0;
 
 function initLecturer() {
     socket = new WebSocket(url);
@@ -23,5 +24,31 @@ function initLecturer() {
 
     socket.onclose = function(e) {
         console.log("Connection closed.");
+    }
+
+    window.onkeydown = onKey;
+}
+
+function onKey(e) {
+    var key = e.keyCode ? e.keyCode : e.which;
+
+    switch(key) {
+        case 37: // Left
+            currentPage--;
+            if(currentPage < 0) currentPage = 0;
+            var msg = {
+                "type": "pageChange",
+                "page": currentPage
+            };
+            socket.send(JSON.stringify(msg));
+            break;
+        case 39: // Right
+            currentPage++;
+            var msg = {
+                "type": "pageChange",
+                "page": currentPage
+            };
+            socket.send(JSON.stringify(msg));
+            break;
     }
 }
