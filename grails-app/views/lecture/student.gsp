@@ -12,7 +12,7 @@
                         .replaceFirst(/https/, /wssd/)
                         .replaceFirst(/http/, /ws/)}";
     var lectureId = ${lectureId};
-    window.onload = init();
+    window.onload = initStudent;
 </script>
 </body>
 </html>

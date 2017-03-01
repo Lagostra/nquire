@@ -1,6 +1,6 @@
 var socket;
 
-function init() {
+function initLecturer() {
     socket = new WebSocket(url);
     console.log("Connecting...")
 

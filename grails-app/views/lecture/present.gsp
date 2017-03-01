@@ -17,7 +17,7 @@
         if(lectureId == 0) {
             alert("No lecture started!");
         } else {
-            window.onload = init;
+            window.onload = initLecturer;
         }
     </script>
 </body>
