@@ -1,5 +1,6 @@
 package nquire.websocket
 
+import com.google.gson.JsonObject
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import org.apache.commons.logging.Log
@@ -14,14 +15,16 @@ import java.nio.file.Paths
 
 class LectureHandler {
 
-    private List<WebSocketSession> students;
-    private List<WebSocketSession> lecturers;
-
-    static Log log = LogFactory.getLog(getClass())
+    private static Log log = LogFactory.getLog(getClass())
 
     private int id;
     private String lecturerToken;
     private String presentation;
+
+    private List<WebSocketSession> students;
+    private List<WebSocketSession> lecturers;
+
+    private List<String> questions;
 
     LectureHandler(int id, String lecturerToken) {
         this.id = id
@@ -29,6 +32,7 @@ class LectureHandler {
 
         students = new ArrayList<>();
         lecturers = new ArrayList<>();
+        questions = new ArrayList<>();
     }
 
     LectureHandler(int id, String lecturerToken, String filePath) {
@@ -59,7 +63,14 @@ class LectureHandler {
         if(lecturers.contains(userSession)) {
             // The message was sent by a lecturer
 
-            if(mObject.type == "pageChange") {
+            if(mObject.type == "requestQuestions") {
+                String msg = JsonOutput.toJson([
+                        type: "allQuestions",
+                        questions: questions.toArray()
+                    ])
+
+                userSession.sendMessage(new TextMessage(msg))
+            } else if(mObject.type == "pageChange") {
                 sendToAllStudents(message)
             }
         } else {
@@ -67,6 +78,7 @@ class LectureHandler {
 
             if(mObject.type == "question") { //Student asked a question
                 // TODO check if question matches previously asked question
+                questions.add(mObject.question)
                 sendToAllLecturers(message)
             } else if(mObject.type == "pace") { // Student has given pace feedback
 
