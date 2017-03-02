@@ -16,6 +16,12 @@ class LectureController {
     }
 
     def present() {
+        if(principal.currentLecture == 0 || !LectureEndpoint.isAlive(principal.currentLecture)) {
+            // The lecturer does not have a running lecture
+            redirect(controller: 'file', action: 'index')
+            return
+        }
+
         render(view: 'present')
     }
 
