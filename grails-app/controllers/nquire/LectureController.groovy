@@ -57,9 +57,9 @@ class LectureController {
             id = new Random().nextInt(8999) + 1000
 
             if(filePath == null)
-                isAdded = LectureEndpoint.addLecture(new LectureHandler(id, token), id)
+                isAdded = LectureEndpoint.addLecture(new LectureHandler(token), id)
             else
-                isAdded = LectureEndpoint.addLecture(new LectureHandler(id, token, filePath), id)
+                isAdded = LectureEndpoint.addLecture(new LectureHandler(token, filePath), id)
         }
 
         principal.currentLecture = id

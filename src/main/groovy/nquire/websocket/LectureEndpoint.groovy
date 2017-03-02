@@ -84,16 +84,21 @@ class LectureEndpoint implements WebSocketHandler {
             return false
         }
         lectures.put(id, lecture)
+        lecture.setId(id)
         return true
     }
 
-    void closeLecture(int id) {
-        for(WebSocketSession user : lectures.get(id)) {
+    static void closeLecture(int id) {
+        LectureHandler lecture = lectures.get(id)
+        closeLecture(lecture)
+    }
+
+    static void closeLecture(LectureHandler lecture) {
+        lectures.remove(lecture.getId())
+        for(WebSocketSession user : lecture.getAllUsers()) {
             lecturesByUser.remove(user)
         }
-        lectures.get(id).close()
-        log.error("Why you close me?!")
-        lectures.remove(id)
+        lecture.close()
     }
 
     static boolean isAlive(int id) {

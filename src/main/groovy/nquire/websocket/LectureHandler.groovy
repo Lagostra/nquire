@@ -29,8 +29,7 @@ class LectureHandler {
     private List<String> questions;
     private List<Box>[] boxes;
 
-    LectureHandler(int id, String lecturerToken) {
-        this.id = id
+    LectureHandler(String lecturerToken) {
         this.lecturerToken = lecturerToken
 
         students = new ArrayList<>();
@@ -38,8 +37,8 @@ class LectureHandler {
         questions = new ArrayList<>();
     }
 
-    LectureHandler(int id, String lecturerToken, String filePath) {
-        this(id, lecturerToken)
+    LectureHandler(String lecturerToken, String filePath) {
+        this(lecturerToken)
 
         PDDocument pdDocument = PDDocument.load(new File(filePath))
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -124,6 +123,14 @@ class LectureHandler {
         List<WebSocketSession> result = new ArrayList<>(students)
         result.addAll(lecturers)
         return result
+    }
+
+    public void setId(int id) {
+        this.id = id
+    }
+
+    public int getId() {
+        return this.id
     }
 
     /**
