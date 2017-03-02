@@ -19,7 +19,10 @@ class LectureHandler {
 
     private static Log log = LogFactory.getLog(getClass())
 
+    private static final long inactivityTimeout = 30*60*1000 // Time of inactivity before lecture is closed [ms]
+
     private int id;
+    private long lastActivity;
     private String lecturerToken;
     private String presentation;
 
@@ -31,6 +34,7 @@ class LectureHandler {
 
     LectureHandler(String lecturerToken) {
         this.lecturerToken = lecturerToken
+        lastActivity = System.currentTimeMillis();
 
         students = new ArrayList<>();
         lecturers = new ArrayList<>();
@@ -68,6 +72,7 @@ class LectureHandler {
     }
 
     public void onMessage(String message, WebSocketSession userSession) {
+        lastActivity = System.currentTimeMillis()
         def mObject = new JsonSlurper().parseText(message)
 
         if(lecturers.contains(userSession)) {
@@ -131,6 +136,10 @@ class LectureHandler {
 
     public int getId() {
         return this.id
+    }
+
+    public boolean shouldClose() {
+        return System.currentTimeMillis() - lastActivity > inactivityTimeout
     }
 
     /**

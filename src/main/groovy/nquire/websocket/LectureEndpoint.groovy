@@ -10,13 +10,30 @@ import org.springframework.web.socket.WebSocketMessage
 import org.springframework.web.socket.TextMessage
 import org.springframework.web.socket.CloseStatus
 
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
+
 class LectureEndpoint implements WebSocketHandler {
+
+    private static Log log = LogFactory.getLog(getClass())
+
+    private static scheduler;
 
     private static Map<Integer, LectureHandler> lectures = new HashMap<>()
     private static Map<WebSocketSession, LectureHandler> lecturesByUser = new HashMap<>()
     private static List<WebSocketSession> unassignedUsers = new ArrayList<>()
 
-    static Log log = LogFactory.getLog(getClass())
+
+    static {
+        scheduler = Executors.newScheduledThreadPool(1)
+        scheduler.scheduleAtFixedRate(new Runnable() {
+                @Override
+                public void run() {
+                    closeInactiveLectures()
+                }
+            }, 5, 5, TimeUnit.MINUTES)
+    }
+
 
     @Override
     public void afterConnectionEstablished(final WebSocketSession session) throws Exception {
@@ -38,6 +55,7 @@ class LectureEndpoint implements WebSocketHandler {
                                                     code   : 404,
                                                     message: 'No lecture with the provided ID exists!'])
                     session.sendMessage(new TextMessage(errorMessage))
+                    session.close()
                     return
                 }
 
@@ -51,6 +69,7 @@ class LectureEndpoint implements WebSocketHandler {
                                                         code: 403,
                                                         message: 'The provided token did not authenticate against the lecture.'])
                         session.sendMessage(new TextMessage(errorMsg))
+                        session.close()
                     } else {
                         lecturesByUser.put(session, lectures.get(mObject.lectureId))
                         unassignedUsers.remove(session)
@@ -99,6 +118,13 @@ class LectureEndpoint implements WebSocketHandler {
             lecturesByUser.remove(user)
         }
         lecture.close()
+    }
+
+    private static void closeInactiveLectures() {
+        for(LectureHandler lecture : lectures.values()) {
+            if(lecture.shouldClose())
+                closeLecture(lecture)
+        }
     }
 
     static boolean isAlive(int id) {
