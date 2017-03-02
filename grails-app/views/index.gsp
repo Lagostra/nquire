@@ -9,7 +9,7 @@
     <div class="jumbotron">
         <div class="container">
             <h1 class="display-3">nquire</h1>
-            <p>Velkommen til <em>nquire!</em> Dette programmet er en av de ledende inovatørene innen undervisning på
+            <p>Velkommen til <em>nquire!</em> Dette programmet er en av de ledende innovatørene innen undervisning på
             universitetsnivå. Vår visjon for prosjektet er at hver forelesning skal forbedres iterativt,
             basert på tilbakemeldinger fra studentene i salen.</p>
             <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
@@ -22,9 +22,9 @@
             <div class="col-md-4">
                 <h2>Vanskelighetsgrad.</h2>
                 <p>Gjennom <em>nquire's</em> dynamiske presentasjonsviser kan studenter enkelt få oversikt over
-                slidesene, under forelesning. Brukeren kan markere deler av presentasjonen som er
+                slides under forelesning. Brukeren kan markere deler av presentasjonen som er
                 utfordrende, slik at foreleser vet hva som trenger videre gjennomgang. Hvis et område blir
-                markert av mange, vises dette på den felles presentasjonen, så så slipper man å føle seg alene om man
+                markert av mange, vises dette på den felles presentasjonen, så man slipper å føle seg alene dersom man
                 ikke forstår alt!</p>
                 <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
             </div>
