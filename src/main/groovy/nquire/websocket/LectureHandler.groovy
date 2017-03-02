@@ -5,6 +5,8 @@ import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
+import org.apache.pdfbox.pdmodel.PDDocument
+import org.apache.pdfbox.pdmodel.common.PDStream
 import org.springframework.web.socket.WebSocketSession
 import org.springframework.web.socket.TextMessage
 import org.springframework.web.socket.CloseStatus
@@ -25,6 +27,7 @@ class LectureHandler {
     private List<WebSocketSession> lecturers;
 
     private List<String> questions;
+    private List<Box>[] boxes;
 
     LectureHandler(int id, String lecturerToken) {
         this.id = id
@@ -38,7 +41,15 @@ class LectureHandler {
     LectureHandler(int id, String lecturerToken, String filePath) {
         this(id, lecturerToken)
 
-        presentation = DatatypeConverter.printBase64Binary(Files.readAllBytes(Paths.get(filePath)));
+        PDDocument pdDocument = PDDocument.load(new File(filePath))
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        pdDocument.save(baos);
+        pdDocument.close();
+
+        presentation = DatatypeConverter.printBase64Binary(baos.toByteArray())
+        boxes = (ArrayList<Box>[]) new ArrayList[pdDocument.getNumberOfPages()];
+
+        //presentation = DatatypeConverter.printBase64Binary(Files.readAllBytes(Paths.get(filePath)));
     }
 
     public boolean addLecturer(WebSocketSession lecturer, String token) {
@@ -128,4 +139,16 @@ class LectureHandler {
         }
     }
 
+}
+
+class Box {
+    float x, y
+    float width, height
+
+    Box(float x, float y, float width, float height) {
+        this.x = x
+        this.y = y
+        this.width = width
+        this.height = height
+    }
 }
