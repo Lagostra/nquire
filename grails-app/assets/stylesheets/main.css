@@ -20,5 +20,5 @@
 }
 
 #question_container{
-    overflow: scroll;
+    overflow: auto;
 }
