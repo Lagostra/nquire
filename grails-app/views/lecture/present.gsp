@@ -6,6 +6,9 @@
 </head>
 <body>
     <h1>Lecture ID: <sec:loggedInUserInfo field='currentLecture'/></h1>
+    <g:form controller="lecture" action="close_lecture">
+        <g:submitButton name="Submit" value="Close lecture" class="btn btn-primary" />
+    </g:form>
 
     <script>
         var url = "${createLink(uri: '/lectureStream', absolute: true)

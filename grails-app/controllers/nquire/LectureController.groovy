@@ -70,5 +70,7 @@ class LectureController {
 
     def close_lecture() {
         LectureEndpoint.closeLecture(principal.currentLecture)
+
+        redirect(controller: 'file', action: 'index')
     }
 }
