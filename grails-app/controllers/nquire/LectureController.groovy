@@ -9,7 +9,7 @@ import java.security.SecureRandom
 @Secured('ROLE_LECTURER')
 class LectureController {
 
-    static allowedMethods = [present: 'GET', create_lecture: 'POST'];
+    static allowedMethods = [present: 'GET', create_lecture: 'POST', close_lecture: 'POST'];
 
     def index() {
 
@@ -66,5 +66,9 @@ class LectureController {
         principal.lectureToken = token
 
         redirect(action: 'present')
+    }
+
+    def close_lecture() {
+        LectureEndpoint.closeLecture(principal.currentLecture)
     }
 }
