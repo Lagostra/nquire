@@ -63,7 +63,14 @@ class LectureHandler {
                 sendToAllStudents(message)
             }
         } else {
+            // The message was sent by a student
 
+            if(mObject.type == "question") { //Student asked a question
+                // TODO check if question matches previously asked question
+                sendToAllLecturers(message)
+            } else if(mObject.type == "pace") { // Student has given pace feedback
+
+            }
         }
 
         if(mObject.type == "requestPresentation" && presentation != null) {
