@@ -31,4 +31,5 @@
 
 #question_container{
     overflow: auto;
+    overflow-x: hidden;
 }
