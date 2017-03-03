@@ -30,7 +30,11 @@ var addQuestion = function(question) {
     notifyNewQuestion();
     default_question.classList.add(class_hidden);
     question_container.innerHTML +=
-        '<div class="question new_question">' + question + ' </div> ';
+        '<div class="row">' +
+        '<div class="col-md-2"></div>' +
+        '<div class="col-md-8">' +
+        '<div class="question new_question">' + question + ' </div> ' +
+        '</div> </div>';
 }
 
 //notify the lecturer of a new question

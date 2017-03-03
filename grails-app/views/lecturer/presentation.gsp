@@ -7,15 +7,14 @@
 </head>
 <body>
    <div class="container">
-
-      <div class="row">
-         <div class="col-md-2"></div>
-         <div class="col-md-8">
-            <!-- denne må endres etterhvert. har "new_btn" tag når det er nytt q-->
-            <div id="display_question_btn" class="btn btn-primary btn-md">!</div>
+      <!-- denne må endres etterhvert. har "new_btn" tag når det er nytt q-->
+      <div id="display_question_btn" class="btn btn-primary btn-md">!</div>
 
 
-            <div id="question_container" class="hidden">
+      <div id="question_container" class="hidden">
+         <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
                <div id="default_question" class="question">
                   <p>No questions yet</p> <!-- mulig fjern -->
                </div>
