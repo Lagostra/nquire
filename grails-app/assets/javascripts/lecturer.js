@@ -36,11 +36,6 @@ function initLecturer() {
     }
 
     window.onkeydown = onKey;
-
-    //rerenders current page on window resize
-    window.onresize = function(){
-        renderPage(this.currentPage);
-    }
 }
 
 function onKey(e) {

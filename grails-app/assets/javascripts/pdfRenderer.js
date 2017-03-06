@@ -33,6 +33,12 @@ function initPdfReader(){
 }
 
 
+//rerenders current page on window resize
+window.onresize = function(){
+    console.log("Rerender");
+    renderPage(currentPage);
+}
+
 //http://stackoverflow.com/questions/12092633/pdf-js-rendering-a-pdf-file-using-a-base64-file-source-instead-of-url
 function setPresentation(string){
     pdf = atob(string);
