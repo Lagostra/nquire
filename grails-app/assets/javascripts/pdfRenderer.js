@@ -12,12 +12,18 @@
  *
  */
 
-
 var renderTask = null;
 var pageRendering = false;
 var pdf = false;
 var pageNumPending = null;
 var currentPage = 1;
+
+// Disable workers to avoid yet another cross-origin issue (workers need
+// the URL of the script to be loaded, and dynamically loading a cross-origin
+// script does not work).
+PDFJS.disableWorker = true;
+// The workerSrc property shall be specified.
+PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 
 // atob() is used to convert base64 encoded PDF to binary-like data.
 // (See also https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/Base64_encoding_and_decoding.)
@@ -48,27 +54,6 @@ function loadPDF(){
         });
     }
 }
-
-
-// Disable workers to avoid yet another cross-origin issue (workers need
-// the URL of the script to be loaded, and dynamically loading a cross-origin
-// script does not work).
-PDFJS.disableWorker = true;
-// The workerSrc property shall be specified.
-PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
-
-// loading the document
-var loadingTask = PDFJS.getDocument({data: pdfData}).then(function(pdf) {
-    this.pdf = pdf;
-    document.getElementById('page_count').textContent = pdf.numPages;
-    console.log('PDF loaded:',pdf);
-    //first render
-    this.renderPage(1);
-
-}, function (reason) {
-    // PDF loading error
-    console.error(reason);
-});
 
 function renderPage(pageNumber) {
 
@@ -128,11 +113,6 @@ function calculateScale(viewport,page){
         console.log(page.getViewport(pageWidth/width))
         return page.getViewport(pageWidth/width);
     }
-}
-
-//rerenders current page on window resize
-window.onresize = function(){
-    renderPage(this.currentPage);
 }
 
 function renderPreviousPage() {
