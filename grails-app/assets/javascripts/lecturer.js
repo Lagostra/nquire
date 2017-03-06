@@ -6,7 +6,6 @@
 //Variables
 var questions = [];
 var question_container;
-var html_questions;
 var default_question;
 var display_question_btn;
 var hide_question_btn;
@@ -19,7 +18,6 @@ var class_new_question = "new_question";
 var init = function() {
     question_container = document.getElementById("question_container");
     default_question = document.getElementById("default_question");
-    html_questions = document.getElementsByClassName("question");
 
     display_question_btn = document.getElementById("display_question_btn");
     hide_question_btn = document.getElementById("hide_question_btn");
@@ -67,23 +65,23 @@ var getQuestionsToggled = function() {
 
 //show/hide questions on lecturer screen
 var questionsSetHidden = function (hidden) {
-    html_questions = document.getElementsByClassName("question");
     if (hidden) {
         question_container.classList.add(class_hidden);
-        display_question_btn.classList.remove(class_new_btn);
-        html_questions.classList.remove(class_new_question);
         question_container.scrollTop = question_container.scrollHeight;
         resetNewQuestions();
     }
     else {
         question_container.classList.remove(class_hidden);
+        display_question_btn.classList.remove(class_new_btn);
     }
 };
 
 
 var resetNewQuestions = function () {
-    var new_questions = document.getElementsByClassName(class_new_question);
-    new_questions.classList.remove(class_new_question);
+    var new_questions = document.getElementsByClassName("question");
+    for (var i = 0; i < new_questions.length; i++){
+        new_questions[i].classList.remove(class_new_question);
+    }
 };
 
 window.onload = function(){
@@ -91,4 +89,5 @@ window.onload = function(){
     addQuestion("Test: hvem heter jeg?");
     addQuestion("Whatchu doin?");
     addQuestion("Swag?");
+    addQuestion("Blir dette nr 2 eller blir det nest siste eller...?");
 };
