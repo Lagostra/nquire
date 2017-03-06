@@ -25,9 +25,9 @@
     outline: 1px solid black;
 }
 
-.question_new{
+.new_question{
     font-weight:bold;
-    border-bottom: 2px #d61c28 solid ;
+    border-bottom: 20px #d61c28 solid ;
 }
 
 #question_container{

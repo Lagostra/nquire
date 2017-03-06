@@ -6,8 +6,9 @@
 var questions = [];
 var question_container;
 var html_questions;
-var display_question_btn;
 var default_question;
+var display_question_btn;
+var hide_question_btn;
 
 var class_hidden = "hidden";
 var class_new_btn = "new_btn";
@@ -16,12 +17,20 @@ var class_new_question = "new_question"
 //list of strings
 var init = function() {
     question_container = document.getElementById("question_container");
-    display_question_btn = document.getElementById("display_question_btn");
     default_question = document.getElementById("default_question");
     html_questions = document.getElementsByClassName("question");
 
+    display_question_btn = document.getElementById("display_question_btn");
+    hide_question_btn = document.getElementById("hide_question_btn");
+
+
     /* EVENTS */
-    display_question_btn.addEventListener("click",questionsSetHidden(false));
+    display_question_btn.onclick = function () {
+        questionsSetHidden(false);
+    }
+    hide_question_btn.onclick = function () {
+        questionsSetHidden(true);
+    }
 }
 
 /*call this function upon event, when new question is received*/
@@ -34,7 +43,7 @@ var addQuestion = function(question) {
         '<div class="row">' +
         '<div class="col-md-2"></div>' +
         '<div class="col-md-8">' +
-        '<div class="question new_question">' + question + ' </div> ' +
+        '<div class="question">' + question + ' </div> ' +
         '</div> </div>';
 }
 
@@ -64,15 +73,18 @@ var questionsSetHidden = function (hidden) {
         display_question_btn.classList.remove(class_new_btn);
         html_questions.classList.remove(class_new_question);
         question_container.scrollTop = question_container.scrollHeight;
-        for (child in question_container.childList){
-            child.classList.remove("new_question");
-        }
+        resetNewQuestions();
     }
     else {
         question_container.classList.remove(class_hidden);
     }
 }
 
+
+var resetNewQuestions = function () {
+    var new_questions = document.getElementsByClassName(class_new_question);
+    new_questions.classList.remove(class_new_question);
+}
 
 window.onload = function(){
     init();

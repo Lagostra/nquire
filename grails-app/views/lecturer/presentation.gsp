@@ -8,7 +8,8 @@
 <body>
    <div class="container">
       <!-- denne må endres etterhvert. har "new_btn" tag når det er nytt q-->
-      <div id="display_question_btn" class="btn btn-primary btn-md">!</div>
+      <div id="display_question_btn" class="btn btn-primary btn-md">Show Questions</div>
+      <div id="hide_question_btn" class="btn btn-primary btn-md">Hide Questions</div>
 
 
       <div id="question_container" class="hidden">
