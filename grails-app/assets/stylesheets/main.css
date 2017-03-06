@@ -30,6 +30,10 @@
     border-bottom: 20px #d61c28 solid ;
 }
 
+.new_btn{
+    background-color: #d61c28;
+}
+
 #question_container{
     overflow: auto;
     overflow-x: hidden;
