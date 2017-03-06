@@ -26,6 +26,7 @@ var init = function() {
 
 /*call this function upon event, when new question is received*/
 var addQuestion = function(question) {
+    question.new = true;
     questions.push(question);
     notifyNewQuestion();
     default_question.classList.add(class_hidden);
@@ -56,13 +57,16 @@ var getQuestionsToggled = function() {
 }
 
 //show/hide questions on lecturer screen
-var questionsSetHidden = function (on) {
+var questionsSetHidden = function (hidden) {
     html_questions = document.getElementsByClassName("question");
-    if (on) {
+    if (hidden) {
         question_container.classList.add(class_hidden);
         display_question_btn.classList.remove(class_new_btn);
         html_questions.classList.remove(class_new_question);
         question_container.scrollTop = question_container.scrollHeight;
+        for (child in question_container.childList){
+            child.classList.remove("new_question");
+        }
     }
     else {
         question_container.classList.remove(class_hidden);
