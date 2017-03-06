@@ -11,11 +11,7 @@
     <asset:stylesheet src="application.css"/>
     <asset:stylesheet src="student.css"/>
 
-    <g:javascript>
-        window.grailsSupport = {
-            PDFWorker : "${assetPath(src: 'pdf.worker.js')}",
-        };
-    </g:javascript>
+
 
 </head>
 <body>
@@ -67,5 +63,15 @@
     <asset:javascript src="application.js"/>
     <asset:javascript src="pdfRenderer.js"/>
     <asset:javascript src="student.js"/>
+    <g:javascript>
+        window.grailsSupport = {
+            PDFWorker : "${assetPath(src: 'pdf.worker.js')}",
+        };
+        var url = "${createLink(uri: '/lectureStream', absolute: true)
+            .replaceFirst(/https/, /wssd/)
+            .replaceFirst(/http/, /ws/)}";
+    var lectureId = ${lectureId};
+    window.onload = initStudent;
+    </g:javascript>
 </body>
 </html>

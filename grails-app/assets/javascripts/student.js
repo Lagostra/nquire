@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /**
  * Created by Lavrans on 28.02.2017.
  *
@@ -27,7 +27,7 @@ function initStudent() {
                 socket.send(JSON.stringify({"type": "requestPresentation"}));
                 break;
             case "presentation": // Received presentation file
-
+                setPresentation(msg.presentation);
                 break;
         }
     }
