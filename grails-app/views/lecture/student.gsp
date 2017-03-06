@@ -68,7 +68,7 @@
             PDFWorker : "${assetPath(src: 'pdf.worker.js')}",
         };
         var url = "${createLink(uri: '/lectureStream', absolute: true)
-        .replaceFirst(/https/, /wssd/)
+        .replaceFirst(/https/, /wss/)
         .replaceFirst(/http/, /ws/)}";
     var lectureId = ${lectureId};
     window.onload = initStudent;
