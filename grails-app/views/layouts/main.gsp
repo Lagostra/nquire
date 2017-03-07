@@ -67,7 +67,7 @@
 
     <div class="container">
         <g:layoutBody/>
-
+        <div class="alert alert-danger hidden" role="alert">You did something wrong!</div>
         <div class="footer" role="contentinfo"></div>
 
         <asset:javascript src="application.js"/>
