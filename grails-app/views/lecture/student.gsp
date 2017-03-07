@@ -11,7 +11,7 @@
     <asset:stylesheet src="application.css"/>
     <asset:stylesheet src="student.css"/>
 </head>
-<body>
+<body onmousemove="mouseMoveHandler()">
 
 
 
@@ -43,6 +43,8 @@
         <canvas id="the-canvas"></canvas>
     </div>
 
+
+    <div id="buttons-container">
     <button id="hard" class="btn btn-default btn-lg " type="button" onclick="hardButtonClicked()">
         Hard
     </button>
@@ -55,14 +57,14 @@
         Question
     </button>
 
-    <button id="slower" class="btn btn-default btn-lg " type="button" onclick="slowerButtonClicked()">
+    <button id="slower" class="btn btn-default btn-lg btn-danger " type="button" onclick="slowerButtonClicked()">
         Slower
     </button>
 
-    <button id="faster" class="btn btn-default btn-lg " type="button" onclick="fasterButtonClicked()">
+    <button id="faster" class="btn btn-default btn-lg btn-success " type="button" onclick="fasterButtonClicked()">
         Faster
     </button>
-
+    </div>
 
     <asset:javascript src="application.js"/>
     <asset:javascript src="pdf.js" />
