@@ -9,7 +9,6 @@ var question_container;
 var default_question;
 var display_question_btn;
 var hide_question_btn;
-var new_question_badge;
 
 var class_hidden = "hidden";
 var class_new_btn = "new_btn";
@@ -25,7 +24,6 @@ function initLecturer() {
     default_question = document.getElementById("default_question");
     display_question_btn = document.getElementById("display_question_btn");
     hide_question_btn = document.getElementById("hide_question_btn");
-    new_question_badge = document.getElementById("new_question_badge");
 
     /* EVENTS */
     display_question_btn.onclick = function () {
@@ -93,6 +91,7 @@ var addQuestion = function(question) {
 
 //Notify the lecturer of a new question
 var notifyNewQuestion = function () {
+    var new_question_badge = document.getElementById("new_question_badge");
     // Hvis questions er displayed skal ikke knappen få "new" taggen
     if (getQuestionsToggled()) {return}
 
@@ -122,6 +121,7 @@ var questionsSetHidden = function (hidden) {
 //Remove the new_question class from all question elements
 var resetNewQuestions = function () {
     var new_questions = document.getElementsByClassName("question");
+    var new_question_badge = document.getElementById("new_question_badge");
     for (var i = 0; i < new_questions.length; i++){
         new_questions[i].classList.remove(class_new_question);
     }
