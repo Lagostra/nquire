@@ -15,27 +15,25 @@ body {
 
 }
 #hard{
-    position: fixed;
-    bottom: 20px;
-    left: 30%;
+
 }
 #undo {
-    position: fixed;
-    bottom: 20px;
-    left: 40%;
+
 }
 #question{
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
+
 }
 #slower{
-    position: fixed;
-    bottom: 20px;
-    left: 60%;
+
 }
 #faster{
+
+}
+#buttons-container{
     position: fixed;
-    bottom: 20px;
-    left: 70%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: RGBA(0,0,0,0.5);
+    bottom: 0px;
+    padding:10px;
 }

@@ -5,6 +5,7 @@
  */
 
 var socket;
+var timeout;
 
 function initStudent() {
     socket = new WebSocket(url);
@@ -35,11 +36,9 @@ function initStudent() {
     socket.onerror = function(e) {
 
     }
-
     socket.onclose = function(e) {
         console.log("Connection closed.");
     }
-
 
     window.onkeydown = function(e){
         if (e.keyCode == '39') {
@@ -76,5 +75,17 @@ function modalSaveButtonClicked(){
         {type:"question", question: question}
     );
     socket.send(message);
+    form['questionInput'].value="";
 
 }
+
+function mouseMoveHandler(){
+    document.getElementById("buttons-container").style.display = "block";
+
+    clearTimeout(timeout);
+    timeout = setTimeout(function(){
+        document.getElementById("buttons-container").style.display = "none";
+    },2000)
+
+}
+
