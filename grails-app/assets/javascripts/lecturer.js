@@ -54,7 +54,7 @@ function initLecturer() {
                 socket.send(JSON.stringify({"type": "requestPresentation"}));
                 break;
             case "presentation": // Received presentation file
-                setPresentation(presentation);
+                setPresentation(msg.presentation);
                 break;
         }
     }

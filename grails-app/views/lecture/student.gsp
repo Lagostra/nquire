@@ -29,7 +29,9 @@
     <div id="overlayBackground" onClick="backgroundClicked()"></div>
 
     <div style="position: fixed;"><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>
-    <canvas id="the-canvas"></canvas>
+    <div id="presentation-container">
+        <canvas id="the-canvas"></canvas>
+    </div>
 
     <button id="hard" class="btn btn-default btn-lg " type="button" onclick="hardButtonClicked()">
         Hard
