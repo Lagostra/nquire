@@ -1,6 +1,6 @@
 <html>
 <head>
-    <meta name="layout" content="main" />
+    <asset:stylesheet src="application.css" />
 </head>
 <body>
     <h1>Lecture ID: <sec:loggedInUserInfo field='currentLecture'/></h1>
@@ -28,7 +28,7 @@
     </div>
 
     <div><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>
-    <div id="presentation-container" style="position: relative; width: 500px; height: 300px;">
+    <div id="presentation-container" style="z-index: -10;">
         <canvas id="the-canvas"></canvas>
     </div>
 

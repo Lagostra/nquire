@@ -47,3 +47,8 @@
     left: 0;
     right: 0;
 }
+
+    #the-canvas {
+        margin: auto;
+        display: block;
+    }
