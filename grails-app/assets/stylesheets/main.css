@@ -13,3 +13,37 @@
 .margin-top-20 {
     margin-top: 20px;
 }
+
+.hidden{
+    /*visibility: hidden; */
+    display: none;
+}
+
+.question{
+    display: block;
+    padding: 2em;
+    outline: 1px solid black;
+}
+
+.new_question{
+    font-weight:bold;
+    border-bottom: 20px #d61c28 solid ;
+}
+
+.new_btn{
+    background-color: #d61c28;
+}
+
+#question_container{
+    overflow: auto;
+    overflow-x: hidden;
+    outline: 1px solid black;
+}
+
+#presentation-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

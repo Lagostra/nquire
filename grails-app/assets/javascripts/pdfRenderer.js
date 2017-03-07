@@ -105,8 +105,9 @@ function renderPage(pageNumber) {
 function calculateScale(viewport,page){
     var height = viewport.height;
     var width = viewport.width;
-    var pageHeight = document.documentElement.clientHeight;
-    var pageWidth = document.documentElement.clientWidth;
+    var presContainer = document.getElementById("presentation-container");
+    var pageHeight = presContainer.clientHeight;
+    var pageWidth = presContainer.clientWidth;
 
     if (height/pageHeight > width / pageWidth){
         return page.getViewport(pageHeight/height);
