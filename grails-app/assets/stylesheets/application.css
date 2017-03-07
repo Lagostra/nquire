@@ -9,5 +9,6 @@
 *
 *= require bootstrap.min
 *= require main
+*= require frontpage
 *= require_self
 */

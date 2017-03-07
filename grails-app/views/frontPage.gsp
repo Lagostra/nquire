@@ -12,7 +12,7 @@
 
 
 </head>
-<body style="background-color:grey; background-image:url('${resource(dir: "images", file: "background.jpeg")}'); background-size:cover;">
+<body id="student-login">
 
 <script>
     function joinButtonClicked(){
@@ -21,19 +21,18 @@
 
 </script>
 
-<div style="text-align:center; font-size:2em; width: 350px; height: 170px; margin: 0; position: absolute; top:50%; left: 50%; transform: translate(-50%, -50%);">
-<div class="panel panel-default" style="height:148px;">
-    <div class="panel-body">
+<div id="student-login-container">
+    <div class="panel panel-default">
+        <div class="panel-body">
 
-        <input style="font-size:1.2em; width:100%; margin-bottom:15px; "type="text" placeholder="Lecture ID"/><br/>
-        <g:link uri="/lecturer"><button id="faster" class="btn btn-default btn-block btn-lg btn-success " type="button" onclick="joinButtonClicked()">
-        Join lecture
-        </button></g:link><br/>
+            <input type="text" placeholder="Lecture ID"/><br/>
+            <button id="joinButton" class="btn btn-success btn-block btn-lg" onclick="joinButtonClicked()">
+                Join lecture
+            </button>
+        </div>
 
     </div>
-
-</div>
-    <div style="color:white;">or <g:link uri="/lecturer">log in</g:link> as a lecturer</div>
+    <div><g:link uri="/lecturer">I am a lecturer</g:link></div>
 </div>
 <asset:javascript src="application.js"/>
 
