@@ -141,7 +141,7 @@ var removeDefaultQuestion = function() {
 
 //Get the amount of new questions
 var getNewQuestions = function () {
-    return document.getElementsByClassName(class_new_question).length;
+    return document.getElementsByClassName(class_new_question).length + 1;
 };
 
 function onKey(e) {
