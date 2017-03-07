@@ -16,7 +16,6 @@ var class_new_btn = "new_btn";
 var class_new_question = "new_question";
 
 var socket;
-var currentPage = 0;
 
 
 //Initialize variables, set events and declare socket related methods
@@ -157,19 +156,14 @@ var getNewQuestions = function () {
 
 function onKey(e) {
     var key = e.keyCode ? e.keyCode : e.which;
-    var msg = {
-        "type": "pageChange",
-        "page": currentPage
-    };
     switch(key) {
         case 37: // Left
-            currentPage--;
-            if(currentPage < 0) currentPage = 0;
-            socket.send(JSON.stringify(msg));
+            renderPreviousPage();
+            socket.send(JSON.stringify({type: "pageChange", page: currentPage}));
             break;
         case 39: // Right
-            currentPage++;
-            socket.send(JSON.stringify(msg));
+            renderNextPage();
+            socket.send(JSON.stringify({type: "pageChange", page: currentPage}));
             break;
     }
 }
