@@ -145,6 +145,7 @@ function initLecturer() {
         switch(msg.type) {
             case "connected": // Successfully connected to lecture
                 socket.send(JSON.stringify({"type": "requestPresentation"}));
+                socket.send(JSON.stringify({"type": "requestQuestions"}));
                 break;
             case "presentation": // Received presentation file
                 setPresentation(msg.presentation);
