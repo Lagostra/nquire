@@ -89,6 +89,7 @@ class LectureEndpoint implements WebSocketHandler {
 
     @Override
     void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
+        lecturesByUser.get(session).removeUser(session)
         lecturesByUser.remove(session)
         unassignedUsers.remove(session)
     }

@@ -71,6 +71,11 @@ class LectureHandler {
         student.sendMessage(new TextMessage(msg))
     }
 
+    public removeUser(WebSocketSession user) {
+        lecturers.remove(user)
+        students.remove(user)
+    }
+
     public void onMessage(String message, WebSocketSession userSession) {
         lastActivity = System.currentTimeMillis()
         def mObject = new JsonSlurper().parseText(message)
