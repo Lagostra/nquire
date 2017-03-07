@@ -17,6 +17,7 @@ var class_new_question = "new_question";
 var socket;
 var currentPage = 0;
 
+//Initialize variables, set events and declare socket related methods
 function initLecturer() {
     question_container = document.getElementById("question_container");
     default_question = document.getElementById("default_question");
@@ -68,7 +69,7 @@ function initLecturer() {
     window.onkeydown = onKey;
 }
 
-/*call this function upon event, when new question is received*/
+//Call this function when new questions are received, adds question and HTML
 var addQuestion = function(question) {
     question.new = true;
     questions.push(question);
@@ -87,7 +88,7 @@ var addQuestion = function(question) {
         '</div>';
 };
 
-//notify the lecturer of a new question
+//Notify the lecturer of a new question
 var notifyNewQuestion = function () {
     // Hvis questions er displayed skal ikke knappen få "new" taggen
     if (getQuestionsToggled()){return}
@@ -97,12 +98,12 @@ var notifyNewQuestion = function () {
     console.log("new question added");
 };
 
-//are questions displayed?
+//Check whether questions are displayed
 var getQuestionsToggled = function() {
     return question_container.classList.contains(class_hidden);
 };
 
-//show/hide questions on lecturer screen
+//Show/hide questions on lecturer screen
 var questionsSetHidden = function (hidden) {
     if (hidden) {
         question_container.classList.add(class_hidden);
