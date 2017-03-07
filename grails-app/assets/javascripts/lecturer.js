@@ -35,19 +35,19 @@ function initLecturer() {
 
 
     socket = new WebSocket(url);
-    console.log("Connecting...")
+    console.log("Connecting...");
 
     socket.onopen = function(e) {
-        console.log("Connection established")
+        console.log("Connection established");
         var msg = { "type": "connect",
             "lectureId": lectureId,
             "role": "lecturer",
-            "token": token}
+            "token": token};
         socket.send(JSON.stringify(msg))
-    }
+    };
 
     socket.onmessage = function(e) {
-        var msg = JSON.parse(e.data)
+        var msg = JSON.parse(e.data);
 
         switch(msg.type) {
             case "connected": // Successfully connected to lecture
@@ -57,15 +57,15 @@ function initLecturer() {
                 setPresentation(presentation);
                 break;
         }
-    }
+    };
 
     socket.onerror = function(e) {
 
-    }
+    };
 
     socket.onclose = function(e) {
         console.log("Connection closed.");
-    }
+    };
 
     window.onkeydown = onKey;
 }
@@ -124,23 +124,19 @@ var resetNewQuestions = function () {
 
 function onKey(e) {
     var key = e.keyCode ? e.keyCode : e.which;
-
+    var msg = {
+        "type": "pageChange",
+        "page": currentPage
+    };
     switch(key) {
         case 37: // Left
             currentPage--;
             if(currentPage < 0) currentPage = 0;
-            var msg = {
-                "type": "pageChange",
-                "page": currentPage
-            };
             socket.send(JSON.stringify(msg));
             break;
         case 39: // Right
             currentPage++;
-            var msg = {
-                "type": "pageChange",
-                "page": currentPage
-            };
+
             socket.send(JSON.stringify(msg));
             break;
     }
