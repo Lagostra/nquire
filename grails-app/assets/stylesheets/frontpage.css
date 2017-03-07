@@ -1,14 +1,23 @@
+html {
+    height:100%;
+}
+
+#nquire-image {
+    width: 350px;
+    height: auto;
+}
 #student-login {
     background-color:grey;
     background-image:url('background.jpeg');
     background-size:cover;
+    background-repeat: no-repeat;
 }
 
     #student-login-container {
         text-align:center;
         font-size:2em;
         width: 350px;
-        height: 170px;
+        height: 400px;
         margin: 0;
         position: absolute;
         top:50%;
