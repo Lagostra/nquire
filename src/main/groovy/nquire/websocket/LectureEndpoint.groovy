@@ -84,7 +84,7 @@ class LectureEndpoint implements WebSocketHandler {
 
     @Override
     void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-        // TODO Print error
+        log.error(exception.message)
     }
 
     @Override
