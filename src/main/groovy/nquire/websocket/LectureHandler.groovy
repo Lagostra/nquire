@@ -7,9 +7,11 @@ import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 import org.apache.pdfbox.pdmodel.PDDocument
 import org.apache.pdfbox.pdmodel.common.PDStream
+
 import org.springframework.web.socket.WebSocketSession
 import org.springframework.web.socket.TextMessage
 import org.springframework.web.socket.CloseStatus
+import org.springframework.web.util.HtmlUtils
 
 import javax.xml.bind.DatatypeConverter
 import java.nio.file.Files
@@ -51,8 +53,6 @@ class LectureHandler {
 
         presentation = DatatypeConverter.printBase64Binary(baos.toByteArray())
         boxes = (ArrayList<Box>[]) new ArrayList[pdDocument.getNumberOfPages()];
-
-        //presentation = DatatypeConverter.printBase64Binary(Files.readAllBytes(Paths.get(filePath)));
     }
 
     public boolean addLecturer(WebSocketSession lecturer, String token) {
@@ -93,8 +93,13 @@ class LectureHandler {
 
             if(mObject.type == "question") { //Student asked a question
                 // TODO check if question matches previously asked question
-                questions.add(mObject.question)
-                sendToAllLecturers(message)
+                String question = HtmlUtils.htmlEscape(mObject.question)
+                questions.add(question)
+                String msg = JsonOutput.toJson([
+                        type: "question",
+                        question: question
+                ])
+                sendToAllLecturers(msg)
             } else if(mObject.type == "pace") { // Student has given pace feedback
 
             }
