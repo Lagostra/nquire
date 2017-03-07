@@ -14,8 +14,10 @@ var class_hidden = "hidden";
 var class_new_btn = "new_btn";
 var class_new_question = "new_question";
 
-//list of strings
-var init = function() {
+var socket;
+var currentPage = 0;
+
+function initLecturer() {
     question_container = document.getElementById("question_container");
     default_question = document.getElementById("default_question");
 
@@ -30,7 +32,43 @@ var init = function() {
     hide_question_btn.onclick = function () {
         questionsSetHidden(true);
     };
-};
+
+
+    socket = new WebSocket(url);
+    console.log("Connecting...")
+
+    socket.onopen = function(e) {
+        console.log("Connection established")
+        var msg = { "type": "connect",
+            "lectureId": lectureId,
+            "role": "lecturer",
+            "token": token}
+        socket.send(JSON.stringify(msg))
+    }
+
+    socket.onmessage = function(e) {
+        var msg = JSON.parse(e.data)
+
+        switch(msg.type) {
+            case "connected": // Successfully connected to lecture
+                socket.send(JSON.stringify({"type": "requestPresentation"}));
+                break;
+            case "presentation": // Received presentation file
+                setPresentation(presentation);
+                break;
+        }
+    }
+
+    socket.onerror = function(e) {
+
+    }
+
+    socket.onclose = function(e) {
+        console.log("Connection closed.");
+    }
+
+    window.onkeydown = onKey;
+}
 
 /*call this function upon event, when new question is received*/
 var addQuestion = function(question) {
@@ -84,10 +122,26 @@ var resetNewQuestions = function () {
     }
 };
 
-window.onload = function(){
-    init();
-    addQuestion("Test: hvem heter jeg?");
-    addQuestion("Whatchu doin?");
-    addQuestion("Swag?");
-    addQuestion("Blir dette nr 2 eller blir det nest siste eller...?");
-};
+function onKey(e) {
+    var key = e.keyCode ? e.keyCode : e.which;
+
+    switch(key) {
+        case 37: // Left
+            currentPage--;
+            if(currentPage < 0) currentPage = 0;
+            var msg = {
+                "type": "pageChange",
+                "page": currentPage
+            };
+            socket.send(JSON.stringify(msg));
+            break;
+        case 39: // Right
+            currentPage++;
+            var msg = {
+                "type": "pageChange",
+                "page": currentPage
+            };
+            socket.send(JSON.stringify(msg));
+            break;
+    }
+}

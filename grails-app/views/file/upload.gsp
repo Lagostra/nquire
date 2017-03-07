@@ -13,7 +13,7 @@
                 <g:if test="${message}">
                     <div class="info-message">${message}</div>
                 </g:if>
-                <g:uploadForm name="uploadForm" url="[controller:'file', action:'save']">
+                <g:uploadForm name="uploadForm" url="[controller:'file', action:'save']" onsubmit="return validateUploadForm();" >
                     <div class="form-group">
                         <label for="title">Title:</label>
                         <g:textField name="title" class="form-control" id="title"></g:textField>
