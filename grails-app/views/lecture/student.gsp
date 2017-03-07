@@ -24,7 +24,7 @@
                 </div>
                 <div class="modal-body">
                     <form name="questionForm">
-                        <textarea name="questionInput" style="resize:none; width:100%;" rows="3" maxlength="400"></textarea>
+                        <textarea id="questionInput" name="questionInput" style="resize:none; width:100%;" rows="3" maxlength="400"></textarea>
                     </form>
                 </div>
                 <div class="modal-footer">
