@@ -14,11 +14,11 @@
 </head>
 <body style="background-color:grey;">
 
-<div style="text-align:center; font-size:2em; max-width: 15%; margin: 0; position: absolute; top:50%; left: 50%; transform: translate(-50%, -50%);">
-<div class="panel panel-default" style="padding: 4px;">
+<div style="text-align:center; font-size:2em; width: 350px; height: 170px; margin: 0; position: absolute; top:50%; left: 50%; transform: translate(-50%, -50%);">
+<div class="panel panel-default" style="height:148px;">
     <div class="panel-body">
 
-        <input style="font-size:1.2em; width:100%;margin:8px;"type="text" placeholder="Lecture ID"/><br/>
+        <input style="font-size:1.2em; width:100%; margin-bottom:15px; "type="text" placeholder="Lecture ID"/><br/>
         <button id="faster" class="btn btn-default btn-block btn-lg btn-success " type="button" onclick="JoinButtonClicked()">
         Join lecture
         </button><br/>
