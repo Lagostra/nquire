@@ -8,9 +8,12 @@ var drag;
 var tempRect;
 var prevRect;
 var seq;
+var contextWidth;
+var contextHeight;
 
 function init(){
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    contextWidth = canvas.clientWidth; contextHeight = canvas.clientHeight;
     canvas.addEventListener("mousedown", mouseDown);
     canvas.addEventListener("mousemove", mouseMove);
     canvas.addEventListener("mouseup", mouseUp);
@@ -25,7 +28,7 @@ function init(){
 function mouseDown(event){
     if(!drag){
         drag = true;
-        tempRect.x = event.offsetX; tempRect.y = event.offsetY;
+        tempRect.x = (event.offsetX/contextWidth); tempRect.y = (event.offsetY/contextHeight);
         tempRect.w = 0; tempRect.h = 0;
         tempRect.sequence = seq;
     }
@@ -46,7 +49,7 @@ function keyPress(e){
 function drawTemp(){
     update();
     context.globalAlpha = 0.6;
-    context.fillRect(tempRect.x, tempRect.y, tempRect.w, tempRect.h);
+    context.fillRect(tempRect.x * contextWidth, tempRect.y * contextHeight, tempRect.w * contextWidth, tempRect.h * contextHeight);
 }
 
 function update(){
@@ -55,7 +58,7 @@ function update(){
     prevRect = splitAllRects(prevRect);
     for(var i = 0; i < prevRect.length; i++){
         var rect = prevRect[i];
-        context.fillRect(rect.x, rect.y, rect.w, rect.h);
+        context.fillRect(rect.x * contextWidth, rect.y * contextHeight, rect.w * contextWidth, rect.h * contextHeight);
     }
 }
 
@@ -82,7 +85,7 @@ function mouseUp(event){
 
 function mouseMove(event){
     if(drag){
-        tempRect.w = event.offsetX - tempRect.x; tempRect.h = event.offsetY - tempRect.y;
+        tempRect.w = (event.offsetX/contextWidth) - tempRect.x; tempRect.h = (event.offsetY/contextHeight) - tempRect.y;
         drawTemp();
     }
 }
