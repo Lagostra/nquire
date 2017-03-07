@@ -13,20 +13,30 @@
 </head>
 <body>
 
-    <div id="questionOverlay">
-        post a question
-        <div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="questionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title" id="exampleModalLabel">Send a question to the lecturer</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="questionForm">
+                    <textarea name="questionInput" style="resize:none; width:100%;" rows="3" maxlength="400"></textarea>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="modalSaveButtonClicked();">Send</button>
+            </div>
         </div>
-        <button  class="btn btn-default" type="button" onclick="">
-            CANCEL
-        </button>
-        <button class="btn btn-default" type="button">
-            SEND
-        </button>
     </div>
-
-    <div id="overlayBackground" onClick="backgroundClicked()"></div>
+</div>
 
     <div style="position: fixed;"><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>
     <canvas id="the-canvas"></canvas>
@@ -39,7 +49,7 @@
         Undo
     </button>
 
-    <button id="question" class="btn btn-default btn-lg " type="button" onclick="questionButtonClicked()">
+    <button id="question" class="btn btn-default btn-lg " data-toggle="modal" data-target="#questionModal" type="button" onclick="questionButtonClicked()">
         Question
     </button>
 
