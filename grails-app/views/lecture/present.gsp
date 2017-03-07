@@ -8,8 +8,12 @@
         <g:submitButton name="Submit" value="Close lecture" class="btn btn-primary" />
     </g:form>
 
-    <div id="display_question_btn" class="btn btn-primary btn-md">Show Questions</div>
-    <div id="hide_question_btn" class="btn btn-primary btn-md">Hide Questions</div>
+    <div id="display_question_btn" class="btn btn-primary btn-md">
+        Show Questions <span id="new_question_badge" class="badge"></span>
+    </div>
+    <div id="hide_question_btn" class="btn btn-primary btn-md">
+        Hide Questions
+    </div>
 
 
     <div id="question_container" class="hidden">
