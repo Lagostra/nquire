@@ -129,7 +129,7 @@ var clearAllQuestions = function () {
 var setDefaultQuestion = function () {
     question_container.innerHTML =
         '<div id="default_question" class="question">' +
-            '<p>No questions yet</p>' +
+            'No questions yet' +
         '</div>';
 };
 
