@@ -24,7 +24,7 @@
     </div>
 
     <div><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>
-    <div id="presentation-container" style="width: 500px; height: 300px;">
+    <div id="presentation-container" style="position: relative; width: 500px; height: 300px;">
         <canvas id="the-canvas"></canvas>
     </div>
 
