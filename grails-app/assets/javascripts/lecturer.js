@@ -136,7 +136,6 @@ function onKey(e) {
             break;
         case 39: // Right
             currentPage++;
-
             socket.send(JSON.stringify(msg));
             break;
     }
