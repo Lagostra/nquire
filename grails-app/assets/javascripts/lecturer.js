@@ -17,57 +17,6 @@ var class_new_question = "new_question";
 var socket;
 var currentPage = 0;
 
-function initLecturer() {
-    question_container = document.getElementById("question_container");
-    default_question = document.getElementById("default_question");
-    display_question_btn = document.getElementById("display_question_btn");
-    hide_question_btn = document.getElementById("hide_question_btn");
-
-    /* EVENTS */
-    display_question_btn.onclick = function () {
-        questionsSetHidden(false);
-    };
-    hide_question_btn.onclick = function () {
-        questionsSetHidden(true);
-    };
-
-    /* SOCETS */
-    socket = new WebSocket(url);
-    console.log("Connecting...");
-
-    socket.onopen = function(e) {
-        console.log("Connection established");
-        var msg = { "type": "connect",
-            "lectureId": lectureId,
-            "role": "lecturer",
-            "token": token};
-        socket.send(JSON.stringify(msg))
-    };
-
-    socket.onmessage = function(e) {
-        var msg = JSON.parse(e.data);
-
-        switch(msg.type) {
-            case "connected": // Successfully connected to lecture
-                socket.send(JSON.stringify({"type": "requestPresentation"}));
-                break;
-            case "presentation": // Received presentation file
-                setPresentation(msg.presentation);
-                break;
-        }
-    };
-
-    socket.onerror = function(e) {
-
-    };
-
-    socket.onclose = function(e) {
-        console.log("Connection closed.");
-    };
-
-    window.onkeydown = onKey;
-}
-
 /*call this function upon event, when new question is received*/
 var addQuestion = function(question) {
     question.new = true;
@@ -161,4 +110,64 @@ function onKey(e) {
             socket.send(JSON.stringify(msg));
             break;
     }
+}
+
+function initLecturer() {
+    question_container = document.getElementById("question_container");
+    default_question = document.getElementById("default_question");
+    display_question_btn = document.getElementById("display_question_btn");
+    hide_question_btn = document.getElementById("hide_question_btn");
+
+    /* EVENTS */
+    display_question_btn.onclick = function () {
+        questionsSetHidden(false);
+    };
+    hide_question_btn.onclick = function () {
+        questionsSetHidden(true);
+    };
+
+    /* SOCETS */
+    socket = new WebSocket(url);
+    console.log("Connecting...");
+
+    socket.onopen = function(e) {
+        console.log("Connection established");
+        var msg = { "type": "connect",
+            "lectureId": lectureId,
+            "role": "lecturer",
+            "token": token};
+        socket.send(JSON.stringify(msg))
+    };
+
+    socket.onmessage = function(e) {
+        var msg = JSON.parse(e.data);
+
+        switch(msg.type) {
+            case "connected": // Successfully connected to lecture
+                socket.send(JSON.stringify({"type": "requestPresentation"}));
+                break;
+            case "presentation": // Received presentation file
+                setPresentation(msg.presentation);
+                break;
+            case "allQuestions": // All previous questions
+                clearAllQuestions();
+                for(var i = 0; i < msg.questions.length; i++) {
+                    addQuestion(msg.questions[i]);
+                }
+                break;
+            case "question": // One new question
+                addQuestion(msg.question);
+                break;
+        }
+    };
+
+    socket.onerror = function(e) {
+
+    };
+
+    socket.onclose = function(e) {
+        console.log("Connection closed.");
+    };
+
+    window.onkeydown = onKey;
 }
