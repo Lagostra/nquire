@@ -17,7 +17,7 @@
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 <div id="default_question" class="question">
-                    <p>No questions yet</p> <!-- mulig fjern -->
+                    <p>No questions yet</p>
                 </div>
             </div>
         </div>

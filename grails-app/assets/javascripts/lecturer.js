@@ -20,10 +20,8 @@ var currentPage = 0;
 function initLecturer() {
     question_container = document.getElementById("question_container");
     default_question = document.getElementById("default_question");
-
     display_question_btn = document.getElementById("display_question_btn");
     hide_question_btn = document.getElementById("hide_question_btn");
-
 
     /* EVENTS */
     display_question_btn.onclick = function () {
@@ -33,7 +31,7 @@ function initLecturer() {
         questionsSetHidden(true);
     };
 
-
+    /* SOCETS */
     socket = new WebSocket(url);
     console.log("Connecting...");
 
@@ -78,18 +76,21 @@ var addQuestion = function(question) {
     default_question.classList.add(class_hidden);
     question_container.innerHTML +=
         '<div class="row">' +
-        '<div class="col-md-2"></div>' +
-        '<div class="col-md-8">' +
-        '<div class="question ' + class_new_question + ' ">' + question + ' </div> ' +
-        '</div> </div>';
+            '<div class="col-md-2"></div>' +
+            '<div class="col-md-8">' +
+                '<div id ="' + questions.length + '" ' +
+                    'class="question ' +
+                    class_new_question + ' ">' +
+                    question +
+                ' </div> ' +
+            '</div> ' +
+        '</div>';
 };
 
 //notify the lecturer of a new question
 var notifyNewQuestion = function () {
     // Hvis questions er displayed skal ikke knappen få "new" taggen
-    if (getQuestionsToggled()){
-        return
-    }
+    if (getQuestionsToggled()){return}
     display_question_btn.classList.add(class_new_btn);
 
     //potensiel popup elns, bestemt ved testing
@@ -114,12 +115,33 @@ var questionsSetHidden = function (hidden) {
     }
 };
 
-
+//Remove the new_question class from all question elements
 var resetNewQuestions = function () {
     var new_questions = document.getElementsByClassName("question");
     for (var i = 0; i < new_questions.length; i++){
         new_questions[i].classList.remove(class_new_question);
     }
+};
+
+//Reset the questions array,
+var clearAllQuestions = function () {
+    questions = [];
+    setDefaultQuestion();
+};
+
+//Adds the default question "no questions yet"
+var setDefaultQuestion = function () {
+    question_container.innerHTML =
+        '<div id="question_container" class="hidden">' +
+        '<div class="row">' +
+            '<div class="col-md-2"></div>' +
+            '<div class="col-md-8">' +
+                '<div id="default_question" class="question">' +
+                    '<p>No questions yet</p>' +
+                '</div>' +
+            '</div>' +
+        '</div>' +
+    '</div>';
 };
 
 function onKey(e) {
@@ -136,7 +158,6 @@ function onKey(e) {
             break;
         case 39: // Right
             currentPage++;
-
             socket.send(JSON.stringify(msg));
             break;
     }
