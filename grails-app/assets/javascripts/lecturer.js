@@ -9,6 +9,7 @@ var question_container;
 var default_question;
 var display_question_btn;
 var hide_question_btn;
+var new_question_badge;
 
 var class_hidden = "hidden";
 var class_new_btn = "new_btn";
@@ -23,6 +24,7 @@ function initLecturer() {
     default_question = document.getElementById("default_question");
     display_question_btn = document.getElementById("display_question_btn");
     hide_question_btn = document.getElementById("hide_question_btn");
+    new_question_badge = document.getElementById("new_question_badge");
 
     /* EVENTS */
     display_question_btn.onclick = function () {
@@ -91,11 +93,11 @@ var addQuestion = function(question) {
 //Notify the lecturer of a new question
 var notifyNewQuestion = function () {
     // Hvis questions er displayed skal ikke knappen få "new" taggen
-    if (getQuestionsToggled()){return}
-    display_question_btn.classList.add(class_new_btn);
+    if (getQuestionsToggled()) {return}
 
-    //potensiel popup elns, bestemt ved testing
-    console.log("new question added");
+    display_question_btn.classList.add(class_new_btn);
+    new_question_badge.innerHTML = getNewQuestions();
+    new_question_badge.classList.remove(class_hidden);
 };
 
 //Check whether questions are displayed
@@ -122,6 +124,8 @@ var resetNewQuestions = function () {
     for (var i = 0; i < new_questions.length; i++){
         new_questions[i].classList.remove(class_new_question);
     }
+    new_question_badge.innerHTML = getNewQuestions();
+    new_question_badge.classList.add(class_hidden);
 };
 
 //Reset the questions array,
@@ -143,6 +147,11 @@ var setDefaultQuestion = function () {
             '</div>' +
         '</div>' +
     '</div>';
+};
+
+//Get the amount of new questions
+var getNewQuestions = function () {
+    return document.getElementsByClassName(class_new_question).length;
 };
 
 function onKey(e) {
