@@ -35,7 +35,6 @@ function initPdfReader(){
 
 //rerenders current page on window resize
 window.onresize = function(){
-    console.log("Rerender");
     renderPage(currentPage);
 }
 
@@ -50,13 +49,11 @@ function loadPDF(){
         var loadingTask = PDFJS.getDocument({data: pdf}).then(function(pdf) {
             this.pdf = pdf;
             document.getElementById('page_count').textContent = pdf.numPages;
-            console.log('PDF loaded:',pdf);
             //first render
             this.renderPage(1);
 
         }, function (reason) {
             // PDF loading error
-            console.error(reason);
         });
     }
 }
@@ -108,15 +105,14 @@ function renderPage(pageNumber) {
 function calculateScale(viewport,page){
     var height = viewport.height;
     var width = viewport.width;
-    var pageHeight = document.documentElement.clientHeight;
-    var pageWidth = document.documentElement.clientWidth;
+    var presContainer = document.getElementById("presentation-container");
+    var pageHeight = presContainer.clientHeight;
+    var pageWidth = presContainer.clientWidth;
 
     if (height/pageHeight > width / pageWidth){
-        console.log(page.getViewport(pageHeight/height))
         return page.getViewport(pageHeight/height);
     }
     else {
-        console.log(page.getViewport(pageWidth/width))
         return page.getViewport(pageWidth/width);
     }
 }

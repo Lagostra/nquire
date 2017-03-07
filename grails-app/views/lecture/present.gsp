@@ -27,6 +27,13 @@
         </div>
     </div>
 
+    <div><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>
+    <div id="presentation-container" style="position: relative; width: 500px; height: 300px;">
+        <canvas id="the-canvas"></canvas>
+    </div>
+
+    <asset:javascript src="pdf.js" />
+    <asset:javascript src="pdfRenderer.js"/>
     <asset:javascript src="lecturer.js"/>
     <script>
         var url = "${createLink(uri: '/lectureStream', absolute: true)

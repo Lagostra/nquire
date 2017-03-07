@@ -109,13 +109,22 @@ class LectureHandler {
 
     private sendToAllStudents(String message) {
         for(WebSocketSession student : students) {
-            student.sendMessage(new TextMessage(message))
+            sendTo(student, message)
         }
     }
 
     private sendToAllLecturers(String message) {
         for(WebSocketSession lecturer : lecturers) {
-            lecturer.sendMessage(new TextMessage(message))
+            sendTo(lecturer, message)
+        }
+    }
+
+    private sendTo(WebSocketSession user, String message) {
+        try {
+            user.sendMessage(new TextMessage(message))
+        } catch(IOException e) {
+            lecturers.remove(user);
+            students.remove(user);
         }
     }
 
