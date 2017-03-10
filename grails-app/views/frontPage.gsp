@@ -15,9 +15,9 @@
 <body id="student-login">
 
 <div id="student-login-container">
+    <img id="nquire-image" src="${resource(dir: 'images', file: "textLogo.png")}" alt="Grails"/>
     <div class="panel panel-default">
         <div class="panel-body">
-
             <input id="lecture-id-field" type="text" placeholder="Lecture ID"/><br/>
             <button id="joinButton" class="btn btn-success btn-block btn-lg" onclick="joinButtonClicked()">
                 Join lecture
