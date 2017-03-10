@@ -80,6 +80,10 @@ class LectureController {
 
     def close_lecture() {
         LectureEndpoint.closeLecture(authenticatedUser.currentLecture)
+        authenticatedUser.currentLecture = 0
+        authenticatedUser.lectureToken = ""
+        authenticatedUser.save(flush: true)
+        springSecurityService.reauthenticate(authenticatedUser.username)
 
         redirect(controller: 'file', action: 'index')
     }
