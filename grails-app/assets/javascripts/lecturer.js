@@ -139,15 +139,15 @@ var clearAllQuestions = function () {
 var setDefaultQuestion = function () {
     question_container.innerHTML =
         '<div id="question_container" class="hidden">' +
-        '<div class="row">' +
-            '<div class="col-md-2"></div>' +
-            '<div class="col-md-8">' +
-                '<div id="default_question" class="question">' +
-                    '<p>No questions yet</p>' +
+            '<div class="row">' +
+                '<div class="col-md-2"></div>' +
+                '<div class="col-md-8">' +
+                    '<div id="default_question" class="question">' +
+                        '<p>No questions yet</p>' +
+                    '</div>' +
                 '</div>' +
             '</div>' +
-        '</div>' +
-    '</div>';
+        '</div>';
 };
 
 //Get the amount of new questions
