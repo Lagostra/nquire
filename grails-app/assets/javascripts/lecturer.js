@@ -19,59 +19,6 @@ var socket;
 var currentPage = 0;
 
 
-//Initialize variables, set events and declare socket related methods
-function initLecturer() {
-    question_container = document.getElementById("question_container");
-    default_question = document.getElementById("default_question");
-    display_question_btn = document.getElementById("display_question_btn");
-    hide_question_btn = document.getElementById("hide_question_btn");
-    new_question_badge = document.getElementById("new_question_badge");
-
-    /* EVENTS */
-    display_question_btn.onclick = function () {
-        questionsSetHidden(false);
-    };
-    hide_question_btn.onclick = function () {
-        questionsSetHidden(true);
-    };
-
-    /* SOCETS */
-    socket = new WebSocket(url);
-    console.log("Connecting...");
-
-    socket.onopen = function(e) {
-        console.log("Connection established");
-        var msg = { "type": "connect",
-            "lectureId": lectureId,
-            "role": "lecturer",
-            "token": token};
-        socket.send(JSON.stringify(msg))
-    };
-
-    socket.onmessage = function(e) {
-        var msg = JSON.parse(e.data);
-
-        switch(msg.type) {
-            case "connected": // Successfully connected to lecture
-                socket.send(JSON.stringify({"type": "requestPresentation"}));
-                break;
-            case "presentation": // Received presentation file
-                setPresentation(presentation);
-                break;
-        }
-    };
-
-    socket.onerror = function(e) {
-
-    };
-
-    socket.onclose = function(e) {
-        console.log("Connection closed.");
-    };
-
-    window.onkeydown = onKey;
-}
-
 //Call this function when new questions are received, adds question and HTML
 var addQuestion = function(question) {
     question.new = true;
@@ -155,6 +102,7 @@ var getNewQuestions = function () {
     return document.getElementsByClassName(class_new_question).length;
 };
 
+//On Key
 function onKey(e) {
     var key = e.keyCode ? e.keyCode : e.which;
     var msg = {
@@ -174,6 +122,7 @@ function onKey(e) {
     }
 }
 
+//Initialize variables, set events and declare socket related methods
 function initLecturer() {
     question_container = document.getElementById("question_container");
     default_question = document.getElementById("default_question");
