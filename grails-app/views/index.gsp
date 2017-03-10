@@ -22,23 +22,20 @@
         <div class="row">
             <div class="col-md-4">
                 <h2>Vanskelighetsgrad.</h2>
-                <p>Gjennom <em>nquire's</em> dynamiske presentasjonsviser
-                kan studenter enkelt få oversikt over
-                slides under forelesning. Brukeren kan markere deler
-                av presentasjonen som er utfordrende, slik at foreleser
+                <p>Gjennom <em>nquire's</em> dynamiske presentasjonsviser kan studenter
+                enkelt få oversikt over slides under forelesning. Brukeren kan markere
+                deler av presentasjonen som er utfordrende, slik at foreleser
                 vet hva som trenger videre gjennomgang. Hvis et område blir
                 markert av mange, vises dette på den felles presentasjonen,
-                så man slipper å føle seg alene dersom man
-                ikke forstår alt!</p>
+                så man slipper å føle seg alene dersom man ikke forstår alt!</p>
                 <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
             </div>
             <div class="col-md-4">
                 <h2>Spørsmål?</h2>
                 <p>Lurer du på noe under forelesning? Ved bruk av <em>nquire's</em>
-                    "ask-feature" kan man stille spørsmål
-                    med lav terskel, uten å føle at man sinker
-                    forelesningen, eller trenger å snakke høyt i
-                en sal med mange mennesker. </p>
+                "ask-feature" kan man stille spørsmål med lav terskel, uten å
+                føle at man sinker forelesningen, eller trenger å snakke høyt i
+                en sal med mange mennesker.</p>
                 <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
             </div>
             <div class="col-md-4">
