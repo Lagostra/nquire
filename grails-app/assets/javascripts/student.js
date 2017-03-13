@@ -8,6 +8,8 @@ var socket;
 var timeout;
 
 function initStudent() {
+    document.body.onmousemove = mouseMoveHandler;
+
     socket = new WebSocket(url);
     console.log("Connecting...")
 

@@ -11,7 +11,7 @@
     <asset:stylesheet src="application.css"/>
     <asset:stylesheet src="student.css"/>
 </head>
-<body onmousemove="mouseMoveHandler()">
+<body>
     <!-- Modal -->
     <div class="modal fade" id="questionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
