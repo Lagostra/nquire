@@ -84,11 +84,12 @@ class LectureEndpoint implements WebSocketHandler {
 
     @Override
     void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-        // TODO Print error
+        log.error(exception.message)
     }
 
     @Override
     void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
+        lecturesByUser.get(session).removeUser(session)
         lecturesByUser.remove(session)
         unassignedUsers.remove(session)
     }

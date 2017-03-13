@@ -18,6 +18,8 @@ class User implements Serializable {
 	String email
 	String firstName
 	String lastName
+	String lectureToken = ""
+	int currentLecture = 0
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked

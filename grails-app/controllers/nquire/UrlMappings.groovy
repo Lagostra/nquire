@@ -9,9 +9,9 @@ class UrlMappings {
             }
         }
 
-        "/"(view:"/index")
-        "/student"(view:"/student/studentPage")
+        "/"(view:"/frontPage")
         "500"(view:'/error')
         "404"(view:'/notFound')
+        "/lecturer"(view:"/lecturerFrontPage")
     }
 }

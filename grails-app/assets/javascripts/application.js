@@ -8,10 +8,7 @@
 //= require jquery-2.2.0.min
 //= require bootstrap
 //= require register
-//= require_tree .
 //= require_self
-//= require pdf
-//= require pdf.worker
 
 if (typeof jQuery !== 'undefined') {
     (function($) {

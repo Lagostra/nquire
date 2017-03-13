@@ -7,13 +7,8 @@ grails.plugin.springsecurity.authority.className = 'nquire.Role'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/',               access: ['permitAll']],
 	[pattern: '/error',          access: ['permitAll']],
-	[pattern: '/index',          access: ['permitAll']],
-	[pattern: '/index.gsp',      access: ['permitAll']],
-	[pattern: '/shutdown',       access: ['permitAll']],
-	[pattern: '/hello',     	 access: ['permitAll']],
-	[pattern: '/hello/index',    access: ['permitAll']],
+	[pattern: '/lecturer',       access: ['permitAll']],
 	[pattern: '/user/register',  access: ['permitAll']],
-	[pattern: '/register',  access: ['permitAll']],
 	[pattern: '/assets/**',      access: ['permitAll']],
 	[pattern: '/**/js/**',       access: ['permitAll']],
 	[pattern: '/**/css/**',      access: ['permitAll']],
@@ -36,3 +31,5 @@ rememberMe.key = "jkl893ajgah80" // Set custom cookie salting key for security
 grails.plugin.springsecurity.password.algorithm = 'bcrypt' // Set password hashing algorithm to bcrypt for security
 grails.plugin.springsecurity.rejectIfNoRule = false // Disable pessimistic lockdown
 grails.plugin.springsecurity.fii.rejectPublicInvocations = false
+
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = "/lecturer" // Set default redirect url to lecturer home

@@ -8,6 +8,8 @@ var socket;
 var timeout;
 
 function initStudent() {
+    document.body.onmousemove = mouseMoveHandler;
+
     socket = new WebSocket(url);
     console.log("Connecting...")
 
@@ -58,7 +60,8 @@ function undoButtonClicked(){
     console.log("button clicked");
 }
 function questionButtonClicked(){
-    console.log("button clicked");
+    // Timeout because button event requires focus; must be released first...
+    setTimeout(function() {document.getElementById('questionInput').focus()}, 500);
 }
 function slowerButtonClicked(){
     console.log("button clicked");
