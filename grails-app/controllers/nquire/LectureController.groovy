@@ -9,6 +9,8 @@ import java.security.SecureRandom
 @Secured('ROLE_LECTURER')
 class LectureController {
 
+    def springSecurityService;
+
     static allowedMethods = [present: 'GET', create_lecture: 'POST', close_lecture: 'POST'];
 
     def index() {
@@ -16,7 +18,7 @@ class LectureController {
     }
 
     def present() {
-        if(principal.currentLecture == 0 || !LectureEndpoint.isAlive(principal.currentLecture)) {
+        if(authenticatedUser.currentLecture == 0 || !LectureEndpoint.isAlive(principal.currentLecture)) {
             // The lecturer does not have a running lecture
             redirect(controller: 'file', action: 'index')
             return
@@ -68,14 +70,20 @@ class LectureController {
                 isAdded = LectureEndpoint.addLecture(new LectureHandler(token, filePath), id)
         }
 
-        principal.currentLecture = id
-        principal.lectureToken = token
+        authenticatedUser.currentLecture = id
+        authenticatedUser.lectureToken = token
+        authenticatedUser.save(flush: true)
+        springSecurityService.reauthenticate(authenticatedUser.username)
 
         redirect(action: 'present')
     }
 
     def close_lecture() {
-        LectureEndpoint.closeLecture(principal.currentLecture)
+        LectureEndpoint.closeLecture(authenticatedUser.currentLecture)
+        authenticatedUser.currentLecture = 0
+        authenticatedUser.lectureToken = ""
+        authenticatedUser.save(flush: true)
+        springSecurityService.reauthenticate(authenticatedUser.username)
 
         redirect(controller: 'file', action: 'index')
     }

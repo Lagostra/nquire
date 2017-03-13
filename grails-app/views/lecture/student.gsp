@@ -11,32 +11,29 @@
     <asset:stylesheet src="application.css"/>
     <asset:stylesheet src="student.css"/>
 </head>
-<body onmousemove="mouseMoveHandler()">
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="questionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="modal-title" id="exampleModalLabel">Send a question to the lecturer</span>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form name="questionForm">
-                    <textarea name="questionInput" style="resize:none; width:100%;" rows="3" maxlength="400"></textarea>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="modalSaveButtonClicked();">Send</button>
+<body>
+    <!-- Modal -->
+    <div class="modal fade" id="questionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="modal-title" id="exampleModalLabel">Send a question to the lecturer</span>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form name="questionForm">
+                        <textarea id="questionInput" name="questionInput" style="resize:none; width:100%;" rows="3" maxlength="400"></textarea>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="modalSaveButtonClicked();">Send</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     <div style="position: fixed;"><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>
     <div id="presentation-container">

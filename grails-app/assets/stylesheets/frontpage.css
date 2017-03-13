@@ -1,0 +1,45 @@
+html {
+    height:100%;
+}
+
+#nquire-image {
+    width: 350px;
+    height: auto;
+}
+#student-login {
+    background-color:grey;
+    background-image:url('background.jpeg');
+    background-size:cover;
+    background-repeat: no-repeat;
+}
+
+    #student-login-container {
+        text-align:center;
+        font-size:2em;
+        width: 350px;
+        height: 400px;
+        margin: 0;
+        position: absolute;
+        top:50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+        #student-login-container .panel {
+        }
+
+            #student-login-container input[type="text"] {
+                text-align: center;
+                font-size:1.2em;
+                padding: .5em;
+                width:100%;
+                margin-bottom:15px;
+            }
+
+        #student-login-container a {
+            color: white;
+            text-shadow:    -1px -1px 8px black,
+                            -1px 1px 8px black,
+                            1px -1px 8px black,
+                            1px 1px 8px black;
+        }
