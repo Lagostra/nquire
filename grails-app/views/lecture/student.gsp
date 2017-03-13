@@ -10,6 +10,7 @@
 
     <asset:stylesheet src="application.css"/>
     <asset:stylesheet src="student.css"/>
+    <asset:link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 </head>
 <body>
     <!-- Modal -->
