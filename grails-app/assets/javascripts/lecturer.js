@@ -8,7 +8,6 @@ var questions = [];
 var question_container;
 var default_question;
 var display_question_btn;
-var hide_question_btn;
 var new_question_badge;
 
 var class_hidden = "hidden";
@@ -21,7 +20,6 @@ function initLecturer() {
     question_container = document.getElementById("question_container");
     default_question = document.getElementById("default_question");
     display_question_btn = document.getElementById("display_question_btn");
-    hide_question_btn = document.getElementById("hide_question_btn");
     new_question_badge = document.getElementById("new_question_badge");
 
     /* EVENTS */
