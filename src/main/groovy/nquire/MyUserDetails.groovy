@@ -6,15 +6,16 @@ import org.springframework.security.core.GrantedAuthority;
 class MyUserDetails extends GrailsUser {
 
     final String fullName;
-    String lectureToken;
-    int currentLecture = 0;
-
+    String lectureToken
+    int currentLecture
     public MyUserDetails(String username, String password, boolean enabled, boolean accountNonExpired,
                   boolean credentialsNonExpired, boolean accountNonLocked, Collection<GrantedAuthority> authorities,
-                  long id, String fullName) {
+                  long id, String fullName, int currentLecture, String lectureToken) {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities, id);
 
-        this.fullName = fullName;
+        this.fullName = fullName
+        this.currentLecture = currentLecture
+        this.lectureToken = lectureToken
     }
 
 }
