@@ -17,6 +17,8 @@ class FileController {
 
     static allowedMethods = [index: 'GET', upload: 'GET', save: 'POST', get: 'GET'];
 
+    private final thumbnailHeight = 120
+
     def index() {
         render(view: 'list', model: [presentations: authenticatedUser.presentations]);
     }
@@ -101,9 +103,13 @@ class FileController {
 
         PDFRenderer renderer = new PDFRenderer(pdDocument);
 
-        // Renders the first page
-        // The second argument is the DPI of the rendered image
-        BufferedImage image = renderer.renderImageWithDPI(0, 15.0);
+        // Renders thumbnail full-size to calculate scale
+        BufferedImage image = renderer.renderImage(0);
+        // Scale thumbnail so that all are of same height
+        float scale = thumbnailHeight / image.getHeight()
+
+        // Render scaled thumbnail
+        image = renderer.renderImage(0, scale);
 
         return image;
     }

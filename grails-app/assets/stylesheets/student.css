@@ -1,0 +1,39 @@
+html{
+    height: 100%;
+}
+
+#the-canvas {
+
+    margin: auto;
+    display:Block;
+    outline: 1px solid;
+
+}
+body {
+    height: 100%;
+    background-color: #1A1A1A;
+
+}
+#hard{
+
+}
+#undo {
+
+}
+#question{
+
+}
+#slower{
+
+}
+#faster{
+
+}
+#buttons-container{
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: RGBA(0,0,0,0.5);
+    bottom: 0px;
+    padding:10px;
+}

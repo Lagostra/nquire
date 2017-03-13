@@ -8,7 +8,6 @@
 //= require jquery-2.2.0.min
 //= require bootstrap
 //= require register
-//= require_tree .
 //= require_self
 
 if (typeof jQuery !== 'undefined') {

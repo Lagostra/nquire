@@ -13,3 +13,52 @@
 .margin-top-20 {
     margin-top: 20px;
 }
+
+.hidden{
+    /*visibility: hidden; */
+    display: none;
+}
+
+.question{
+    padding: 0.5em;
+    margin-bottom: 2px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.new_question::before {
+    content: '';
+    display: inline-block;
+    border-radius: 50%;
+    width: 50%;
+    background-color: #5bc0de;
+    height: 10px;
+    width: 10px;
+    margin: 0 2px;
+}
+
+.new_question{
+    font-weight:bold;
+}
+
+.new_btn{
+    background-color: #d61c28;
+}
+
+#question_container{
+    overflow: auto;
+    max-height: 200px;
+}
+
+#presentation-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+    #the-canvas {
+        margin: auto;
+        display: block;
+    }
