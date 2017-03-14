@@ -32,6 +32,10 @@ function initStudent() {
             case "presentation": // Received presentation file
                 setPresentation(msg.presentation);
                 break;
+            case "similarQuestion":
+                document.getElementById("modalOwnQuestion").innerHTML = msg.ownQuestion;
+                document.getElementById("modalMatchedQuestion").innerHTML = msg.matchedQuestion;
+                $('#similarQuestionModal').modal('show');
         }
     }
 
@@ -80,6 +84,16 @@ function modalSaveButtonClicked(){
     socket.send(message);
     form['questionInput'].value="";
 
+}
+
+function forceSendQuestion() {
+    var question = document.getElementById("modalOwnQuestion").innerHTML;
+    var message = JSON.stringify({
+            type: "question",
+            force: true,
+            question: question
+        });
+    socket.send(message);
 }
 
 function mouseMoveHandler(){
