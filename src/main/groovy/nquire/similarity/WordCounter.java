@@ -13,7 +13,7 @@ import java.util.List;
 
 public class WordCounter implements SimilarityCalculator{
 
-    private List<String> stopWords;
+    List<String> stopWords;
     private static Log log = LogFactory.getLog(WordCounter.class);
     private int nGrams;
 
@@ -41,20 +41,20 @@ public class WordCounter implements SimilarityCalculator{
         return calculateSimilarity(l1, l2);
     }
 
-    private List<String> listify(String s) {
+    List<String> listify(String s) {
         return new ArrayList<String>(Arrays.asList(s.split(" ")));
     }
 
-    private void makeNGrams(List<String> s, int n) {
+    void makeNGrams(List<String> s, int n) {
         if(n < 2)
             return;
 
         int length = s.size();
 
         for(int i = 1; i < n; i++) {
-            for(int j = 0; j < length - i + 1; j++) {
+            for(int j = 0; j < length - i; j++) {
                 String nGram = s.get(j);
-                for(int k = 1; k < i; k++) {
+                for(int k = 1; k <= i; k++) {
                     nGram += "_" + s.get(j + k);
                 }
                 s.add(nGram);
@@ -62,25 +62,26 @@ public class WordCounter implements SimilarityCalculator{
         }
     }
 
-    private void removeStopWords(List<String> s) {
-        for(String w : s) {
-            if(stopWords.contains(w)) {
-                s.remove(w);
+    void removeStopWords(List<String> s) {
+        for(int i = 0; i < s.size(); i++) {
+            if(stopWords.contains(s.get(i))) {
+                s.remove(i);
+                i--;
             }
         }
     }
 
-    private List<String> removeDuplicates(List<String> s) {
+    List<String> removeDuplicates(List<String> s) {
         return new ArrayList<String>(new LinkedHashSet<String>(s));
     }
 
-    private float calculateSimilarity(List<String> s1, List<String> s2) {
+    float calculateSimilarity(List<String> s1, List<String> s2) {
         int numSimilarWords = 0;
         for(String w : s1) {
             if(s2.contains(w))
                 numSimilarWords++;
         }
-        return numSimilarWords / Math.max(s1.size(), s2.size());
+        return (float) numSimilarWords / Math.max(s1.size(), s2.size());
     }
 
     private void loadStopWords() {
