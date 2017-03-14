@@ -24,6 +24,9 @@ public class WordCounter implements SimilarityCalculator{
 
     @Override
     public float calculate(String s1, String s2) {
+        s1 = s1.toLowerCase();
+        s2 = s2.toLowerCase();
+
         List<String> l1 = listify(s1);
         List<String> l2 = listify(s2);
 
@@ -107,5 +110,4 @@ public class WordCounter implements SimilarityCalculator{
 
         stopWords = result;
     }
-
 }
