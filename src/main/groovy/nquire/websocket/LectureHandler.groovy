@@ -3,6 +3,8 @@ package nquire.websocket
 import com.google.gson.JsonObject
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
+import nquire.similarity.SimilarityCalculator
+import nquire.similarity.WordCounter
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 import org.apache.pdfbox.pdmodel.PDDocument
@@ -14,14 +16,15 @@ import org.springframework.web.socket.CloseStatus
 import org.springframework.web.util.HtmlUtils
 
 import javax.xml.bind.DatatypeConverter
-import java.nio.file.Files
-import java.nio.file.Paths
 
 class LectureHandler {
 
     private static Log log = LogFactory.getLog(getClass())
 
     private static final long inactivityTimeout = 30*60*1000 // Time of inactivity before lecture is closed [ms]
+
+    private static SimilarityCalculator simCalc
+    private final float SIMILARITY_THRESHOLD = 0.6;
 
     private int id;
     private long lastActivity;
@@ -37,6 +40,7 @@ class LectureHandler {
     LectureHandler(String lecturerToken) {
         this.lecturerToken = lecturerToken
         lastActivity = System.currentTimeMillis();
+        simCalc = new WordCounter(2);
 
         students = new ArrayList<>();
         lecturers = new ArrayList<>();
@@ -97,14 +101,7 @@ class LectureHandler {
             // The message was sent by a student
 
             if(mObject.type == "question") { //Student asked a question
-                // TODO check if question matches previously asked question
-                String question = HtmlUtils.htmlEscape(mObject.question)
-                questions.add(question)
-                String msg = JsonOutput.toJson([
-                        type: "question",
-                        question: question
-                ])
-                sendToAllLecturers(msg)
+                handleQuestion(mObject, userSession)
             } else if(mObject.type == "pace") { // Student has given pace feedback
 
             }
@@ -115,6 +112,38 @@ class LectureHandler {
                                                 presentation: presentation])
             userSession.sendMessage(new TextMessage(msg))
         }
+    }
+
+    private handleQuestion(mObject, WebSocketSession userSession) {
+        String question = HtmlUtils.htmlEscape(mObject.question)
+        String matchedQuestion;
+        if(!mObject.force)
+            matchedQuestion = getSimilarQuestion(mObject.question)
+
+        if(matchedQuestion == null) {
+            questions.add(question)
+            String msg = JsonOutput.toJson([
+                    type: "question",
+                    question: question
+            ])
+            sendToAllLecturers(msg)
+        } else {
+            String msg = JsonOutput.toJson([
+                    type: "similarQuestion",
+                    ownQuestion: question,
+                    matchedQuestion: matchedQuestion
+                ])
+            userSession.sendMessage(new TextMessage(msg))
+        }
+    }
+
+    private String getSimilarQuestion(String q1) {
+        for(String q2 : questions) {
+            if(simCalc.calculate(q1, q2) > SIMILARITY_THRESHOLD) {
+                return q2
+            }
+        }
+        return null
     }
 
     private sendToAllStudents(String message) {
