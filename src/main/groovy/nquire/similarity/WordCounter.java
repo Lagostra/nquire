@@ -27,8 +27,10 @@ public class WordCounter implements SimilarityCalculator{
         List<String> l1 = listify(s1);
         List<String> l2 = listify(s2);
 
-        makeNGrams(l1, nGrams);
-        makeNGrams(l2, nGrams);
+        if(nGrams > 1) {
+            makeNGrams(l1, nGrams);
+            makeNGrams(l2, nGrams);
+        }
 
         l1 = removeDuplicates(l1);
         l2 = removeDuplicates(l2);
