@@ -24,7 +24,7 @@ class LectureHandler {
     private static final long inactivityTimeout = 30*60*1000 // Time of inactivity before lecture is closed [ms]
 
     private static SimilarityCalculator simCalc
-    private final float SIMILARITY_THRESHOLD = 0.6;
+    private final float SIMILARITY_THRESHOLD = 0.20;
 
     private int id;
     private long lastActivity;
