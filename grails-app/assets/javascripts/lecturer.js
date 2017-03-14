@@ -102,7 +102,6 @@ var notifyNewQuestion = function () {
     display_question_btn.classList.add(class_new_btn);
     new_question_badge.innerHTML = getNewQuestions();
     new_question_badge.classList.remove(class_hidden);
-    alert("new Question");
 };
 
 //Check whether questions are displayed
