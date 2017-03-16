@@ -13,8 +13,9 @@ class LectureController {
 
     static allowedMethods = [present: 'GET', create_lecture: 'POST', close_lecture: 'POST'];
 
+    @Secured('permitAll')
     def index() {
-
+        render(view: '/frontPage')
     }
 
     def present() {
