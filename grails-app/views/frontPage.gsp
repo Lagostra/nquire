@@ -23,7 +23,7 @@
                     <strong>Error:</strong> No lecture with given id.
                 </div>
             </g:if>
-            <div id="lecture-id-invalid-warning" class="alert alert-warning alert-small hidden">
+            <div id="lecture-id-invalid-warning" class="alert alert-danger alert-small hidden">
                 <strong>Error:</strong> ID must be between 1000 and 9999.
             </div>
             <g:form name="join-form" controller="lecture" action="connect" method="get" onsubmit="return validateJoinForm();">
