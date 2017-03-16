@@ -18,6 +18,11 @@
     <img id="nquire-image" src="${resource(dir: 'images', file: "textLogo.png")}" alt="Grails"/>
     <div class="panel panel-default">
         <div class="panel-body">
+            <g:if test="${status == true}">
+                <div class="alert alert-danger alert-small">
+                    <strong>Error:</strong> No lecture with given id.
+                </div>
+            </g:if>
             <g:form name="join-form" controller="lecture" action="connect" method="get" onsubmit="return validateJoinForm();">
                 <g:textField id="lecture-id-field" name="id" placeholder="Lecture ID" maxlength="4" />
                 <input type="submit" class="btn btn-success btn-block btn-lg" value="Join lecture" />
