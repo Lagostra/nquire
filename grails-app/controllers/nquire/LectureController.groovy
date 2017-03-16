@@ -40,7 +40,7 @@ class LectureController {
 
         if(!LectureEndpoint.isAlive(id)) {
             // Lecture does not exist
-            // TODO Handle this...
+            redirect(action: 'index', params: [status: 1])
         }
 
         render(view: 'student', model: [lectureId: id])
