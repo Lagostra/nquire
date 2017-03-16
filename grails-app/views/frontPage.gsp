@@ -23,6 +23,9 @@
                     <strong>Error:</strong> No lecture with given id.
                 </div>
             </g:if>
+            <div id="lecture-id-invalid-warning" class="alert alert-warning alert-small hidden">
+                <strong>Error:</strong> ID must be between 1000 and 9999.
+            </div>
             <g:form name="join-form" controller="lecture" action="connect" method="get" onsubmit="return validateJoinForm();">
                 <g:textField id="lecture-id-field" name="id" placeholder="Lecture ID" maxlength="4" />
                 <input type="submit" class="btn btn-success btn-block btn-lg" value="Join lecture" />
@@ -41,7 +44,7 @@
         var form = document.forms['join-form'];
         var idValue = parseInt(form['id'].value);
         if(isNaN(idValue) || idValue < 1000 || idValue > 9999) {
-            alert("Lecture id must be between 1000 and 9999.")
+            document.getElementById("lecture-id-invalid-warning").classList.remove("hidden");
             return false;
         }
         return true;
