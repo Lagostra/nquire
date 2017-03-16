@@ -15,7 +15,9 @@ class LectureController {
 
     @Secured('permitAll')
     def index() {
-        render(view: '/frontPage')
+        boolean invalidLecture = session['invalidLecture'];
+        session['invalidLecture'] = false;
+        render(view: '/frontPage', model: [status: invalidLecture])
     }
 
     def present() {
@@ -32,7 +34,7 @@ class LectureController {
     def connect() {
         if(params.id == null) {
             // No lecture id given
-            redirect("/")
+            redirect(action: index)
             // TODO Redirect to form for lecture connection
         }
 
@@ -40,7 +42,8 @@ class LectureController {
 
         if(!LectureEndpoint.isAlive(id)) {
             // Lecture does not exist
-            redirect(action: 'index', params: [status: 1])
+            session['invalidLecture'] = true;
+            redirect(action: 'index')
         }
 
         render(view: 'student', model: [lectureId: id])
