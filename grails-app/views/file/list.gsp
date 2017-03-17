@@ -20,15 +20,10 @@
     </g:if>
     <g:each in="${presentations}">
         <div class="col-md-3">
-            <button class="btn btn-default btn-block" onclick="
-                    this.parentElement.getElementsByClassName('create-lecture-form')[0].submit();
-                ">
+            <button class="btn btn-default btn-block">
                 <g:img class="img-thumbnail img-responsive center-block" uri="/file/get_thumbnail/${it.id}"/>
                 ${it.title}
             </button>
-            <g:form class="create-lecture-form" url="[action:'create_lecture',controller:'lecture']" method="POST" style="display: none;">
-                <g:hiddenField name="presentationId" value="${it.id}" />
-            </g:form>
         </div>
     </g:each>
 </div>
