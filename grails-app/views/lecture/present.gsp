@@ -15,7 +15,7 @@
                 <div class="modal-body">
                     <div id="question_container">
                         <div id="default_question" class="question">
-                            <p>No questions yet</p>
+                            No questions yet
                         </div>
                     </div>
                 </div>
