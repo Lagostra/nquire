@@ -49,6 +49,15 @@ class LectureController {
         render(view: 'student', model: [lectureId: id])
     }
 
+    def create() {
+        if(principal.currentLecture != 0 && LectureEndpoint.isAlive(principal.currentLecture)) {
+            // TODO Send message that a lecture is already running
+            redirect(action: 'present')
+            return
+        }
+        render(view: 'create', model: [presentations: authenticatedUser.presentations])
+    }
+
     def create_lecture() {
         if(principal.currentLecture != 0 && LectureEndpoint.isAlive(principal.currentLecture)) {
             // TODO Send message that a lecture is already running

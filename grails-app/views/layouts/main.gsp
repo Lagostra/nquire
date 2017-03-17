@@ -42,6 +42,9 @@
                                 </g:link>
                             </li>
                         </g:if>
+                        <g:else>
+                            <li><g:link controller="lecture" action="create" >Create lecture</g:link></li>
+                        </g:else>
                     </sec:ifAllGranted>
                 </ul>
 
