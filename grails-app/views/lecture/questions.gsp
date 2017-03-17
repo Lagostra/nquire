@@ -5,6 +5,13 @@
 <body>
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
+            <g:form controller="lecture" action="close_lecture" class="inline-form pull-right">
+                <g:submitButton name="Submit" value="Close lecture" class="btn btn-danger" />
+            </g:form>
+        </div>
+    </div>
+    <div class="row margin-top-10">
+        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
                    Questions

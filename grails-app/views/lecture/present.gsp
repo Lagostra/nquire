@@ -28,7 +28,7 @@
 
     <h1>Lecture ID: <sec:loggedInUserInfo field='currentLecture'/></h1>
     <g:form controller="lecture" action="close_lecture">
-        <g:submitButton name="Submit" value="Close lecture" class="btn btn-primary" />
+        <g:submitButton name="Submit" value="Close lecture" class="btn btn-danger" />
     </g:form>
 
     <button id="display_question_btn" class="btn btn-primary btn-md" data-toggle="modal" data-target="#questionsModal" type="button">
