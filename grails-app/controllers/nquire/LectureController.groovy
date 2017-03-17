@@ -108,6 +108,6 @@ class LectureController {
         authenticatedUser.save(flush: true)
         springSecurityService.reauthenticate(authenticatedUser.username)
 
-        redirect(controller: 'file', action: 'index')
+        redirect(controller: 'lecture', action: 'present')
     }
 }
