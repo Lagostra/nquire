@@ -49,6 +49,10 @@
     background-color: #d61c28;
 }
 
+.current-lecture-link {
+    color: #34B509 !important;
+}
+
 #question_container{
     overflow: auto;
     max-height: 200px;

@@ -34,6 +34,14 @@
                     <li><a href="/">Home</a></li>
                     <sec:ifAllGranted roles="ROLE_LECTURER">
                         <li><g:link controller="file" action="index" >Presentations</g:link></li>
+                        <g:if test="${nquire.websocket.LectureEndpoint.isAlive(applicationContext.springSecurityService.principal.currentLecture)}" >
+                            <li>
+                                <g:link class="current-lecture-link" controller="lecture" action="present"
+                                        id="${applicationContext.springSecurityService.principal.currentLecture}">
+                                    Current Lecture
+                                </g:link>
+                            </li>
+                        </g:if>
                     </sec:ifAllGranted>
                 </ul>
 
