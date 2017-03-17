@@ -54,6 +54,7 @@
         if(lectureId == 0) {
             alert("No lecture started!");
         } else {
+            pageRole = "present";
             window.onload = initLecturer;
         }
     </script>

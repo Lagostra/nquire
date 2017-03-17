@@ -23,11 +23,21 @@ class LectureController {
     def present() {
         if(authenticatedUser.currentLecture == 0 || !LectureEndpoint.isAlive(principal.currentLecture)) {
             // The lecturer does not have a running lecture
-            redirect(controller: 'file', action: 'index')
+            redirect(controller: 'lecture', action: 'create')
             return
         }
 
         render(view: 'present')
+    }
+
+    def questions() {
+        if(authenticatedUser.currentLecture == 0 || !LectureEndpoint.isAlive(principal.currentLecture)) {
+            // The lecturer does not have a running lecture
+            redirect(controller: 'lecture', action: 'create')
+            return
+        }
+
+        render(view: 'questions')
     }
 
     @Secured('permitAll')

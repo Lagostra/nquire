@@ -43,9 +43,13 @@
 
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <g:link controller="lecture" action="present"
-                                                id="${applicationContext.springSecurityService.principal.currentLecture}">
-                                            Present
+                                        <g:link controller="lecture" action="present">
+                                            Presentation view
+                                        </g:link>
+                                    </li>
+                                    <li>
+                                        <g:link controller="lecture" action="questions">
+                                            Questions view
                                         </g:link>
                                     </li>
                                 </ul>
@@ -89,7 +93,6 @@
 
     <div class="container">
         <g:layoutBody/>
-        <div class="alert alert-danger hidden" role="alert">You did something wrong!</div>
         <div class="footer" role="contentinfo"></div>
 
         <asset:javascript src="application.js"/>
