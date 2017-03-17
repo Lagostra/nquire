@@ -10,7 +10,8 @@ public class Pace implements PaceInterface {
     @Override
     public double calculateCurrentPace(ArrayList<Feedback> feedbackList) {
 
-        
+        //Algorithm here
+
         return 0.0;
     }
 
