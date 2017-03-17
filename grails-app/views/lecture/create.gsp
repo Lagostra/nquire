@@ -14,6 +14,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
+                        <g:if test="${presentations.size() == 0}"><!---->
+                            <div class="col-md-12">You haven't uploaded any presentations yet!</div>
+                        </g:if>
                         <g:each in="${presentations}">
                             <div class="col-md-4">
                                 <button class="btn btn-default btn-block" onclick="setLectureFile(${it.id}, this);">
