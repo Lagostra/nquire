@@ -1,6 +1,7 @@
 <html>
 <head>
     <asset:stylesheet src="application.css" />
+    <asset:stylesheet src="present.css"/>
 </head>
 <body>
     <div class="modal fade" id="questionsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -26,18 +27,32 @@
         </div>
     </div>
 
-    <h1>Lecture ID: <sec:loggedInUserInfo field='currentLecture'/></h1>
-    <g:form controller="lecture" action="close_lecture">
-        <g:submitButton name="Submit" value="Close lecture" class="btn btn-primary" />
-    </g:form>
+    <div id="overlay">
+        <h1>Lecture ID: <sec:loggedInUserInfo field='currentLecture'/></h1>
+        <g:form controller="lecture" action="close_lecture">
+            <g:submitButton name="Submit" value="Close lecture" class="btn btn-primary" />
+        </g:form>
 
-    <button id="display_question_btn" class="btn btn-primary btn-md" data-toggle="modal" data-target="#questionsModal" type="button">
-        Show Questions <span id="new_question_badge" class="badge"></span>
-    </button>
+        <button id="display_question_btn" class="btn btn-primary btn-md" data-toggle="modal" data-target="#questionsModal" type="button">
+            Show Questions <span id="new_question_badge" class="badge"></span>
+        </button>
 
-    <div><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>
+        <div><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>
+
+    </div>
     <div id="presentation-container" style="z-index: -10;">
         <canvas id="the-canvas"></canvas>
+    </div>
+
+    <div id="pace-container">
+        <div id="top-container">
+            <div id="top-overlay">
+            </div>
+        </div>
+        <div id="bottom-container">
+            <div id="bottom-overlay">
+            </div>
+        </div>
     </div>
 
     <asset:javascript src="application.js"/>
