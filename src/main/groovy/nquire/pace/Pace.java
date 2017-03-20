@@ -20,16 +20,16 @@ public class Pace implements PaceInterface {
         double sizeConstant = 2 - Math.pow(1.014, feedbackList.size());
 
         for (Feedback fb : feedbackList){
-            if (fb.getFast()) feedback += calculateTime(timeElapsed);
-            else feedback -= calculateTime(timeElapsed);
+            if (fb.getFast()) feedback += calculateTime(timeElapsed, sizeConstant);
+            else feedback -= calculateTime(timeElapsed, sizeConstant);
         }
 
         return base + feedback;
     }
 
 
-    private double calculateTime (double timeElapsed){
-        double a = 2 - Math.pow(1.00025, (8 * timeElapsed));
+    private double calculateTime (double timeElapsed, double sizeConstant){
+        double a = (2 - Math.pow(1.00025, (8 * timeElapsed)))*sizeConstant;
         if (a > 1.0) a = 1.0;
         else if (a < -1.0) a = -1.0;
         return a;
