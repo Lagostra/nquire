@@ -108,6 +108,12 @@ class LectureEndpoint implements WebSocketHandler {
         return true
     }
 
+    static LectureHandler getLecture(int id) {
+        if(!lectures.containsKey(id))
+            return null;
+        return lectures.get(id);
+    }
+
     static void closeLecture(int id) {
         LectureHandler lecture = lectures.get(id)
         closeLecture(lecture)

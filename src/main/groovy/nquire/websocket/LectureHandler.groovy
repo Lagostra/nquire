@@ -186,6 +186,10 @@ class LectureHandler {
         return this.id
     }
 
+    public boolean hasPresentation() {
+        return presentation != null;
+    }
+
     public boolean shouldClose() {
         return System.currentTimeMillis() - lastActivity > inactivityTimeout
     }
