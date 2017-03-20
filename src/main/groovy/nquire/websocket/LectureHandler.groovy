@@ -184,7 +184,7 @@ class LectureHandler {
     }
 
     private sendToAllStudents(String message) {
-        for(Student student : students) {
+        for(Student student : students.values()) {
             sendTo(student.getSession(), message)
         }
     }
@@ -211,7 +211,7 @@ class LectureHandler {
 
     public List getAllUsers() {
         List<WebSocketSession> result = new ArrayList<>(lecturers)
-        for(Student student : students) {
+        for(Student student : students.values()) {
             result.add(student.getSession())
         }
         return result
