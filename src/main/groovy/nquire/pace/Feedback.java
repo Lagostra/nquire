@@ -7,8 +7,8 @@ import java.util.Date;
  */
 public class Feedback {
 
-    public Date timestamp = new Date();
-    public boolean fast;
+    private Date timestamp = new Date();
+    private boolean fast;
 
     public Feedback(Date timestamp, boolean fast) {
         this.timestamp = timestamp;
@@ -17,6 +17,9 @@ public class Feedback {
 
     public boolean getFast() {
         return this.fast;
+    }
+    public Date getTimestamp() {
+        return this.timestamp;
     }
 
 }
