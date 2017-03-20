@@ -30,7 +30,7 @@ class LectureHandler {
     private String lecturerToken;
     private String presentation;
 
-    private List<Student> students;
+    private Map<WebSocketSession, Student> students;
     private List<WebSocketSession> lecturers;
 
     private List<String> questions;
@@ -41,7 +41,7 @@ class LectureHandler {
         lastActivity = System.currentTimeMillis();
         simCalc = new WordCounter(2);
 
-        students = new ArrayList<>();
+        students = new HashMap<>();
         lecturers = new ArrayList<>();
         questions = new ArrayList<>();
     }
@@ -69,7 +69,7 @@ class LectureHandler {
     }
 
     public void addStudent(WebSocketSession student) {
-        students.add(new Student(student, ++lastStudentId))
+        students.put(student, new Student(student, ++lastStudentId))
         String msg = JsonOutput.toJson([type: "connected"])
         student.sendMessage(new TextMessage(msg))
     }
