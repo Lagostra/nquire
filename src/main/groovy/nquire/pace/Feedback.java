@@ -15,5 +15,8 @@ public class Feedback {
         this.fast = fast;
     }
 
+    public boolean getFast() {
+        return this.fast;
+    }
 
 }

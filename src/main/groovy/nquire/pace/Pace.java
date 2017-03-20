@@ -9,7 +9,12 @@ public class Pace implements PaceInterface {
 
     @Override
     public double calculateCurrentPace(ArrayList<Feedback> feedbackList) {
-
+        double base = 50.0;
+        double feedback = 0.0;
+        for (Feedback fb : feedbackList){
+            if (fb.getFast()) feedback += 1.0;
+            else feedback -= 1.0;
+        }
         //Algorithm here
 
         return 0.0;
