@@ -172,8 +172,10 @@ class LectureHandler {
     }
 
     public List getAllUsers() {
-        List<WebSocketSession> result = new ArrayList<>(students)
-        result.addAll(lecturers)
+        List<WebSocketSession> result = new ArrayList<>(lecturers)
+        for(Student student : students) {
+            result.add(student.getSession())
+        }
         return result
     }
 
@@ -197,8 +199,8 @@ class LectureHandler {
      * Closes all connections to this lecture.
      * */
     public void close() {
-        for (WebSocketSession student : students) {
-            student.close(CloseStatus.GOING_AWAY)
+        for (Student student : students) {
+            student.getSession().close(CloseStatus.GOING_AWAY)
         }
 
         for (WebSocketSession lecturer : lecturers) {
