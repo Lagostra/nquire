@@ -44,4 +44,4 @@ public class Pace implements PaceInterface {
         return a;
     }
 
-} // Thanks author
+}
