@@ -6,6 +6,7 @@ import spock.lang.*
 
 /**
  * See the API for {@link grails.test.mixin.support.GrailsUnitTestMixin} for usage instructions
+ *
  */
 @TestMixin(GrailsUnitTestMixin)
 class PaceSpec extends Specification {
