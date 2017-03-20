@@ -11,7 +11,7 @@ public class Pace implements PaceInterface {
     @Override
     public double calculateCurrentPace(ArrayList<Feedback> feedbackList) {
         if (feedbackList.isEmpty())
-            throw new IllegalArgumentException("Invalid feedback list");
+            return 50.0;
 
         double base = 50.0;
         double feedback = 0.0;
@@ -23,7 +23,6 @@ public class Pace implements PaceInterface {
             if (fb.getFast()) feedback += calculateTime(timeElapsed, sizeConstant);
             else feedback -= calculateTime(timeElapsed, sizeConstant);
         }
-
         return base + feedback;
     }
 
