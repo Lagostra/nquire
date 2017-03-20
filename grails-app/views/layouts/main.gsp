@@ -42,11 +42,13 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    <li>
-                                        <g:link controller="lecture" action="present">
-                                            Presentation view
-                                        </g:link>
-                                    </li>
+                                    <g:if test="${nquire.websocket.LectureEndpoint.getLecture(applicationContext.springSecurityService.principal.currentLecture).hasPresentation()}">
+                                        <li>
+                                            <g:link controller="lecture" action="present">
+                                                Presentation view
+                                            </g:link>
+                                        </li>
+                                    </g:if>
                                     <li>
                                         <g:link controller="lecture" action="questions">
                                             Questions view
