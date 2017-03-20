@@ -15,6 +15,8 @@ import org.springframework.web.util.HtmlUtils
 
 import javax.xml.bind.DatatypeConverter
 
+import nquire.pace.Feedback
+
 class LectureHandler {
 
     private static Log log = LogFactory.getLog(getClass())
@@ -35,6 +37,7 @@ class LectureHandler {
 
     private List<String> questions;
     private List<Box>[] boxes;
+    private List<Feedback> paceFeedback;
 
     LectureHandler(String lecturerToken) {
         this.lecturerToken = lecturerToken
@@ -44,6 +47,7 @@ class LectureHandler {
         students = new HashMap<>();
         lecturers = new ArrayList<>();
         questions = new ArrayList<>();
+        paceFeedback = new ArrayList<>();
     }
 
     LectureHandler(String lecturerToken, String filePath) {
@@ -99,10 +103,20 @@ class LectureHandler {
         } else {
             // The message was sent by a student
 
+            Student student = students.get(userSession)
+
             if(mObject.type == "question") { //Student asked a question
                 handleQuestion(mObject, userSession)
             } else if(mObject.type == "pace") { // Student has given pace feedback
+                if(student.lastFeedback.getTime() - (new Date()).getTime() > 60 * 1000) {
+                    student.lastFeedback = new Date()
 
+                    if(mObject.value > 0) { // Too fast
+                        paceFeedback.add(new Feedback(new Date(), true))
+                    } else if(mObject.value < 0) { // Too slow
+                        paceFeedback.add(new Feedback(new Date(), false))
+                    }
+                }
             }
         }
 
