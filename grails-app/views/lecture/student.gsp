@@ -10,14 +10,15 @@
 
     <asset:stylesheet src="application.css"/>
     <asset:stylesheet src="student.css"/>
+    <asset:link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 </head>
 <body>
     <!-- Modal -->
-    <div class="modal fade" id="questionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="questionModal" tabindex="-1" role="dialog" aria-labelledby="questionModalTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span class="modal-title" id="exampleModalLabel">Send a question to the lecturer</span>
+                    <span class="modal-title" id="questionModalTitle">Send a question to the lecturer</span>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -30,6 +31,40 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="modalSaveButtonClicked();">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="similarQuestionModal" tabindex="-1" role="dialog" aria-labelledby="similarQuestionModalTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="modal-title" id="similarQuestionModalTitle">Similar question found</span>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <p>
+                            We found an already asked question that might be similar to the question you just asked.
+                            Please compare the questions, and decide whether the questions are equivalent or not.
+                        </p>
+                    </div>
+                    <div>
+                        <h4>Your question:</h4>
+                        <p id="modalOwnQuestion">I am a banana</p>
+                    </div>
+                    <div>
+                        <h4>Matched question:</h4>
+                        <p id="modalMatchedQuestion">I am not a banana</p>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Equivalent</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="forceSendQuestion();">Not equivalent</button>
                 </div>
             </div>
         </div>

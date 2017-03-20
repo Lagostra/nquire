@@ -8,8 +8,8 @@ var questions = [];
 var question_container;
 var default_question;
 var display_question_btn;
-var hide_question_btn;
 var new_question_badge;
+var pageRole;
 
 var class_hidden = "hidden";
 var class_new_btn = "new_btn";
@@ -21,13 +21,14 @@ function initLecturer() {
     question_container = document.getElementById("question_container");
     default_question = document.getElementById("default_question");
     display_question_btn = document.getElementById("display_question_btn");
-    hide_question_btn = document.getElementById("hide_question_btn");
     new_question_badge = document.getElementById("new_question_badge");
 
     /* EVENTS */
-    display_question_btn.onclick = function () {
-        question_container.scrollTop = question_container.scrollHeight;
-    };
+    if(pageRole == "present") {
+        display_question_btn.onclick = function () {
+            question_container.scrollTop = question_container.scrollHeight;
+        };
+    }
 
     /* SOCkETS */
     socket = new WebSocket(url);
@@ -47,7 +48,8 @@ function initLecturer() {
 
         switch(msg.type) {
             case "connected": // Successfully connected to lecture
-                socket.send(JSON.stringify({"type": "requestPresentation"}));
+                if(pageRole == "present")
+                    socket.send(JSON.stringify({"type": "requestPresentation"}));
                 socket.send(JSON.stringify({"type": "requestQuestions"}));
                 break;
             case "presentation": // Received presentation file
@@ -73,11 +75,13 @@ function initLecturer() {
         console.log("Connection closed.");
     };
 
-    window.onkeydown = onKey;
+    if(pageRole == "present") {
+        window.onkeydown = onKey;
 
-    $('#questionsModal').on('hidden.bs.modal', function(e) {
-       resetNewQuestions();
-    });
+        $('#questionsModal').on('hidden.bs.modal', function(e) {
+            resetNewQuestions();
+        });
+    }
 }
 
 //Call this function when new questions are received, adds question and HTML
@@ -85,7 +89,9 @@ var addQuestion = function(question) {
     removeDefaultQuestion();
     question.new = true;
     questions.push(question);
-    notifyNewQuestion();
+    if(pageRole == "present") {
+        notifyNewQuestion();
+    }
     default_question.classList.add(class_hidden);
     question_container.innerHTML +=
         '<div ' +
@@ -104,7 +110,6 @@ var notifyNewQuestion = function () {
     display_question_btn.classList.add(class_new_btn);
     new_question_badge.innerHTML = getNewQuestions();
     new_question_badge.classList.remove(class_hidden);
-    alert("new Question");
 };
 
 //Check whether questions are displayed

@@ -13,25 +13,38 @@ class LectureController {
 
     static allowedMethods = [present: 'GET', create_lecture: 'POST', close_lecture: 'POST'];
 
+    @Secured('permitAll')
     def index() {
-
+        boolean invalidLecture = session['invalidLecture'];
+        session['invalidLecture'] = false;
+        render(view: '/frontPage', model: [status: invalidLecture])
     }
 
     def present() {
         if(authenticatedUser.currentLecture == 0 || !LectureEndpoint.isAlive(principal.currentLecture)) {
             // The lecturer does not have a running lecture
-            redirect(controller: 'file', action: 'index')
+            redirect(controller: 'lecture', action: 'create')
             return
         }
 
         render(view: 'present')
     }
 
+    def questions() {
+        if(authenticatedUser.currentLecture == 0 || !LectureEndpoint.isAlive(principal.currentLecture)) {
+            // The lecturer does not have a running lecture
+            redirect(controller: 'lecture', action: 'create')
+            return
+        }
+
+        render(view: 'questions')
+    }
+
     @Secured('permitAll')
     def connect() {
         if(params.id == null) {
             // No lecture id given
-            redirect("/")
+            redirect(action: index)
             // TODO Redirect to form for lecture connection
         }
 
@@ -39,10 +52,20 @@ class LectureController {
 
         if(!LectureEndpoint.isAlive(id)) {
             // Lecture does not exist
-            // TODO Handle this...
+            session['invalidLecture'] = true;
+            redirect(action: 'index')
         }
 
         render(view: 'student', model: [lectureId: id])
+    }
+
+    def create() {
+        if(principal.currentLecture != 0 && LectureEndpoint.isAlive(principal.currentLecture)) {
+            // TODO Send message that a lecture is already running
+            redirect(action: 'present')
+            return
+        }
+        render(view: 'create', model: [presentations: authenticatedUser.presentations])
     }
 
     def create_lecture() {
@@ -85,6 +108,6 @@ class LectureController {
         authenticatedUser.save(flush: true)
         springSecurityService.reauthenticate(authenticatedUser.username)
 
-        redirect(controller: 'file', action: 'index')
+        redirect(controller: 'lecture', action: 'present')
     }
 }

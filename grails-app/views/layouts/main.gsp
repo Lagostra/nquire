@@ -13,6 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <asset:stylesheet src="application.css"/>
+    <asset:link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 
     <g:layoutHead/>
 </head>
@@ -26,13 +27,40 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">nquire</a>
+                <a class="navbar-brand" href="/lecturer">nquire</a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/">Home</a></li>
+                    <li><a href="/lecturer">Home</a></li>
                     <sec:ifAllGranted roles="ROLE_LECTURER">
                         <li><g:link controller="file" action="index" >Presentations</g:link></li>
+                        <g:if test="${nquire.websocket.LectureEndpoint.isAlive(applicationContext.springSecurityService.principal.currentLecture)}" >
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle current-lecture-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Current Lecture
+                                    <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <g:if test="${nquire.websocket.LectureEndpoint.getLecture(applicationContext.springSecurityService.principal.currentLecture).hasPresentation()}">
+                                        <li>
+                                            <g:link controller="lecture" action="present">
+                                                Presentation view
+                                            </g:link>
+                                        </li>
+                                    </g:if>
+                                    <li>
+                                        <g:link controller="lecture" action="questions">
+                                            Questions view
+                                        </g:link>
+                                    </li>
+                                </ul>
+
+                            </li>
+                        </g:if>
+                        <g:else>
+                            <li><g:link controller="lecture" action="create" >Create lecture</g:link></li>
+                        </g:else>
                     </sec:ifAllGranted>
                 </ul>
 
@@ -67,7 +95,6 @@
 
     <div class="container">
         <g:layoutBody/>
-        <div class="alert alert-danger hidden" role="alert">You did something wrong!</div>
         <div class="footer" role="contentinfo"></div>
 
         <asset:javascript src="application.js"/>
