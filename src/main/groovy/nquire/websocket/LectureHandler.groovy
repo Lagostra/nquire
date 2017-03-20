@@ -1,6 +1,5 @@
 package nquire.websocket
 
-import com.google.gson.JsonObject
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import nquire.similarity.SimilarityCalculator
@@ -8,7 +7,6 @@ import nquire.similarity.WordCounter
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 import org.apache.pdfbox.pdmodel.PDDocument
-import org.apache.pdfbox.pdmodel.common.PDStream
 
 import org.springframework.web.socket.WebSocketSession
 import org.springframework.web.socket.TextMessage
@@ -27,11 +25,12 @@ class LectureHandler {
     private final float SIMILARITY_THRESHOLD = 0.20;
 
     private int id;
+    private int lastStudentId = 0;
     private long lastActivity;
     private String lecturerToken;
     private String presentation;
 
-    private List<WebSocketSession> students;
+    private List<Student> students;
     private List<WebSocketSession> lecturers;
 
     private List<String> questions;
@@ -70,7 +69,7 @@ class LectureHandler {
     }
 
     public void addStudent(WebSocketSession student) {
-        students.add(student)
+        students.add(new Student(student, ++lastStudentId))
         String msg = JsonOutput.toJson([type: "connected"])
         student.sendMessage(new TextMessage(msg))
     }
@@ -147,8 +146,8 @@ class LectureHandler {
     }
 
     private sendToAllStudents(String message) {
-        for(WebSocketSession student : students) {
-            sendTo(student, message)
+        for(Student student : students) {
+            sendTo(student.getSession(), message)
         }
     }
 
