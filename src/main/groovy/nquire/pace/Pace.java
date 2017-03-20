@@ -15,7 +15,8 @@ public class Pace implements PaceInterface {
             if (fb.getFast()) feedback += 1.0;
             else feedback -= 1.0;
         }
-        //Algorithm here
+
+        
 
         return 0.0;
     }
