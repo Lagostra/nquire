@@ -23,7 +23,6 @@ public class Pace implements PaceInterface {
             if (fb.getFast()) feedback += calculateTime(timeElapsed, sizeConstant);
             else feedback -= calculateTime(timeElapsed, sizeConstant);
         }
-
         return base + feedback;
     }
 
