@@ -17,6 +17,8 @@ var class_new_question = "new_question";
 
 var socket;
 
+
+//Changes to the code
 function initLecturer() {
     question_container = document.getElementById("question_container");
     default_question = document.getElementById("default_question");
@@ -83,6 +85,7 @@ function initLecturer() {
         });
     }
 }
+
 
 //Call this function when new questions are received, adds question and HTML
 var addQuestion = function(question) {
@@ -154,6 +157,7 @@ var getNewQuestions = function () {
     return document.getElementsByClassName(class_new_question).length + 1;
 };
 
+//On Key
 function onKey(e) {
     var key = e.keyCode ? e.keyCode : e.which;
     switch(key) {
