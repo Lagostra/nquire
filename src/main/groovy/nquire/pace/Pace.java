@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
  * Created by lars on 13.03.2017.
- * tid brukt så langt: 4 timer
+ * tid brukt så langt: 4.5 timer
  */
 public class Pace implements PaceInterface {
 
@@ -27,7 +27,7 @@ public class Pace implements PaceInterface {
     }
 
 
-    private double calculateTime (Date timestamp, double sizeConstant){
+    private double calculateTime(Date timestamp, double sizeConstant) {
         double a = (2 -
                 Math.pow(1.00025, (8 * compareTime(timestamp))))*sizeConstant;
         if (a > 1.0) a = 1.0;
