@@ -2,6 +2,8 @@ package nquire.websocket
 
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
+import nquire.pace.Pace
+import nquire.pace.PaceInterface
 import nquire.similarity.SimilarityCalculator
 import nquire.similarity.WordCounter
 import org.apache.commons.logging.Log
@@ -17,17 +19,24 @@ import javax.xml.bind.DatatypeConverter
 
 import nquire.pace.Feedback
 
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
+
 class LectureHandler {
 
     private static Log log = LogFactory.getLog(getClass())
 
     private static final long inactivityTimeout = 30*60*1000 // Time of inactivity before lecture is closed [ms]
 
-    private static SimilarityCalculator simCalc
-    private final float SIMILARITY_THRESHOLD = 0.20;
+    private static scheduler = Executors.newScheduledThreadPool(5)
+
+    private static SimilarityCalculator simCalc = new WordCounter(2)
+    private static PaceInterface paceCalc = new Pace()
+    private final float SIMILARITY_THRESHOLD = 0.20
 
     private int id;
     private int lastStudentId = 0;
+    private double pace = 50.0;
     private long lastActivity;
     private String lecturerToken;
     private String presentation;
@@ -42,12 +51,18 @@ class LectureHandler {
     LectureHandler(String lecturerToken) {
         this.lecturerToken = lecturerToken
         lastActivity = System.currentTimeMillis();
-        simCalc = new WordCounter(2);
 
         students = new HashMap<>();
         lecturers = new ArrayList<>();
         questions = new ArrayList<>();
         paceFeedback = new ArrayList<>();
+
+        scheduler.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                updatePace();
+            }
+        }, 20, 20, TimeUnit.SECONDS)
     }
 
     LectureHandler(String lecturerToken, String filePath) {
@@ -157,6 +172,15 @@ class LectureHandler {
             }
         }
         return null
+    }
+
+    private void updatePace() {
+        pace = paceCalc.calculateCurrentPace(paceFeedback)
+        String msg = JsonOutput.toJson([
+                type: "pace",
+                value: pace
+            ])
+        sendToAllLecturers(new TextMessage(msg))
     }
 
     private sendToAllStudents(String message) {
