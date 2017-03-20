@@ -6,6 +6,7 @@
 
 var socket;
 var timeout;
+var lastPaceFeedback = 0;
 
 function initStudent() {
     document.body.onmousemove = mouseMoveHandler;
@@ -68,10 +69,28 @@ function questionButtonClicked(){
     setTimeout(function() {document.getElementById('questionInput').focus()}, 500);
 }
 function slowerButtonClicked(){
-    console.log("button clicked");
+    if(getTime() - lastPaceFeedback > 60*1000) {
+        lastPaceFeedback = getTime();
+
+        var message = JSON.stringify({
+            type: "pace",
+            value: 1.0
+        });
+
+        socket.send(message)
+    }
 }
 function fasterButtonClicked(){
-    console.log("button clicked");
+    if(getTime() - lastPaceFeedback > 60*1000) {
+        lastPaceFeedback = getTime();
+
+        var message = JSON.stringify({
+            type: "pace",
+            value: -1.0
+        });
+
+        socket.send(message);
+    }
 }
 function modalSaveButtonClicked(){
     var form = document.forms['questionForm'];
