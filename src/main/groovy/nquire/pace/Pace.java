@@ -41,9 +41,9 @@ public class Pace implements PaceInterface {
 
     //Hvor lang tid mellom 5 minutter siden og timestamp
     private double compareTime(Date timestamp) {
-        double a = (timestamp.getTime() -
+        double a = ((timestamp.getTime() -
                 new Date(System.currentTimeMillis()+5*60*1000).getTime()
-                    /1000);
+                    )/1000);
         if (a < 0.0 ) return 0.0;
         return a;
     }
