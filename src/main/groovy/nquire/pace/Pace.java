@@ -1,6 +1,6 @@
 package nquire.pace;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 
 /**
@@ -10,8 +10,8 @@ import java.util.Date;
 public class Pace implements PaceInterface {
 
     @Override
-    public double calculateCurrentPace(ArrayList<Feedback> feedbackList) {
-        if (feedbackList.isEmpty())
+    public double calculateCurrentPace(List<Feedback> feedbackList) {
+        if (feedbackList == null || feedbackList.isEmpty())
             return 50.0;
 
         double base = 50.0;
@@ -20,7 +20,9 @@ public class Pace implements PaceInterface {
         double sizeConstant = 2 - Math.pow(1.014, feedbackList.size());
 
         for (Feedback fb : feedbackList){
-            if (fb.getFast()) feedback += calculateTime(fb.getTimestamp(), sizeConstant);
+            if (fb.getFast()){
+                feedback += calculateTime(fb.getTimestamp(), sizeConstant);
+            }
             else feedback -= calculateTime(fb.getTimestamp(), sizeConstant);
         }
         return base + feedback;
