@@ -237,7 +237,7 @@ class LectureHandler {
      * Closes all connections to this lecture.
      * */
     public void close() {
-        for (Student student : students) {
+        for (Student student : students.values()) {
             student.getSession().close(CloseStatus.GOING_AWAY)
         }
 
