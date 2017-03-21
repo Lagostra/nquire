@@ -125,4 +125,8 @@ function mouseMoveHandler(){
     },2000)
 
 }
-
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip({
+        placement : 'top'
+    });
+});

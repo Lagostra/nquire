@@ -23,6 +23,9 @@ var socket;
 function initLecturer() {
     document.body.onmousemove = mouseMoveHandler;
 
+    //for testing only
+    setPaceValue(80);
+
     question_container = document.getElementById("question_container");
     default_question = document.getElementById("default_question");
     display_question_btn = document.getElementById("display_question_btn");
@@ -83,9 +86,6 @@ function initLecturer() {
 
     if(pageRole == "present") {
         window.onkeydown = onKey;
-
-        //for testing only
-        setPaceValue(80);
 
         $('#questionsModal').on('hidden.bs.modal', function(e) {
             resetNewQuestions();

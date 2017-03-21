@@ -32,15 +32,13 @@
     <!-- Container for the ID/number of questions-->
     <div id="info-bar">
         <div id="lecture-id"> ID: <sec:loggedInUserInfo field='currentLecture'/>    </div>
-
         <img style="height:28px; width:auto; float: left;" src="${resource(dir: 'images', file: "snail.svg")}" alt="Grails"/>
+
         <div id="pace-container">
-
             <div id="pace-overlay"></div>
-
         </div>
-        <img style="height:22px; width:auto; float: left; margin-right: 20px;" src="${resource(dir: 'images', file: "rabbit.svg")}" alt="Grails"/>
 
+        <img style="height:22px; width:auto; float: left; margin-right: 20px;" src="${resource(dir: 'images', file: "rabbit.svg")}" alt="Grails"/>
         <div id="question-badge"><span class="badge progress-bar-danger">4</span></div>
     </div>
 
