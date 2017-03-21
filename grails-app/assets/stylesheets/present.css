@@ -6,7 +6,7 @@ body {
 #overlay{
     position: fixed;
     left: 0;
-    top: 150px;
+    top: 50px;
 }
 
 #question-badge {
@@ -19,7 +19,7 @@ body {
     position: fixed;
     left: 0;
     top: 0;
-    width: 250px;
+    width: 300px;
     height: 25px;
     background: white;
     font-size: large;
@@ -31,6 +31,7 @@ body {
     vertical-align: middle;
     width: 80px;
     float: left;
+    margin-left: 5px;
 }
 #the-canvas {
     margin: auto;
@@ -44,17 +45,26 @@ body {
     background: -moz-linear-gradient(right,red,yellow, green); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to right,red,yellow, green); /* Standard syntax */
 
-    width: 120px;
-    height: 15px;
-    margin-top: 5px;
+    width: 100px;
+    height: 19px;
+    margin-top: 3px;
+    margin-bottom: 3px;
     margin-right: 5px;
+    margin-left: 5px;
 
 }
-
 #pace-overlay {
     height: 100%;
     width: 4px;
     background: black;
     margin-left: 50%;
+}
+#buttons-container{
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: RGBA(0,0,0,0.5);
+    bottom: 0px;
+    padding:10px;
 }
 

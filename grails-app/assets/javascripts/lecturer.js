@@ -10,6 +10,7 @@ var default_question;
 var display_question_btn;
 var new_question_badge;
 var pageRole;
+var timeout;
 
 var class_hidden = "hidden";
 var class_new_btn = "new_btn";
@@ -20,6 +21,8 @@ var socket;
 
 //Changes to the code
 function initLecturer() {
+    document.body.onmousemove = mouseMoveHandler;
+
     question_container = document.getElementById("question_container");
     default_question = document.getElementById("default_question");
     display_question_btn = document.getElementById("display_question_btn");
@@ -164,9 +167,8 @@ var getNewQuestions = function () {
 
 //sets the position of the pace bar (0-100)
 function setPaceValue(value){
-
-    var invertedValue = 100-value;
-
+    var pointer = document.getElementById("pace-overlay");
+    pointer.style.marginLeft = (value-2).toString() + "%";
 }
 
 function onKey(e) {
@@ -181,4 +183,14 @@ function onKey(e) {
             socket.send(JSON.stringify({type: "pageChange", page: currentPage}));
             break;
     }
+}
+
+function mouseMoveHandler(){
+    document.getElementById("buttons-container").style.display = "block";
+
+    clearTimeout(timeout);
+    timeout = setTimeout(function(){
+        document.getElementById("buttons-container").style.display = "none";
+    },2000)
+
 }
