@@ -7,6 +7,6 @@ import java.util.List;
  */
 public interface PaceInterface {
 
-    double calculateCurrentPace(List<Feedback> feedbackList);
+    double calculateCurrentPace(List<Feedback> feedbackList, int numStudents);
 
 }
