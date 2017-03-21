@@ -9,6 +9,7 @@ var question_container;
 var default_question;
 var display_question_btn;
 var new_question_badge;
+var pageRole;
 
 var class_hidden = "hidden";
 var class_new_btn = "new_btn";
@@ -23,9 +24,11 @@ function initLecturer() {
     new_question_badge = document.getElementById("new_question_badge");
 
     /* EVENTS */
-    display_question_btn.onclick = function () {
-        question_container.scrollTop = question_container.scrollHeight;
-    };
+    if(pageRole == "present") {
+        display_question_btn.onclick = function () {
+            question_container.scrollTop = question_container.scrollHeight;
+        };
+    }
 
     /* SOCkETS */
     socket = new WebSocket(url);
@@ -45,7 +48,8 @@ function initLecturer() {
 
         switch(msg.type) {
             case "connected": // Successfully connected to lecture
-                socket.send(JSON.stringify({"type": "requestPresentation"}));
+                if(pageRole == "present")
+                    socket.send(JSON.stringify({"type": "requestPresentation"}));
                 socket.send(JSON.stringify({"type": "requestQuestions"}));
                 break;
             case "presentation": // Received presentation file
@@ -71,12 +75,17 @@ function initLecturer() {
         console.log("Connection closed.");
     };
 
-    window.onkeydown = onKey;
-    setPaceValue(80)
 
-    $('#questionsModal').on('hidden.bs.modal', function(e) {
-       resetNewQuestions();
-    });
+    if(pageRole == "present") {
+        window.onkeydown = onKey;
+
+        //for testing only
+        setPaceValue(80);
+
+        $('#questionsModal').on('hidden.bs.modal', function(e) {
+            resetNewQuestions();
+        });
+    }
 }
 
 //Call this function when new questions are received, adds question and HTML
@@ -84,7 +93,9 @@ var addQuestion = function(question) {
     removeDefaultQuestion();
     question.new = true;
     questions.push(question);
-    notifyNewQuestion();
+    if(pageRole == "present") {
+        notifyNewQuestion();
+    }
     default_question.classList.add(class_hidden);
     question_container.innerHTML +=
         '<div ' +
@@ -96,6 +107,7 @@ var addQuestion = function(question) {
 
 //Notify the lecturer of a new question
 var notifyNewQuestion = function () {
+    var new_question_badge = document.getElementById("new_question_badge");
     // Hvis questions er displayed skal ikke knappen få "new" taggen
     if (getQuestionsToggled()) {return}
 
@@ -112,6 +124,7 @@ var getQuestionsToggled = function() {
 //Remove the new_question class from all question elements
 var resetNewQuestions = function () {
     var new_questions = document.getElementsByClassName("question");
+    var new_question_badge = document.getElementById("new_question_badge");
     for (var i = 0; i < new_questions.length; i++){
         new_questions[i].classList.remove(class_new_question);
     }

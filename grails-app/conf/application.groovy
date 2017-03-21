@@ -31,3 +31,5 @@ rememberMe.key = "jkl893ajgah80" // Set custom cookie salting key for security
 grails.plugin.springsecurity.password.algorithm = 'bcrypt' // Set password hashing algorithm to bcrypt for security
 grails.plugin.springsecurity.rejectIfNoRule = false // Disable pessimistic lockdown
 grails.plugin.springsecurity.fii.rejectPublicInvocations = false
+
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = "/lecturer" // Set default redirect url to lecturer home

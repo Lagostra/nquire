@@ -6,8 +6,11 @@
 
 var socket;
 var timeout;
+var lastPaceFeedback = 0;
 
 function initStudent() {
+    document.body.onmousemove = mouseMoveHandler;
+
     socket = new WebSocket(url);
     console.log("Connecting...")
 
@@ -30,6 +33,10 @@ function initStudent() {
             case "presentation": // Received presentation file
                 setPresentation(msg.presentation);
                 break;
+            case "similarQuestion":
+                document.getElementById("modalOwnQuestion").innerHTML = msg.ownQuestion;
+                document.getElementById("modalMatchedQuestion").innerHTML = msg.matchedQuestion;
+                $('#similarQuestionModal').modal('show');
         }
     }
 
@@ -62,10 +69,28 @@ function questionButtonClicked(){
     setTimeout(function() {document.getElementById('questionInput').focus()}, 500);
 }
 function slowerButtonClicked(){
-    console.log("button clicked");
+    if(getTime() - lastPaceFeedback > 60*1000) {
+        lastPaceFeedback = getTime();
+
+        var message = JSON.stringify({
+            type: "pace",
+            value: 1.0
+        });
+
+        socket.send(message)
+    }
 }
 function fasterButtonClicked(){
-    console.log("button clicked");
+    if(getTime() - lastPaceFeedback > 60*1000) {
+        lastPaceFeedback = getTime();
+
+        var message = JSON.stringify({
+            type: "pace",
+            value: -1.0
+        });
+
+        socket.send(message);
+    }
 }
 function modalSaveButtonClicked(){
     var form = document.forms['questionForm'];
@@ -78,6 +103,16 @@ function modalSaveButtonClicked(){
     socket.send(message);
     form['questionInput'].value="";
 
+}
+
+function forceSendQuestion() {
+    var question = document.getElementById("modalOwnQuestion").innerHTML;
+    var message = JSON.stringify({
+            type: "question",
+            force: true,
+            question: question
+        });
+    socket.send(message);
 }
 
 function mouseMoveHandler(){
