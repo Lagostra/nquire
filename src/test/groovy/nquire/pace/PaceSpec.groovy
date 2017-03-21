@@ -26,26 +26,26 @@ class PaceSpec extends Specification {
         }
         double a = calculateCurrentPace(feedbackList);
         then:
-         a > 50;
-        a < 100;
-        feedbackList.size() == 10;
+         a > 50
+        a < 100
+        feedbackList.size() == 10
     }
 
     void "test 50 positives"() {
         when:
         for (int i = 0; i < 50; i++){
-            feedbackList.push(new Feedback(new Date(), true));
+            feedbackList.push(new Feedback(new Date(), true))
         }
-        double a = calculateCurrentPace(feedbackList);
+        double a = calculateCurrentPace(feedbackList)
         then:
-        a == 100;
-        feedbackList.size() == 50;
+        a == 100
+        feedbackList.size() == 50
     }
 
     void "test feedback C"() {
         when:
         then:
-        true;
+        true
     }
 
 
