@@ -78,7 +78,7 @@
 
     <div id="buttons-container">
     <button id="hard" class="btn btn-default btn-lg " type="button" onclick="hardButtonClicked()">
-        Hard
+        Hard <span class="glyphicon glyphicon-fire"></span>
     </button>
 
     <button id="undo" class="btn btn-default btn-lg " type="button" onclick="undoButtonClicked()">
@@ -86,7 +86,7 @@
     </button>
 
     <button id="question" class="btn btn-default btn-lg " data-toggle="modal" data-target="#questionModal" type="button" onclick="questionButtonClicked()">
-        Question
+        Question <span class="glyphicon glyphicon-question-sign"></span>
     </button>
 
     <button id="slower" class="btn btn-default btn-lg btn-danger " type="button" onclick="slowerButtonClicked()">
@@ -94,7 +94,7 @@
     </button>
 
     <button id="faster" class="btn btn-default btn-lg btn-success " type="button" onclick="fasterButtonClicked()">
-        Faster
+        Faster <span class="glyphicons glyphicon-flash"></span>
     </button>
     </div>
 

@@ -17,6 +17,8 @@ var class_new_question = "new_question";
 
 var socket;
 
+
+//Changes to the code
 function initLecturer() {
     question_container = document.getElementById("question_container");
     default_question = document.getElementById("default_question");
@@ -88,6 +90,7 @@ function initLecturer() {
     }
 }
 
+
 //Call this function when new questions are received, adds question and HTML
 var addQuestion = function(question) {
     removeDefaultQuestion();
@@ -157,6 +160,7 @@ var removeDefaultQuestion = function() {
 var getNewQuestions = function () {
     return document.getElementsByClassName(class_new_question).length + 1;
 };
+
 
 //sets the position of the pace bar (0-100)
 function setPaceValue(value){

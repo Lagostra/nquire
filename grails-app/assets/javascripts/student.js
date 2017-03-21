@@ -68,9 +68,10 @@ function questionButtonClicked(){
     // Timeout because button event requires focus; must be released first...
     setTimeout(function() {document.getElementById('questionInput').focus()}, 500);
 }
+
 function slowerButtonClicked(){
-    if(getTime() - lastPaceFeedback > 60*1000) {
-        lastPaceFeedback = getTime();
+    if(new Date().getTime() - lastPaceFeedback > 60*1000) {
+        lastPaceFeedback = new Date().getTime();
 
         var message = JSON.stringify({
             type: "pace",
@@ -81,8 +82,8 @@ function slowerButtonClicked(){
     }
 }
 function fasterButtonClicked(){
-    if(getTime() - lastPaceFeedback > 60*1000) {
-        lastPaceFeedback = getTime();
+    if(new Date().getTime() - lastPaceFeedback > 60*1000) {
+        lastPaceFeedback = new Date().getTime();
 
         var message = JSON.stringify({
             type: "pace",
