@@ -62,6 +62,7 @@ class LectureHandler {
             public void run() {
                 updatePace();
             }
+
         }, 20, 20, TimeUnit.SECONDS)
     }
 
@@ -180,7 +181,7 @@ class LectureHandler {
                 type: "pace",
                 value: pace
             ])
-        sendToAllLecturers(new TextMessage(msg))
+        sendToAllLecturers(msg)
     }
 
     private sendToAllStudents(String message) {
