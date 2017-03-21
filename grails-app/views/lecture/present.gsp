@@ -29,16 +29,21 @@
         </div>
     </div>
 
-    <!-- Container for the ID/question/pagenumber/close lecture -->
+    <!-- Container for the ID/number of questions-->
+    <div id="info-bar">
+        <span style="vertical-align: middle"> &nbsp;&nbsp;ID: <sec:loggedInUserInfo field='currentLecture'/> &nbsp;&nbsp;    </span>
+        <span class="badge progress-bar-danger">4</span>
+    </div>
+
+    <!-- Container for the question/pagenumber/close lecture -->
     <div id="overlay">
 
-        <h1>Lecture ID: <sec:loggedInUserInfo field='currentLecture'/></h1>
         <g:form controller="lecture" action="close_lecture">
             <g:submitButton name="Submit" value="Close lecture" class="btn btn-danger" />
         </g:form>
 
         <button id="display_question_btn" class="btn btn-primary btn-md" data-toggle="modal" data-target="#questionsModal" type="button">
-            Show Questions <span id="new_question_badge" class="badge"></span>
+            Questions <span id="new_question_badge" class="badge"></span>
         </button>
 
         <div><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>

@@ -6,8 +6,20 @@ body {
 #overlay{
     position: fixed;
     left: 0;
-    top: 0;
+    top: 50px;
 
+}
+
+#info-bar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 130px;
+    height: 30px;
+    background: white;
+    font-size:large;
+    vertical-align: middle;
+    border-radius: 0px 0px 25px 0px;
 }
 #the-canvas {
 
@@ -16,7 +28,7 @@ body {
 
 }
 #pace-container{
-    background: #1A1A1A;;
+    background: #1A1A1A;
     position: fixed;
     width: 4px;
     height: 100%;
