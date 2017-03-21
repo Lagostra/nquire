@@ -30,9 +30,8 @@ public class Pace implements PaceInterface {
 
 
     private double calculateTime(Date timestamp, double sizeConstant) {
-        double a =
-                (2 - Math.pow(1.00025, (8 * compareTime(timestamp))))
-                        *sizeConstant;
+
+        double a = 0.8 * Math.pow(compareTime(timestamp),0.45)* sizeConstant;
         if (a > 1.0) a = 1.0;
         else if (a < -1.0) a = -1.0;
         return a;
