@@ -1,12 +1,12 @@
 package nquire.pace;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by lars on 13.03.2017.
  */
 public interface PaceInterface {
 
-    double calculateCurrentPace(ArrayList<Feedback> feedbackList);
+    double calculateCurrentPace(List<Feedback> feedbackList);
 
 }
