@@ -5,6 +5,7 @@ import org.springframework.web.socket.WebSocketSession
 class Student {
     private WebSocketSession session;
     private int id;
+    private Date lastFeedback = new Date(1970, 1, 1);
 
     Student(session, id) {
         this.session = session;
@@ -17,5 +18,13 @@ class Student {
 
     public int getId() {
         return id;
+    }
+
+    public Date getLastFeedback() {
+        return lastFeedback
+    }
+
+    public void setLastFeedback(Date date) {
+        lastFeedback = date
     }
 }

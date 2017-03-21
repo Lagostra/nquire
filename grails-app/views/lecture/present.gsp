@@ -1,8 +1,11 @@
 <html>
 <head>
     <asset:stylesheet src="application.css" />
+    <asset:stylesheet src="present.css"/>
 </head>
 <body>
+
+    <!-- Modal for posting a question -->
     <div class="modal fade" id="questionsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -26,18 +29,42 @@
         </div>
     </div>
 
-    <h1>Lecture ID: <sec:loggedInUserInfo field='currentLecture'/></h1>
-    <g:form controller="lecture" action="close_lecture">
-        <g:submitButton name="Submit" value="Close lecture" class="btn btn-danger" />
-    </g:form>
+    <!-- Container for the ID/number of questions-->
+    <div id="info-bar">
+        <span style="vertical-align: middle"> &nbsp;&nbsp;ID: <sec:loggedInUserInfo field='currentLecture'/> &nbsp;&nbsp;    </span>
+        <span class="badge progress-bar-danger">4</span>
+    </div>
 
-    <button id="display_question_btn" class="btn btn-primary btn-md" data-toggle="modal" data-target="#questionsModal" type="button">
-        Show Questions <span id="new_question_badge" class="badge"></span>
-    </button>
+    <!-- Container for the question/pagenumber/close lecture -->
+    <div id="overlay">
 
-    <div><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>
+        <g:form controller="lecture" action="close_lecture">
+            <g:submitButton name="Submit" value="Close lecture" class="btn btn-danger" />
+        </g:form>
+
+        <button id="display_question_btn" class="btn btn-primary btn-md" data-toggle="modal" data-target="#questionsModal" type="button">
+            Questions <span id="new_question_badge" class="badge"></span>
+        </button>
+
+        <div><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>
+
+    </div>
+
+    <!-- Container for the presentation canvas -->
     <div id="presentation-container" style="z-index: -10;">
         <canvas id="the-canvas"></canvas>
+    </div>
+
+    <!-- Container for the right side pace bar -->
+    <div id="pace-container">
+        <div id="top-container">
+            <div id="top-overlay">
+            </div>
+        </div>
+        <div id="bottom-container">
+            <div id="bottom-overlay">
+            </div>
+        </div>
     </div>
 
     <asset:javascript src="application.js"/>

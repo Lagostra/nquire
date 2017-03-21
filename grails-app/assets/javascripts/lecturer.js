@@ -17,6 +17,8 @@ var class_new_question = "new_question";
 
 var socket;
 
+
+//Changes to the code
 function initLecturer() {
     question_container = document.getElementById("question_container");
     default_question = document.getElementById("default_question");
@@ -75,14 +77,19 @@ function initLecturer() {
         console.log("Connection closed.");
     };
 
+
     if(pageRole == "present") {
         window.onkeydown = onKey;
+
+        //for testing only
+        setPaceValue(80);
 
         $('#questionsModal').on('hidden.bs.modal', function(e) {
             resetNewQuestions();
         });
     }
 }
+
 
 //Call this function when new questions are received, adds question and HTML
 var addQuestion = function(question) {
@@ -153,6 +160,27 @@ var removeDefaultQuestion = function() {
 var getNewQuestions = function () {
     return document.getElementsByClassName(class_new_question).length + 1;
 };
+
+
+//sets the position of the pace bar (0-100)
+function setPaceValue(value){
+    var invertedValue = 100-value;
+    var topOverlay = document.getElementById("top-overlay");
+    var bottomOverlay = document.getElementById("bottom-overlay");
+
+    if (value > 50){
+        topOverlay.style.height = invertedValue.toString()+"%";
+        bottomOverlay.style.height = "100%";
+    }
+    else if(value < 50){
+        bottomOverlay.style.height = value.toString()+"%";
+        topOverlay.style.height = "100%";
+    }
+    else{
+        topOverlay.style.height = "100%";
+        bottomOverlay.style.height = "100%";
+    }
+}
 
 function onKey(e) {
     var key = e.keyCode ? e.keyCode : e.which;
