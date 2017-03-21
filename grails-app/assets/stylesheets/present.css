@@ -6,65 +6,55 @@ body {
 #overlay{
     position: fixed;
     left: 0;
-    top: 50px;
+    top: 150px;
+}
 
+#question-badge {
+    margin-top: 2px;
 }
 
 #info-bar {
+    clear:both;
+    box-shadow: 1px 1px 3px black;
     position: fixed;
     left: 0;
     top: 0;
-    width: 130px;
-    height: 30px;
+    width: 250px;
+    height: 25px;
     background: white;
-    font-size:large;
-    vertical-align: middle;
+    font-size: large;
     border-radius: 0px 0px 25px 0px;
 }
-#the-canvas {
 
+#lecture-id {
+    horiz-align: center;
+    vertical-align: middle;
+    width: 80px;
+    float: left;
+}
+#the-canvas {
     margin: auto;
     display:Block;
-
 }
 #pace-container{
-    background: #1A1A1A;
-    position: fixed;
-    width: 4px;
-    height: 100%;
-    right: 0px;
-    top: 0px;
-}
-#top-container {
-    height:50%;
-    width: 100%;
+    float: left;
     background: red; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(red,yellow); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient( red, yellow); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient( red, yellow); /* For Firefox 3.6 to 15 */
-    background: linear-gradient( red, yellow); /* Standard syntax */
-}
-#bottom-container {
-    position:relative;
-    height:50%;
-    width: 100%;
-    background: red; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(yellow, red); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient( yellow, red); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient( yellow, red); /* For Firefox 3.6 to 15 */
-    background: linear-gradient( yellow, red); /* Standard syntax */
-}
-#top-overlay {
-    height:30%;
-    width: 100%;
-    background: #1A1A1A;
+    background: -webkit-linear-gradient(left,red,yellow,green); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right,red,yellow, green); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right,red,yellow, green); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right,red,yellow, green); /* Standard syntax */
+
+    width: 120px;
+    height: 15px;
+    margin-top: 5px;
+    margin-right: 5px;
+
 }
 
-#bottom-overlay {
-    position:absolute;
-    bottom:0px;
-    height:30%;
-    width: 100%;
-    background: #1A1A1A;
+#pace-overlay {
+    height: 100%;
+    width: 4px;
+    background: black;
+    margin-left: 50%;
 }
 

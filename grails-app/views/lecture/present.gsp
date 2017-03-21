@@ -31,8 +31,13 @@
 
     <!-- Container for the ID/number of questions-->
     <div id="info-bar">
-        <span style="vertical-align: middle"> &nbsp;&nbsp;ID: <sec:loggedInUserInfo field='currentLecture'/> &nbsp;&nbsp;    </span>
-        <span class="badge progress-bar-danger">4</span>
+        <div id="lecture-id"> ID: <sec:loggedInUserInfo field='currentLecture'/>    </div>
+
+        <div id="pace-container">
+            <div id="pace-overlay"></div>
+        </div>
+
+        <div id="question-badge"><span class="badge progress-bar-danger">4</span></div>
     </div>
 
     <!-- Container for the question/pagenumber/close lecture -->
@@ -53,18 +58,6 @@
     <!-- Container for the presentation canvas -->
     <div id="presentation-container" style="z-index: -10;">
         <canvas id="the-canvas"></canvas>
-    </div>
-
-    <!-- Container for the right side pace bar -->
-    <div id="pace-container">
-        <div id="top-container">
-            <div id="top-overlay">
-            </div>
-        </div>
-        <div id="bottom-container">
-            <div id="bottom-overlay">
-            </div>
-        </div>
     </div>
 
     <asset:javascript src="application.js"/>
