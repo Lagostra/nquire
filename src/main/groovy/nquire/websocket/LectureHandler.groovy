@@ -115,7 +115,7 @@ class LectureHandler {
             if(mObject.type == "question") { //Student asked a question
                 handleQuestion(mObject, userSession)
             } else if(mObject.type == "pace") { // Student has given pace feedback
-                if(student.lastFeedback.getTime() - (new Date()).getTime() > 60 * 1000) {
+                if(System.currentTimeMillis() - student.lastFeedback.getTime() > 60 * 1000) {
                     student.lastFeedback = new Date()
 
                     if(mObject.value > 0) { // Too fast
@@ -167,10 +167,7 @@ class LectureHandler {
     }
 
     void updatePace() {
-        log.error(paceFeedback)
-        log.error(students.size())
         pace = paceCalc.calculateCurrentPace(paceFeedback, students.size())
-        log.error(pace)
         String msg = JsonOutput.toJson([
                 type: "pace",
                 value: pace
