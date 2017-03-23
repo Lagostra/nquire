@@ -40,7 +40,7 @@
         <canvas id="the-canvas"></canvas>
     </div>
 
-    <div id="canvasesdiv2" style="position:relative; z-index: 1000;">
+    <div id="canvasesdiv2" style="position:relative; z-index: 9999;">
         <canvas id="lecturer_canvas"></canvas>
     </div>
 

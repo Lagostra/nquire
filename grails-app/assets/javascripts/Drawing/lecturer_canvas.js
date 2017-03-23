@@ -4,7 +4,7 @@
 
 
 var studentCanvasArray;
-var canvas = document.getElementById('canvas2');
+var canvas = document.getElementById('lecturer_canvas');
 var context = canvas.getContext("2d");
 var fullAlpha;
 var contextWidth;
@@ -14,10 +14,28 @@ var page;
 function init(){
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
     contextWidth = canvas.clientWidth; contextHeight = canvas.clientHeight;
-    studentCanvasArray = {};
-    studentCanvasArray[0] = {};
+    studentCanvasArray = test();
     page = 0;
     update();
+}
+
+function test(){
+    canvasArray = new Array();
+    /**
+    canvasArray.push({x: 10, y: 100, w: 20, h: 110, sequence: 0});
+    canvasArray.push({x: 200, y: 400, w: 100, h: 130, sequence: 1});
+    canvasArray.push({x: 310, y: 210, w: 70, h: 200, sequence: 2});
+    canvasArray.push({x: 40, y: 40, w: 90, h: 40, sequence: 3});
+    canvasArray.push({x: 90, y: 10, w: 73, h: 120, sequence: 4});
+    **/
+
+    pageArray = {};
+    pageArray['0000'] = canvasArray;
+
+    presArray = {};
+    presArray[0] = pageArray;
+
+    return presArray;
 }
 
 function updateStudentCanvas(studentId, page, array){
@@ -38,15 +56,17 @@ function backwardPage(){
 }
 
 function update(){
-    fullAlpha = (0.25 / studentCanvasArray[page].length);
+    fullAlpha = (0.25 / Object.keys(studentCanvasArray[page]).length);
     context.clearRect(0, 0, canvas.width, canvas.height);
     render();
 }
 
 function render(){
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    for(var stud in studentCanvasArray[page]){
-        draw(studentCanvasArray[page][stud]);
+    for(var id in studentCanvasArray[page]){
+        for(var i = 0; i < studentCanvasArray[page][id].length; i++){
+            var r = studentCanvasArray[page][id][i];
+            draw(r);
+        }
     }
 }
 function draw(rect){

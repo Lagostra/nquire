@@ -27,8 +27,6 @@ function initStudentCanvas(){
 }
 
 
-
-
 function mouseDown(event){
     if(!drag){
         drag = true;
@@ -47,7 +45,6 @@ function keyPress(e){
         }
         seq--;
         update();
-        updateCanvas(page, prevRect);
     }
 }
 
@@ -65,6 +62,7 @@ function update(){
         var rect = prevRect[i];
         context.fillRect(rect.x * contextWidth, rect.y * contextHeight, rect.w * contextWidth, rect.h * contextHeight);
     }
+    updateCanvas(page, prevRect);
 }
 
 function mouseUp(event){
@@ -86,7 +84,6 @@ function mouseUp(event){
         }
     }
     update();
-    updateCanvas(page, prevRect)
 }
 
 function mouseMove(event){

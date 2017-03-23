@@ -58,7 +58,7 @@ function initStudent() {
 }
 
 function updateCanvas(page, canvasArray){
-    socket.send(JSON.stringify({"type": "canvasUpdated", "studentId": null, "page": page, "array": canvasArray}));
+    socket.send(JSON.stringify({"type": "updateStudentCanvas", "studentId": null, "page": page, "array": canvasArray}));
 }
 
 function hardButtonClicked(){
