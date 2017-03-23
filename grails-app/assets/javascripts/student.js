@@ -72,6 +72,7 @@ function undoButtonClicked(){
 }
 function questionButtonClicked(){
     // Timeout because button event requires focus; must be released first...
+    $('#questionModal').modal('show');
     setTimeout(function() {document.getElementById('questionInput').focus()}, 500);
 }
 

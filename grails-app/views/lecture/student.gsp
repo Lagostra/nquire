@@ -87,7 +87,7 @@
         <img style="height:22px;" src="${resource(dir: 'images', file: "undo-arrow.svg")}" alt="Grails"/>
     </button>
 
-    <button id="question" class="btn btn-default btn-lg " data-toggle="tooltip" data-toggle="modal"  data-target="#questionModal" type="button" title="ask the lecturer a question" onclick="questionButtonClicked()">
+    <button id="question" class="btn btn-default btn-lg " data-toggle="tooltip" type="button" title="ask the lecturer a question" onclick="questionButtonClicked()">
         <img style="height:22px;" src="${resource(dir: 'images', file: "speech-bubble.svg")}" alt="Grails"/>
     </button>
 
