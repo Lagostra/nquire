@@ -5,6 +5,7 @@
 var canvas = document.getElementById('student_canvas');
 var context= canvas.getContext("2d");
 var drag;
+var isMarking = false;
 var tempRect;
 var seqArray;
 var contextWidth;
@@ -30,6 +31,9 @@ function initStudentCanvas(){
 
 
 function mouseDown(event){
+    if(!isMarking)
+        return;
+
     if(!drag){
         drag = true;
         tempRect.x = (event.offsetX/contextWidth); tempRect.y = (event.offsetY/contextHeight);
@@ -86,6 +90,10 @@ function update(){
 }
 
 function mouseUp(event){
+    if(!isMarking)
+        return;
+
+    toggleMarking();
     drag = false;
     if(tempRect.w != 0 && tempRect.h != 0){
         var b = false;

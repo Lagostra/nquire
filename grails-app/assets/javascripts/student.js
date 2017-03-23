@@ -65,8 +65,20 @@ function updateCanvas(page, canvasArray){
 }
 
 function hardButtonClicked(){
-    console.log("button clicked");
+    toggleMarking();
 }
+
+function toggleMarking() {
+    isMarking = !isMarking;
+    if(!isMarking)
+        drag = false;
+
+    if(isMarking)
+        document.getElementById("hard").classList.add("active");
+    else
+        document.getElementById("hard").classList.remove("active");
+}
+
 function undoButtonClicked(){
     console.log("button clicked");
 }
