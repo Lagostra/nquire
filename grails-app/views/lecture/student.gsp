@@ -77,24 +77,24 @@
 
 
     <div id="buttons-container">
-    <button id="hard" class="btn btn-default btn-lg " type="button" onclick="hardButtonClicked()">
-        Hard
+    <button id="hard" class="btn btn-default btn-lg " type="button" data-toggle="tooltip" title="select a difficult area" onclick="hardButtonClicked()">
+        <img style="height:22px;" src="${resource(dir: 'images', file: "drag.svg")}" alt="Grails"/>
     </button>
 
-    <button id="undo" class="btn btn-default btn-lg " type="button" onclick="undoButtonClicked()">
-        Undo
+    <button id="undo" class="btn btn-default btn-lg " type="button" data-toggle="tooltip" title="undo the previous area selected" onclick="undoButtonClicked()">
+        <img style="height:22px;" src="${resource(dir: 'images', file: "undo-arrow.svg")}" alt="Grails"/>
     </button>
 
-    <button id="question" class="btn btn-default btn-lg " data-toggle="modal" data-target="#questionModal" type="button" onclick="questionButtonClicked()">
-        Question
+    <button id="question" class="btn btn-default btn-lg " data-toggle="tooltip" data-toggle="modal"  data-target="#questionModal" type="button" title="ask the lecturer a question" onclick="questionButtonClicked()">
+        <img style="height:22px;" src="${resource(dir: 'images', file: "speech-bubble.svg")}" alt="Grails"/>
     </button>
 
-    <button id="slower" class="btn btn-default btn-lg btn-danger " type="button" onclick="slowerButtonClicked()">
-        Slower
+    <button id="slower" class="btn btn-default btn-lg btn-danger " type="button" data-toggle="tooltip" title="the lecture is going too fast, SLOWER!" onclick="slowerButtonClicked()">
+        <img style="height:23px;" src="${resource(dir: 'images', file: "snail.svg")}" alt="Grails"/>
     </button>
 
-    <button id="faster" class="btn btn-default btn-lg btn-success " type="button" onclick="fasterButtonClicked()">
-        Faster
+    <button id="faster" class="btn btn-default btn-lg btn-warning " type="button" data-toggle="tooltip" title="the lecture is going too slow, FASTER!" onclick="fasterButtonClicked()">
+        <img style="height:23px;" src="${resource(dir: 'images', file: "rabbit.svg")}" alt="Grails"/>
     </button>
     </div>
 

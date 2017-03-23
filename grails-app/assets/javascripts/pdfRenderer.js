@@ -140,21 +140,3 @@ function queueRenderPage(num) {
         renderPage(num);
     }
 }
-
-/*
-//testing next/previous page on keydown
-var i = 1
-window.onkeydown = function(e){
-    console.log("key pressed")
-
-    if (i==1 || i==3 || i== 5){
-        renderNextPage();
-        i += 1
-    }
-    else{
-        renderPreviousPage();
-        i += 1
-    }
-}
-
-*/
