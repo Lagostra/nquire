@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
  * Created by lars on 13.03.2017.
- * tid brukt så langt: 4.5 timer
+ * tid brukt så langt: 6.5 timer
  */
 public class Pace implements PaceInterface {
 
