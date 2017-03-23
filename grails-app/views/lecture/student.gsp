@@ -74,7 +74,7 @@
     <div id="presentation-container">
         <canvas id="the-canvas"></canvas>
     </div>
-    <div id="canvasesdiv" style="position:relative; z-index: 1000;">
+    <div id="canvasesdiv" style="position:relative;">
     <canvas id="student_canvas"></canvas>
     </div>
 
