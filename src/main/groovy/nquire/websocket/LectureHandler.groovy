@@ -48,8 +48,7 @@ class LectureHandler {
 
     LectureHandler(String lecturerToken, String filePath) {
         this(lecturerToken)
-
-        PDDocument pdDocument = PDDocument.load(new File(filePath))
+        PDDocument pdDocument = PDDocument.load(new File(filePath));
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         pdDocument.save(baos);
         pdDocument.close();
@@ -103,6 +102,14 @@ class LectureHandler {
                 handleQuestion(mObject, userSession)
             } else if(mObject.type == "pace") { // Student has given pace feedback
 
+            } else if(mObject.type == "updateStudentCanvas"){
+                String msg = JsonOutput.toJson([
+                        type: "updateStudentCanvas",
+                        studentId: students.get(userSession).id,
+                        page: mObject.page,
+                        array: mObject.array
+                ])
+                sendToAllLecturers(msg);
             }
         }
 
@@ -169,6 +176,10 @@ class LectureHandler {
     private sendToAll(String message) {
         sendToAllStudents(message)
         sendToAllLecturers(message)
+    }
+
+    public updateStudentCanvas(WebSocketSession user, int page, List<Integer> canvas){
+
     }
 
     public List getAllUsers() {

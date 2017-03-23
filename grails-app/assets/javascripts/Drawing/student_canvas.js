@@ -2,7 +2,7 @@
  * Created by lisas on 27.02.2017.
  */
 
-var canvas = document.getElementById('canvas');
+var canvas = document.getElementById('student_canvas');
 var context= canvas.getContext("2d");
 var drag;
 var tempRect;
@@ -10,8 +10,9 @@ var prevRect;
 var seq;
 var contextWidth;
 var contextHeight;
+var page;
 
-function init(){
+function initStudentCanvas(){
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
     contextWidth = canvas.clientWidth; contextHeight = canvas.clientHeight;
     canvas.addEventListener("mousedown", mouseDown);
@@ -21,8 +22,11 @@ function init(){
     drag = false;
     tempRect = {x: 0, y: 0, w: 0, h: 0, sequence: 0};
     prevRect = new Array();
+    page = 0;
     seq = 0;
 }
+
+
 
 
 function mouseDown(event){
@@ -43,6 +47,7 @@ function keyPress(e){
         }
         seq--;
         update();
+        updateCanvas(page, prevRect);
     }
 }
 
@@ -81,6 +86,7 @@ function mouseUp(event){
         }
     }
     update();
+    updateCanvas(page, prevRect)
 }
 
 function mouseMove(event){
@@ -90,4 +96,4 @@ function mouseMove(event){
     }
 }
 
-init();
+initStudentCanvas();

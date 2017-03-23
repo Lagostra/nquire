@@ -64,6 +64,8 @@ function initLecturer() {
             case "question": // One new question
                 addQuestion(msg.question);
                 break;
+            case "updateStudentCanvas": //Student has made a change on their drawing canvas
+                updateStudentCanvas(msg.studentId, msg.page, msg.array);
         }
     };
 
@@ -159,10 +161,12 @@ function onKey(e) {
     switch(key) {
         case 37: // Left
             renderPreviousPage();
+            backwardPage();
             socket.send(JSON.stringify({type: "pageChange", page: currentPage}));
             break;
         case 39: // Right
             renderNextPage();
+            forwardPage();
             socket.send(JSON.stringify({type: "pageChange", page: currentPage}));
             break;
     }

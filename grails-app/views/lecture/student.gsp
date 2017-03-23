@@ -74,7 +74,9 @@
     <div id="presentation-container">
         <canvas id="the-canvas"></canvas>
     </div>
-
+    <div id="canvasesdiv" style="position:relative; z-index: 1000;">
+    <canvas id="student_canvas"></canvas>
+    </div>
 
     <div id="buttons-container">
     <button id="hard" class="btn btn-default btn-lg " type="button" onclick="hardButtonClicked()">
@@ -102,6 +104,8 @@
     <asset:javascript src="pdf.js" />
     <asset:javascript src="pdfRenderer.js"/>
     <asset:javascript src="student.js"/>
+    <asset:javascript src="Drawing/functions.js" />
+    <asset:javascript src="Drawing/student_canvas.js" />
     <g:javascript>
         var url = "${createLink(uri: '/lectureStream', absolute: true)
         .replaceFirst(/https/, /wss/)

@@ -40,10 +40,16 @@
         <canvas id="the-canvas"></canvas>
     </div>
 
+    <div id="canvasesdiv2" style="position:relative; z-index: 1000;">
+        <canvas id="lecturer_canvas"></canvas>
+    </div>
+
+    <asset:javascript src="Drawing/lecturer_canvas.js"/>
+    <asset:javascript src="Drawing/functions.js"/>
+    <asset:javascript src="lecturer.js"/>
     <asset:javascript src="application.js"/>
     <asset:javascript src="pdf.js" />
     <asset:javascript src="pdfRenderer.js"/>
-    <asset:javascript src="lecturer.js"/>
     <script>
         var url = "${createLink(uri: '/lectureStream', absolute: true)
                         .replaceFirst(/https/, /wss/)
