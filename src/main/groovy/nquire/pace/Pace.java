@@ -27,12 +27,16 @@ public class Pace implements PaceInterface {
         for (Feedback fb : feedbackList){
             if (fb.getFast()) {
                 feedback += calculateTime(fb.getTimestamp())
-                        * 50 * sizeConstant;
+                        * 50.0 * sizeConstant;
             } else {
                 feedback -= calculateTime(fb.getTimestamp())
-                        * 50 * sizeConstant;
+                        * 50.0 * sizeConstant;
             }
         }
+        if(feedback > 50.0)
+            feedback = 50.0;
+        else if(feedback < -50.0)
+            feedback = -50.0;
         return base + feedback;
     }
 
@@ -44,7 +48,7 @@ public class Pace implements PaceInterface {
         double a = 1 - (Math.pow(deltaTime, 3) / 27000000);
 
         if (a > 1.0) a = 1.0;
-        else if (a < -1.0) a = -1.0;
+        else if (a < 0.0) a = 0.0;
         return a;
     }
 
@@ -55,6 +59,6 @@ public class Pace implements PaceInterface {
     }
 
     double calculateSizeConstant(int numStudents) {
-        return (10/numStudents < 1.0) ? 10/numStudents : 1.0;
+        return (10.0/numStudents < 1.0) ? 10.0/numStudents : 1.0;
     }
 }
