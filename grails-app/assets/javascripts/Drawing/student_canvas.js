@@ -86,7 +86,6 @@ function update(){
         var rect = presArray[page][i];
         context.fillRect(rect.x * contextWidth, rect.y * contextHeight, rect.w * contextWidth, rect.h * contextHeight);
     }
-    updateCanvas(page, presArray[page]);
 }
 
 function mouseUp(event){
@@ -111,6 +110,7 @@ function mouseUp(event){
             seqArray[page] = seqArray[page] + 1;
         }
     }
+    updateCanvas(page, presArray[page]);
     update();
 }
 
