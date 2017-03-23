@@ -1,5 +1,8 @@
 package nquire.pace;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.util.List;
 import java.util.Date;
 
@@ -8,6 +11,8 @@ import java.util.Date;
  * tid brukt så langt: 6.5 timer
  */
 public class Pace implements PaceInterface {
+
+    private static Log log = LogFactory.getLog(Pace.class);
 
     @Override
     public double calculateCurrentPace(List<Feedback> feedbackList, int numStudents) {
@@ -20,12 +25,13 @@ public class Pace implements PaceInterface {
         double sizeConstant = calculateSizeConstant(numStudents);
 
         for (Feedback fb : feedbackList){
-            if (fb.getFast())
+            if (fb.getFast()) {
                 feedback += calculateTime(fb.getTimestamp())
                         * 50 * sizeConstant;
-            else
+            } else {
                 feedback -= calculateTime(fb.getTimestamp())
                         * 50 * sizeConstant;
+            }
         }
         return base + feedback;
     }
@@ -45,7 +51,7 @@ public class Pace implements PaceInterface {
 
     //Hvor lang tid mellom 5 minutter siden og timestamp
     private double compareTime(Date timestamp) {
-        return System.currentTimeMillis() - timestamp.getTime();
+        return (System.currentTimeMillis() - timestamp.getTime()) / 1000;
     }
 
     double calculateSizeConstant(int numStudents) {
