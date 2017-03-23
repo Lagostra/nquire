@@ -1,0 +1,71 @@
+body {
+    height: 100%;
+    background-color: #1A1A1A;
+
+}
+#overlay{
+    position: fixed;
+    left: 0;
+    top: 50px;
+}
+
+#question-badge {
+    margin-top: 2px;
+}
+
+#info-bar {
+    clear:both;
+    box-shadow: 1px 1px 3px black;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 300px;
+    height: 25px;
+    background: white;
+    font-size: large;
+    border-radius: 0px 0px 25px 0px;
+}
+
+#lecture-id {
+    horiz-align: center;
+    vertical-align: middle;
+    width: 80px;
+    float: left;
+    margin-left: 5px;
+}
+#the-canvas {
+    margin: auto;
+    display:Block;
+}
+#pace-container{
+    float: left;
+    background: red; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left,red,yellow,green); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right,red,yellow, green); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right,red,yellow, green); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right,red,yellow, green); /* Standard syntax */
+
+    width: 100px;
+    height: 19px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    margin-right: 5px;
+    margin-left: 5px;
+
+}
+#pace-overlay {
+    height: 100%;
+    width: 4px;
+    background: black;
+    margin-left: 50%;
+}
+#buttons-container{
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: RGBA(0,0,0,0.5);
+    bottom: 0px;
+    padding:10px;
+    border-radius: 10px 10px 0px 0px;
+}
+

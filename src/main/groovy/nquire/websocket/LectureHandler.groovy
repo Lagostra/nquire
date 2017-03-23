@@ -2,6 +2,8 @@ package nquire.websocket
 
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
+import nquire.pace.Pace
+import nquire.pace.PaceInterface
 import nquire.similarity.SimilarityCalculator
 import nquire.similarity.WordCounter
 import org.apache.commons.logging.Log
@@ -13,7 +15,13 @@ import org.springframework.web.socket.TextMessage
 import org.springframework.web.socket.CloseStatus
 import org.springframework.web.util.HtmlUtils
 
+import javax.annotation.PreDestroy
 import javax.xml.bind.DatatypeConverter
+
+import nquire.pace.Feedback
+
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 class LectureHandler {
 
@@ -21,11 +29,13 @@ class LectureHandler {
 
     private static final long inactivityTimeout = 30*60*1000 // Time of inactivity before lecture is closed [ms]
 
-    private static SimilarityCalculator simCalc
-    private final float SIMILARITY_THRESHOLD = 0.20;
+    private static SimilarityCalculator simCalc = new WordCounter(2)
+    private static PaceInterface paceCalc = new Pace()
+    private final float SIMILARITY_THRESHOLD = 0.20
 
     private int id;
     private int lastStudentId = 0;
+    private double pace = 50.0;
     private long lastActivity;
     private String lecturerToken;
     private String presentation;
@@ -35,15 +45,16 @@ class LectureHandler {
 
     private List<String> questions;
     private List<Box>[] boxes;
+    private List<Feedback> paceFeedback;
 
     LectureHandler(String lecturerToken) {
         this.lecturerToken = lecturerToken
         lastActivity = System.currentTimeMillis();
-        simCalc = new WordCounter(2);
 
         students = new HashMap<>();
         lecturers = new ArrayList<>();
         questions = new ArrayList<>();
+        paceFeedback = new ArrayList<>();
     }
 
     LectureHandler(String lecturerToken, String filePath) {
@@ -98,10 +109,20 @@ class LectureHandler {
         } else {
             // The message was sent by a student
 
+            Student student = students.get(userSession)
+
             if(mObject.type == "question") { //Student asked a question
                 handleQuestion(mObject, userSession)
             } else if(mObject.type == "pace") { // Student has given pace feedback
+                if(System.currentTimeMillis() - student.lastFeedback.getTime() > 60 * 1000) {
+                    student.lastFeedback = new Date()
 
+                    if(mObject.value > 0) { // Too fast
+                        paceFeedback.add(new Feedback(new Date(), true))
+                    } else if(mObject.value < 0) { // Too slow
+                        paceFeedback.add(new Feedback(new Date(), false))
+                    }
+                }
             } else if(mObject.type == "updateStudentCanvas"){
                 String msg = JsonOutput.toJson([
                         type: "updateStudentCanvas",
@@ -152,8 +173,17 @@ class LectureHandler {
         return null
     }
 
+    void updatePace() {
+        pace = paceCalc.calculateCurrentPace(paceFeedback, students.size())
+        String msg = JsonOutput.toJson([
+                type: "pace",
+                value: pace
+            ])
+        sendToAllLecturers(msg)
+    }
+
     private sendToAllStudents(String message) {
-        for(Student student : students) {
+        for(Student student : students.values()) {
             sendTo(student.getSession(), message)
         }
     }
@@ -184,7 +214,7 @@ class LectureHandler {
 
     public List getAllUsers() {
         List<WebSocketSession> result = new ArrayList<>(lecturers)
-        for(Student student : students) {
+        for(Student student : students.values()) {
             result.add(student.getSession())
         }
         return result
@@ -210,7 +240,7 @@ class LectureHandler {
      * Closes all connections to this lecture.
      * */
     public void close() {
-        for (Student student : students) {
+        for (Student student : students.values()) {
             student.getSession().close(CloseStatus.GOING_AWAY)
         }
 
@@ -218,7 +248,6 @@ class LectureHandler {
             lecturer.close(CloseStatus.GOING_AWAY)
         }
     }
-
 }
 
 class Box {

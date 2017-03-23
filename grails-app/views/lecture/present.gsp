@@ -1,8 +1,11 @@
 <html>
 <head>
     <asset:stylesheet src="application.css" />
+    <asset:stylesheet src="present.css"/>
 </head>
 <body>
+
+    <!-- Modal for posting a question -->
     <div class="modal fade" id="questionsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -26,16 +29,34 @@
         </div>
     </div>
 
-    <h1>Lecture ID: <sec:loggedInUserInfo field='currentLecture'/></h1>
-    <g:form controller="lecture" action="close_lecture">
-        <g:submitButton name="Submit" value="Close lecture" class="btn btn-danger" />
+    <!-- Container for the ID/number of questions-->
+    <div id="info-bar">
+        <div id="lecture-id"> ID: <sec:loggedInUserInfo field='currentLecture'/>    </div>
+        <img style="height:28px; width:auto; float: left;" src="${resource(dir: 'images', file: "snail.svg")}" alt="Grails"/>
+
+        <div id="pace-container">
+            <div id="pace-overlay"></div>
+        </div>
+
+        <img style="height:22px; width:auto; float: left; margin-right: 20px;" src="${resource(dir: 'images', file: "rabbit.svg")}" alt="Grails"/>
+        <div id="question-badge"><span class="badge progress-bar-danger">4</span></div>
+    </div>
+
+    <!-- Container for the question/pagenumber/close lecture -->
+    <div id="buttons-container">
+    <g:form controller="lecture" style="float:left;margin:0;" action="close_lecture">
+        <g:submitButton name="Submit" value="Close lecture"  class="btn btn-default btn-lg btn-danger" />
     </g:form>
 
-    <button id="display_question_btn" class="btn btn-primary btn-md" data-toggle="modal" data-target="#questionsModal" type="button">
-        Show Questions <span id="new_question_badge" class="badge"></span>
+    <button id="display_question_btn" style="float:left;margin-left:10px;" class="btn btn-primary btn-default btn-lg" data-toggle="modal" data-target="#questionsModal" type="button">
+        Questions <span id="new_question_badge" class="badge"></span>
     </button>
 
-    <div><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>
+    <div style="float:left; margin-left:10px;"><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>
+
+    </div>
+
+    <!-- Container for the presentation canvas -->
     <div id="presentation-container" style="z-index: -10;">
         <canvas id="the-canvas"></canvas>
     </div>
