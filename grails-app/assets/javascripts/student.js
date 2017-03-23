@@ -49,9 +49,11 @@ function initStudent() {
     window.onkeydown = function(e){
         if (e.keyCode == '39') {
             this.renderNextPage();
+            pageInc();
         }
         else if (e.keyCode == '37') {
             this.renderPreviousPage();
+            pageDec();
         }
     }
 

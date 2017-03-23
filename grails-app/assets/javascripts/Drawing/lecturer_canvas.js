@@ -16,24 +16,16 @@ function init(){
     contextWidth = canvas.clientWidth; contextHeight = canvas.clientHeight;
     studentCanvasArray = test();
     page = 0;
+    setPageCount(100);
     update();
 }
 
 function test(){
-    canvasArray = new Array();
-    /**
-    canvasArray.push({x: 10, y: 100, w: 20, h: 110, sequence: 0});
-    canvasArray.push({x: 200, y: 400, w: 100, h: 130, sequence: 1});
-    canvasArray.push({x: 310, y: 210, w: 70, h: 200, sequence: 2});
-    canvasArray.push({x: 40, y: 40, w: 90, h: 40, sequence: 3});
-    canvasArray.push({x: 90, y: 10, w: 73, h: 120, sequence: 4});
-    **/
-
     pageArray = {};
-    pageArray['0000'] = canvasArray;
+    pageArray['0000'] = new Array();
 
-    presArray = {};
-    presArray[0] = pageArray;
+    presArray = new Array();
+    presArray.push(pageArray);
 
     return presArray;
 }
@@ -43,16 +35,24 @@ function updateStudentCanvas(studentId, page, array){
     update();
 }
 
+function setPageCount(p){
+    while(studentCanvasArray.length < p){
+        studentCanvasArray.push({});
+    }
+}
+
 function forwardPage(){
     page++;
-    if(!(page in studentCanvasArray)){
-        studentCanvasArray[page] = {};
+    if(page >= studentCanvasArray.length){
+        studentCanvasArray.push({});
     }
+    update();
 }
 function backwardPage(){
     if(page > 0){
         page--;
     }
+    update();
 }
 
 function update(){

@@ -6,11 +6,11 @@ var canvas = document.getElementById('student_canvas');
 var context= canvas.getContext("2d");
 var drag;
 var tempRect;
-var prevRect;
-var seq;
+var seqArray;
 var contextWidth;
 var contextHeight;
 var page;
+var presArray;
 
 function initStudentCanvas(){
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
@@ -21,9 +21,11 @@ function initStudentCanvas(){
     window.addEventListener("keydown", keyPress);
     drag = false;
     tempRect = {x: 0, y: 0, w: 0, h: 0, sequence: 0};
-    prevRect = new Array();
     page = 0;
-    seq = 0;
+    seqArray = new Array();
+    seqArray.push(0);
+    presArray = new Array();
+    presArray.push(new Array());
 }
 
 
@@ -32,20 +34,38 @@ function mouseDown(event){
         drag = true;
         tempRect.x = (event.offsetX/contextWidth); tempRect.y = (event.offsetY/contextHeight);
         tempRect.w = 0; tempRect.h = 0;
-        tempRect.sequence = seq;
+        tempRect.sequence = seqArray[page];
     }
 }
 
 function keyPress(e){
-    if(e.which == 90 && prevRect.length > 0 && seq>= 0){
-        for(i = prevRect.length - 1; i >= 0; i--){
-            if(prevRect[i].sequence == seq - 1){
-                prevRect.splice(i, 1);
+    if(e.which == 90 && presArray[page].length > 0 && seqArray[page]>= 0){
+        for(i = presArray[page].length - 1; i >= 0; i--){
+            if(presArray[page][i].sequence == seqArray[page] - 1){
+                presArray[page].splice(i, 1);
             }
         }
-        seq--;
+        seqArray[page] = seqArray[page] - 1;
         update();
     }
+}
+
+function pageInc(){
+    page++;
+    if(page >= presArray.length){
+        presArray.push(new Array());
+        seqArray.push(0);
+    }
+    console.log(page);
+    update();
+}
+
+function pageDec(){
+    if(page > 0){
+        page--;
+        console.log(presArray);
+    }
+    update();
 }
 
 function drawTemp(){
@@ -57,30 +77,30 @@ function drawTemp(){
 function update(){
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.globalAlpha = 0.2;
-    prevRect = splitAllRects(prevRect);
-    for(var i = 0; i < prevRect.length; i++){
-        var rect = prevRect[i];
+    presArray[page] = splitAllRects(presArray[page]);
+    for(var i = 0; i < presArray[page].length; i++){
+        var rect = presArray[page][i];
         context.fillRect(rect.x * contextWidth, rect.y * contextHeight, rect.w * contextWidth, rect.h * contextHeight);
     }
-    updateCanvas(page, prevRect);
+    updateCanvas(page, presArray[page]);
 }
 
 function mouseUp(event){
     drag = false;
     if(tempRect.w != 0 && tempRect.h != 0){
         var b = false;
-        for(var i = 0; i < prevRect.length; i++){
-            other = prevRect[i];
+        for(var i = 0; i < presArray[page].length; i++){
+            var other = presArray[page][i];
             if(intersects(tempRect, other)){
-                intRect = intersection(tempRect, other);
+                var intRect = intersection(tempRect, other);
                 if(isEqual(intRect, tempRect)){
                     b = true;
                 }
             }
         }
         if(!b){
-            prevRect.push(processRect(tempRect));
-            seq++;
+            presArray[page].push(processRect(tempRect));
+            seqArray[page] = seqArray[page] + 1;
         }
     }
     update();
