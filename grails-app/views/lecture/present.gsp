@@ -44,15 +44,23 @@
 
     <!-- Container for the question/pagenumber/close lecture -->
     <div id="buttons-container" style="z-index: 10;">
-    <g:form controller="lecture" style="float:left;margin:0;" action="close_lecture">
-        <g:submitButton name="Submit" value="Close lecture"  class="btn btn-default btn-lg btn-danger" />
-    </g:form>
+        <g:link view="lecturerFrontPage" class="btn btn-primary btn-lg" style="float:left;margin-left:0px;">
+            Home
+        </g:link>
 
-    <button id="display_question_btn" style="float:left;margin-left:10px;" class="btn btn-primary btn-default btn-lg" data-toggle="modal" data-target="#questionsModal" type="button">
-        Questions
-    </button>
+        <button id="display_question_btn" style="float:left;margin-left:10px;" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#questionsModal" type="button">
+            Questions
+        </button>
 
-    <div style="float:left; margin-left:10px;"><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>
+        <g:link controller="lecture" action="questions" class="btn btn-primary btn-lg" style="float:left;margin-left:10px;">
+            Questions view
+        </g:link>
+
+        <g:form controller="lecture" style="float:left;margin-left:10px;" action="close_lecture">
+            <g:submitButton name="Submit" value="Close lecture"  class="btn btn-danger btn-lg" />
+        </g:form>
+
+        <div style="float:left; margin-left:10px;"><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>
 
     </div>
 
