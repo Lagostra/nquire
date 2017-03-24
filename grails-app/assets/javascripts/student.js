@@ -50,17 +50,35 @@ function initStudent() {
     window.onkeydown = function(e){
         if (e.keyCode == '39') {
             this.renderNextPage();
+            pageInc();
         }
         else if (e.keyCode == '37') {
             this.renderPreviousPage();
+            pageDec();
         }
     }
 
 }
 
-function hardButtonClicked(){
-    console.log("button clicked");
+function updateCanvas(page, canvasArray){
+    socket.send(JSON.stringify({"type": "updateStudentCanvas", "studentId": null, "page": page, "array": canvasArray}));
 }
+
+function hardButtonClicked(){
+    toggleMarking();
+}
+
+function toggleMarking() {
+    isMarking = !isMarking;
+    if(!isMarking)
+        drag = false;
+
+    if(isMarking)
+        document.getElementById("hard").classList.add("active");
+    else
+        document.getElementById("hard").classList.remove("active");
+}
+
 function undoButtonClicked(){
     console.log("button clicked");
 }

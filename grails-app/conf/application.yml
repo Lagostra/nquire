@@ -142,5 +142,6 @@ environments:
 
         presentationRoot: /app-res/presentations/
 
+
         grails:
             serverURL: https://nquire.andreassen.info

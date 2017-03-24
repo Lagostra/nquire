@@ -71,6 +71,8 @@ function initLecturer() {
             case "pace":
                 setPaceValue(msg.value);
                 break;
+            case "updateStudentCanvas": //Student has made a change on their drawing canvas
+                updateStudentCanvas(msg.studentId, msg.page, msg.array);
         }
     };
 
@@ -174,10 +176,12 @@ function onKey(e) {
         case 37: // Left
             renderPreviousPage();
             socket.send(JSON.stringify({type: "pageChange", page: currentPage}));
+            backwardPage();
             break;
         case 39: // Right
             renderNextPage();
             socket.send(JSON.stringify({type: "pageChange", page: currentPage}));
+            forwardPage();
             break;
     }
 }

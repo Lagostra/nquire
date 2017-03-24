@@ -9,12 +9,12 @@
 <body style="'margin: 0">
 
 <div id="canvasesdiv" style="position:relative; width:600px; height:650px">
-<canvas id="canvas" width="800" height="650">
+    <canvas id="student_canvas" width="800" height="650">
     Sorry, your browser is rubbish.
-</canvas>
-<script src = "draw.js">
 
-</script>
+    </canvas>
 </div>
+<asset:javascript src="Drawing/functions.js" />
+<asset:javascript src="Drawing/student_canvas.js" />
 </body>
 </html>
