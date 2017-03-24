@@ -43,7 +43,7 @@
     </div>
 
     <!-- Container for the question/pagenumber/close lecture -->
-    <div id="buttons-container">
+    <div id="buttons-container" style="z-index: 10;">
     <g:form controller="lecture" style="float:left;margin:0;" action="close_lecture">
         <g:submitButton name="Submit" value="Close lecture"  class="btn btn-default btn-lg btn-danger" />
     </g:form>
@@ -61,7 +61,7 @@
         <canvas id="the-canvas"></canvas>
     </div>
 
-    <div id="canvasesdiv2" style="position:relative; z-index: 9999;">
+    <div id="canvasesdiv2" style="position:relative;">
         <canvas id="lecturer_canvas"></canvas>
     </div>
 
