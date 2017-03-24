@@ -113,13 +113,12 @@ var addQuestion = function(question) {
 
 //Notify the lecturer of a new question
 var notifyNewQuestion = function () {
-    var new_question_badge = document.getElementById("new_question_badge");
+    var new_question_badge = document.getElementById("new-question-badge");
     // Hvis questions er displayed skal ikke knappen få "new" taggen
     if (getQuestionsToggled()) {return}
 
     display_question_btn.classList.add(class_new_btn);
     new_question_badge.innerHTML = getNewQuestions();
-    new_question_badge.classList.remove(class_hidden);
 };
 
 //Check whether questions are displayed
@@ -130,13 +129,12 @@ var getQuestionsToggled = function() {
 //Remove the new_question class from all question elements
 var resetNewQuestions = function () {
     var new_questions = document.getElementsByClassName("question");
-    var new_question_badge = document.getElementById("new_question_badge");
+    var new_question_badge = document.getElementById("new-question-badge");
     for (var i = 0; i < new_questions.length; i++){
         new_questions[i].classList.remove(class_new_question);
     }
     display_question_btn.classList.remove(class_new_btn);
     new_question_badge.innerHTML = getNewQuestions();
-    new_question_badge.classList.add(class_hidden);
 };
 
 //Reset the questions array,

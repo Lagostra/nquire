@@ -39,7 +39,7 @@
         </div>
 
         <img style="height:22px; width:auto; float: left; margin-right: 20px;" src="${resource(dir: 'images', file: "rabbit.svg")}" alt="Grails"/>
-        <div id="question-badge"><span class="badge progress-bar-danger">4</span></div>
+        <div id="question-badge"><span id="new-question-badge" class="badge progress-bar-danger">0</span></div>
     </div>
 
     <!-- Container for the question/pagenumber/close lecture -->
@@ -49,7 +49,7 @@
     </g:form>
 
     <button id="display_question_btn" style="float:left;margin-left:10px;" class="btn btn-primary btn-default btn-lg" data-toggle="modal" data-target="#questionsModal" type="button">
-        Questions <span id="new_question_badge" class="badge"></span>
+        Questions
     </button>
 
     <div style="float:left; margin-left:10px;"><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>
