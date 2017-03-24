@@ -15,6 +15,7 @@ import org.springframework.web.socket.TextMessage
 import org.springframework.web.socket.CloseStatus
 import org.springframework.web.util.HtmlUtils
 
+import javax.annotation.PreDestroy
 import javax.xml.bind.DatatypeConverter
 
 import nquire.pace.Feedback
@@ -27,8 +28,6 @@ class LectureHandler {
     private static Log log = LogFactory.getLog(getClass())
 
     private static final long inactivityTimeout = 30*60*1000 // Time of inactivity before lecture is closed [ms]
-
-    private static scheduler = Executors.newScheduledThreadPool(5)
 
     private static SimilarityCalculator simCalc = new WordCounter(2)
     private static PaceInterface paceCalc = new Pace()
@@ -56,14 +55,6 @@ class LectureHandler {
         lecturers = new ArrayList<>();
         questions = new ArrayList<>();
         paceFeedback = new ArrayList<>();
-
-        scheduler.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                updatePace();
-            }
-
-        }, 20, 20, TimeUnit.SECONDS)
     }
 
     LectureHandler(String lecturerToken, String filePath) {
@@ -124,7 +115,7 @@ class LectureHandler {
             if(mObject.type == "question") { //Student asked a question
                 handleQuestion(mObject, userSession)
             } else if(mObject.type == "pace") { // Student has given pace feedback
-                if(student.lastFeedback.getTime() - (new Date()).getTime() > 60 * 1000) {
+                if(System.currentTimeMillis() - student.lastFeedback.getTime() > 60 * 1000) {
                     student.lastFeedback = new Date()
 
                     if(mObject.value > 0) { // Too fast
@@ -175,8 +166,8 @@ class LectureHandler {
         return null
     }
 
-    private void updatePace() {
-        pace = paceCalc.calculateCurrentPace(paceFeedback)
+    void updatePace() {
+        pace = paceCalc.calculateCurrentPace(paceFeedback, students.size())
         String msg = JsonOutput.toJson([
                 type: "pace",
                 value: pace
@@ -246,7 +237,6 @@ class LectureHandler {
             lecturer.close(CloseStatus.GOING_AWAY)
         }
     }
-
 }
 
 class Box {

@@ -10,6 +10,7 @@ import org.springframework.web.socket.WebSocketMessage
 import org.springframework.web.socket.TextMessage
 import org.springframework.web.socket.CloseStatus
 
+import javax.annotation.PreDestroy
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
@@ -25,13 +26,22 @@ class LectureEndpoint implements WebSocketHandler {
 
 
     static {
-        scheduler = Executors.newScheduledThreadPool(1)
+        scheduler = Executors.newScheduledThreadPool(5)
         scheduler.scheduleAtFixedRate(new Runnable() {
                 @Override
                 public void run() {
                     closeInactiveLectures()
                 }
             }, 5, 5, TimeUnit.MINUTES)
+
+        scheduler.scheduleAtFixedRate(new Runnable() {
+            @Override
+            void run() {
+                for(LectureHandler l : lectures.values()) {
+                    l.updatePace()
+                }
+            }
+        }, 20, 20, TimeUnit.SECONDS)
     }
 
 
@@ -137,6 +147,11 @@ class LectureEndpoint implements WebSocketHandler {
 
     static boolean isAlive(int id) {
         return lectures.containsKey(id)
+    }
+
+    @PreDestroy
+    static void cleanThreads() {
+        scheduler.shutdown()
     }
 
 }
