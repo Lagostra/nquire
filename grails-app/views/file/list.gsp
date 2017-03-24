@@ -20,10 +20,10 @@
     </g:if>
     <g:each in="${presentations}">
         <div class="col-md-3">
-            <button class="btn btn-default btn-block">
+            <div class="panel panel-default panel-body center-text">
                 <g:img class="img-thumbnail img-responsive center-block" uri="/file/get_thumbnail/${it.id}"/>
                 ${it.title}
-            </button>
+            </div>
         </div>
     </g:each>
 </div>
