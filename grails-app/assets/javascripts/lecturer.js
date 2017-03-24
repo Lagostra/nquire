@@ -19,12 +19,8 @@ var class_new_question = "new_question";
 var socket;
 
 
-//Changes to the code
 function initLecturer() {
     document.body.onmousemove = mouseMoveHandler;
-
-    //for testing only
-    setPaceValue(80);
 
     question_container = document.getElementById("question_container");
     default_question = document.getElementById("default_question");
@@ -71,6 +67,9 @@ function initLecturer() {
                 break;
             case "question": // One new question
                 addQuestion(msg.question);
+                break;
+            case "pace":
+                setPaceValue(msg.value);
                 break;
         }
     };
