@@ -98,7 +98,10 @@ class LectureController {
         authenticatedUser.save(flush: true)
         springSecurityService.reauthenticate(authenticatedUser.username)
 
-        redirect(action: 'present')
+        if(pres != null)
+            redirect(action: 'present')
+        else
+            redirect(action: 'questions')
     }
 
     def close_lecture() {
@@ -108,6 +111,6 @@ class LectureController {
         authenticatedUser.save(flush: true)
         springSecurityService.reauthenticate(authenticatedUser.username)
 
-        redirect(controller: 'lecture', action: 'present')
+        redirect(controller: 'lecture', action: 'create')
     }
 }
