@@ -15,7 +15,10 @@
                 <div class="modal-body">
                     <div class="row">
                         <g:if test="${presentations.size() == 0}"><!---->
-                            <div class="col-md-12">You haven't uploaded any presentations yet!</div>
+                            <div class="col-md-12">
+                                You haven't uploaded any presentations yet!
+                                <g:link controller="file" action="upload">Upload one now!</g:link>
+                            </div>
                         </g:if>
                         <g:each in="${presentations}">
                             <div class="col-md-4">
