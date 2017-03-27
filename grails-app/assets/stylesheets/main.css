@@ -79,6 +79,12 @@
         display: block;
     }
 
+#open-questions-button {
+    position: relative;
+    margin-right: 10px;
+    top: -5px;
+}
+
 .presentation-box:hover:before {
     content: " ";
     position: absolute;

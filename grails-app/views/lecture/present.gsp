@@ -14,6 +14,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
+                    <g:link controller="lecture" action="questions" class="btn btn-primary btn-sm pull-right" target="_blank" elementId="open-questions-button">Open in own tab</g:link>
                 </div>
                 <div class="modal-body">
                     <div id="question_container">
