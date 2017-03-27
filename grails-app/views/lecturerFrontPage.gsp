@@ -43,12 +43,6 @@
                 dynamisk kommunisert til foreleser, slik at tempoet kan tilpasses fortløpende!</p>
             </div>
         </div>
-
-        <hr>
-
-        <footer>
-            <p>&copy; Company 2017</p>
-        </footer>
     </div> <!-- /container -->
 
 </body>
