@@ -58,6 +58,12 @@ body {
     width: 4px;
     background: black;
     margin-left: 50%;
+
+    -moz-transition: all 3s ease-out;  /* FF4+ */
+    -o-transition: all 3s ease-out;  /* Opera 10.5+ */
+    -webkit-transition: all 3s ease-out;  /* Saf3.2+, Chrome */
+    -ms-transition: all 3s ease-out;  /* IE10 */
+    transition: all 3s ease-out;
 }
 #buttons-container{
     position: fixed;
