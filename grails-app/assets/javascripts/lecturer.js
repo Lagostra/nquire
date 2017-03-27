@@ -8,7 +8,6 @@ var questions = [];
 var question_container;
 var default_question;
 var display_question_btn;
-var new_question_badge;
 var pageRole;
 var timeout;
 
@@ -25,7 +24,6 @@ function initLecturer() {
     question_container = document.getElementById("question_container");
     default_question = document.getElementById("default_question");
     display_question_btn = document.getElementById("display_question_btn");
-    new_question_badge = document.getElementById("new_question_badge");
 
     /* EVENTS */
     if(pageRole == "present") {
@@ -122,7 +120,6 @@ var notifyNewQuestion = function () {
     // Hvis questions er displayed skal ikke knappen få "new" taggen
     if (getQuestionsToggled()) {return}
 
-    display_question_btn.classList.add(class_new_btn);
     new_question_badge.innerHTML = getNewQuestions();
 };
 
@@ -138,7 +135,6 @@ var resetNewQuestions = function () {
     for (var i = 0; i < new_questions.length; i++){
         new_questions[i].classList.remove(class_new_question);
     }
-    display_question_btn.classList.remove(class_new_btn);
     new_question_badge.innerHTML = getNewQuestions();
 };
 
