@@ -29,6 +29,11 @@
         </div>
     </div>
 
+    <!-- Container for the loading spinner while loading the lecture-->
+    <div id="loading-container">
+        <span class="glyphicon glyphicon-refresh large glyphicon-refresh-animate"></span> Loading...
+    </div>
+
     <!-- Container for the ID/number of questions-->
     <div id="info-bar">
         <div id="lecture-id"> ID: <sec:loggedInUserInfo field='currentLecture'/>    </div>

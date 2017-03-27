@@ -49,6 +49,10 @@ function loadPDF(){
         var loadingTask = PDFJS.getDocument({data: pdf}).then(function(pdf) {
             this.pdf = pdf;
             document.getElementById('page_count').textContent = pdf.numPages;
+
+            // Hides the loading spinner
+            document.getElementById("loading-container").style.display = "none";
+
             //first render
             this.renderPage(1);
 

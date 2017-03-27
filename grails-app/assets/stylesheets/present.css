@@ -75,3 +75,24 @@ body {
     border-radius: 10px 10px 0px 0px;
 }
 
+#loading-container {
+    position: fixed;
+    top: calc(50% - 22.5px);
+    left: calc(50% - 90px);
+    font-size: xx-large;
+}
+.glyphicon-refresh-animate {
+    -animation: spin .9s infinite linear;
+    -webkit-animation: spin2 .9s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+
