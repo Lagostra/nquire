@@ -52,10 +52,6 @@
             Questions
         </button>
 
-        <g:link controller="lecture" action="questions" class="btn btn-primary btn-lg" style="float:left;margin-left:10px;">
-            Questions view
-        </g:link>
-
         <g:form controller="lecture" style="float:left;margin-left:10px;" action="close_lecture">
             <g:submitButton name="Submit" value="Close lecture"  class="btn btn-danger btn-lg" />
         </g:form>
