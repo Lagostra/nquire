@@ -27,6 +27,10 @@
     display: none;
 }
 
+.red {
+    color: red !important;
+}
+
 .question{
     padding: 0.5em;
     margin-bottom: 2px;
