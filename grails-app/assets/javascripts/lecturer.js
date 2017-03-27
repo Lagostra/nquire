@@ -101,7 +101,11 @@ var addQuestion = function(question) {
     question.new = true;
     questions.push(question);
     if(pageRole == "present") {
-        notifyNewQuestion();
+        /*  Timeout solves off by one-error on question count.
+        *   The error is caused by getElementsByClassName returning av live collection
+        *    - at the time length is called (with no timeout), the question has not been added to the DOM.
+        * */
+        setTimeout(notifyNewQuestion, 100);
     }
     default_question.classList.add(class_hidden);
     question_container.innerHTML +=
@@ -160,7 +164,7 @@ var removeDefaultQuestion = function() {
 
 //Get the amount of new questions
 var getNewQuestions = function () {
-    return document.getElementsByClassName(class_new_question).length + 1;
+    return document.getElementsByClassName(class_new_question).length;
 };
 
 
