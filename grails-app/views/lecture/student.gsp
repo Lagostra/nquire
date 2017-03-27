@@ -36,6 +36,11 @@
         </div>
     </div>
 
+    <!-- Container for the loading spinner while loading the lecture-->
+    <div id="loading-container">
+        <span class="glyphicon glyphicon-refresh large glyphicon-refresh-animate"></span> Loading...
+    </div>
+
     <div class="modal fade" id="similarQuestionModal" tabindex="-1" role="dialog" aria-labelledby="similarQuestionModalTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
