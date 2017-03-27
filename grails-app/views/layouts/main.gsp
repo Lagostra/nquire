@@ -33,8 +33,10 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/lecturer">Home</a></li>
                     <sec:ifAllGranted roles="ROLE_LECTURER">
-                        <li><g:link controller="file" action="index" >Presentations</g:link></li>
-                        <g:if test="${nquire.websocket.LectureEndpoint.isAlive(applicationContext.springSecurityService.principal.currentLecture)}" >
+                        <g:set var="lectureAlive" value="${nquire.websocket.LectureEndpoint.isAlive(applicationContext.springSecurityService.principal.currentLecture)}" />
+
+                        <li <g:if test="${lectureAlive}"> class="disabled"</g:if>><g:link controller="file" action="index" >Presentations</g:link></li>
+                        <g:if test="${lectureAlive}" >
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle current-lecture-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     Current Lecture
@@ -53,6 +55,11 @@
                                         <g:link controller="lecture" action="questions">
                                             Questions view
                                         </g:link>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="red" onclick="forms['close-form'].submit()">Close lecture</a>
+                                        <g:form name="close-form" controller="lecture" style="float:left;margin-left:10px;" action="close_lecture">
+                                        </g:form>
                                     </li>
                                 </ul>
 

@@ -52,12 +52,26 @@
                             <label for="presentation-selector">Presentation file</label>
                             <div class="row">
                                 <div class="col-md-3">
-                                    <button id="presentation-selector" class="btn btn-default" data-toggle="modal" data-target="#file-modal" type="button" >
-                                        Select presentation file
+                                    <button id="presentation-selector" class="btn btn-default" data-toggle="modal" data-target="#file-modal" type="button">
+                                        <g:if test="${selectedPresentation}">
+                                            <span id="remove-presentation" title="Remove presentation" type="button" class="close" onclick="removePresentation();">
+                                                <span>&times;</span>
+                                            </span>
+                                            <g:img class="img-thumbnail img-responsive center-block" uri="/file/get_thumbnail/${selectedPresentation.id}"/>
+                                            ${selectedPresentation.title}
+                                        </g:if>
+                                        <g:else>
+                                            Select presentation file
+                                        </g:else>
                                     </button>
                                 </div>
                             </div>
-                            <g:hiddenField name="presentationId" class="form-control" id="presentation-id"></g:hiddenField>
+                            <g:if test="${selectedPresentation}">
+                                <g:hiddenField name="presentationId" class="form-control" id="presentation-id" value="${selectedPresentation.id}"></g:hiddenField>
+                            </g:if>
+                            <g:else>
+                                <g:hiddenField name="presentationId" class="form-control" id="presentation-id"></g:hiddenField>
+                            </g:else>
                         </div>
                         <div class="form-group pull-right">
                             <g:submitButton name="submit" class="btn btn-primary btn-md" value="Create lecture" />

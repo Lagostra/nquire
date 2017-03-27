@@ -6,6 +6,8 @@ import nquire.websocket.LectureHandler
 
 import java.security.SecureRandom
 
+import nquire.Presentation
+
 @Secured('ROLE_LECTURER')
 class LectureController {
 
@@ -65,7 +67,15 @@ class LectureController {
             redirect(action: 'present')
             return
         }
-        render(view: 'create', model: [presentations: authenticatedUser.presentations])
+
+        Presentation pres = null;
+        if(params.id) {
+            pres = Presentation.findById(params.id)
+            if(pres.owner != authenticatedUser)
+                pres = null
+        }
+
+        render(view: 'create', model: [presentations: authenticatedUser.presentations, selectedPresentation: pres])
     }
 
     def create_lecture() {

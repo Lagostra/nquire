@@ -27,6 +27,10 @@
     display: none;
 }
 
+.red {
+    color: red !important;
+}
+
 .question{
     padding: 0.5em;
     margin-bottom: 2px;
@@ -74,3 +78,32 @@
         margin: auto;
         display: block;
     }
+
+#open-questions-button {
+    position: relative;
+    margin-right: 10px;
+    top: -5px;
+}
+
+.presentation-box:hover:before {
+    content: " ";
+    position: absolute;
+    top: 0; bottom: 20px; left: 15px; right: 15px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.4);
+}
+    .btn-create-lecture {
+        display: none;
+        position: absolute;
+        left: 20px;
+        top: 5px;
+    }
+
+    .presentation-box:hover .btn-create-lecture {
+        display: block;
+    }
+
+#file-modal .modal-body .row {
+    max-height: 500px;
+    overflow: auto;
+}
