@@ -33,8 +33,10 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/lecturer">Home</a></li>
                     <sec:ifAllGranted roles="ROLE_LECTURER">
-                        <li><g:link controller="file" action="index" >Presentations</g:link></li>
-                        <g:if test="${nquire.websocket.LectureEndpoint.isAlive(applicationContext.springSecurityService.principal.currentLecture)}" >
+                        <g:set var="lectureAlive" value="${nquire.websocket.LectureEndpoint.isAlive(applicationContext.springSecurityService.principal.currentLecture)}" />
+
+                        <li <g:if test="${lectureAlive}"> class="disabled"</g:if>><g:link controller="file" action="index" >Presentations</g:link></li>
+                        <g:if test="${lectureAlive}" >
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle current-lecture-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     Current Lecture
