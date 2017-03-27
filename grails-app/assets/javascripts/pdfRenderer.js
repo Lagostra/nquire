@@ -48,7 +48,9 @@ function loadPDF(){
         // loading the document
         var loadingTask = PDFJS.getDocument({data: pdf}).then(function(pdf) {
             this.pdf = pdf;
-            document.getElementById('page_count').textContent = pdf.numPages;
+            if (document.getElementById('page_count')) {
+                document.getElementById('page_count').textContent = pdf.numPages;
+            }
 
             // Hides the loading spinner
             document.getElementById("loading-container").style.display = "none";
@@ -93,7 +95,9 @@ function renderPage(pageNumber) {
             console.log("page rendered")
 
             this.currentPage = pageNumber;
-            document.getElementById('page_num').textContent = pageNumber;
+            if (document.getElementById('page_num') != null){
+                document.getElementById('page_num').textContent = pageNumber;
+            }
             pageRendering = false;
             if (pageNumPending !== null) {
                 // New page rendering is pending

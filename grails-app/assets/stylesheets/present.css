@@ -19,17 +19,17 @@ body {
     position: fixed;
     left: 0;
     top: 0;
-    width: 300px;
-    height: 25px;
+    width: 175px;
+    height: 42px;
     background: white;
-    font-size: large;
+    font-size: xx-large;
     border-radius: 0px 0px 25px 0px;
 }
 
 #lecture-id {
     horiz-align: center;
     vertical-align: middle;
-    width: 80px;
+    width: 140px;
     float: left;
     margin-left: 5px;
 }
@@ -37,20 +37,25 @@ body {
     margin: auto;
     display:Block;
 }
-#pace-container{
-    float: left;
-    background: red; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(left,red,yellow,green); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(right,red,yellow, green); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(right,red,yellow, green); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to right,red,yellow, green); /* Standard syntax */
+#pace-background{
 
-    width: 100px;
-    height: 19px;
-    margin-top: 3px;
-    margin-bottom: 3px;
+
+    background: red; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left,red,red,yellow,red); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right,red,red,yellow,red); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right,red,yellow,red); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right,red,yellow,red); /* Standard syntax */
+
+    width: 350px;
+    height: 23px;
+    margin-top: 0px;
+    margin-bottom: 2px;
     margin-right: 5px;
     margin-left: 5px;
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 
 }
 #pace-overlay {
@@ -65,14 +70,37 @@ body {
     -ms-transition: all 3s ease-out;  /* IE10 */
     transition: all 3s ease-out;
 }
-#buttons-container{
+#buttons-container {
+    width: 100%;
+    height: 46px;
+    margin-top: 5px;
+    padding-left: 40px;
+}
+#pace-container {
+    height: 28px;
+    width: 100%;
+
+}
+#menu-container{
+    -moz-transition: all 0.5s ease-out;  /* FF4+ */
+    -o-transition: all 0.5s ease-out;  /* Opera 10.5+ */
+    -webkit-transition: all 0.5s ease-out;  /* Saf3.2+, Chrome */
+    -ms-transition: all 0.5s ease-out;  /* IE10 */
+    transition: all 0.5s ease-out;
+
+    z-index: 10;
     position: fixed;
     left: 50%;
-    transform: translate(-50%, 0);
+    width: 450px;
+
+
+    transform: translateX(-50%);
     background-color: RGBA(0,0,0,0.5);
     bottom: 0px;
     padding:10px;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 25px 25px 0px 0px;
+    padding-bottom: 10px;
+    padding-top: 5px;
 }
 
 #loading-container {

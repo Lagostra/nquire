@@ -187,11 +187,11 @@ function onKey(e) {
 }
 
 function mouseMoveHandler(){
-    document.getElementById("buttons-container").style.display = "block";
+    document.getElementById("menu-container").style.transform = "translateY(0%) translateX(-50%)";
 
     clearTimeout(timeout);
     timeout = setTimeout(function(){
-        document.getElementById("buttons-container").style.display = "none";
-    },2000)
+        document.getElementById("menu-container").style.transform = "translateY(60px) translateX(-50%)";
+    },2500)
 
 }

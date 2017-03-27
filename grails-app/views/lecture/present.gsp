@@ -37,31 +37,41 @@
     <!-- Container for the ID/number of questions-->
     <div id="info-bar">
         <div id="lecture-id"> ID: <sec:loggedInUserInfo field='currentLecture'/>    </div>
-        <img style="height:28px; width:auto; float: left;" src="${resource(dir: 'images', file: "snail.svg")}" alt="Grails"/>
-
-        <div id="pace-container">
-            <div id="pace-overlay"></div>
-        </div>
-
-        <img style="height:22px; width:auto; float: left; margin-right: 20px;" src="${resource(dir: 'images', file: "rabbit.svg")}" alt="Grails"/>
         <div id="question-badge"><span id="new-question-badge" class="badge progress-bar-danger">0</span></div>
     </div>
 
     <!-- Container for the question/pagenumber/close lecture -->
-    <div id="buttons-container" style="z-index: 10;">
-        <g:link view="lecturerFrontPage" class="btn btn-primary btn-lg" style="float:left;margin-left:0px;">
-            Home
-        </g:link>
+    <div id="menu-container" class="slide-in">
 
-        <button id="display_question_btn" style="float:left;margin-left:10px;" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#questionsModal" type="button">
-            Questions
-        </button>
+        <div id="pace-container">
+            <img style="height:28px; position:absolute; top:5px; left:15px;" src="${resource(dir: 'images', file: "snail.svg")}" alt="Grails"/>
+            <div id="pace-background">
+                <div id="pace-overlay"></div>
+            </div>
+            <img style="height:22px; position:absolute; top: 5px; right: 15px;" src="${resource(dir: 'images', file: "rabbit.svg")}" alt="Grails"/>
+        </div>
 
-        <g:form controller="lecture" style="float:left;margin-left:10px;" action="close_lecture">
-            <g:submitButton name="Submit" value="Close lecture"  class="btn btn-danger btn-lg" />
-        </g:form>
+        <div id="buttons-container">
 
-        <div style="float:left; margin-left:10px;"><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>
+            <g:link view="lecturerFrontPage" class="btn btn-primary btn-lg" style="float:left;margin-left:0px;">
+                Home
+            </g:link>
+
+            <button id="display_question_btn" style="float:left;margin-left:10px;" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#questionsModal" type="button">
+                Questions
+            </button>
+
+            <g:form class="form-inline" controller="lecture" style="float:left;margin-left:10px; margin-bottom: 0px;" action="close_lecture">
+                <g:submitButton name="Submit" value="Close lecture"  class="btn btn-danger btn-lg" />
+            </g:form>
+
+        </div>
+
+
+
+
+
+        <!--<div style="float:left; margin-left:10px;"><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div> -->
 
     </div>
 
