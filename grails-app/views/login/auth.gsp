@@ -22,10 +22,10 @@
                             <label for="password">Password:</label>
                             <g:passwordField name="${passwordParameter ?: 'password'}" class="form-control" id="password"></g:passwordField>
                         </div>
-                        <div class="form-group">
+                        <!--<div class="form-group">
                             <g:checkBox name="${rememberMeParameter ?: 'remember-me'}-me" id="remember_me"></g:checkBox>
                             <label for="remember_me">Remember me</label>
-                        </div>
+                        </div>-->
                         <div class="form-group pull-right">
                             <input type="submit" class="btn btn-primary" />
                         </div>
