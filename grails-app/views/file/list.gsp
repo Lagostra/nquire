@@ -19,8 +19,9 @@
         </div>
     </g:if>
     <g:each in="${presentations}">
-        <div class="col-md-3">
+        <div class="col-md-3 presentation-box">
             <div class="panel panel-default panel-body center-text">
+                <g:link controller="lecture" action="create" id="${it.id}" class="btn btn-primary btn-create-lecture">Use in lecture</g:link>
                 <g:img class="img-thumbnail img-responsive center-block" uri="/file/get_thumbnail/${it.id}"/>
                 ${it.title}
             </div>
