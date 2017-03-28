@@ -208,11 +208,15 @@ class LectureHandler {
         sendToAllLecturers(message)
     }
 
-    public updateStudentCanvas(WebSocketSession user, int page, List<Integer> canvas){
-
+    public List<Student> getAllStudents() {
+        return new ArrayList<>(students.values())
     }
 
-    public List getAllUsers() {
+    public List<WebSocketSession> getAllLecturers() {
+        return lecturers
+    }
+
+    public List<WebSocketSession> getAllUsers() {
         List<WebSocketSession> result = new ArrayList<>(lecturers)
         for(Student student : students.values()) {
             result.add(student.getSession())
