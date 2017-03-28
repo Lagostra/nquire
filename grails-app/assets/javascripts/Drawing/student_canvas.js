@@ -2,7 +2,7 @@
  * Created by lisas on 27.02.2017.
  */
 
-var canvas = document.getElementById('student_canvas');
+var canvas = document.getElementById('student-canvas');
 var context= canvas.getContext("2d");
 var drag;
 var isMarking = false;
@@ -14,7 +14,6 @@ var page;
 var presArray;
 
 function initStudentCanvas(){
-    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
     contextWidth = canvas.clientWidth; contextHeight = canvas.clientHeight;
     canvas.addEventListener("mousedown", mouseDown);
     canvas.addEventListener("mousemove", mouseMove);
@@ -27,6 +26,8 @@ function initStudentCanvas(){
     seqArray.push(0);
     presArray = new Array();
     presArray.push(new Array());
+
+    addRenderPageListener(onCanvasResize);
 }
 
 
@@ -50,7 +51,7 @@ function keyPress(e){
             }
         }
         seqArray[page] = seqArray[page] - 1;
-        update();
+        updateBoxes();
     }
 }
 
@@ -61,7 +62,7 @@ function pageInc(){
         seqArray.push(0);
     }
     console.log(page);
-    update();
+    updateBoxes();
 }
 
 function pageDec(){
@@ -69,16 +70,18 @@ function pageDec(){
         page--;
         console.log(presArray);
     }
-    update();
+    updateBoxes();
 }
 
 function drawTemp(){
-    update();
+    contextWidth = canvas.clientWidth; contextHeight = canvas.clientHeight;
+    updateBoxes();
     context.globalAlpha = 0.6;
     context.fillRect(tempRect.x * contextWidth, tempRect.y * contextHeight, tempRect.w * contextWidth, tempRect.h * contextHeight);
 }
 
-function update(){
+function updateBoxes(){
+    contextWidth = canvas.clientWidth; contextHeight = canvas.clientHeight;
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.globalAlpha = 0.2;
     presArray[page] = splitAllRects(presArray[page]);
@@ -111,7 +114,7 @@ function mouseUp(event){
         }
     }
     updateCanvas(page, presArray[page]);
-    update();
+    updateBoxes();
 }
 
 function mouseMove(event){
@@ -121,4 +124,9 @@ function mouseMove(event){
     }
 }
 
-initStudentCanvas();
+function onCanvasResize() {
+    var theCanvas = document.getElementById("the-canvas");
+    canvas.height = theCanvas.height;
+    canvas.width = theCanvas.width;
+    updateBoxes();
+}

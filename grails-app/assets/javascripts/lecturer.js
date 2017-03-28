@@ -86,9 +86,16 @@ function initLecturer() {
     if(pageRole == "present") {
         window.onkeydown = onKey;
 
+        initLecturerCanvas();
+
         $('#questionsModal').on('hidden.bs.modal', function(e) {
             resetNewQuestions();
         });
+    }
+
+    //rerenders current page on window resize
+    window.onresize = function() {
+        renderPage(currentPage);
     }
 }
 

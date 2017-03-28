@@ -79,10 +79,7 @@
     <!-- Container for the presentation canvas -->
     <div id="presentation-container" style="z-index: -10;">
         <canvas id="the-canvas"></canvas>
-    </div>
-
-    <div id="canvasesdiv2" style="position:relative;">
-        <canvas id="lecturer_canvas"></canvas>
+        <canvas id="lecturer-canvas"></canvas>
     </div>
 
     <asset:javascript src="Drawing/lecturer_canvas.js"/>
