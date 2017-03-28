@@ -13,6 +13,7 @@ class PaceSpec extends Specification {
 
     List<Feedback> feedbackList
     Pace pace = new Pace()
+    Date date = new Date()
 
     def setup() {
         feedbackList = new ArrayList<>()
@@ -24,7 +25,7 @@ class PaceSpec extends Specification {
     void "test 10 positives"() {
         when:
             for (int i = 0; i < 10; i++){
-                feedbackList.add(new Feedback(new Date(), true))
+                feedbackList.add(new Feedback(date, true))
             }
             double a = pace.calculateCurrentPace(feedbackList, 10)
         then:
@@ -36,7 +37,7 @@ class PaceSpec extends Specification {
     void "test 50 positives"() {
         when:
             for (int i = 0; i < 50; i++){
-                feedbackList.add(new Feedback(new Date(), true))
+                feedbackList.add(new Feedback(date, true))
             }
             double a = pace.calculateCurrentPace(feedbackList, 50)
         then:
@@ -44,20 +45,38 @@ class PaceSpec extends Specification {
             feedbackList.size() == 50
     }
 
-    void "test cancellout 1+ 1-" () {
+    void "test cancellout 1+ 1-"() {
         when:
-            Date date = new Date()
             feedbackList.add(new Feedback(date,true))
             feedbackList.add(new Feedback(date, false))
         then:
             pace.calculateCurrentPace(feedbackList,10) == 50
     }
 
-    /*void "test feedback C"() {
+    void "test null list input"() {
         when:
+            double a = pace.calculateCurrentPace(null,1)
         then:
-        true
-    }*/
+            a == 50.0
+    }
+
+    void "test 0 numStudents"() {
+        when:
+        feedbackList.add(new Feedback(date,true))
+        double a = pace.calculateCurrentPace(feedbackList,0)
+        then:
+        a == 50.0
+
+    }
+
+    void "test negative numStudents"() {
+        when:
+        feedbackList.add(new Feedback(date,true))
+        double a = pace.calculateCurrentPace(feedbackList,-10)
+        then:
+        a == 100.0
+
+    }
 
 
 }
