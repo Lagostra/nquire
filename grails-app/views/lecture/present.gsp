@@ -35,10 +35,16 @@
         <span class="glyphicon glyphicon-refresh large glyphicon-refresh-animate"></span> Loading...
     </div>
 
-    <!-- Container for the ID/number of questions-->
+    <!-- Container for the ID-->
     <div id="info-bar">
         <div id="lecture-id"> ID: <sec:loggedInUserInfo field='currentLecture'/>    </div>
-        <div id="question-badge"><span id="new-question-badge" class="badge progress-bar-danger">0</span></div>
+        <!--<div id="question-badge"><span class="badge progress-bar-danger">0</span></div>-->
+    </div>
+
+    <!-- Container for new questions popup-->
+    <div id="question-popup" class="hidden">
+        <div id="question-number" >0</div>
+        <img style="height:40px;" src="${resource(dir: 'images', file: "message.svg")}" alt="Grails"/>
     </div>
 
     <!-- Container for the question/pagenumber/close lecture -->
@@ -62,8 +68,9 @@
                 Home
             </g:link>
 
-            <button id="display_question_btn" style="float:left;margin-left:10px;" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#questionsModal" type="button">
+            <button id="display_question_btn" style="float:left; margin-left:10px; position: relative;" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#questionsModal" type="button">
                 Questions
+                <span id="question-badge" class="badge progress-bar-danger">0</span>
             </button>
 
             <g:form class="form-inline" controller="lecture" style="float:left;margin-left:10px; margin-bottom: 0px;" action="close_lecture">

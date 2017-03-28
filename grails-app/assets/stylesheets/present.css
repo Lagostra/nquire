@@ -8,10 +8,35 @@ body {
     left: 0;
     top: 50px;
 }
-
 #question-badge {
-    margin-top: 2px;
+    font-size: 1.7rem;
+    position: relative;
+    top: -18px;
+    right: 2px;
+    margin-right: -25px;
+    background-color: red;
+    color: white;
+
 }
+#question-popup {
+    position: fixed;
+    right: calc(50% - 275px);
+    bottom: 0px;
+    height: 40px;
+    width: 40px;
+
+}
+#question-number {
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    font-size: large;
+    font-weight: 800;
+    color: white;
+}
+
 
 #info-bar {
     clear:both;
@@ -19,7 +44,7 @@ body {
     position: fixed;
     left: 0;
     top: 0;
-    width: 175px;
+    width: 140px;
     height: 42px;
     background: white;
     font-size: xx-large;
@@ -90,7 +115,7 @@ body {
     z-index: 10;
     position: fixed;
     left: 50%;
-    bottom: -60px;
+    bottom: -62px;
     width: 450px;
 
 
@@ -102,7 +127,7 @@ body {
     padding-top: 5px;
 }
 #menu-container:hover {
-    transform: translateY(-60px) translateX(-50%);
+    transform: translateY(-62px) translateX(-50%);
 }
 
 #pull-tab {
