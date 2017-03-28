@@ -99,7 +99,7 @@ var addQuestion = function(question) {
     question.new = true;
     questions.push(question);
     if(pageRole == "present") {
-        /*  Timeout solves off by one-error on question count.
+        /*  Timeout solves off-by-one error on question count.
         *   The error is caused by getElementsByClassName returning av live collection
         *    - at the time length is called (with no timeout), the question has not been added to the DOM.
         * */
@@ -116,11 +116,12 @@ var addQuestion = function(question) {
 
 //Notify the lecturer of a new question
 var notifyNewQuestion = function () {
-    var new_question_badge = document.getElementById("new-question-badge");
     // Hvis questions er displayed skal ikke knappen få "new" taggen
-    if (getQuestionsToggled()) {return}
+    if (getQuestionsToggled()) {return 0;}
+    var new_question_badge = document.getElementById("new-question-badge");
 
     new_question_badge.innerHTML = getNewQuestions();
+    return 1;
 };
 
 //Check whether questions are displayed
