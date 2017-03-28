@@ -19,7 +19,6 @@ var socket;
 
 
 function initLecturer() {
-    document.body.onmousemove = mouseMoveHandler;
 
     question_container = document.getElementById("question_container");
     default_question = document.getElementById("default_question");
@@ -166,8 +165,14 @@ var getNewQuestions = function () {
 
 //sets the position of the pace bar (0-100)
 function setPaceValue(value){
+    if (value >= 100){
+        value = 100;
+    }
+    else if(value <= 0) {
+        value = 0;
+    }
     var pointer = document.getElementById("pace-overlay");
-    pointer.style.marginLeft = (value-2).toString() + "%";
+    pointer.style.marginLeft = (value).toString() + "%";
 }
 
 function onKey(e) {
@@ -184,14 +189,4 @@ function onKey(e) {
             forwardPage();
             break;
     }
-}
-
-function mouseMoveHandler(){
-    document.getElementById("menu-container").style.transform = "translateY(0%) translateX(-50%)";
-
-    clearTimeout(timeout);
-    timeout = setTimeout(function(){
-        document.getElementById("menu-container").style.transform = "translateY(60px) translateX(-50%)";
-    },2500)
-
 }
