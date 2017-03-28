@@ -58,6 +58,12 @@ function initStudent() {
         }
     }
 
+    //rerenders current page on window resize
+    window.onresize = function() {
+        renderPage(currentPage);
+    }
+
+    initStudentCanvas();
 }
 
 function updateCanvas(page, canvasArray){

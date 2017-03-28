@@ -78,9 +78,7 @@
     <div style="position: fixed;"><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>
     <div id="presentation-container">
         <canvas id="the-canvas"></canvas>
-    </div>
-    <div id="canvasesdiv" style="position:relative;">
-    <canvas id="student_canvas"></canvas>
+        <canvas id="student-canvas"></canvas>
     </div>
 
     <div id="buttons-container">
