@@ -11,11 +11,11 @@ import spock.lang.*
 @TestMixin(GrailsUnitTestMixin)
 class PaceSpec extends Specification {
 
-    List<Feedback> feedbackList;
-    Pace pace = new Pace();
+    List<Feedback> feedbackList
+    Pace pace = new Pace()
 
     def setup() {
-        feedbackList = new ArrayList<>();
+        feedbackList = new ArrayList<>()
     }
 
     def cleanup() {
@@ -24,9 +24,9 @@ class PaceSpec extends Specification {
     void "test 10 positives"() {
         when:
             for (int i = 0; i < 10; i++){
-                feedbackList.add(new Feedback(new Date(), true));
+                feedbackList.add(new Feedback(new Date(), true))
             }
-            double a = pace.calculateCurrentPace(feedbackList, 10);
+            double a = pace.calculateCurrentPace(feedbackList, 10)
         then:
             a > 50
             a <= 100
@@ -42,6 +42,15 @@ class PaceSpec extends Specification {
         then:
             a == 100
             feedbackList.size() == 50
+    }
+
+    void "test cancellout 1+ 1-" () {
+        when:
+            Date date = new Date()
+            feedbackList.add(new Feedback(date,true))
+            feedbackList.add(new Feedback(date, false))
+        then:
+            pace.calculateCurrentPace(feedbackList,10) == 50
     }
 
     /*void "test feedback C"() {
