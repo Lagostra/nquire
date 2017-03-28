@@ -7,6 +7,8 @@ class Presentation {
     String title;
     String fileName;
 
+    def grailsApplication
+
     static belongsTo = [owner: User]
 
     static mapping = {
@@ -20,7 +22,7 @@ class Presentation {
 
     def beforeDelete() {
         // Delete the file that this object references
-        File file = new File(grailsApplication.config.getProperty('presentationRoot') + filename + ".pdf");
+        File file = new File(grailsApplication.config.getProperty('presentationRoot') + fileName + ".pdf");
         file.delete();
     }
 
