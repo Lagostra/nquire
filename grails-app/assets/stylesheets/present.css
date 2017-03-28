@@ -50,8 +50,7 @@ body {
     height: 23px;
     margin-top: 0px;
     margin-bottom: 2px;
-    margin-right: 5px;
-    margin-left: 5px;
+    margin-left: -2px;
 
     position: absolute;
     left: 50%;
@@ -64,17 +63,17 @@ body {
     background: black;
     margin-left: 50%;
 
-    -moz-transition: all 3s ease-out;  /* FF4+ */
-    -o-transition: all 3s ease-out;  /* Opera 10.5+ */
-    -webkit-transition: all 3s ease-out;  /* Saf3.2+, Chrome */
-    -ms-transition: all 3s ease-out;  /* IE10 */
-    transition: all 3s ease-out;
+    -moz-transition: all 1s ease-out;  /* FF4+ */
+    -o-transition: all 1s ease-out;  /* Opera 10.5+ */
+    -webkit-transition: all 1s ease-out;  /* Saf3.2+, Chrome */
+    -ms-transition: all 1s ease-out;  /* IE10 */
+    transition: all 1s ease-out;
 }
 #buttons-container {
     width: 100%;
     height: 46px;
     margin-top: 5px;
-    padding-left: 40px;
+    padding-left: 36px;
 }
 #pace-container {
     height: 28px;
@@ -91,18 +90,32 @@ body {
     z-index: 10;
     position: fixed;
     left: 50%;
+    bottom: -60px;
     width: 450px;
 
 
     transform: translateX(-50%);
     background-color: RGBA(0,0,0,0.5);
-    bottom: 0px;
     padding:10px;
     border-radius: 25px 25px 0px 0px;
     padding-bottom: 10px;
     padding-top: 5px;
 }
+#menu-container:hover {
+    transform: translateY(-60px) translateX(-50%);
+}
 
+#pull-tab {
+    border-radius: 6px 6px 0px 0px;
+    z-index: 10;
+    background-color: RGBA(0,0,0,0.5);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 10px;
+    width: 30px;
+    margin-top: -15px;
+}
 #loading-container {
     position: fixed;
     top: calc(50% - 22.5px);

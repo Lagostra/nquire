@@ -44,12 +44,16 @@
     <!-- Container for the question/pagenumber/close lecture -->
     <div id="menu-container" class="slide-in">
 
+        <div id="pull-tab">
+            <span style="color: white; margin-left: 7.5px;" class="glyphicon glyphicon-option-horizontal"></span>
+        </div>
+
         <div id="pace-container">
-            <img style="height:28px; position:absolute; top:5px; left:15px;" src="${resource(dir: 'images', file: "snail.svg")}" alt="Grails"/>
+            <img style="height:28px; position:absolute; top:5px; left:10px;" src="${resource(dir: 'images', file: "snail.svg")}" alt="Grails"/>
             <div id="pace-background">
                 <div id="pace-overlay"></div>
             </div>
-            <img style="height:22px; position:absolute; top: 5px; right: 15px;" src="${resource(dir: 'images', file: "rabbit.svg")}" alt="Grails"/>
+            <img style="height:22px; position:absolute; top: 5px; right: 17px;" src="${resource(dir: 'images', file: "rabbit.svg")}" alt="Grails"/>
         </div>
 
         <div id="buttons-container">
