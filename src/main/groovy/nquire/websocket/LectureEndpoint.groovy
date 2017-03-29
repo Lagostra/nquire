@@ -66,6 +66,7 @@ class LectureEndpoint implements WebSocketHandler {
                                                     message: 'No lecture with the provided ID exists!'])
                     session.sendMessage(new TextMessage(errorMessage))
                     session.close()
+                    unassignedUsers.remove(session)
                     return
                 }
 
@@ -82,8 +83,8 @@ class LectureEndpoint implements WebSocketHandler {
                         session.close()
                     } else {
                         lecturesByUser.put(session, lectures.get(mObject.lectureId))
-                        unassignedUsers.remove(session)
                     }
+                    unassignedUsers.remove(session)
                 }
             }
 
@@ -126,7 +127,7 @@ class LectureEndpoint implements WebSocketHandler {
     }
 
     static void closeLecture(int id) {
-        LectureHandler lecture = lectures.get(id)
+        LectureHandler lecture = getLecture(id)
         closeLecture(lecture)
     }
 
@@ -138,7 +139,7 @@ class LectureEndpoint implements WebSocketHandler {
         lecture.close()
     }
 
-    private static void closeInactiveLectures() {
+    static void closeInactiveLectures() {
         for(LectureHandler lecture : lectures.values()) {
             if(lecture.shouldClose())
                 closeLecture(lecture)
@@ -147,6 +148,16 @@ class LectureEndpoint implements WebSocketHandler {
 
     static boolean isAlive(int id) {
         return lectures.containsKey(id)
+    }
+
+    static List<WebSocketSession> getUnassignedUsers() {
+        return new ArrayList<>(unassignedUsers.asList())
+    }
+
+    static void clearAll() {
+        lectures = new HashMap<>()
+        lecturesByUser = new HashMap<>()
+        unassignedUsers = new ArrayList<>()
     }
 
     @PreDestroy
