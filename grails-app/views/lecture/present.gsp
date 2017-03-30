@@ -70,7 +70,7 @@
 
             <button id="display_question_btn" style="float:left; margin-left:10px; position: relative;" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#questionsModal" type="button">
                 Questions
-                <span id="question-badge" class="badge progress-bar-danger">0</span>
+                <span id="question-badge" class="badge progress-bar-danger hidden">0</span>
             </button>
 
             <g:form class="form-inline" controller="lecture" style="float:left;margin-left:10px; margin-bottom: 0px;" action="close_lecture">

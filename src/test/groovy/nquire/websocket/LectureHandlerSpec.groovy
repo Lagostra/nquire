@@ -92,6 +92,16 @@ class LectureHandlerSpec extends Specification {
         lectureHandler.getId() == 1
     }
 
+    def "test LectureHandler.addQuestion"() {
+        when:
+        String question = "I have a question"
+        lectureHandler.addQuestion(question)
+
+        then:
+        lectureHandler.questions.size() == 1
+        lectureHandler.questions.get(1).question == question
+    }
+
     def "test LectureHandler.getSimilarQuestion()"() {
         when:
         JSONObject mObject = new JSONObject()
@@ -166,7 +176,7 @@ class LectureHandlerSpec extends Specification {
         then:
         session.lastMessage.getPayload() == JsonOutput.toJson([
                 type: "question",
-                question: question,
+                question: new Question(question, 2)
         ])
     }
 
@@ -218,7 +228,7 @@ class LectureHandlerSpec extends Specification {
         then:
         session.lastMessage.getPayload() == JsonOutput.toJson([
                 type: "allQuestions",
-                questions: [question]
+                questions: [new Question(question, 1)]
             ])
     }
 
@@ -244,7 +254,7 @@ class LectureHandlerSpec extends Specification {
         then:
         session.lastMessage.getPayload() == JsonOutput.toJson([
                 type: "question",
-                question: question
+                question: new Question(question, 1)
         ])
     }
 

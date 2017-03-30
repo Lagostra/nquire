@@ -4,7 +4,7 @@
  */
 
 //Variables
-var questions = [];
+var questions = new Array();
 var question_container;
 var default_question;
 var display_question_btn;
@@ -65,11 +65,17 @@ function initLecturer() {
             case "question": // One new question
                 addQuestion(msg.question);
                 break;
+            case "setQuestionsRead":
+                for(var i = 0; i < msg.questions.length; i++) {
+                    setQuestionRead(msg.questions[i]);
+                }
+                break;
             case "pace":
                 setPaceValue(msg.value);
                 break;
             case "updateStudentCanvas": //Student has made a change on their drawing canvas
                 updateStudentCanvas(msg.studentId, msg.page, msg.array);
+                break;
         }
     };
 
@@ -102,8 +108,7 @@ function initLecturer() {
 //Call this function when new questions are received, adds question and HTML
 var addQuestion = function(question) {
     removeDefaultQuestion();
-    question.new = true;
-    questions.push(question);
+    questions[question.id] = question;
     if(pageRole == "present") {
         /*  Timeout solves off by one-error on question count.
         *   The error is caused by getElementsByClassName returning av live collection
@@ -112,13 +117,19 @@ var addQuestion = function(question) {
         setTimeout(notifyNewQuestion, 100);
     }
     default_question.classList.add(class_hidden);
-    question_container.innerHTML +=
-        '<div ' +
-            'class="question ' +
-            class_new_question + ' ">' +
-            question +
-        ' </div>';
+    var question_object = document.createElement("div");
+    question_object.id = "question-" + question.id;
+    question_object.classList.add("question");
+    if(!question.read)
+        question_object.classList.add(class_new_question);
+    question_object.textContent = question.question;
+    question_container.appendChild(question_object);
 };
+
+var setQuestionRead = function(id) {
+    questions[id].read = true;
+    document.getElementById("question-" + id).classList.remove(class_new_question);
+}
 
 //Notify the lecturer of a new question
 var notifyNewQuestion = function () {
@@ -128,8 +139,10 @@ var notifyNewQuestion = function () {
     // Hvis questions er displayed skal ikke knappen få "new" taggen
     if (getQuestionsToggled()) {return}
 
-    document.getElementById("question-popup").classList.remove("hidden");
-    document.getElementById("question-badge").classList.remove("hidden");
+    if(getNewQuestions() > 0) {
+        document.getElementById("question-popup").classList.remove("hidden");
+        document.getElementById("question-badge").classList.remove("hidden");
+    }
     new_question_badge.innerHTML = getNewQuestions();
     new_question_badge_2.innerHTML = getNewQuestions();
 };
@@ -141,21 +154,28 @@ var getQuestionsToggled = function() {
 
 //Remove the new_question class from all question elements
 var resetNewQuestions = function () {
-    var new_questions = document.getElementsByClassName("question");
+    var new_questions = document.getElementsByClassName(class_new_question);
     var new_question_badge = document.getElementById("question-number");
     var new_question_badge_2 = document.getElementById("question-badge");
 
+    var readIds = new Array();
+
     for (var i = 0; i < new_questions.length; i++){
+        readIds.push(parseInt(new_questions[i].id.split("-")[1]));
         new_questions[i].classList.remove(class_new_question);
     }
 
-    new_question_badge.innerHTML = getNewQuestions();
-    new_question_badge_2.innerHTML = getNewQuestions();
+    new_question_badge.innerHTML = 0;
+    new_question_badge_2.innerHTML = 0;
 
-    if (getNewQuestions() == 0){
-        document.getElementById("question-popup").classList.add("hidden");
-        document.getElementById("question-badge").classList.add("hidden");
-    }
+    document.getElementById("question-popup").classList.add("hidden");
+    document.getElementById("question-badge").classList.add("hidden");
+
+    var msg = JSON.stringify({
+        type: "setQuestionsRead",
+        questions: readIds
+    });
+    socket.send(msg)
 };
 
 //Reset the questions array,
