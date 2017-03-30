@@ -7,7 +7,9 @@ import spock.lang.Unroll;
 import org.grails.plugins.testing.GrailsMockMultipartFile;
 
 import nquire.User;
-import nquire.Presentation;
+import nquire.Presentation
+
+import java.nio.file.Files;
 
 /**
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
@@ -68,6 +70,34 @@ class FileControllerSpec extends Specification {
         user.presentations.size() == 1;
         file.targetFileLocation.path != "";
     }
+
+    @Unroll
+    def "test FileController.delete() does not accept #method requests"(String method) {
+        when:
+        request.method = method
+        controller.delete()
+
+        then:
+        response.status == 405
+
+        where:
+        method << ['GET', 'DELETE', 'PUT']
+    }
+
+    def "test FileController.delete() when user does not own file"() {
+        given:
+        def presentation = GroovySpy(Presentation)
+
+        when:
+        request.method = "post"
+        controller.params.id = 1
+        controller.delete()
+
+        then:
+        0 * presentation.beforeDelete()
+        response.redirectedUrl == "/file/index"
+    }
+
 
     def "test FileController.get() returns 404 for non-existing presentation"() {
         when:
