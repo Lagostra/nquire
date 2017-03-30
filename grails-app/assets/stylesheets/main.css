@@ -99,7 +99,14 @@
         top: 5px;
     }
 
-    .presentation-box:hover .btn-create-lecture {
+    .btn-delete-lecture {
+        display: none;
+        position: absolute;
+        right: 20px;
+        top: 5px;
+    }
+
+    .presentation-box:hover .btn-create-lecture, .presentation-box:hover .btn-delete-lecture {
         display: block;
     }
 

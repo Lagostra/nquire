@@ -3,6 +3,8 @@ package nquire
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
+import java.nio.file.Files
+
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
@@ -20,15 +22,13 @@ class PresentationSpec extends Specification {
 
     def "test Presentation.beforeDelete()"() {
         given:
-        def mockFile = Mock(File)
-        GroovySpy(File, global: true, useObjenesis: true)
+        GroovySpy(Files, global: true, useObjenesis: true)
 
         when:
         pres.fileName = "file"
         pres.beforeDelete()
 
         then:
-        1 * new File("nullfile.pdf") >> { mockFile }
-        1 * mockFile.delete()
+        1 * Files.delete(_)
     }
 }
