@@ -22,7 +22,7 @@
         <div class="col-md-3 presentation-box">
             <div class="panel panel-default panel-body center-text">
                 <g:link controller="lecture" action="create" id="${it.id}" class="btn btn-primary btn-create-lecture">Use in lecture</g:link>
-                <g:form name="delete-form" controller="file" action="delete" class="btn-delete-lecture">
+                <g:form name="delete-form" controller="file" action="delete" class="btn-delete-lecture" onsubmit="return confirm('Are you sure you want to delete the presentation file?');">
                     <g:hiddenField name="id" value="${it.id}"></g:hiddenField>
                     <g:submitButton name="submit" class="btn btn-danger" value="Delete"/>
                 </g:form>

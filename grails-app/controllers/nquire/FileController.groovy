@@ -120,6 +120,8 @@ class FileController {
         // Render scaled thumbnail
         image = renderer.renderImage(0, scale);
 
+        pdDocument.close()
+
         return image;
     }
 

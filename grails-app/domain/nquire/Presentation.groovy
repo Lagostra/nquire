@@ -31,10 +31,10 @@ class Presentation {
             Path file = Paths.get(grailsApplication.config.getProperty('presentationRoot') + fileName + ".pdf")
             Files.delete(file)
             // Delete thumbnail
-            file = Path file = Paths.get(grailsApplication.config.getProperty('presentationRoot') + "thumbnails/" + fileName + ".pdf")
+            file = Paths.get(grailsApplication.config.getProperty('presentationRoot') + "thumbnails/" + fileName + ".jpg")
             Files.delete(file)
         } catch(FileSystemException e) {
-            log.error(e.message)
+            log.error(e.toString())
             return false
         }
     }
