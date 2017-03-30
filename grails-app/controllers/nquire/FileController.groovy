@@ -56,7 +56,7 @@ class FileController {
     def delete() {
         Presentation pres = Presentation.findById(params.id);
 
-        if(pres != null) {
+        if(pres != null && pres.owner == authenticatedUser) {
             pres.delete(flush: true)
         }
 
