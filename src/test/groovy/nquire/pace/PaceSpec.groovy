@@ -6,7 +6,7 @@ import spock.lang.*
 
 /**
  * See the API for {@link grails.test.mixin.support.GrailsUnitTestMixin} for usage instructions
- *
+ *  3 timer
  */
 @TestMixin(GrailsUnitTestMixin)
 class PaceSpec extends Specification {
@@ -74,11 +74,19 @@ class PaceSpec extends Specification {
     void "test negative numStudents"() {
         when:
         feedbackList.add(new Feedback(date,true))
-        double a = pace.calculateCurrentPace(feedbackList,-10)
-        double b = 100
-        then:
-        a == b
 
+        boolean flag = false
+
+        try{
+            pace.calculateCurrentPace(feedbackList,-10)
+        }
+        catch(IllegalArgumentException e){
+            System.out.print(e)
+            flag = true
+        }
+
+        then:
+        flag
     }
 
 
