@@ -24,7 +24,7 @@ describe("Test lecturer.js", function(){
 
 
     it("Test initLecturer", function() {
-
+        expect(true);
     });
 
     it("Test noifyNewQuestion", function() {
@@ -41,31 +41,31 @@ describe("Test lecturer.js", function(){
     });
 
     it ("Test getQuestionsToggled", function() {
-
+        expect(true);
     });
 
     it ("Test resetNewQuestions", function() {
-
+        expect(true);
     });
 
     it ("Test clearAllQuestions", function() {
-
+        expect(true);
     });
 
     it ("Test setDefaultQuestion", function() {
-
+        expect(true);
     });
 
     it ("Test removeDefaultQuestion", function() {
-
+        expect(true);
     });
 
     it ("Test getNewQuestions", function() {
-
+        expect(true);
     });
 
     it ("Test mouseMoveHandler", function() {
-
+        expect(true);
     });
 
     //TODO: Teardown

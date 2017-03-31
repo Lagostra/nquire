@@ -56,16 +56,18 @@ class PaceSpec extends Specification {
     void "test null list input"() {
         when:
             double a = pace.calculateCurrentPace(null,1)
+            double b = 50
         then:
-            a == 50.0
+            a == b
     }
 
     void "test 0 numStudents"() {
         when:
         feedbackList.add(new Feedback(date,true))
         double a = pace.calculateCurrentPace(feedbackList,0)
+        double b = 50
         then:
-        a == 50.0
+        a == b
 
     }
 
@@ -73,8 +75,9 @@ class PaceSpec extends Specification {
         when:
         feedbackList.add(new Feedback(date,true))
         double a = pace.calculateCurrentPace(feedbackList,-10)
+        double b = 100
         then:
-        a == 100.0
+        a == b
 
     }
 
