@@ -65,7 +65,7 @@ class PaceSpec extends Specification {
         when:
         feedbackList.add(new Feedback(date,true))
         double a = pace.calculateCurrentPace(feedbackList,0)
-        double b = 50
+        double b = 100.0
         then:
         a == b
 
