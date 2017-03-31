@@ -9,6 +9,7 @@ import java.util.Date;
 /**
  * Created by lars on 13.03.2017.
  * tid brukt så langt: 6.5 timer
+ *  TODO: En uhåndtert case er når studenter forlater forelsnig. Dette må håndteres
  */
 public class Pace implements PaceInterface {
 
