@@ -122,7 +122,7 @@ var addQuestion = function(question) {
     question_object.classList.add("question");
     if(!question.read)
         question_object.classList.add(class_new_question);
-    question_object.textContent = question.question;
+    question_object.innerHTML = question.question;
     question_container.appendChild(question_object);
 };
 
