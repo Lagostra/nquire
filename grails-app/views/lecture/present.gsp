@@ -64,7 +64,7 @@
 
         <div id="buttons-container">
 
-            <g:link view="lecturerFrontPage" class="btn btn-primary btn-lg" style="float:left;margin-left:0px;">
+            <g:link url="/lecturer" class="btn btn-primary btn-lg" style="float:left;margin-left:0px;">
                 Home
             </g:link>
 
