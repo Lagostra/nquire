@@ -1,14 +1,15 @@
 /**
  * Created by lars on 28.03.2017.
- * Time spent 2h - Lars
+ * Time spent 2.5h - Lars
  *
  */
 describe("Test lecturer.js", function(){
     beforeEach(function() {
+
         //INIT
-        var question_container = document.body.createElement("div");
+        var question_container = document.createElement("div");
         question_container.id = "question_container";
-        var default_question = document.body.createElement("div");
+        var default_question = document.createElement("div");
         default_question.id = "default_question";
         var display_question_btn = document.createElement("div");
         display_question_btn.id = "default_question";
@@ -49,7 +50,6 @@ describe("Test lecturer.js", function(){
         addQuestion("What is love?");
         expect(getNewQuestions()).toBe(true);
         expect(notifyNewQuestion()).toBe(1);
-
     });
 
     it ("Test getQuestionsToggled", function() {
