@@ -15,7 +15,7 @@ import nquire.User;
 @Secured('ROLE_LECTURER')
 class FileController {
 
-    static allowedMethods = [index: 'GET', upload: 'GET', save: 'POST', get: 'GET'];
+    static allowedMethods = [index: 'GET', upload: 'GET', save: 'POST', delete: 'POST', get: 'GET'];
 
     private final thumbnailHeight = 120
 
@@ -39,7 +39,6 @@ class FileController {
 
         String filename = UUID.randomUUID().toString();
 
-        //f.transferTo(new File("D:\\Eivind\\workspaces\\Java2\\presentations\\test.pdf"));
         File pdfDocument = new File(grailsApplication.config.getProperty('presentationRoot') + filename + ".pdf");
         f.transferTo(pdfDocument);
         BufferedImage thumbnail = createThumbnail(pdfDocument);
@@ -52,6 +51,16 @@ class FileController {
         Presentation pres = new Presentation(title: title, fileName: filename, owner: user).save(flush: true);
 
         redirect(action: 'index');
+    }
+
+    def delete() {
+        Presentation pres = Presentation.findById(params.id);
+
+        if(pres != null && pres.owner == authenticatedUser) {
+            pres.delete(flush: true)
+        }
+
+        redirect(action: "index")
     }
 
     def get() {
@@ -110,6 +119,8 @@ class FileController {
 
         // Render scaled thumbnail
         image = renderer.renderImage(0, scale);
+
+        pdDocument.close()
 
         return image;
     }

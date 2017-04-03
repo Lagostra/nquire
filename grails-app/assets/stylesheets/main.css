@@ -99,11 +99,25 @@
         top: 5px;
     }
 
-    .presentation-box:hover .btn-create-lecture {
+    .btn-delete-lecture {
+        display: none;
+        position: absolute;
+        right: 20px;
+        top: 5px;
+    }
+
+    .presentation-box:hover .btn-create-lecture, .presentation-box:hover .btn-delete-lecture {
         display: block;
     }
 
 #file-modal .modal-body .row {
     max-height: 500px;
     overflow: auto;
+}
+
+#lecturer-canvas, #student-canvas {
+    position: absolute;
+    top: 0;
+    margin: auto;
+    display: block;
 }

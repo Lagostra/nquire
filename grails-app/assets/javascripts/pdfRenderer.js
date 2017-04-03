@@ -17,6 +17,7 @@ var pageRendering = false;
 var pdf = false;
 var pageNumPending = null;
 var currentPage = 1;
+var renderPageListeners = new Array();
 
 // Disable workers to avoid yet another cross-origin issue (workers need
 // the URL of the script to be loaded, and dynamically loading a cross-origin
@@ -32,17 +33,12 @@ function initPdfReader(){
 
 }
 
-
-//rerenders current page on window resize
-window.onresize = function(){
-    renderPage(currentPage);
-}
-
 //http://stackoverflow.com/questions/12092633/pdf-js-rendering-a-pdf-file-using-a-base64-file-source-instead-of-url
 function setPresentation(string){
     pdf = atob(string);
     loadPDF();
 }
+
 function loadPDF(){
     if (pdf != null){
         // loading the document
@@ -55,7 +51,7 @@ function loadPDF(){
             // Hides the loading spinner
             document.getElementById("loading-container").style.display = "none";
 
-            //first render
+            //first renderBoxes
             this.renderPage(1);
 
         }, function (reason) {
@@ -79,7 +75,7 @@ function renderPage(pageNumber) {
         canvas.height = viewport.height;
         canvas.width = viewport.width;
 
-        //cancels the running render if there is one
+        //cancels the running renderBoxes if there is one
         if (renderTask) {
             renderTask.cancel();
         }
@@ -99,6 +95,12 @@ function renderPage(pageNumber) {
                 document.getElementById('page_num').textContent = pageNumber;
             }
             pageRendering = false;
+
+            // Call renderBoxes page listeners
+            for(var i = 0; i < renderPageListeners.length; i++) {
+                renderPageListeners[i]();
+            }
+
             if (pageNumPending !== null) {
                 // New page rendering is pending
                 renderPage(pageNumPending);
@@ -107,6 +109,10 @@ function renderPage(pageNumber) {
         });
 
     });
+}
+
+function addRenderPageListener(listener) {
+    renderPageListeners.push(listener);
 }
 
 // returns a new viewport with a scale that fits the page

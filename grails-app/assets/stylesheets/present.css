@@ -8,10 +8,41 @@ body {
     left: 0;
     top: 50px;
 }
-
 #question-badge {
-    margin-top: 2px;
+    font-size: 1.7rem;
+    position: relative;
+    top: -18px;
+    right: 2px;
+    margin-right: -25px;
+    background-color: red;
+    color: white;
+
 }
+#question-popup {
+    position: fixed;
+    right: calc(50% - 275px);
+    bottom: 0px;
+    height: 40px;
+    width: 40px;
+
+    -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 1s; /* Firefox < 16 */
+    -ms-animation: fadein 1s; /* Internet Explorer */
+    -o-animation: fadein 1s; /* Opera < 12.1 */
+    animation: fadein 1s;
+
+}
+#question-number {
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    font-size: large;
+    font-weight: 800;
+    color: white;
+}
+
 
 #info-bar {
     clear:both;
@@ -19,7 +50,7 @@ body {
     position: fixed;
     left: 0;
     top: 0;
-    width: 175px;
+    width: 140px;
     height: 42px;
     background: white;
     font-size: xx-large;
@@ -50,8 +81,7 @@ body {
     height: 23px;
     margin-top: 0px;
     margin-bottom: 2px;
-    margin-right: 5px;
-    margin-left: 5px;
+    margin-left: -2px;
 
     position: absolute;
     left: 50%;
@@ -64,17 +94,17 @@ body {
     background: black;
     margin-left: 50%;
 
-    -moz-transition: all 3s ease-out;  /* FF4+ */
-    -o-transition: all 3s ease-out;  /* Opera 10.5+ */
-    -webkit-transition: all 3s ease-out;  /* Saf3.2+, Chrome */
-    -ms-transition: all 3s ease-out;  /* IE10 */
-    transition: all 3s ease-out;
+    -moz-transition: all 1s ease-out;  /* FF4+ */
+    -o-transition: all 1s ease-out;  /* Opera 10.5+ */
+    -webkit-transition: all 1s ease-out;  /* Saf3.2+, Chrome */
+    -ms-transition: all 1s ease-out;  /* IE10 */
+    transition: all 1s ease-out;
 }
 #buttons-container {
     width: 100%;
     height: 46px;
     margin-top: 5px;
-    padding-left: 40px;
+    padding-left: 33px;
 }
 #pace-container {
     height: 28px;
@@ -91,18 +121,32 @@ body {
     z-index: 10;
     position: fixed;
     left: 50%;
+    bottom: -62px;
     width: 450px;
 
 
     transform: translateX(-50%);
     background-color: RGBA(0,0,0,0.5);
-    bottom: 0px;
     padding:10px;
     border-radius: 25px 25px 0px 0px;
     padding-bottom: 10px;
     padding-top: 5px;
 }
+#menu-container:hover {
+    transform: translateY(-62px) translateX(-50%);
+}
 
+#pull-tab {
+    border-radius: 6px 6px 0px 0px;
+    z-index: 10;
+    background-color: RGBA(0,0,0,0.5);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 10px;
+    width: 30px;
+    margin-top: -15px;
+}
 #loading-container {
     position: fixed;
     top: calc(50% - 22.5px);
@@ -124,3 +168,31 @@ body {
     to { transform: scale(1) rotate(360deg);}
 }
 
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
