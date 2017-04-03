@@ -18,18 +18,32 @@ var socket;
 
 //Initionalizes the script so it has valid members, starts web sockets
 function initLecturer() {
-
+    /*ELEMENTS*/
     question_container = document.getElementById("question_container");
     default_question = document.getElementById("default_question");
     display_question_btn = document.getElementById("display_question_btn");
+    
+    /*SOCKETS*/
+    initSockets();
 
     /* EVENTS */
+    //sets events apropriately if in present mode
     if(pageRole == "present") {
-        display_question_btn.onclick = function () {
-            question_container.scrollTop = question_container.scrollHeight;
-        };
+        window.onkeydown = onKey;
+        initLecturerCanvas();
+        $('#questionsModal').on('hidden.bs.modal', function(e) {
+            resetNewQuestions();
+        });
     }
 
+    //rerenders current page on window resize
+    window.onresize = function() {
+        renderPage(currentPage);
+    }
+}
+
+//Sets up web socets, called as part of the init routine
+function initSockets() {
     /* SOCkETS */
     socket = new WebSocket(url);
     console.log("Connecting...");
@@ -78,29 +92,11 @@ function initLecturer() {
         }
     };
 
-    socket.onerror = function(e) {
-
-    };
+    socket.onerror = function(e) {};
 
     socket.onclose = function(e) {
         console.log("Connection closed.");
     };
-
-
-    if(pageRole == "present") {
-        window.onkeydown = onKey;
-
-        initLecturerCanvas();
-
-        $('#questionsModal').on('hidden.bs.modal', function(e) {
-            resetNewQuestions();
-        });
-    }
-
-    //rerenders current page on window resize
-    window.onresize = function() {
-        renderPage(currentPage);
-    }
 }
 
 //Call this function when new questions are received, adds question and HTML
