@@ -12,26 +12,38 @@ var pageRole;
 var timeout;
 
 var class_hidden = "hidden";
-var class_new_btn = "new_btn";
 var class_new_question = "new_question";
 
 var socket;
 
-
+//Initionalizes the script so it has valid members, starts web sockets
 function initLecturer() {
-
+    /*ELEMENTS*/
     question_container = document.getElementById("question_container");
     default_question = document.getElementById("default_question");
     display_question_btn = document.getElementById("display_question_btn");
 
+    /*SOCKETS*/
+    initSockets();
+
     /* EVENTS */
+    //sets events apropriately if in present mode
     if(pageRole == "present") {
-        display_question_btn.onclick = function () {
-            question_container.scrollTop = question_container.scrollHeight;
-        };
+        window.onkeydown = onKey;
+        initLecturerCanvas();
+        $('#questionsModal').on('hidden.bs.modal', function(e) {
+            resetNewQuestions();
+        });
     }
 
-    /* SOCkETS */
+    //rerenders current page on window resize
+    window.onresize = function() {
+        renderPage(currentPage);
+    }
+}
+
+//Sets up web socets, called as part of the init routine
+function initSockets() {
     socket = new WebSocket(url);
     console.log("Connecting...");
 
@@ -79,34 +91,15 @@ function initLecturer() {
         }
     };
 
-    socket.onerror = function(e) {
-
-    };
+    socket.onerror = function(e) {};
 
     socket.onclose = function(e) {
         console.log("Connection closed.");
     };
-
-
-    if(pageRole == "present") {
-        window.onkeydown = onKey;
-
-        initLecturerCanvas();
-
-        $('#questionsModal').on('hidden.bs.modal', function(e) {
-            resetNewQuestions();
-        });
-    }
-
-    //rerenders current page on window resize
-    window.onresize = function() {
-        renderPage(currentPage);
-    }
 }
 
-
 //Call this function when new questions are received, adds question and HTML
-var addQuestion = function(question) {
+function addQuestion(question) {
     removeDefaultQuestion();
     questions[question.id] = question;
     if(pageRole == "present") {
@@ -116,7 +109,6 @@ var addQuestion = function(question) {
         * */
         setTimeout(notifyNewQuestion, 100);
     }
-    default_question.classList.add(class_hidden);
     var question_object = document.createElement("div");
     question_object.id = "question-" + question.id;
     question_object.classList.add("question");
@@ -126,13 +118,14 @@ var addQuestion = function(question) {
     question_container.appendChild(question_object);
 };
 
-var setQuestionRead = function(id) {
+//Sets a question to read, so it is not considdered new
+function setQuestionRead(id){
     questions[id].read = true;
     document.getElementById("question-" + id).classList.remove(class_new_question);
 }
 
 //Notify the lecturer of a new question
-var notifyNewQuestion = function () {
+function notifyNewQuestion() {
     // Hvis questions er displayed skal ikke knappen få "new" taggen
     if (getQuestionsToggled()) {return 0;}
     var new_question_badge = document.getElementById("question-number");
@@ -148,12 +141,12 @@ var notifyNewQuestion = function () {
 };
 
 //Check whether questions are displayed
-var getQuestionsToggled = function() {
+function getQuestionsToggled() {
     return question_container.classList.contains(class_hidden);
 };
 
 //Remove the new_question class from all question elements
-var resetNewQuestions = function () {
+function resetNewQuestion(){
     var new_questions = document.getElementsByClassName(class_new_question);
     var new_question_badge = document.getElementById("question-number");
     var new_question_badge_2 = document.getElementById("question-badge");
@@ -178,31 +171,31 @@ var resetNewQuestions = function () {
     socket.send(msg)
 };
 
-//Reset the questions array,
-var clearAllQuestions = function () {
+//Reset the questions array
+function clearAllQuestions() {
     questions = [];
     setDefaultQuestion();
 };
 
 //Adds the default question "no questions yet"
-var setDefaultQuestion = function () {
+function setDefaultQuestion() {
     question_container.innerHTML =
         '<div id="default_question" class="question">' +
             'No questions yet' +
         '</div>';
 };
 
-var removeDefaultQuestion = function() {
+//Hard removal of default question, part of add question routine
+function removeDefaultQuestion(){
     var default_question = document.getElementById("default_question");
     if(default_question)
         default_question.parentElement.removeChild(default_question);
 };
 
 //Get the amount of new questions
-var getNewQuestions = function () {
+function getNewQuestion(){
     return document.getElementsByClassName(class_new_question).length;
 };
-
 
 //sets the position of the pace bar (0-100)
 function setPaceValue(value){
@@ -216,6 +209,7 @@ function setPaceValue(value){
     pointer.style.marginLeft = (value).toString() + "%";
 }
 
+//On key spesification
 function onKey(e) {
     var key = e.keyCode ? e.keyCode : e.which;
     switch(key) {
