@@ -106,7 +106,7 @@ function initLecturer() {
 
 
 //Call this function when new questions are received, adds question and HTML
-var addQuestion = function(question) {
+function addQuestion(question) {
     removeDefaultQuestion();
     questions[question.id] = question;
     if(pageRole == "present") {
@@ -132,7 +132,7 @@ var setQuestionRead = function(id) {
 }
 
 //Notify the lecturer of a new question
-var notifyNewQuestion = function () {
+function notifyNewQuestion() {
     // Hvis questions er displayed skal ikke knappen få "new" taggen
     if (getQuestionsToggled()) {return 0;}
     var new_question_badge = document.getElementById("question-number");
@@ -148,12 +148,12 @@ var notifyNewQuestion = function () {
 };
 
 //Check whether questions are displayed
-var getQuestionsToggled = function() {
+function getQuestionsToggled() {
     return question_container.classList.contains(class_hidden);
 };
 
 //Remove the new_question class from all question elements
-var resetNewQuestions = function () {
+function resetNewQuestion(){
     var new_questions = document.getElementsByClassName(class_new_question);
     var new_question_badge = document.getElementById("question-number");
     var new_question_badge_2 = document.getElementById("question-badge");
@@ -178,28 +178,28 @@ var resetNewQuestions = function () {
     socket.send(msg)
 };
 
-//Reset the questions array,
-var clearAllQuestions = function () {
+//Reset the questions array
+function clearAllQuestions() {
     questions = [];
     setDefaultQuestion();
 };
 
 //Adds the default question "no questions yet"
-var setDefaultQuestion = function () {
+function setDefaultQuestion() {
     question_container.innerHTML =
         '<div id="default_question" class="question">' +
             'No questions yet' +
         '</div>';
 };
 
-var removeDefaultQuestion = function() {
+function removeDefaultQuestion(){
     var default_question = document.getElementById("default_question");
     if(default_question)
         default_question.parentElement.removeChild(default_question);
 };
 
 //Get the amount of new questions
-var getNewQuestions = function () {
+function getNewQuestion(){
     return document.getElementsByClassName(class_new_question).length;
 };
 
