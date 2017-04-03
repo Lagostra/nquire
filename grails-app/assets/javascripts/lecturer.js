@@ -12,7 +12,6 @@ var pageRole;
 var timeout;
 
 var class_hidden = "hidden";
-var class_new_btn = "new_btn";
 var class_new_question = "new_question";
 
 var socket;
@@ -126,7 +125,8 @@ function addQuestion(question) {
     question_container.appendChild(question_object);
 };
 
-var setQuestionRead = function(id) {
+//Sets a question to read, so it is not considdered new
+function setQuestionRead(id){
     questions[id].read = true;
     document.getElementById("question-" + id).classList.remove(class_new_question);
 }
@@ -202,7 +202,6 @@ function removeDefaultQuestion(){
 function getNewQuestion(){
     return document.getElementsByClassName(class_new_question).length;
 };
-
 
 //sets the position of the pace bar (0-100)
 function setPaceValue(value){
