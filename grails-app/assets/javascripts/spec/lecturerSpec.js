@@ -1,20 +1,19 @@
 /**
  * Created by lars on 28.03.2017.
- * Time spent 3.5h - Lars
+ * Time spent 4.5h - Lars
  *
  */
 describe("Test lecturer.js", function(){
     beforeEach(function() {
         var htmlElements = {};
-        document.getElementById() =
-            jasmine.createSpy().andCallFake(function(id){
+        document.getElementById =
+            jasmine.createSpy().and.callFake(function(id){
                 if (!htmlElements[id]) {
                     var newElement = document.createElement("div");
                     htmlElements[id] = newElement;
                 }
                 return htmlElements[id];
-            }
-
+            });
 
         //INIT
         var question_container = document.createElement("div");
@@ -24,15 +23,17 @@ describe("Test lecturer.js", function(){
         var display_question_btn = document.createElement("div");
         display_question_btn.id = "default_question";
 
+
         //BADGE
-        var badge = document.body.createElement("div");
+        var badge = document.createElement("div");
         badge.classList.add("new-question-badge");
 
 
 
-        //TODO: denne må de som laget den gjøre
+        /*TODO: denne må de som laget den gjøre
         var menu_container = document.body.createElement("div");
         badge.id = "menu-container";
+        */
 
 
     });

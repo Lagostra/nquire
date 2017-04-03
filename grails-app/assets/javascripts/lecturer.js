@@ -44,7 +44,6 @@ function initLecturer() {
 
 //Sets up web socets, called as part of the init routine
 function initSockets() {
-    /* SOCkETS */
     socket = new WebSocket(url);
     console.log("Connecting...");
 
@@ -110,7 +109,6 @@ function addQuestion(question) {
         * */
         setTimeout(notifyNewQuestion, 100);
     }
-    default_question.classList.add(class_hidden);
     var question_object = document.createElement("div");
     question_object.id = "question-" + question.id;
     question_object.classList.add("question");
