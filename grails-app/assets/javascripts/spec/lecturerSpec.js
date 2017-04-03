@@ -38,11 +38,11 @@ describe("Test lecturer.js", function(){
     });
 
     afterEach(function() {
-
+        //Add teardown here if needed
     });
 
 
-    it("Test initLecturer", function() {
+    it("Test initLecturer elemeents", function() {
         initLecturer();
 
         expect(document.getElementById("question_container")
@@ -56,19 +56,27 @@ describe("Test lecturer.js", function(){
 
     it("Test addQuestion", function() {
         addQuestion("What is love?");
+
+        expect(removeDefaultQuestion().toHaveBeenCalled());
         expect(getNewQuestions()).toBe(true);
-        expect(notifyNewQuestion()).toBe(1);
+        expect(notifyNewQuestion()).toHaveBeenCalled(1);
+    });
+
+    it ("Test setQuestionRead", function () {
+        var q = addQuestion("What?");
+        q.id = "testId";
+        setQuestionRead(q.id);
+
+        expect(q.read).toBe(true);
+        expect(questions(q.id).read).toBe(true);
+        expect(document.getElementById("question-"+q.id)
+            .classList.contains(class_new_question)).toBe(false);
     });
 
     it("Test noifyNewQuestion", function() {
         addQuestion("Why?");
         expect(notifyNewQuestion().toBe(1));
         expect(badge.innerHTML.toBe(1));
-    });
-
-    it ("Test setQuestionRead", function () {
-
-        expect(true).toBe(true);
     });
 
     it ("Test getQuestionsToggled", function() {
