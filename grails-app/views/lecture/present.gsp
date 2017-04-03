@@ -2,6 +2,8 @@
 <head>
     <asset:stylesheet src="application.css" />
     <asset:stylesheet src="present.css"/>
+
+    <title>Presentation - nquire</title>
 </head>
 <body>
 

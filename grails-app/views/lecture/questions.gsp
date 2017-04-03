@@ -1,6 +1,7 @@
 <html>
 <head>
     <meta name="layout" content="main" />
+    <title>Questions - nquire</title>
 </head>
 <body>
     <div class="row">
