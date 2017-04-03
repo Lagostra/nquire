@@ -1,10 +1,20 @@
 /**
  * Created by lars on 28.03.2017.
- * Time spent 2.5h - Lars
+ * Time spent 3.5h - Lars
  *
  */
 describe("Test lecturer.js", function(){
     beforeEach(function() {
+        var htmlElements = {};
+        document.getElementById() =
+            jasmine.createSpy().andCallFake(function(id){
+                if (!htmlElements[id]) {
+                    var newElement = document.createElement("div");
+                    htmlElements[id] = newElement;
+                }
+                return htmlElements[id];
+            }
+
 
         //INIT
         var question_container = document.createElement("div");
@@ -24,6 +34,10 @@ describe("Test lecturer.js", function(){
         var menu_container = document.body.createElement("div");
         badge.id = "menu-container";
 
+
+    });
+
+    afterEach(function() {
 
     });
 
@@ -92,5 +106,4 @@ describe("Test lecturer.js", function(){
         expect(true).toBe(true);
     });
 
-    //TODO: Teardown
 });
