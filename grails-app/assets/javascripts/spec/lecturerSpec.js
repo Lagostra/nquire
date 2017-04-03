@@ -1,6 +1,6 @@
 /**
  * Created by lars on 28.03.2017.
- * Time spent 4.5h - Lars
+ * Time spent 5h - Lars
  *
  */
 describe("Test lecturer.js", function(){
