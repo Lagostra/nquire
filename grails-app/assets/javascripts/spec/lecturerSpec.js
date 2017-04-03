@@ -40,45 +40,56 @@ describe("Test lecturer.js", function(){
 
     });
 
-    it("Test noifyNewQuestion", function() {
-        addQuestion("Why?");
-        expect(notifyNewQuestion().toBe(1));
-        expect(badge.innerHTML.toBe(1));
-    });
-
     it("Test addQuestion", function() {
         addQuestion("What is love?");
         expect(getNewQuestions()).toBe(true);
         expect(notifyNewQuestion()).toBe(1);
     });
 
+    it("Test noifyNewQuestion", function() {
+        addQuestion("Why?");
+        expect(notifyNewQuestion().toBe(1));
+        expect(badge.innerHTML.toBe(1));
+    });
+
+    it ("Test setQuestionRead", function () {
+
+        expect(true).toBe(true);
+    });
+
     it ("Test getQuestionsToggled", function() {
-        
-        expect(true);
+
+        expect(true).toBe(true);
     });
 
     it ("Test resetNewQuestions", function() {
-        expect(true);
+
+        expect(true).toBe(true);
     });
 
     it ("Test clearAllQuestions", function() {
-        expect(true);
+
+        expect(true).toBe(true);
     });
 
     it ("Test setDefaultQuestion", function() {
-        expect(true);
+
+        expect(true).toBe(true);
     });
 
     it ("Test removeDefaultQuestion", function() {
-        expect(true);
+
+        expect(true).toBe(true);
     });
 
     it ("Test getNewQuestions", function() {
-        expect(true);
+
+        expect(true).toBe(true);
     });
 
     it ("Test mouseMoveHandler", function() {
-        expect(true);
+
+        expect(true).toBe(true);
     });
 
     //TODO: Teardown
