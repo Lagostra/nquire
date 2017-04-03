@@ -22,7 +22,7 @@ function initLecturer() {
     question_container = document.getElementById("question_container");
     default_question = document.getElementById("default_question");
     display_question_btn = document.getElementById("display_question_btn");
-    
+
     /*SOCKETS*/
     initSockets();
 
