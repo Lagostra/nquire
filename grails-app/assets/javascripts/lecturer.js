@@ -16,7 +16,7 @@ var class_new_question = "new_question";
 
 var socket;
 
-
+//Initionalizes the script so it has valid members, starts web sockets
 function initLecturer() {
 
     question_container = document.getElementById("question_container");
@@ -102,7 +102,6 @@ function initLecturer() {
         renderPage(currentPage);
     }
 }
-
 
 //Call this function when new questions are received, adds question and HTML
 function addQuestion(question) {
@@ -192,6 +191,7 @@ function setDefaultQuestion() {
         '</div>';
 };
 
+//Hard removal of default question, part of add question routine
 function removeDefaultQuestion(){
     var default_question = document.getElementById("default_question");
     if(default_question)
@@ -215,6 +215,7 @@ function setPaceValue(value){
     pointer.style.marginLeft = (value).toString() + "%";
 }
 
+//On key spesification
 function onKey(e) {
     var key = e.keyCode ? e.keyCode : e.which;
     switch(key) {
