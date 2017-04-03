@@ -84,10 +84,6 @@
         <img style="height:22px;" src="${resource(dir: 'images', file: "drag.svg")}" alt="Grails"/>
     </button>
 
-    <button id="undo" class="btn btn-default btn-lg " type="button" data-toggle="tooltip" title="undo the previous area selected" onclick="undoButtonClicked()">
-        <img style="height:22px;" src="${resource(dir: 'images', file: "undo-arrow.svg")}" alt="Grails"/>
-    </button>
-
     <button id="question" class="btn btn-default btn-lg " data-toggle="tooltip" type="button" title="ask the lecturer a question" onclick="questionButtonClicked()">
         <img style="height:22px;" src="${resource(dir: 'images', file: "speech-bubble.svg")}" alt="Grails"/>
     </button>

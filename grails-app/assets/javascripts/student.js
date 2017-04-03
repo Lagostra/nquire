@@ -71,10 +71,7 @@ function updateCanvas(page, canvasArray){
 }
 
 function hardButtonClicked(){
-    toggleMarking();
-}
 
-function toggleMarking() {
     isMarking = !isMarking;
     if(!isMarking)
         drag = false;
@@ -85,9 +82,6 @@ function toggleMarking() {
         document.getElementById("hard").classList.remove("active");
 }
 
-function undoButtonClicked(){
-    console.log("button clicked");
-}
 function questionButtonClicked(){
     // Timeout because button event requires focus; must be released first...
     $('#questionModal').modal('show');
