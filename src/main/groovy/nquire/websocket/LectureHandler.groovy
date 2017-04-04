@@ -15,13 +15,9 @@ import org.springframework.web.socket.TextMessage
 import org.springframework.web.socket.CloseStatus
 import org.springframework.web.util.HtmlUtils
 
-import javax.annotation.PreDestroy
 import javax.xml.bind.DatatypeConverter
 
 import nquire.pace.Feedback
-
-import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
 
 class LectureHandler {
 
@@ -35,6 +31,7 @@ class LectureHandler {
 
     private int id;
     private int lastStudentId = 0;
+    private int nextQuestionId = 0;
     private double pace = 50.0;
     private long lastActivity;
     private String lecturerToken;
@@ -43,18 +40,20 @@ class LectureHandler {
     private Map<WebSocketSession, Student> students;
     private List<WebSocketSession> lecturers;
 
-    private List<String> questions;
+    private Map<Integer, Question> questions;
     private List<Box>[] boxes;
     private List<Feedback> paceFeedback;
+    private Map<Integer, Map> markings;
 
     LectureHandler(String lecturerToken) {
         this.lecturerToken = lecturerToken
         lastActivity = System.currentTimeMillis();
 
-        students = new HashMap<>();
-        lecturers = new ArrayList<>();
-        questions = new ArrayList<>();
-        paceFeedback = new ArrayList<>();
+        students = new HashMap<>()
+        lecturers = new ArrayList<>()
+        questions = new HashMap<>()
+        markings = new HashMap<>()
+        paceFeedback = new ArrayList<>()
     }
 
     LectureHandler(String lecturerToken, String filePath) {
@@ -99,12 +98,23 @@ class LectureHandler {
             if(mObject.type == "requestQuestions") {
                 String msg = JsonOutput.toJson([
                         type: "allQuestions",
-                        questions: questions.toArray()
+                        questions: questions.values().toArray()
                     ])
 
-                userSession.sendMessage(new TextMessage(msg))
+                sendTo(userSession, msg)
+            } else if(mObject.type == "requestMarkings") {
+                String msg = JsonOutput.toJson([
+                        type: "allMarkings",
+                        markings: markings
+                    ]);
+                sendTo(userSession, msg)
             } else if(mObject.type == "pageChange") {
                 sendToAllStudents(message)
+            } else if(mObject.type == "setQuestionsRead") {
+                for(int id : mObject.questions) {
+                    questions.get(id).setRead(true)
+                }
+                sendToAllLecturers(message)
             }
         } else {
             // The message was sent by a student
@@ -124,6 +134,10 @@ class LectureHandler {
                     }
                 }
             } else if(mObject.type == "updateStudentCanvas"){
+                if(!markings.containsKey(students.get(userSession).id))
+                    markings.put(students.get(userSession).id, new HashMap())
+
+                markings.get(students.get(userSession).id).put(mObject.page, mObject.array)
                 String msg = JsonOutput.toJson([
                         type: "updateStudentCanvas",
                         studentId: students.get(userSession).id,
@@ -137,7 +151,7 @@ class LectureHandler {
         if(mObject.type == "requestPresentation" && presentation != null) {
             String msg = JsonOutput.toJson([    type   : 'presentation',
                                                 presentation: presentation])
-            userSession.sendMessage(new TextMessage(msg))
+            sendTo(userSession, msg)
         }
     }
 
@@ -148,10 +162,10 @@ class LectureHandler {
             matchedQuestion = getSimilarQuestion(mObject.question)
 
         if(matchedQuestion == null) {
-            questions.add(question)
+            Question qObject = addQuestion(question)
             String msg = JsonOutput.toJson([
                     type: "question",
-                    question: question
+                    question: qObject
             ])
             sendToAllLecturers(msg)
         } else {
@@ -164,10 +178,16 @@ class LectureHandler {
         }
     }
 
+    Question addQuestion(String question) {
+        Question qObject = new Question(question, nextQuestionId++)
+        questions.put(qObject.getId(), qObject)
+        return qObject
+    }
+
     private String getSimilarQuestion(String q1) {
-        for(String q2 : questions) {
-            if(simCalc.calculate(q1, q2) > SIMILARITY_THRESHOLD) {
-                return q2
+        for(Question q2 : questions.values()) {
+            if(simCalc.calculate(q1, q2.getQuestion()) > SIMILARITY_THRESHOLD) {
+                return q2.getQuestion()
             }
         }
         return null
@@ -208,11 +228,15 @@ class LectureHandler {
         sendToAllLecturers(message)
     }
 
-    public updateStudentCanvas(WebSocketSession user, int page, List<Integer> canvas){
-
+    public List<Student> getAllStudents() {
+        return new ArrayList<>(students.values())
     }
 
-    public List getAllUsers() {
+    public List<WebSocketSession> getAllLecturers() {
+        return lecturers
+    }
+
+    public List<WebSocketSession> getAllUsers() {
         List<WebSocketSession> result = new ArrayList<>(lecturers)
         for(Student student : students.values()) {
             result.add(student.getSession())
@@ -259,5 +283,37 @@ class Box {
         this.y = y
         this.width = width
         this.height = height
+    }
+}
+
+class Question {
+    private String question
+    private int id
+    private boolean read
+
+    Question(String question, int id,  boolean read) {
+        this.question = question
+        this.id = id
+        this.read = read
+    }
+
+    Question(String question, int id) {
+        this(question, id, false)
+    }
+
+    String getQuestion() {
+        return question
+    }
+
+    int getId() {
+        return id
+    }
+
+    String isRead() {
+        return read
+    }
+
+    void setRead(boolean read) {
+        this.read = read
     }
 }

@@ -9,6 +9,7 @@ import java.util.Date;
 /**
  * Created by lars on 13.03.2017.
  * tid brukt så langt: 6.5 timer
+ *  TODO: En uhåndtert case er når studenter forlater forelsnig. Dette må håndteres
  */
 public class Pace implements PaceInterface {
 
@@ -18,6 +19,10 @@ public class Pace implements PaceInterface {
     public double calculateCurrentPace(List<Feedback> feedbackList, int numStudents) {
         if (feedbackList == null || feedbackList.isEmpty())
             return 50.0;
+        if (numStudents < 0)
+            throw new IllegalArgumentException("numStudents is negative");
+
+
 
         double base = 50.0;
         double feedback = 0.0;
@@ -33,9 +38,9 @@ public class Pace implements PaceInterface {
                         * 50.0 * sizeConstant;
             }
         }
-        if(feedback > 50.0)
+        if (feedback > 50.0)
             feedback = 50.0;
-        else if(feedback < -50.0)
+        else if (feedback < -50.0)
             feedback = -50.0;
         return base + feedback;
     }

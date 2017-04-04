@@ -3,9 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>
-
-    </title>
+    <title>Lecture - nquire</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <asset:stylesheet src="application.css"/>
@@ -78,18 +76,12 @@
     <div style="position: fixed;"><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>
     <div id="presentation-container">
         <canvas id="the-canvas"></canvas>
-    </div>
-    <div id="canvasesdiv" style="position:relative;">
-    <canvas id="student_canvas"></canvas>
+        <canvas id="student-canvas"></canvas>
     </div>
 
     <div id="buttons-container">
     <button id="hard" class="btn btn-default btn-lg " type="button" data-toggle="tooltip" title="select a difficult area" onclick="hardButtonClicked()">
         <img style="height:22px;" src="${resource(dir: 'images', file: "drag.svg")}" alt="Grails"/>
-    </button>
-
-    <button id="undo" class="btn btn-default btn-lg " type="button" data-toggle="tooltip" title="undo the previous area selected" onclick="undoButtonClicked()">
-        <img style="height:22px;" src="${resource(dir: 'images', file: "undo-arrow.svg")}" alt="Grails"/>
     </button>
 
     <button id="question" class="btn btn-default btn-lg " data-toggle="tooltip" type="button" title="ask the lecturer a question" onclick="questionButtonClicked()">

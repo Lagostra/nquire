@@ -4,20 +4,21 @@
 
 
 var studentCanvasArray;
-var canvas = document.getElementById('lecturer_canvas');
+var canvas = document.getElementById('lecturer-canvas');
 var context = canvas.getContext("2d");
 var fullAlpha;
 var contextWidth;
 var contextHeight;
 var page;
 
-function init(){
-    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+function initLecturerCanvas(){
     contextWidth = canvas.clientWidth; contextHeight = canvas.clientHeight;
     studentCanvasArray = test();
     page = 0;
     setPageCount(100);
     update();
+
+    addRenderPageListener(onCanvasResize);
 }
 
 function test(){
@@ -58,10 +59,10 @@ function backwardPage(){
 function update(){
     fullAlpha = (0.25 / Object.keys(studentCanvasArray[page]).length);
     context.clearRect(0, 0, canvas.width, canvas.height);
-    render();
+    renderBoxes();
 }
 
-function render(){
+function renderBoxes(){
     for(var id in studentCanvasArray[page]){
         for(var i = 0; i < studentCanvasArray[page][id].length; i++){
             var r = studentCanvasArray[page][id][i];
@@ -69,10 +70,16 @@ function render(){
         }
     }
 }
+
 function draw(rect){
+    contextWidth = canvas.clientWidth; contextHeight = canvas.clientHeight;
     context.globalAlpha = fullAlpha;
     context.fillRect(rect.x * contextWidth, rect.y * contextHeight, rect.w * contextWidth, rect.h * contextHeight);
 }
 
-init();
-
+function onCanvasResize() {
+    var theCanvas = document.getElementById("the-canvas");
+    canvas.height = theCanvas.height;
+    canvas.width = theCanvas.width;
+    renderBoxes();
+}

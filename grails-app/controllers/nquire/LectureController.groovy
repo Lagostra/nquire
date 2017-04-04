@@ -46,8 +46,8 @@ class LectureController {
     def connect() {
         if(params.id == null) {
             // No lecture id given
-            redirect(action: index)
-            // TODO Redirect to form for lecture connection
+            redirect(action: 'index')
+            return
         }
 
         int id = params.int('id')
@@ -63,7 +63,6 @@ class LectureController {
 
     def create() {
         if(principal.currentLecture != 0 && LectureEndpoint.isAlive(principal.currentLecture)) {
-            // TODO Send message that a lecture is already running
             redirect(action: 'present')
             return
         }
@@ -80,7 +79,6 @@ class LectureController {
 
     def create_lecture() {
         if(principal.currentLecture != 0 && LectureEndpoint.isAlive(principal.currentLecture)) {
-            // TODO Send message that a lecture is already running
             redirect(action: 'present')
             return
         }

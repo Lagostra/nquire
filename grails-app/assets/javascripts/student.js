@@ -58,13 +58,19 @@ function initStudent() {
         }
     }
 
+    //rerenders current page on window resize
+    window.onresize = function() {
+        renderPage(currentPage);
+    }
+
+    initStudentCanvas();
 }
 
 function updateCanvas(page, canvasArray){
     socket.send(JSON.stringify({"type": "updateStudentCanvas", "studentId": null, "page": page, "array": canvasArray}));
 }
 
-function hardButtonClicked(){
+function hardButtonClicked() {
     toggleMarking();
 }
 
@@ -79,9 +85,6 @@ function toggleMarking() {
         document.getElementById("hard").classList.remove("active");
 }
 
-function undoButtonClicked(){
-    console.log("button clicked");
-}
 function questionButtonClicked(){
     // Timeout because button event requires focus; must be released first...
     $('#questionModal').modal('show');

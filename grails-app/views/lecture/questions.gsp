@@ -1,11 +1,12 @@
 <html>
 <head>
     <meta name="layout" content="main" />
+    <title>Questions - nquire</title>
 </head>
 <body>
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <g:form controller="lecture" action="close_lecture" class="inline-form pull-right">
+            <g:form controller="lecture" action="close_lecture" class="inline-form pull-right" onsubmit="return confirm('Are you sure you want to close the current lecture?');" >
                 <g:submitButton name="Submit" value="Close lecture" class="btn btn-danger" />
             </g:form>
         </div>

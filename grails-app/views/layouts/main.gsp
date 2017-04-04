@@ -4,11 +4,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/> <!--zoom removed-->
-    <meta name="description" content="Swag">
-    <meta name="author" content="nquire-Team">
+    <meta name="author" content="nquire team">
 
     <title>
-        <g:layoutTitle default="Grails"/>
+        <g:layoutTitle default="nquire"/>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
@@ -57,7 +56,7 @@
                                         </g:link>
                                     </li>
                                     <li>
-                                        <a href="#" class="red" onclick="forms['close-form'].submit()">Close lecture</a>
+                                        <a href="#" class="red" onclick="if(confirm('Are you sure you want to close the current lecture?')) forms['close-form'].submit()">Close lecture</a>
                                         <g:form name="close-form" controller="lecture" style="float:left;margin-left:10px;" action="close_lecture">
                                         </g:form>
                                     </li>

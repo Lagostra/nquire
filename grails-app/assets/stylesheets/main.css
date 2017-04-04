@@ -85,25 +85,45 @@
     top: -5px;
 }
 
-.presentation-box:hover:before {
-    content: " ";
+.presentation-box .panel {
+    position: relative;
+}
+
+.presentation-box:hover .panel:before {
     position: absolute;
-    top: 0; bottom: 20px; left: 15px; right: 15px;
+    display: block;
+    content: " ";
+    top: 0; bottom: 0; left: 0; right: 0;
     border-radius: 5px;
     background: rgba(0, 0, 0, 0.4);
 }
+
     .btn-create-lecture {
         display: none;
         position: absolute;
-        left: 20px;
+        left: 5px;
         top: 5px;
     }
 
-    .presentation-box:hover .btn-create-lecture {
+    .btn-delete-lecture {
+        display: none;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+    }
+
+    .presentation-box:hover .btn-create-lecture, .presentation-box:hover .btn-delete-lecture {
         display: block;
     }
 
 #file-modal .modal-body .row {
     max-height: 500px;
     overflow: auto;
+}
+
+#lecturer-canvas, #student-canvas {
+    position: absolute;
+    top: 0;
+    margin: auto;
+    display: block;
 }
