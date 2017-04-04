@@ -100,17 +100,17 @@ body {
     -ms-transition: all 1s ease-out;  /* IE10 */
     transition: all 1s ease-out;
 }
+#pace-container {
+    height: 28px;
+    width: 100%;
+
+}
 #buttons-container {
     width: 100%;
     height: 46px;
     margin-top: 5px;
     padding-top: 5px;
     padding-left: 10px;
-}
-#pace-container {
-    height: 28px;
-    width: 100%;
-
 }
 #menu-container{
     -moz-transition: all 0.5s ease-out;  /* FF4+ */

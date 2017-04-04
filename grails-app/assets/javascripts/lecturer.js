@@ -38,7 +38,9 @@ function initLecturer() {
 
     //rerenders current page on window resize
     window.onresize = function() {
-        renderPage(currentPage);
+        if(document.getElementById("the-canvas")){
+            renderPage(currentPage);
+        }
     }
 }
 
