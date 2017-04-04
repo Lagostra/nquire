@@ -218,6 +218,19 @@ function setPaceValue(value){
     pointer.style.marginLeft = (value).toString() + "%";
 }
 
+function toggleOverlay(){
+
+    if (document.getElementById("lecturer-canvas")){
+        var container = document.getElementById("lecturer-canvas");
+        if (container.style.display != "none"){
+            container.style.display = "none";
+        }
+        else {
+            container.style.display = "block";
+        }
+    }
+}
+
 //On key spesification
 function onKey(e) {
     var key = e.keyCode ? e.keyCode : e.which;

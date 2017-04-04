@@ -66,18 +66,22 @@
 
         <div id="buttons-container">
 
-            <g:link url="/lecturer" class="btn btn-primary btn-lg" style="float:left;margin-left:0px;">
+            <g:link url="/lecturer" class="btn btn-primary btn-md" style="float:left;margin-left:0px;">
                 Home
             </g:link>
 
-            <button id="display_question_btn" style="float:left; margin-left:10px; position: relative;" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#questionsModal" type="button">
+            <button id="display_question_btn" style="float:left; margin-left:10px; position: relative;" class="btn btn-primary btn-md" data-toggle="modal" data-target="#questionsModal" type="button">
                 Questions
                 <span id="question-badge" class="badge progress-bar-danger hidden">0</span>
             </button>
 
+            <button style="float:left; margin-left:10px; position: relative;" class="btn btn-primary btn-md" type="button" onclick="toggleOverlay()">
+                Toggle overlay
+            </button>
+
             <g:form class="form-inline" controller="lecture" style="float:left;margin-left:10px; margin-bottom: 0px;"
                             action="close_lecture" onsubmit="return confirm('Are you sure you want to close the current lecture?');" >
-                <g:submitButton name="Submit" value="Close lecture" class="btn btn-danger btn-lg" />
+                <g:submitButton name="Submit" value="Close lecture" class="btn btn-danger btn-md" />
             </g:form>
 
         </div>

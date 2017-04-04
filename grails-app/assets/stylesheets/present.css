@@ -104,7 +104,8 @@ body {
     width: 100%;
     height: 46px;
     margin-top: 5px;
-    padding-left: 33px;
+    padding-top: 5px;
+    padding-left: 10px;
 }
 #pace-container {
     height: 28px;
