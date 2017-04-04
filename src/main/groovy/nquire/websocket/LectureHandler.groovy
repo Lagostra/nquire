@@ -43,15 +43,17 @@ class LectureHandler {
     private Map<Integer, Question> questions;
     private List<Box>[] boxes;
     private List<Feedback> paceFeedback;
+    private Map<Integer, Map> markings;
 
     LectureHandler(String lecturerToken) {
         this.lecturerToken = lecturerToken
         lastActivity = System.currentTimeMillis();
 
-        students = new HashMap<>();
-        lecturers = new ArrayList<>();
-        questions = new HashMap<>();
-        paceFeedback = new ArrayList<>();
+        students = new HashMap<>()
+        lecturers = new ArrayList<>()
+        questions = new HashMap<>()
+        markings = new HashMap<>()
+        paceFeedback = new ArrayList<>()
     }
 
     LectureHandler(String lecturerToken, String filePath) {
@@ -99,7 +101,13 @@ class LectureHandler {
                         questions: questions.values().toArray()
                     ])
 
-                userSession.sendMessage(new TextMessage(msg))
+                sendTo(userSession, msg)
+            } else if(mObject.type == "requestMarkings") {
+                String msg = JsonOutput.toJson([
+                        type: "allMarkings",
+                        markings: markings
+                    ]);
+                sendTo(userSession, msg)
             } else if(mObject.type == "pageChange") {
                 sendToAllStudents(message)
             } else if(mObject.type == "setQuestionsRead") {
@@ -126,6 +134,10 @@ class LectureHandler {
                     }
                 }
             } else if(mObject.type == "updateStudentCanvas"){
+                if(!markings.containsKey(students.get(userSession).id))
+                    markings.put(students.get(userSession).id, new HashMap())
+
+                markings.get(students.get(userSession).id).put(mObject.page, mObject.array)
                 String msg = JsonOutput.toJson([
                         type: "updateStudentCanvas",
                         studentId: students.get(userSession).id,
@@ -139,7 +151,7 @@ class LectureHandler {
         if(mObject.type == "requestPresentation" && presentation != null) {
             String msg = JsonOutput.toJson([    type   : 'presentation',
                                                 presentation: presentation])
-            userSession.sendMessage(new TextMessage(msg))
+            sendTo(userSession, msg)
         }
     }
 
