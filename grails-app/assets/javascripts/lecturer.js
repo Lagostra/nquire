@@ -155,7 +155,7 @@ function getQuestionsToggled() {
 };
 
 //Remove the new_question class from all question elements
-function resetNewQuestion(){
+function resetNewQuestions(){
     var new_questions = document.getElementsByClassName(class_new_question);
     var new_question_badge = document.getElementById("question-number");
     var new_question_badge_2 = document.getElementById("question-badge");
@@ -202,7 +202,7 @@ function removeDefaultQuestion(){
 };
 
 //Get the amount of new questions
-function getNewQuestion(){
+function getNewQuestions(){
     return document.getElementsByClassName(class_new_question).length;
 };
 

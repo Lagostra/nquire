@@ -15,6 +15,13 @@ describe("Test lecturer.js", function(){
                 return htmlElements[id];
             });
 
+
+
+        //WEEB SOCKETS (emptied to avoid errors)
+        WebSocket = function() {};
+        socket = new Object();
+        url = "";
+
         //INIT
         var question_container = document.createElement("div");
         question_container.id = "question_container";
@@ -46,13 +53,12 @@ describe("Test lecturer.js", function(){
     it("Test initLecturer elemeents", function() {
         initLecturer();
 
-        expect(document.getElementById("question_container")
-            .toBe(question_container));
+        expect(document.getElementById("question_container"))
+            .toBe(question_container);
         expect(document.getElementById("default_question"))
-            .toBe(default_question);
-        expect(document.getElementById("display_question_btn")
-            .toBe(display_question_btn));
-
+            .toEqual(default_question);
+        expect(document.getElementById("display_question_btn"))
+            .toEqual(display_question_btn);
     });
 
     it("Test addQuestion", function() {
