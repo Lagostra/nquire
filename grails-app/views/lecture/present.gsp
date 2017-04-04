@@ -4,6 +4,8 @@
     <asset:stylesheet src="present.css"/>
 
     <title>Presentation - nquire</title>
+
+    <asset:link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 </head>
 <body>
 
