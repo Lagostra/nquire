@@ -75,8 +75,9 @@
                 <span id="question-badge" class="badge progress-bar-danger hidden">0</span>
             </button>
 
-            <g:form class="form-inline" controller="lecture" style="float:left;margin-left:10px; margin-bottom: 0px;" action="close_lecture">
-                <g:submitButton name="Submit" value="Close lecture"  class="btn btn-danger btn-lg" />
+            <g:form class="form-inline" controller="lecture" style="float:left;margin-left:10px; margin-bottom: 0px;"
+                            action="close_lecture" onsubmit="return confirm('Are you sure you want to close the current lecture?');" >
+                <g:submitButton name="Submit" value="Close lecture" class="btn btn-danger btn-lg" />
             </g:form>
 
         </div>

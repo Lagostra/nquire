@@ -3,6 +3,12 @@
  * Time spent 5h - Lars
  *
  */
+var q;
+var question_container;
+var default_question;
+var display_question_btn;
+var badge;
+
 describe("Test lecturer.js", function(){
     beforeEach(function() {
         var htmlElements = {};
@@ -15,17 +21,44 @@ describe("Test lecturer.js", function(){
                 return htmlElements[id];
             });
 
-        //INIT
-        var question_container = document.createElement("div");
-        question_container.id = "question_container";
-        var default_question = document.createElement("div");
-        default_question.id = "default_question";
-        var display_question_btn = document.createElement("div");
-        display_question_btn.id = "default_question";
+        var  classes = {};
+        document.getElementsByClassName =
+            jasmine.createSpy().and.callFake(function(c){
+               if (!classes[c]){
+                   var newElement = document.createElement("div");
+                   classes[c] = newElement;
+               }
+               return classes[c];
+            });
 
+
+        var eParent = document.getElementById("parent");
+        var e = document.getElementById("default_question");
+        eParent.appendChild(e);
+
+        e.parentElement.removeChild =
+            jasmine.createSpy().and.callFake(function(s){});
+
+
+        //WEEB SOCKETS (emptied to avoid errors)
+        WebSocket = function() {};
+        socket = new Object();
+        url = "";
+
+        //INIT
+        question_container = document.createElement("div");
+        question_container.id = "question_container";
+        default_question = document.createElement("div");
+        default_question.id = "default_question";
+        display_question_btn = document.createElement("div");
+        display_question_btn.id = "display_question_btn";
+
+
+        //
+        q = {question : "what?", id : 1, read : true};
 
         //BADGE
-        var badge = document.createElement("div");
+        badge = document.createElement("div");
         badge.classList.add("new-question-badge");
 
 
@@ -39,45 +72,42 @@ describe("Test lecturer.js", function(){
     });
 
     afterEach(function() {
-        //Add teardown here if needed
+        //TODO: Swag her
     });
 
 
     it("Test initLecturer elemeents", function() {
         initLecturer();
 
-        expect(document.getElementById("question_container")
-            .toBe(question_container));
+        expect(document.getElementById("question_container"))
+            .toBe(question_container);
         expect(document.getElementById("default_question"))
-            .toBe(default_question);
-        expect(document.getElementById("display_question_btn")
-            .toBe(display_question_btn));
-
+            .toEqual(default_question);
+        expect(document.getElementById("display_question_btn"))
+            .toEqual(display_question_btn);
     });
 
     it("Test addQuestion", function() {
-        addQuestion("What is love?");
+        addQuestion(q);
 
-        expect(removeDefaultQuestion().toHaveBeenCalled());
-        expect(getNewQuestions()).toBe(true);
-        expect(notifyNewQuestion()).toHaveBeenCalled(1);
+        expect(questions.includes(q)).toBe(true);
+        expect(questions[1]).toEqual(q);
     });
 
     it ("Test setQuestionRead", function () {
-        var q = addQuestion("What?");
-        q.id = "testId";
         setQuestionRead(q.id);
 
         expect(q.read).toBe(true);
-        expect(questions(q.id).read).toBe(true);
+        expect(questions[q.id].read).toBe(true);
         expect(document.getElementById("question-"+q.id)
             .classList.contains(class_new_question)).toBe(false);
     });
 
     it("Test noifyNewQuestion", function() {
-        addQuestion("Why?");
-        expect(notifyNewQuestion().toBe(1));
-        expect(badge.innerHTML.toBe(1));
+        notifyNewQuestion();
+
+        expect(notifyNewQuestion()).toBe(1);
+        expect(badge.innerHTML).toBe("1");
     });
 
     it ("Test getQuestionsToggled", function() {
