@@ -61,8 +61,10 @@ function initSockets() {
 
         switch(msg.type) {
             case "connected": // Successfully connected to lecture
-                if(pageRole == "present")
+                if(pageRole == "present") {
                     socket.send(JSON.stringify({"type": "requestPresentation"}));
+                    socket.send(JSON.stringify({"type": "requestMarkings"}));
+                }
                 socket.send(JSON.stringify({"type": "requestQuestions"}));
                 break;
             case "presentation": // Received presentation file
@@ -87,6 +89,13 @@ function initSockets() {
                 break;
             case "updateStudentCanvas": //Student has made a change on their drawing canvas
                 updateStudentCanvas(msg.studentId, msg.page, msg.array);
+                break;
+            case "allMarkings":
+                for(var studentId in msg.markings) {
+                    for(var page in msg.markings[studentId]) {
+                        updateStudentCanvas(studentId, page, msg.markings[studentId][page]);
+                    }
+                }
                 break;
         }
     };

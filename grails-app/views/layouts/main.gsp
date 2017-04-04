@@ -56,7 +56,7 @@
                                         </g:link>
                                     </li>
                                     <li>
-                                        <a href="#" class="red" onclick="forms['close-form'].submit()">Close lecture</a>
+                                        <a href="#" class="red" onclick="if(confirm('Are you sure you want to close the current lecture?')) forms['close-form'].submit()">Close lecture</a>
                                         <g:form name="close-form" controller="lecture" style="float:left;margin-left:10px;" action="close_lecture">
                                         </g:form>
                                     </li>
