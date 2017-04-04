@@ -223,6 +223,16 @@ function setPaceValue(value) {
         var pointer = document.getElementById("pace-overlay");
         pointer.style.marginLeft = (value).toString() + "%";
     }
+    if (document.getElementById("pace-overlay-questions")){
+        if (value >= 100) {
+            value = 100;
+        }
+        else if (value <= 0) {
+            value = 0;
+        }
+        var pointer = document.getElementById("pace-overlay-questions");
+        pointer.style.marginLeft = (value).toString() + "%";
+    }
 }
 
 function toggleOverlay(){
