@@ -15,6 +15,9 @@ describe("Test lecturer.js", function(){
                 return htmlElements[id];
             });
 
+        //WEEB SOCKETS
+        socket = new Object();
+
         //INIT
         var question_container = document.createElement("div");
         question_container.id = "question_container";
