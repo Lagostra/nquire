@@ -22,10 +22,10 @@ function initLecturerCanvas(){
 }
 
 function test(){
-    pageArray = {};
+    var pageArray = {};
     pageArray['0000'] = new Array();
 
-    presArray = new Array();
+    var presArray = new Array();
     presArray.push(pageArray);
 
     return presArray;
