@@ -19,13 +19,13 @@ body {
 
 }
 #question{
-
+    margin-left: 5px;
 }
 #slower{
-
+    margin-left: 5px;
 }
 #faster{
-
+    margin-left: 5px;
 }
 #buttons-container{
     position: fixed;

@@ -125,6 +125,9 @@ function addQuestion(question) {
         question_object.classList.add(class_new_question);
     question_object.innerHTML = question.question;
     question_container.appendChild(question_object);
+    if (document.getElementById("question_container")){
+        document.getElementById("question_container").scrollTop = document.getElementById("question_container").scrollHeight;
+    }
 };
 
 //Sets a question to read, so it is not considdered new
@@ -207,15 +210,17 @@ function getNewQuestions(){
 };
 
 //sets the position of the pace bar (0-100)
-function setPaceValue(value){
-    if (value >= 100){
-        value = 100;
+function setPaceValue(value) {
+    if (document.getElementById("pace-overlay")){
+        if (value >= 100) {
+            value = 100;
+        }
+        else if (value <= 0) {
+            value = 0;
+        }
+        var pointer = document.getElementById("pace-overlay");
+        pointer.style.marginLeft = (value).toString() + "%";
     }
-    else if(value <= 0) {
-        value = 0;
-    }
-    var pointer = document.getElementById("pace-overlay");
-    pointer.style.marginLeft = (value).toString() + "%";
 }
 
 function toggleOverlay(){

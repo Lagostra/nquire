@@ -9,10 +9,10 @@ body {
     top: 50px;
 }
 #question-badge {
-    font-size: 1.7rem;
+    font-size: 1.4rem;
     position: relative;
-    top: -18px;
-    right: 2px;
+    top: -16px;
+    right: 9px;
     margin-right: -25px;
     background-color: red;
     color: white;
