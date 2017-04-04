@@ -70,8 +70,11 @@ function updateCanvas(page, canvasArray){
     socket.send(JSON.stringify({"type": "updateStudentCanvas", "studentId": null, "page": page, "array": canvasArray}));
 }
 
-function hardButtonClicked(){
+function hardButtonClicked() {
+    toggleMarking();
+}
 
+function toggleMarking() {
     isMarking = !isMarking;
     if(!isMarking)
         drag = false;
