@@ -2,11 +2,14 @@
  * Created by lisas on 27.02.2017.
  */
 
+// Returns true if the two input rectangles cover the exact same area.
 function isEqual(rect1, rect2){
     var r1 = processRect(rect1); var r2 = processRect(rect2);
     return(r1.x==r2.x && r1.y==r2.y && r1.w==r2.w && r1.h==r2.h);
 }
 
+// Returns a rectangle that covers the same area as the input rectangle, but with all attributes
+// (x, y, w, h) as positive numbers.
 function processRect(rect){
     var startX = Math.min(rect.x, (rect.x + rect.w));
     var endX = Math.max(rect.x, (rect.x + rect.w));
@@ -17,6 +20,7 @@ function processRect(rect){
 }
 
 
+// Returns a rectangle that covers the same area as the intersection between the two input rectangles
 function intersection(rect1, rect2){
     var r1 = processRect(rect1); var r2 = processRect(rect2);
     if(intersects(r1,r2)){
@@ -32,12 +36,14 @@ function intersection(rect1, rect2){
     }
 }
 
+// Returns true if the two input rectangles intersect
 function intersects(rect1, rect2){
     var r1 = processRect(rect1); var r2 = processRect(rect2);
     return((Math.min(r1.x+r1.w, r2.x+r2.w) > Math.max(r1.x, r2.x)) && ((Math.min(r1.y+r1.h, r2.y+r2.h) > Math.max(r1.y, r2.y))));
 
 }
 
+// Splits overlapping rectangles into an array of non-overlapping rectangles that covers the same area.
 function splitRects(rectangle1, rectangle2){
     var r1 = processRect(rectangle1); var r2 = processRect(rectangle2);
     var result = new Array();
@@ -98,6 +104,7 @@ function splitRects(rectangle1, rectangle2){
     return splits;
 }
 
+// Returns a clone of the input array of rectangles
 function copy(rectArray){
     var rects = new Array();
     for(var i = 0; i < rectArray.length; i++){
@@ -107,6 +114,8 @@ function copy(rectArray){
     return rects;
 }
 
+// Removes all duplicate rectangles (rectangles that are equal) from an array of rectangles, and returns an array where
+// no two rectangles are equal
 function removeDuplicates(rectArray){
     var result = new Array();
     for(var i = 0; i < rectArray.length; i++){
@@ -126,6 +135,8 @@ function removeDuplicates(rectArray){
     return result;
 }
 
+// Takes in an input of rectangles that may overlap or be equal, and returns an array of non-overlapping rectangles
+// where no two rectangles are equal that covers the same area.
 function splitAllRects(rectArray){
     var rects = removeDuplicates(rectArray);
     var b = false;
