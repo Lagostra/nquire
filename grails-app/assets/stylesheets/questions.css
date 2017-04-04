@@ -1,9 +1,9 @@
 #pace-background-questions{
-    background: red; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(left,red,red,yellow,red); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(right,red,red,yellow,red); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(right,red,yellow,red); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to right,red,yellow,red); /* Standard syntax */
+    background: #ED3F09; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left,#ED3F09,#F0C800,#ED3F09); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right,#ED3F09,#F0C800,#ED3F09); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right,#ED3F09,#F0C800,#ED3F09); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right,#ED3F09,#F0C800,#ED3F09); /* Standard syntax */
 
     width: 350px;
     height: 23px;
