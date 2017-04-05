@@ -13,6 +13,7 @@ var contextHeight;
 var page;
 var presArray;
 
+// Initiates the canvas to be drawn on
 function initStudentCanvas(){
     contextWidth = canvas.clientWidth; contextHeight = canvas.clientHeight;
     canvas.addEventListener("mousedown", mouseDown);
@@ -30,7 +31,7 @@ function initStudentCanvas(){
     addRenderPageListener(onCanvasResize);
 }
 
-
+// Starts drawing a temporary rectangle when the mouse is pressed on the canvas
 function mouseDown(event){
     if(!isMarking)
         return;
@@ -43,6 +44,8 @@ function mouseDown(event){
     }
 }
 
+
+// Undo last drawn square when key Z is pressed
 function keyPress(e){
     if(e.which == 90 && presArray[page].length > 0 && seqArray[page]>= 0){
         for(i = presArray[page].length - 1; i >= 0; i--){
@@ -55,24 +58,25 @@ function keyPress(e){
     }
 }
 
+// Switch to next page
 function pageInc(){
     page++;
     if(page >= presArray.length){
         presArray.push(new Array());
         seqArray.push(0);
     }
-    console.log(page);
     updateBoxes();
 }
 
+// Switch to previous page
 function pageDec(){
     if(page > 0){
         page--;
-        console.log(presArray);
     }
     updateBoxes();
 }
 
+// Temporary rectangle is drawn when mouse is dragged across the canvas
 function drawTemp(){
     contextWidth = canvas.clientWidth; contextHeight = canvas.clientHeight;
     updateBoxes();
@@ -80,6 +84,7 @@ function drawTemp(){
     context.fillRect(tempRect.x * contextWidth, tempRect.y * contextHeight, tempRect.w * contextWidth, tempRect.h * contextHeight);
 }
 
+// Clear canvas and re-draw all rectangles in the current page array.
 function updateBoxes(){
     contextWidth = canvas.clientWidth; contextHeight = canvas.clientHeight;
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -91,6 +96,7 @@ function updateBoxes(){
     }
 }
 
+// The temporary rectangle (if there is one) is drawn and stored in array when the mouse is let go
 function mouseUp(event){
     if(!isMarking)
         return;
@@ -117,6 +123,7 @@ function mouseUp(event){
     updateBoxes();
 }
 
+// Changes the size of the temporarily drawn rectangle to match the mouse position
 function mouseMove(event){
     if(drag){
         tempRect.w = (event.offsetX/contextWidth) - tempRect.x; tempRect.h = (event.offsetY/contextHeight) - tempRect.y;

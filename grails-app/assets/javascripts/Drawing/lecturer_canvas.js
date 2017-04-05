@@ -10,17 +10,19 @@ var fullAlpha;
 var contextWidth;
 var contextHeight;
 var page;
+var otherCanvas = document.getElementById("the-canvas");
 
+// Initiates the canvas on top of the lecture presentation
 function initLecturerCanvas(){
     contextWidth = canvas.clientWidth; contextHeight = canvas.clientHeight;
     studentCanvasArray = test();
     page = 0;
     setPageCount(100);
     update();
-
     addRenderPageListener(onCanvasResize);
 }
 
+// Initiates the studentCanvasArray to hold empty values, so that updating and pushing to it is easier
 function test(){
     var pageArray = {};
     pageArray['0000'] = new Array();
@@ -31,17 +33,21 @@ function test(){
     return presArray;
 }
 
-function updateStudentCanvas(studentId, page, array){
-    studentCanvasArray[page][studentId] = array;
-    update();
-}
-
+// Adds empty pages to the studentCanvasArray until the length matches p
 function setPageCount(p){
     while(studentCanvasArray.length < p){
         studentCanvasArray.push({});
     }
 }
 
+// Updates a certain students drawn canvas for a certain page
+function updateStudentCanvas(studentId, page, array){
+    setPageCount(page + 1);
+    studentCanvasArray[page][studentId] = array;
+    update();
+}
+
+// Switch to next page. If no page exist, create a new page
 function forwardPage(){
     page++;
     if(page >= studentCanvasArray.length){
@@ -49,6 +55,8 @@ function forwardPage(){
     }
     update();
 }
+
+// Switch to previous page, if there is one
 function backwardPage(){
     if(page > 0){
         page--;
@@ -56,12 +64,14 @@ function backwardPage(){
     update();
 }
 
+// Update the alpha value for each drawn canvas on the page, clear the canvas and call for a render
 function update(){
     fullAlpha = (0.25 / Object.keys(studentCanvasArray[page]).length);
     context.clearRect(0, 0, canvas.width, canvas.height);
     renderBoxes();
 }
 
+// Draw all rectangles for the page
 function renderBoxes(){
     for(var id in studentCanvasArray[page]){
         for(var i = 0; i < studentCanvasArray[page][id].length; i++){
@@ -78,7 +88,7 @@ function draw(rect){
 }
 
 function onCanvasResize() {
-    var theCanvas = document.getElementById("the-canvas");
+    var theCanvas = otherCanvas;
     canvas.height = theCanvas.height;
     canvas.width = theCanvas.width;
     renderBoxes();
