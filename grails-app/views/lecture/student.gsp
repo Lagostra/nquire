@@ -73,6 +73,10 @@
         <span class="glyphicon glyphicon-refresh large glyphicon-refresh-animate"></span> Loading...
     </div>
 
+    <button id="btn-goto-lecturer" class="btn btn-default hidden" onclick="renderPage(lecturersCurrentPage);">
+        Go to lecturer's current page
+    </button>
+
     <div style="position: fixed;"><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>
     <div id="presentation-container">
         <canvas id="the-canvas"></canvas>
