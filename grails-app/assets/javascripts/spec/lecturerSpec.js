@@ -45,6 +45,7 @@ describe("Test lecturer.js", function(){
         socket = new Object();
         url = "";
 
+
         //INIT
         question_container = document.createElement("div");
         question_container.id = "question_container";
@@ -73,6 +74,10 @@ describe("Test lecturer.js", function(){
 
     afterEach(function() {
         //TODO: Swag her
+        //this.spies.call.remove();
+        for (var spy in this.spies)
+            spy.call.remove();
+        clearAllQuestions();
     });
 
 
@@ -95,6 +100,7 @@ describe("Test lecturer.js", function(){
     });
 
     it ("Test setQuestionRead", function () {
+        addQuestion(q);
         setQuestionRead(q.id);
 
         expect(q.read).toBe(true);
@@ -104,10 +110,29 @@ describe("Test lecturer.js", function(){
     });
 
     it("Test noifyNewQuestion", function() {
+        addQuestion(q);
         notifyNewQuestion();
 
         expect(notifyNewQuestion()).toBe(1);
         expect(badge.innerHTML).toBe("1");
+    });
+
+    it("Test noifyNewQuestion w/ questions displayed", function() {
+        getQuestionsToggled =
+            jasmine.createSpy().and.callFake(function() {
+                return true;
+            });
+        notifyNewQuestion();
+
+        document.getElementsByClassName =
+            jasmine.createSpy().and.callFake(function() {
+               return 1;
+            });
+
+        expect (new_question_badge).not.toBe(null);
+        expect (new_question_badge2).not.toBe(null);
+        expect(notifyNewQuestion()).toBe(0);
+        expect(badge.innerHTML).toBe("");
     });
 
     it ("Test getQuestionsToggled", function() {
