@@ -118,6 +118,7 @@ describe("Test lecturer.js", function(){
     });
 
     it("Test noifyNewQuestion w/ questions displayed", function() {
+        addQuestion(q);
         getQuestionsToggled =
             jasmine.createSpy().and.callFake(function() {
                 return true;
