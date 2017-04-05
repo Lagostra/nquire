@@ -42,7 +42,8 @@ function initStudent() {
                 break;
             case "pageChange":
                 lecturersCurrentPage = msg.page;
-                checkLecturerPage();
+                if(pdf)
+                    checkLecturerPage();
                 break;
         }
     }
