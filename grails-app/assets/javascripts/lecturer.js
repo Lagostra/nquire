@@ -248,6 +248,31 @@ function toggleOverlay(){
     }
 }
 
+function toggleFullscreen() {
+    if(!(!document.fullscreenElement && !document.msFullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement)) {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        }else if (document.webkitCancelFullScreen) {
+            document.webkitCancelFullScreen();
+        }
+    } else {
+        var element = document.body;
+        if (element.requestFullscreen) {
+            element.requestFullscreen();
+        } else if (element.msRequestFullscreen) {
+            element.msRequestFullscreen();
+        }else if (element.mozRequestFullScreen) {
+            element.mozRequestFullScreen();
+        }else if (element.webkitRequestFullscreen) {
+            element.webkitRequestFullscreen();
+        }
+    }
+}
+
 //On key spesification
 function onKey(e) {
     var key = e.keyCode ? e.keyCode : e.which;

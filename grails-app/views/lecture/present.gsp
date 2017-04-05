@@ -59,32 +59,41 @@
         </div>
 
         <div id="pace-container">
-            <img style="height:28px; position:absolute; top:5px; left:10px;" src="${resource(dir: 'images', file: "snail.svg")}" alt="Grails"/>
+            <img id="pace-snail" class="pace-icon" src="${resource(dir: 'images', file: "snail.svg")}" alt="Grails"/>
             <div id="pace-background">
                 <div id="pace-overlay"></div>
             </div>
-            <img style="height:22px; position:absolute; top: 5px; right: 17px;" src="${resource(dir: 'images', file: "rabbit.svg")}" alt="Grails"/>
+            <img id="pace-rabbit" class="pace-icon" src="${resource(dir: 'images', file: "rabbit.svg")}" alt="Grails"/>
         </div>
 
         <div id="buttons-container">
+            <div id="buttons-wrapper">
+                <g:link url="/lecturer" title="Home" class="btn btn-primary btn-md" >
+                    <span class="glyphicon glyphicon-btn glyphicon-home" />
+                </g:link>
 
-            <g:link url="/lecturer" class="btn btn-primary btn-md" style="float:left;margin-left:0px;">
-                Home
-            </g:link>
+                <button id="display_question_btn" class="btn btn-primary btn-md" title="Questions"
+                        data-toggle="modal" data-target="#questionsModal" type="button">
+                    <span class="glyphicon glyphicon-btn glyphicon-question-sign" />
+                    <span id="question-badge" class="badge progress-bar-danger hidden">0</span>
+                </button>
 
-            <button id="display_question_btn" style="float:left; margin-left:8px; position: relative;" class="btn btn-primary btn-md" data-toggle="modal" data-target="#questionsModal" type="button">
-                Questions
-                <span id="question-badge" class="badge progress-bar-danger hidden">0</span>
-            </button>
+                <button class="btn btn-primary btn-md" type="button" title="Toggle markings overlay" onclick="toggleOverlay()">
+                    Toggle overlay
+                </button>
 
-            <button style="float:left; margin-left:8px; position: relative;" class="btn btn-primary btn-md" type="button" onclick="toggleOverlay()">
-                Toggle overlay
-            </button>
+                <button id="btn-fullscreen" class="btn btn-primary btn-md" title="Toggle fullscreen mode"
+                        type="button" onclick="toggleFullscreen();">
+                    <span class="glyphicon glyphicon-btn glyphicon-fullscreen" />
+                </button>
 
-            <g:form class="form-inline" controller="lecture" style="float:left;margin-left:8px; margin-bottom: 0px;"
-                            action="close_lecture" onsubmit="return confirm('Are you sure you want to close the current lecture?');" >
-                <g:submitButton name="Submit" value="Close lecture" class="btn btn-danger btn-md" />
-            </g:form>
+                <button id="btn-close-lecture" class="btn btn-danger btn-md" title="Close lecture"
+                        onsubmit="if(confirm('Are you sure you want to close the current lecture?')) document.forms['close-lecture'].submit()">
+                    <span class="glyphicon glyphicon-btn glyphicon-remove-sign" />
+                </button>
+            </div>
+
+            <g:form name="close-lecture" class="hidden" controller="lecture" action="close_lecture" />
 
         </div>
 
