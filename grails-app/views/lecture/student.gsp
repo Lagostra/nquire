@@ -73,6 +73,10 @@
         <span class="glyphicon glyphicon-refresh large glyphicon-refresh-animate"></span> Loading...
     </div>
 
+    <button id="btn-goto-lecturer" class="btn btn-default hidden" onclick="renderPage(lecturersCurrentPage);">
+        Go to lecturer's current page
+    </button>
+
     <div style="position: fixed;"><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>
     <div id="presentation-container">
         <canvas id="the-canvas"></canvas>
@@ -88,11 +92,11 @@
         <img style="height:22px;" src="${resource(dir: 'images', file: "speech-bubble.svg")}" alt="Grails"/>
     </button>
 
-    <button id="slower" class="btn btn-default btn-lg btn-danger " type="button" data-toggle="tooltip" title="the lecture is going too fast, SLOWER!" onclick="slowerButtonClicked()">
+    <button id="slower" class="btn btn-default btn-lg btn-danger " type="button" data-toggle="tooltip" title="I want the lecture to go SLOWER!" onclick="slowerButtonClicked()">
         <img style="height:23px;" src="${resource(dir: 'images', file: "snail.svg")}" alt="Grails"/>
     </button>
 
-    <button id="faster" class="btn btn-default btn-lg btn-warning " type="button" data-toggle="tooltip" title="the lecture is going too slow, FASTER!" onclick="fasterButtonClicked()">
+    <button id="faster" class="btn btn-default btn-lg btn-warning " type="button" data-toggle="tooltip" title="I want the lecture to go FASTER!" onclick="fasterButtonClicked()">
         <img style="height:23px;" src="${resource(dir: 'images', file: "rabbit.svg")}" alt="Grails"/>
     </button>
     </div>

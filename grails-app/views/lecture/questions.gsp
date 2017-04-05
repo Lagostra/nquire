@@ -1,9 +1,19 @@
 <html>
 <head>
     <meta name="layout" content="main" />
+    <asset:stylesheet src="questions.css"/>
     <title>Questions - nquire</title>
 </head>
 <body>
+<div id="pace-container-questions">
+    <img style="height:28px; position:absolute; top:4px; left:10px;" src="${resource(dir: 'images', file: "snail.svg")}" alt="Grails"/>
+    <div id="pace-background-questions">
+        <div id="pace-overlay-questions"></div>
+    </div>
+    <img style="height:22px; position:absolute; top: 3px; right: 17px;" src="${resource(dir: 'images', file: "rabbit.svg")}" alt="Grails"/>
+</div>
+
+
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <g:form controller="lecture" action="close_lecture" class="inline-form pull-right" onsubmit="return confirm('Are you sure you want to close the current lecture?');" >

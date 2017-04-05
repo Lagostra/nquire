@@ -3,10 +3,14 @@
  */
 
 var isMarking;
+var socketSendSpy;
+var question_modal;
 
 describe("Test student.js", function(){
 
     beforeEach(function(){
+
+
 
         var htmlElements = {};
         document.getElementById =
@@ -18,39 +22,48 @@ describe("Test student.js", function(){
                 return htmlElements[id];
             });
 
+
         //INNIT
+        socket = new Object();
+        socket.send = function(){};
+        socketSendSpy = spyOn(socket,"send");
+
         var hard_btn = document.createElement("div");
         hard_btn.id = "hard";
         hard_btn.onclick = hardButtonClicked();
 
-        var question_btn = document.createElement("div");
-        question_btn.id = "question"
-        // questionButtonClicked inneholder $-referanser til bootstrap modals og vil throwe errors i jasmine
-        //question_btn.onclick = questionButtonClicked();
-
-        var faster_btn = document.createElement("div");
-        faster_btn.id = "faster"
-        // fasterButtonClicked inneholder socket-referanser og vil throwe errors i jasmine
-        //faster_btn.onclick = fasterButtonClicked();
-
-        var slower_btn = document.createElement("div");
-        slower_btn.id = "slower"
-        // slowerButtonClicked inneholder socket-referanser og vil throwe errors i jasmine
-        //slower_btn.onclick = slowerButtonClicked();
-
         var buttons_container = document.createElement("div");
         buttons_container.id = "buttons-container";
+
+        question_modal = document.createElement("div")
+        question_modal.classList.add("modal");
+        question_modal.id = "questionModal";
+        question_modal.modal = function(){};
+
+                // form
+        var modalBody = document.createElement("div");
+        modalBody.classList.add("modal-body");
+        var form = document.createElement("form");
+        form.name = "questionForm";
+        var textArea = document.createElement("textarea");
+        textArea.name = "questionInput";
+        textArea.id = "questionInput";
+        form.appendChild(textArea);
+        modalBody.appendChild(form);
+        document.body.appendChild(form);
+
 
     });
 
     afterEach(function() {
-
-
+        socketSendSpy = null;
+        document.body.removeChild(document.forms["questionForm"]);
     });
 
 
     it("Test updateCanvas", function() {
-        //sockets - not prioritized for testing at this point
+        updateCanvas();
+        expect(socketSendSpy).toHaveBeenCalled();
     });
 
     it("Test hardButtonClicked if isMarking false", function() {
@@ -73,20 +86,25 @@ describe("Test student.js", function(){
 
 
     it("Test questionButtonClicked", function() {
-        document.getElementById("question").click();
-        //expect(questionButtonClicked()).toHaveBeenCalled(1);
+        var modalSpy = spyOn(question_modal,"modal")
+        questionButtonClicked();
+        expect(modalSpy).toHaveBeenCalled();
     });
 
     it("Test slowerButtonClicked", function() {
+        slowerButtonClicked();
+        expect(socketSendSpy).toHaveBeenCalled();
 
     });
 
-    it("Test fastButtonClicked", function() {
-
+    it("Test fasterButtonClicked", function() {
+        fasterButtonClicked();
+        expect(socketSendSpy).toHaveBeenCalled();
     });
 
     it("Test modalSaveButtonClicked", function() {
-        //modalSaveButtonClicked inneholder socket-referanser og vil throwe errors i jasmine
+        modalSaveButtonClicked();
+        expect(socketSendSpy).toHaveBeenCalled();
     });
 
     it("Test forceSendQuestion", function() {
@@ -104,16 +122,17 @@ describe("Test student.js", function(){
     });
 
     it("Test initStudent", function() {
-        /*check onresize, onmousemove, on keypressed (vanskelig å kjøre initStudent uten errors i jasmine pga sockets)
+        //check onresize, onmousemove, on keypressed (vanskelig å kjøre initStudent uten errors i jasmine pga sockets)
 
-         initStudent();
-         var keypressed = new Event("keypress");
-         keypressed.which = 39;
-         var page = currentPage;
-         window.trigger(keypressed)
-         expect(currentPage)
-         .toEqual(page+1);
-         */
+        url = 'ws://test.address';
+        initStudentCanvas = function(){};
+
+        var WSSpy = spyOn(window, "WebSocket").and.callFake(function(url,protocols){
+            var object = new Object();
+            object.send = function(){};
+            return object;
+        });
+
     });
 
 });

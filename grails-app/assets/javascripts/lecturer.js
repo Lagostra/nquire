@@ -38,7 +38,9 @@ function initLecturer() {
 
     //rerenders current page on window resize
     window.onresize = function() {
-        renderPage(currentPage);
+        if(document.getElementById("the-canvas")){
+            renderPage(currentPage);
+        }
     }
 }
 
@@ -125,6 +127,9 @@ function addQuestion(question) {
         question_object.classList.add(class_new_question);
     question_object.innerHTML = question.question;
     question_container.appendChild(question_object);
+    if (document.getElementById("question_container")){
+        document.getElementById("question_container").scrollTop = document.getElementById("question_container").scrollHeight;
+    }
 };
 
 //Sets a question to read, so it is not considdered new
@@ -207,15 +212,65 @@ function getNewQuestions(){
 };
 
 //sets the position of the pace bar (0-100)
-function setPaceValue(value){
-    if (value >= 100){
-        value = 100;
+function setPaceValue(value) {
+    if (document.getElementById("pace-overlay")){
+        if (value >= 100) {
+            value = 100;
+        }
+        else if (value <= 0) {
+            value = 0;
+        }
+        var pointer = document.getElementById("pace-overlay");
+        pointer.style.marginLeft = (value).toString() + "%";
     }
-    else if(value <= 0) {
-        value = 0;
+    if (document.getElementById("pace-overlay-questions")){
+        if (value >= 100) {
+            value = 100;
+        }
+        else if (value <= 0) {
+            value = 0;
+        }
+        var pointer = document.getElementById("pace-overlay-questions");
+        pointer.style.marginLeft = (value).toString() + "%";
     }
-    var pointer = document.getElementById("pace-overlay");
-    pointer.style.marginLeft = (value).toString() + "%";
+}
+
+function toggleOverlay(){
+
+    if (document.getElementById("lecturer-canvas")){
+        var container = document.getElementById("lecturer-canvas");
+        if (container.style.display != "none"){
+            container.style.display = "none";
+        }
+        else {
+            container.style.display = "block";
+        }
+    }
+}
+
+function toggleFullscreen() {
+    if(!(!document.fullscreenElement && !document.msFullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement)) {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        }else if (document.webkitCancelFullScreen) {
+            document.webkitCancelFullScreen();
+        }
+    } else {
+        var element = document.body;
+        if (element.requestFullscreen) {
+            element.requestFullscreen();
+        } else if (element.msRequestFullscreen) {
+            element.msRequestFullscreen();
+        }else if (element.mozRequestFullScreen) {
+            element.mozRequestFullScreen();
+        }else if (element.webkitRequestFullscreen) {
+            element.webkitRequestFullscreen();
+        }
+    }
 }
 
 //On key spesification
@@ -225,12 +280,10 @@ function onKey(e) {
         case 37: // Left
             renderPreviousPage();
             socket.send(JSON.stringify({type: "pageChange", page: currentPage}));
-            backwardPage();
             break;
         case 39: // Right
             renderNextPage();
             socket.send(JSON.stringify({type: "pageChange", page: currentPage}));
-            forwardPage();
             break;
     }
 }

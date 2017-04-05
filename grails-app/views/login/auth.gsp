@@ -11,7 +11,7 @@
                 </div>
                 <div class="panel-body">
                     <g:if test='${flash.message}'>
-                        <div class="login_message">${flash.message}</div>
+                        <div class="login_message alert alert-danger">${flash.message}</div>
                     </g:if>
                     <form action="${postUrl ?: '/login/authenticate'}" name="loginForm" id="loginForm" method="POST">
                         <div class="form-group">

@@ -32,6 +32,7 @@ class LectureHandler {
     private int id;
     private int lastStudentId = 0;
     private int nextQuestionId = 0;
+    private int lecturersCurrentPage = 1;
     private double pace = 50.0;
     private long lastActivity;
     private String lecturerToken;
@@ -80,7 +81,9 @@ class LectureHandler {
     public void addStudent(WebSocketSession student) {
         students.put(student, new Student(student, ++lastStudentId))
         String msg = JsonOutput.toJson([type: "connected"])
-        student.sendMessage(new TextMessage(msg))
+        sendTo(student, msg)
+        msg = JsonOutput.toJson([type: "pageChange", page: lecturersCurrentPage])
+        sendTo(student, msg)
     }
 
     public removeUser(WebSocketSession user) {
@@ -109,6 +112,7 @@ class LectureHandler {
                     ]);
                 sendTo(userSession, msg)
             } else if(mObject.type == "pageChange") {
+                lecturersCurrentPage = mObject.page;
                 sendToAllStudents(message)
             } else if(mObject.type == "setQuestionsRead") {
                 for(int id : mObject.questions) {

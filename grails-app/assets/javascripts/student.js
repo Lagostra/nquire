@@ -8,6 +8,8 @@ var socket;
 var timeout;
 var lastPaceFeedback = 0;
 
+var lecturersCurrentPage = 1;
+
 function initStudent() {
     document.body.onmousemove = mouseMoveHandler;
 
@@ -37,6 +39,12 @@ function initStudent() {
                 document.getElementById("modalOwnQuestion").innerHTML = msg.ownQuestion;
                 document.getElementById("modalMatchedQuestion").innerHTML = msg.matchedQuestion;
                 $('#similarQuestionModal').modal('show');
+                break;
+            case "pageChange":
+                lecturersCurrentPage = msg.page;
+                if(pdf)
+                    checkLecturerPage();
+                break;
         }
     }
 
@@ -50,11 +58,9 @@ function initStudent() {
     window.onkeydown = function(e){
         if (e.keyCode == '39') {
             this.renderNextPage();
-            pageInc();
         }
         else if (e.keyCode == '37') {
             this.renderPreviousPage();
-            pageDec();
         }
     }
 
@@ -62,6 +68,8 @@ function initStudent() {
     window.onresize = function() {
         renderPage(currentPage);
     }
+
+    addRenderPageListener(checkLecturerPage);
 
     initStudentCanvas();
 }
@@ -75,7 +83,8 @@ function hardButtonClicked() {
 }
 
 function toggleMarking() {
-    isMarking = !isMarking;
+    if(markingEnabled)
+        isMarking = !isMarking;
     if(!isMarking)
         drag = false;
 
@@ -147,6 +156,16 @@ function mouseMoveHandler(){
     },2000)
 
 }
+
+function checkLecturerPage() {
+    var button = document.getElementById("btn-goto-lecturer");
+    if(currentPage == lecturersCurrentPage) {
+        button.classList.add("hidden");
+    } else {
+        button.classList.remove("hidden");
+    }
+}
+
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip({
         placement : 'top'

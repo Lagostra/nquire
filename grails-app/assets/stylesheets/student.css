@@ -2,6 +2,14 @@ html{
     height: 100%;
 }
 
+#btn-goto-lecturer {
+    z-index: 10;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 20px;
+}
+
 #the-canvas {
     margin: auto;
     display:Block;
@@ -15,17 +23,22 @@ body {
 #hard{
 
 }
+
+#hard.active {
+    background: #5cb85c;
+}
+
 #undo {
 
 }
 #question{
-
+    margin-left: 5px;
 }
 #slower{
-
+    margin-left: 5px;
 }
 #faster{
-
+    margin-left: 5px;
 }
 #buttons-container{
     position: fixed;

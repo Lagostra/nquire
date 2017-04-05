@@ -18,46 +18,8 @@ describe("Test Drawing/student_canvas.js", function(){
         expect(tempRect.w).toBe(0);
         expect(tempRect.h).toBe(0);
         expect(tempRect.sequence).toBe(0);
-        expect(page).toBe(0);
         expect(seqArray.length).toBe(1);
         expect(seqArray[0]).toBe(0);
-        expect(presArray.length).toBe(1);
-        expect(presArray[0].length).toBe(0);
-    })
-    it("Test pageInc and pageDec", function(){
-        pageInc();
-        expect(page).toBe(1);
-        expect(presArray.length).toBe(2);
-        expect(presArray[1].length).toBe(0);
-        expect(seqArray.length).toBe(2);
-        expect(seqArray[1]).toBe(0);
-
-        pageInc();
-        expect(page).toBe(2);
-        expect(presArray.length).toBe(3);
-        expect(presArray[1].length).toBe(0);
-        expect(seqArray.length).toBe(3);
-        expect(seqArray[1]).toBe(0);
-
-        pageDec();
-        expect(page).toBe(1);
-        expect(presArray.length).toBe(3);
-        expect(presArray[1].length).toBe(0);
-        expect(seqArray.length).toBe(3);
-        expect(seqArray[1]).toBe(0);
-
-        pageDec();
-        expect(page).toBe(0);
-        expect(presArray.length).toBe(3);
-        expect(presArray[1].length).toBe(0);
-        expect(seqArray.length).toBe(3);
-        expect(seqArray[1]).toBe(0);
-
-        pageDec();
-        expect(page).toBe(0);
-        expect(presArray.length).toBe(3);
-        expect(presArray[1].length).toBe(0);
-        expect(seqArray.length).toBe(3);
-        expect(seqArray[1]).toBe(0);
+        expect(presArray.length).toBe(0);
     })
 })
