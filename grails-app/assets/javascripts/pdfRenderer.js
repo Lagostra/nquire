@@ -18,6 +18,7 @@ var pdf = false;
 var pageNumPending = null;
 var currentPage = 1;
 var renderPageListeners = new Array();
+var pdfLoadListeners = new Array();
 
 // Disable workers to avoid yet another cross-origin issue (workers need
 // the URL of the script to be loaded, and dynamically loading a cross-origin
@@ -50,6 +51,11 @@ function loadPDF(){
 
             // Hides the loading spinner
             document.getElementById("loading-container").style.display = "none";
+
+            // Call pdfLoad listeners
+            for(var i = 0; i < pdfLoadListeners.length; i++) {
+                pdfLoadListeners[i]();
+            }
 
             //first renderBoxes
             this.renderPage(1);
@@ -113,6 +119,10 @@ function renderPage(pageNumber) {
 
 function addRenderPageListener(listener) {
     renderPageListeners.push(listener);
+}
+
+function addPdfLoadListener(listener) {
+    pdfLoadListeners.push(listener);
 }
 
 // returns a new viewport with a scale that fits the page

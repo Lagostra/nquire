@@ -58,11 +58,9 @@ function initStudent() {
     window.onkeydown = function(e){
         if (e.keyCode == '39') {
             this.renderNextPage();
-            pageInc();
         }
         else if (e.keyCode == '37') {
             this.renderPreviousPage();
-            pageDec();
         }
     }
 
@@ -85,7 +83,8 @@ function hardButtonClicked() {
 }
 
 function toggleMarking() {
-    isMarking = !isMarking;
+    if(markingEnabled)
+        isMarking = !isMarking;
     if(!isMarking)
         drag = false;
 

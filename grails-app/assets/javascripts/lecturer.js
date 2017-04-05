@@ -280,12 +280,10 @@ function onKey(e) {
         case 37: // Left
             renderPreviousPage();
             socket.send(JSON.stringify({type: "pageChange", page: currentPage}));
-            backwardPage();
             break;
         case 39: // Right
             renderNextPage();
             socket.send(JSON.stringify({type: "pageChange", page: currentPage}));
-            forwardPage();
             break;
     }
 }
