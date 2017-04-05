@@ -88,7 +88,7 @@
                 </button>
 
                 <button id="btn-close-lecture" class="btn btn-danger btn-md" title="Close lecture"
-                        onsubmit="if(confirm('Are you sure you want to close the current lecture?')) document.forms['close-lecture'].submit()">
+                        onclick="if(confirm('Are you sure you want to close the current lecture?')) document.forms['close-lecture'].submit()">
                     <span class="glyphicon glyphicon-btn glyphicon-remove-sign" />
                 </button>
             </div>
