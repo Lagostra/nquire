@@ -11,11 +11,13 @@
             <div class="jumbotron">
                 <div class="container">
                     <h1 class="display-3">nquire</h1>
-                    <p>Welcome to <em>nquire!</em> This 
-                        Dette programmet er en av de
-                    ledende innovatørene innen undervisning på universitetsnivå.
-                    Vår visjon for prosjektet er at hver forelesning skal forbedres
-                    iterativt, basert på tilbakemeldinger fra studentene i salen.</p>
+                    <p>Welcome to <em>nquire!</em> This product is one
+                    of the leading innovations in the field of
+                    university level teaching. We, the<em>nquire</em>-team,
+                    envision every lecture to be an interactive discussion
+                    between students and professor. With this tool, lectures
+                    will improved through iteration, based on feedback from
+                    the students.</p>
                 </div>
             </div>
         </div>
@@ -29,7 +31,10 @@
         <!-- 3 Slots nederst, med tekst som forklarer features -->
         <div class="row">
             <div class="col-md-3">
-                <h2>Vanskelighetsgrad.</h2>
+                <h2>Difficulty.</h2>
+                <p>
+
+                </p>
                 <p>Gjennom <em>nquire's</em> dynamiske presentasjonsviser kan studenter
                 enkelt få oversikt over slides under forelesning. Brukeren kan markere
                 deler av presentasjonen som er utfordrende, slik at foreleser
