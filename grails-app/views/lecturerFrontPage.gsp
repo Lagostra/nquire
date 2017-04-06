@@ -32,29 +32,30 @@
         <div class="row">
             <div class="col-md-3">
                 <h2>Difficulty.</h2>
-                <p>
-
+                <p>Through <em>nquire's</em> dynamic presentation viewer, students
+                    can easily browse slides during a lecture. The users can, at
+                    their own pace, mark whichever parts of the slides they find
+                    challenging, so the lecturer knows what might need further
+                    explannation.
                 </p>
-                <p>Gjennom <em>nquire's</em> dynamiske presentasjonsviser kan studenter
-                enkelt få oversikt over slides under forelesning. Brukeren kan markere
-                deler av presentasjonen som er utfordrende, slik at foreleser
-                vet hva som trenger videre gjennomgang. Hvis et område blir
-                markert av mange, vises dette på den felles presentasjonen,
-                så man slipper å føle seg alene dersom man ikke forstår alt!</p>
             </div>
             <div class="col-md-3">
-                <h2>Spørsmål?</h2>
-                <p>Lurer du på noe under forelesning? Ved bruk av <em>nquire's</em>
-                "ask-feature" kan man stille spørsmål med lav terskel, uten å
-                føle at man sinker forelesningen, eller trenger å snakke høyt i
-                en sal med mange mennesker.</p>
+                <h2>Questions?</h2>
+                <p>Do your students have questions during the leture?
+                    By using <em>nquire's</em> asking-feature, the students
+                    can ask questions without raising their hands and
+                    grabbing everyone's attention. As a lecturer you can
+                    browse the questions and answer them at your own pace,
+                    making for an interactive lecture.
+                </p>
             </div>
             <div class="col-md-3">
-                <h2>Hastighet!</h2>
-                <p>Går forelesningen for fort? Eller kanskje sovner du av kjedsomhet?
-                I <em>nquire</em> kan man med et enkelt klikk gi tilbakemelding
-                på om forelesningen suser av gårde eller snegler seg fram. Dette blir
-                dynamisk kommunisert til foreleser, slik at tempoet kan tilpasses fortløpende!</p>
+                <h2>Velocity!</h2>
+                <p>Do you sometimes talk too slowly? Or maybe you just wonder
+                    whether your students can keep up? With <em>nquire</em>
+                    you can easily and dynamically get pace feedback from the
+                    students, allowing for on-the-fly adjustments!
+                </p>
             </div>
         </div>
     </div> <!-- /container -->
