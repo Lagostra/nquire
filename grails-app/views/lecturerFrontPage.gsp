@@ -11,7 +11,8 @@
             <div class="jumbotron">
                 <div class="container">
                     <h1 class="display-3">nquire</h1>
-                    <p>Velkommen til <em>nquire!</em> Dette programmet er en av de
+                    <p>Welcome to <em>nquire!</em> This 
+                        Dette programmet er en av de
                     ledende innovatørene innen undervisning på universitetsnivå.
                     Vår visjon for prosjektet er at hver forelesning skal forbedres
                     iterativt, basert på tilbakemeldinger fra studentene i salen.</p>
