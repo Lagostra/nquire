@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <img src="grails-app/assets/images/audience.jpg" class="img">
+            <asset:image src="audience.jpg" style="width: 100%;"/>
         </div>
     </div>
 
