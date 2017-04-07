@@ -162,11 +162,14 @@ describe("Test lecturer.js", function(){
             jasmine.createSpy().and.callFake(function() {
 
         });
-        resetNewQuestions();
+        expect(new_question_badge.innerHTML).toBe("1");
 
+        resetNewQuestions();
+        
         expect(new_question_badge.innerHTML).toBe("0");
         expect(document.getElementById("question-popup").classList.contains("hidden"))
             .toBe(true);
+
     });
 
     it ("Test clearAllQuestions", function() {

@@ -188,7 +188,7 @@ function resetNewQuestions(){
         questions: readIds
     });
     socket.send(msg);
-    
+
     return new_questions;
 }
 
