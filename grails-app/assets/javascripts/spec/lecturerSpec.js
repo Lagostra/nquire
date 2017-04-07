@@ -60,7 +60,7 @@ describe("Test lecturer.js", function(){
 
         //BADGE
         badge = document.createElement("div");
-        badge.classList.add("new-question-badge");
+        badge.id = "new-question-badge";
 
 
 
@@ -130,8 +130,8 @@ describe("Test lecturer.js", function(){
                return 1;
             });
 
-        expect (new_question_badge).not.toBe(null);
-        expect (new_question_badge2).not.toBe(null);
+        expect (badge).not.toBe(null);
+        expect (new_question_badge_2).not.toBe(null);
         expect(notifyNewQuestion()).toBe(0);
         expect(badge.innerHTML).toBe("");
     });
