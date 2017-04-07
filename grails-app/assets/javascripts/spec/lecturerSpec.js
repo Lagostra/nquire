@@ -110,11 +110,17 @@ describe("Test lecturer.js", function(){
     });
 
     it("Test noifyNewQuestion", function() {
-        addQuestion(q);
+        getNewQuestions =
+            jasmine.createSpy().and.callFake(function() {
+            return 1;
+        });
         notifyNewQuestion();
 
+
         expect(notifyNewQuestion()).toBe(1);
-        expect(badge.innerHTML).toBe("1");
+        expect(document.getElementById("question-popup")
+            .classList.contains("hidden")).toBe(false);
+        expect(new_question_badge.innerHTML).toBe("1");
     });
 
     it("Test noifyNewQuestion w/ questions displayed", function() {
@@ -123,14 +129,14 @@ describe("Test lecturer.js", function(){
             jasmine.createSpy().and.callFake(function() {
                 return true;
             });
-        notifyNewQuestion();
-
         document.getElementsByClassName =
             jasmine.createSpy().and.callFake(function() {
-               return 1;
+                return 1;
             });
+        notifyNewQuestion();
 
-        expect (badge).not.toBe(null);
+
+        expect (new_question_badge).not.toBe(null);
         expect (new_question_badge_2).not.toBe(null);
         expect(notifyNewQuestion()).toBe(0);
         expect(badge.innerHTML).toBe("");
