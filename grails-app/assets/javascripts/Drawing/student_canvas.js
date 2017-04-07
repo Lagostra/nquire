@@ -81,7 +81,9 @@ function mouseUp(event){
     if(!isMarking)
         return;
 
+    document.getElementById('presentation-container').style.cursor = null;
     toggleMarking();
+
     drag = false;
     if(tempRect.w != 0 && tempRect.h != 0){
         var b = false;

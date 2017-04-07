@@ -90,9 +90,10 @@ function toggleMarking() {
     if(!isMarking)
         drag = false;
 
-    if(isMarking)
+    if(isMarking) {
         document.getElementById("hard").classList.add("active");
-    else
+        document.getElementById('presentation-container').style.cursor = "crosshair";
+    } else
         document.getElementById("hard").classList.remove("active");
 }
 
