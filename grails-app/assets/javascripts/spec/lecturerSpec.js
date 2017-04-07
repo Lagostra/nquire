@@ -157,8 +157,16 @@ describe("Test lecturer.js", function(){
     });
 
     it ("Test resetNewQuestions", function() {
+        addQuestion(q);
+        socket.send =
+            jasmine.createSpy().and.callFake(function() {
 
-        expect(true).toBe(true);
+        });
+        resetNewQuestions();
+
+        expect(new_question_badge.innerHTML).toBe("0");
+        expect(document.getElementById("question-popup").classList.contains("hidden"))
+            .toBe(true);
     });
 
     it ("Test clearAllQuestions", function() {
