@@ -159,7 +159,7 @@ function notifyNewQuestion() {
     return 1;
 }
 
-//Check whether questions are displayed
+//Returns true if questions are hidden, as by default
 function getQuestionsToggled() {
     return question_container.classList.contains(class_hidden);
 }

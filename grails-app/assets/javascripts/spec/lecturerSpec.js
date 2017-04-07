@@ -16,6 +16,7 @@ describe("Test lecturer.js", function(){
             jasmine.createSpy().and.callFake(function(id){
                 if (!htmlElements[id]) {
                     var newElement = document.createElement("div");
+                    newElement.id = id;
                     htmlElements[id] = newElement;
                 }
                 return htmlElements[id];
@@ -55,7 +56,7 @@ describe("Test lecturer.js", function(){
         display_question_btn.id = "display_question_btn";
 
 
-        //
+        //question
         q = {question : "what?", id : 1, read : true};
 
         //BADGE
@@ -135,16 +136,24 @@ describe("Test lecturer.js", function(){
             });
         notifyNewQuestion();
 
-
         expect (new_question_badge).not.toBe(null);
         expect (new_question_badge_2).not.toBe(null);
         expect(notifyNewQuestion()).toBe(0);
         expect(badge.innerHTML).toBe("");
     });
 
-    it ("Test getQuestionsToggled", function() {
+    it ("Test getQuestionsToggled test true", function() {
+        question_container.classList.add(class_hidden);
+        expect(getQuestionsToggled()).toBe(true);
+    });
 
-        expect(true).toBe(true);
+    it("Test getQuestionsToggled test false", function() {
+        question_container.classList.remove(class_hidden);
+        console.log(question_container.classList);
+        console.log(question_container.classList.contains(class_hidden));
+        console.log(getQuestionsToggled());
+        expect(getQuestionsToggled()).toBe(false);
+        //TODO Dette gir ingen mening, trenger parprogrammering elns for å fikse
     });
 
     it ("Test resetNewQuestions", function() {
