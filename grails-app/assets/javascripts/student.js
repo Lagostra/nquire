@@ -113,6 +113,7 @@ function slowerButtonClicked(){
 
         socket.send(message)
     }
+    doButtonCooldown();
 }
 function fasterButtonClicked(){
     if(new Date().getTime() - lastPaceFeedback > 60*1000) {
@@ -125,7 +126,22 @@ function fasterButtonClicked(){
 
         socket.send(message);
     }
+    doButtonCooldown();
 }
+
+function doButtonCooldown() {
+    var btnFaster = document.getElementById("faster");
+    var btnSlower = document.getElementById("slower");
+
+    btnFaster.disabled = true;
+    btnSlower.disabled = true;
+
+    setTimeout(function() {
+        btnFaster.disabled = false;
+        btnSlower.disabled = false;
+    }, 60000);
+}
+
 function modalSaveButtonClicked(){
     var form = document.forms['questionForm'];
 
@@ -150,11 +166,12 @@ function forceSendQuestion() {
 }
 
 function mouseMoveHandler(){
-    document.getElementById("buttons-container").style.display = "block";
+    var btnContainer = document.getElementById("buttons-container");
+    btnContainer.style.transform = "translate(-50%, 0)";
 
     clearTimeout(timeout);
     timeout = setTimeout(function(){
-        document.getElementById("buttons-container").style.display = "none";
+        btnContainer.style.transform = "translate(-50%, 200%)";
     },2000)
 
 }
