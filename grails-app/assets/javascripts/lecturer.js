@@ -187,7 +187,9 @@ function resetNewQuestions(){
         type: "setQuestionsRead",
         questions: readIds
     });
-    socket.send(msg)
+    socket.send(msg);
+    
+    return new_questions;
 }
 
 //Reset the questions array
