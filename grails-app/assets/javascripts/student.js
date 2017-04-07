@@ -133,6 +133,10 @@ function doButtonCooldown() {
     var btnFaster = document.getElementById("faster");
     var btnSlower = document.getElementById("slower");
 
+    // Hide tooltips; otherwise they're shown during entire cooldown
+    $(btnFaster).tooltip('hide');
+    $(btnSlower).tooltip('hide');
+
     btnFaster.disabled = true;
     btnSlower.disabled = true;
 
