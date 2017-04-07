@@ -53,8 +53,15 @@ function initStudent() {
     }
 
     socket.onclose = function(e) {
-        console.log("Connection closed with code " + e.code + ": " + e.reason);
-        alert("Connection to server lost. Please reload the page.");
+        switch(e.code) {
+            case 4000:
+                window.location = window.location.protocol + "//" +  window.location.hostname + (location.port ? ':' + location.port : '') + "?status=1";
+                break;
+            default:
+                console.log("Connection closed with code " + e.code + ": " + e.reason);
+                alert("Connection to server lost. Please reload the page.");
+                break;
+        }
     }
 
     window.onkeydown = function(e){

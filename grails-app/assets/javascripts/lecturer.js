@@ -109,8 +109,15 @@ function initSockets() {
     };
 
     socket.onclose = function(e) {
-        console.log("Connection closed with code " + e.code + ": " + e.reason);
-        alert("Connection to server lost. Please reload the page.");
+        switch(e.code) {
+            case 4000:
+
+                break;
+            default:
+                console.log("Connection closed with code " + e.code + ": " + e.reason);
+                alert("Connection to server lost. Please reload the page.");
+                break;
+        }
     };
 }
 

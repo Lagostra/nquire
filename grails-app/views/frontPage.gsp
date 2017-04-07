@@ -18,9 +18,14 @@
     <img id="nquire-image" src="${resource(dir: 'images', file: "textLogo.png")}" alt="Grails"/>
     <div class="panel panel-default">
         <div class="panel-body">
-            <g:if test="${status == true}">
+            <g:if test="${status == 2}">
                 <div class="alert alert-danger alert-small">
                     <strong>Error:</strong> No lecture with given id.
+                </div>
+            </g:if>
+            <g:if test="${status == 1}">
+                <div class="alert alert-warning alert-small">
+                    The lecture has been closed by the lecturer.
                 </div>
             </g:if>
             <div id="lecture-id-invalid-warning" class="alert alert-danger alert-small hidden">
