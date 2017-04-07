@@ -49,10 +49,12 @@ function initStudent() {
     }
 
     socket.onerror = function(e) {
-
+        console.log(e);
     }
+
     socket.onclose = function(e) {
-        console.log("Connection closed.");
+        console.log("Connection closed with code " + e.code + ": " + e.reason);
+        alert("Connection to server lost. Please reload the page.");
     }
 
     window.onkeydown = function(e){
