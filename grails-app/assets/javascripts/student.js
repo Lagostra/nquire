@@ -92,7 +92,7 @@ function toggleMarking() {
 
     if(isMarking) {
         document.getElementById("hard").classList.add("active");
-        document.getElementById('presentation-container').style.cursor = "crosshair";
+        document.getElementById('student-canvas').style.cursor = "crosshair";
     } else
         document.getElementById("hard").classList.remove("active");
 }

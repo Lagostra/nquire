@@ -81,7 +81,7 @@ function mouseUp(event){
     if(!isMarking)
         return;
 
-    document.getElementById('presentation-container').style.cursor = null;
+    document.getElementById('student-canvas').style.cursor = null;
     toggleMarking();
 
     drag = false;
