@@ -173,8 +173,11 @@ describe("Test lecturer.js", function(){
     });
 
     it ("Test clearAllQuestions", function() {
+        addQuestion(q);
+        clearAllQuestions();
 
-        expect(true).toBe(true);
+        expect(questions.length === 0).toBe(true);
+        expect(question_container.innerHTML != "").toBe(true);
     });
 
     it ("Test setDefaultQuestion", function() {
