@@ -181,11 +181,17 @@ describe("Test lecturer.js", function(){
     });
 
     it ("Test setDefaultQuestion", function() {
+        setDefaultQuestion();
 
-        expect(true).toBe(true);
+        expect(question_container.innerHTML).toBe(
+            '<div id="default_question" ' +
+            'class="question">' +
+            'No questions yet' +
+            '</div>');
     });
 
     it ("Test removeDefaultQuestion", function() {
+        
 
         expect(true).toBe(true);
     });
