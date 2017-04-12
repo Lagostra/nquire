@@ -30,7 +30,7 @@
     <div class="container">
         <!-- 3 Slots nederst, med tekst som forklarer features -->
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <h2>Difficulty.</h2>
                 <p>Through <em>nquire's</em> dynamic presentation viewer, students
                     can easily browse slides during a lecture. The users can, at
@@ -39,7 +39,7 @@
                     explannation.
                 </p>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <h2>Questions?</h2>
                 <p>Do your students have questions during the leture?
                     By using <em>nquire's</em> asking-feature, the students
@@ -49,7 +49,7 @@
                     making for an interactive lecture.
                 </p>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <h2>Velocity!</h2>
                 <p>Do you sometimes talk too slowly? Or maybe you just wonder
                     whether your students can keep up? With <em>nquire</em>
