@@ -1,6 +1,6 @@
 /**
  * Created by lars on 28.03.2017.
- * Time spent 5h - Lars
+ * Time spent 13h - Lars
  *
  */
 var q;
@@ -173,18 +173,38 @@ describe("Test lecturer.js", function(){
     });
 
     it ("Test clearAllQuestions", function() {
+        addQuestion(q);
+        clearAllQuestions();
 
-        expect(true).toBe(true);
+        expect(questions.length === 0).toBe(true);
+        expect(question_container.innerHTML != "").toBe(true);
     });
 
     it ("Test setDefaultQuestion", function() {
+        setDefaultQuestion();
 
-        expect(true).toBe(true);
+        expect(question_container.innerHTML).toBe(
+            '<div id="default_question" ' +
+            'class="question">' +
+            'No questions yet' +
+            '</div>');
     });
 
     it ("Test removeDefaultQuestion", function() {
+        clearAllQuestions();
+        var parent = document.createElement("div");
+        var default_question =
+            document.createElement("div");
+        default_question.id = "default_question";
+        parent.addChild(default_question);
 
-        expect(true).toBe(true);
+        document.getElementById =
+            jasmine.createSpy().and.callFake(function () {
+              return default_question;
+            });
+        removeDefaultQuestion();
+
+        expect(parent.hasChildNodes()).toBe(false);
     });
 
     it ("Test getNewQuestions", function() {
