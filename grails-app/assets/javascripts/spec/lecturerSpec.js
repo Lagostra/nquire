@@ -65,14 +65,6 @@ describe("Test lecturer.js", function(){
         badge = document.createElement("div");
         badge.id = "new-question-badge";
 
-
-
-        /*TODO: denne må de som laget den gjøre
-        var menu_container = document.body.createElement("div");
-        badge.id = "menu-container";
-        */
-
-
     });
 
     afterEach(function() {
@@ -216,9 +208,6 @@ describe("Test lecturer.js", function(){
         expect(getNewQuestions()).toBe(2); //Scope in js...
     });
 
-    it ("Test mouseMoveHandler", function() {
 
-        expect(true).toBe(true);
-    });
 
 });
