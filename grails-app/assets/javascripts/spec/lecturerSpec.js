@@ -208,8 +208,8 @@ describe("Test lecturer.js", function(){
     });
 
     it ("Test getNewQuestions", function() {
-
-        expect(true).toBe(true);
+        addQuestion(q);
+        expect(getNewQuestions()).toBe(1);
     });
 
     it ("Test mouseMoveHandler", function() {
