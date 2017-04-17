@@ -4,6 +4,8 @@
  *
  */
 var q;
+var q2;
+var url;
 var question_container;
 var default_question;
 var display_question_btn;
@@ -26,8 +28,7 @@ describe("Test lecturer.js", function(){
         document.getElementsByClassName =
             jasmine.createSpy().and.callFake(function(c){
                if (!classes[c]){
-                   var newElement = document.createElement("div");
-                   classes[c] = newElement;
+                   classes[c] = document.createElement("div");
                }
                return classes[c];
             });
@@ -58,6 +59,7 @@ describe("Test lecturer.js", function(){
 
         //question
         q = {question : "what?", id : 1, read : true};
+        q2 = {question : "what what?", id : 1, read : true};
 
         //BADGE
         badge = document.createElement("div");
@@ -210,6 +212,8 @@ describe("Test lecturer.js", function(){
     it ("Test getNewQuestions", function() {
         addQuestion(q);
         expect(getNewQuestions()).toBe(1);
+        addQuestion(q2);
+        expect(getNewQuestions()).toBe(2); //Scope in js...
     });
 
     it ("Test mouseMoveHandler", function() {
