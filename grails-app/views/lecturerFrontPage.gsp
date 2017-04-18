@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <img id="lecpage-image" src="${resource(dir: 'images', file: "classroom.jpg")}" style="width: 104%"/>
+            <img id="lecpage-image" src="${resource(dir: 'images', file: "audience.jpg")}" style="width: 100%"/>
         </div>
     </div>
 
