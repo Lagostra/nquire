@@ -69,9 +69,9 @@ function updateBoxes(){
     contextWidth = canvas.clientWidth; contextHeight = canvas.clientHeight;
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.globalAlpha = 0.2;
-    presArray[currentPage - 1] = splitAllRects(presArray[currentPage - 1]);
-    for(var i = 0; i < presArray[currentPage - 1].length; i++){
-        var rect = presArray[currentPage - 1][i];
+    var renderArray = splitAllRects(presArray[currentPage - 1]);
+    for(var i = 0; i < renderArray.length; i++){
+        var rect = renderArray[i];
         context.fillRect(rect.x * contextWidth, rect.y * contextHeight, rect.w * contextWidth, rect.h * contextHeight);
     }
 }

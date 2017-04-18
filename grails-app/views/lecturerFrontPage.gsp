@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <img src="grails-app/assets/images/audience.jpg" class="img">
+            <img id="lecpage-image" src="${resource(dir: 'images', file: "classroom.jpg")}" style="width: 104%"/>
         </div>
     </div>
 
