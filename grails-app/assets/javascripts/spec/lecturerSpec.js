@@ -1,9 +1,11 @@
 /**
  * Created by lars on 28.03.2017.
- * Time spent 5h - Lars
+ * Time spent 13h - Lars
  *
  */
 var q;
+var q2;
+var url;
 var question_container;
 var default_question;
 var display_question_btn;
@@ -16,6 +18,7 @@ describe("Test lecturer.js", function(){
             jasmine.createSpy().and.callFake(function(id){
                 if (!htmlElements[id]) {
                     var newElement = document.createElement("div");
+                    newElement.id = id;
                     htmlElements[id] = newElement;
                 }
                 return htmlElements[id];
@@ -25,8 +28,7 @@ describe("Test lecturer.js", function(){
         document.getElementsByClassName =
             jasmine.createSpy().and.callFake(function(c){
                if (!classes[c]){
-                   var newElement = document.createElement("div");
-                   classes[c] = newElement;
+                   classes[c] = document.createElement("div");
                }
                return classes[c];
             });
@@ -55,20 +57,13 @@ describe("Test lecturer.js", function(){
         display_question_btn.id = "display_question_btn";
 
 
-        //
+        //question
         q = {question : "what?", id : 1, read : true};
+        q2 = {question : "what what?", id : 1, read : true};
 
         //BADGE
         badge = document.createElement("div");
-        badge.classList.add("new-question-badge");
-
-
-
-        /*TODO: denne må de som laget den gjøre
-        var menu_container = document.body.createElement("div");
-        badge.id = "menu-container";
-        */
-
+        badge.id = "new-question-badge";
 
     });
 
@@ -110,11 +105,17 @@ describe("Test lecturer.js", function(){
     });
 
     it("Test noifyNewQuestion", function() {
-        addQuestion(q);
+        getNewQuestions =
+            jasmine.createSpy().and.callFake(function() {
+            return 1;
+        });
         notifyNewQuestion();
 
+
         expect(notifyNewQuestion()).toBe(1);
-        expect(badge.innerHTML).toBe("1");
+        expect(document.getElementById("question-popup")
+            .classList.contains("hidden")).toBe(false);
+        expect(new_question_badge.innerHTML).toBe("1");
     });
 
     it("Test noifyNewQuestion w/ questions displayed", function() {
@@ -123,52 +124,90 @@ describe("Test lecturer.js", function(){
             jasmine.createSpy().and.callFake(function() {
                 return true;
             });
-        notifyNewQuestion();
-
         document.getElementsByClassName =
             jasmine.createSpy().and.callFake(function() {
-               return 1;
+                return 1;
             });
+        notifyNewQuestion();
 
         expect (new_question_badge).not.toBe(null);
-        expect (new_question_badge2).not.toBe(null);
+        expect (new_question_badge_2).not.toBe(null);
         expect(notifyNewQuestion()).toBe(0);
         expect(badge.innerHTML).toBe("");
     });
 
-    it ("Test getQuestionsToggled", function() {
+    it ("Test getQuestionsToggled test true", function() {
+        question_container.classList.add(class_hidden);
+        expect(getQuestionsToggled()).toBe(true);
+    });
 
-        expect(true).toBe(true);
+    it("Test getQuestionsToggled test false", function() {
+        question_container.classList.remove(class_hidden);
+        console.log(question_container.classList);
+        console.log(question_container.classList.contains(class_hidden));
+        console.log(getQuestionsToggled());
+        expect(getQuestionsToggled()).toBe(false);
+        //TODO Dette gir ingen mening, trenger parprogrammering elns for å fikse
     });
 
     it ("Test resetNewQuestions", function() {
+        addQuestion(q);
+        socket.send =
+            jasmine.createSpy().and.callFake(function() {
 
-        expect(true).toBe(true);
+        });
+        expect(new_question_badge.innerHTML).toBe("1");
+
+        resetNewQuestions();
+        
+        expect(new_question_badge.innerHTML).toBe("0");
+        expect(document.getElementById("question-popup").classList.contains("hidden"))
+            .toBe(true);
+
     });
 
     it ("Test clearAllQuestions", function() {
+        addQuestion(q);
+        clearAllQuestions();
 
-        expect(true).toBe(true);
+        expect(questions.length === 0).toBe(true);
+        expect(question_container.innerHTML != "").toBe(true);
     });
 
     it ("Test setDefaultQuestion", function() {
+        setDefaultQuestion();
 
-        expect(true).toBe(true);
+        expect(question_container.innerHTML).toBe(
+            '<div id="default_question" ' +
+            'class="question">' +
+            'No questions yet' +
+            '</div>');
     });
 
     it ("Test removeDefaultQuestion", function() {
+        clearAllQuestions();
+        var parent = document.createElement("div");
+        var default_question =
+            document.createElement("div");
+        default_question.id = "default_question";
+        parent.addChild(default_question);
 
-        expect(true).toBe(true);
+        document.getElementById =
+            jasmine.createSpy().and.callFake(function () {
+              return default_question;
+            });
+        removeDefaultQuestion();
+
+        expect(parent.hasChildNodes()).toBe(false);
     });
 
     it ("Test getNewQuestions", function() {
-
-        expect(true).toBe(true);
+        addQuestion(q);
+        expect(getNewQuestions()).toBe(1);
+        addQuestion(q2);
+        expect(getNewQuestions()).toBe(2); //Scope in js...
     });
 
-    it ("Test mouseMoveHandler", function() {
 
-        expect(true).toBe(true);
-    });
 
 });

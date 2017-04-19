@@ -18,8 +18,9 @@ class LectureController {
     @Secured('permitAll')
     def index() {
         boolean invalidLecture = session['invalidLecture'];
+        int status = invalidLecture ? 2 : params.int("status", 0);
         session['invalidLecture'] = false;
-        render(view: '/frontPage', model: [status: invalidLecture])
+        render(view: '/frontPage', model: [status: status])
     }
 
     def present() {

@@ -267,13 +267,15 @@ class LectureHandler {
     /**
      * Closes all connections to this lecture.
      * */
-    public void close() {
-        for (Student student : students.values()) {
-            student.getSession().close(CloseStatus.GOING_AWAY)
-        }
+    public void close(normal = true) {
+        if(normal) { // Lecture was closed by lecturer
+            for (Student student : students.values()) {
+                student.getSession().close(new CloseStatus(4000, "Lecture has been closed."))
+            }
 
-        for (WebSocketSession lecturer : lecturers) {
-            lecturer.close(CloseStatus.GOING_AWAY)
+            for (WebSocketSession lecturer : lecturers) {
+                lecturer.close(new CloseStatus(4000, "Lecture has been closed."))
+            }
         }
     }
 }

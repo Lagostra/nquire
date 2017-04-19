@@ -94,8 +94,6 @@ function renderPage(pageNumber) {
         renderTask = page.render(renderContext);
 
         renderTask.promise.then(function () {
-            console.log("page rendered")
-
             this.currentPage = pageNumber;
             if (document.getElementById('page_num') != null){
                 document.getElementById('page_num').textContent = pageNumber;

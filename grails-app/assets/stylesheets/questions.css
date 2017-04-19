@@ -1,3 +1,13 @@
+#lecture-id {
+    display: inline-block;
+    padding: 3px 8px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 2px;
+    border: 1px solid gray;
+}
+
 #pace-background-questions{
     background: #ED3F09; /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(left,#ED3F09,#F0C800,#ED3F09); /* For Safari 5.1 to 6.0 */
