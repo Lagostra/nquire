@@ -8,6 +8,8 @@ var socket;
 var timeout;
 var lastPaceFeedback = 0;
 
+var swipe;
+
 var lecturersCurrentPage = 1;
 
 function initStudent() {
@@ -72,6 +74,11 @@ function initStudent() {
             this.renderPreviousPage();
         }
     }
+
+    // Event handlers for swiping
+    swipe = new Swipe();
+    swipe.setOnSwipeLeft(renderNextPage);
+    swipe.onswiperight = renderPreviousPage;
 
     //rerenders current page on window resize
     window.onresize = function() {
