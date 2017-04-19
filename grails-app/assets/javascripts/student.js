@@ -105,10 +105,15 @@ function toggleMarking() {
         drag = false;
 
     if(isMarking) {
+        if(swipe)
+            swipe.disabled = true;
         document.getElementById("hard").classList.add("active");
         document.getElementById('student-canvas').style.cursor = "crosshair";
-    } else
+    } else {
+        if(swipe)
+            swipe.disabled = false;
         document.getElementById("hard").classList.remove("active");
+    }
 }
 
 function questionButtonClicked(){

@@ -4,6 +4,8 @@ function Swipe() {
     this.onswipeup = null;
     this.onswipedown = null;
 
+    this.disabled = false;
+
     this.xDown = null;
     this.yDown = null;
 
@@ -12,11 +14,16 @@ function Swipe() {
     }
 
     this.handleTouchStart = function(e) {
+        if(this.disabled)
+            return;
+
         this.xDown = e.touches[0].clientX;
         this.yDown = e.touches[0].clientY;
     }.bind(this);
 
     this.handleTouchMove = function(e) {
+        if(this.disabled)
+            return;
         if ( ! this.xDown || ! this.yDown ) {
             return;
         }
