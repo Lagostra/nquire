@@ -8,6 +8,8 @@ var socket;
 var timeout;
 var lastPaceFeedback = 0;
 
+var swipe;
+
 var lecturersCurrentPage = 1;
 
 function initStudent() {
@@ -73,6 +75,11 @@ function initStudent() {
         }
     }
 
+    // Event handlers for swiping
+    swipe = new Swipe();
+    swipe.setOnSwipeLeft(renderNextPage);
+    swipe.onswiperight = renderPreviousPage;
+
     //rerenders current page on window resize
     window.onresize = function() {
         renderPage(currentPage);
@@ -98,10 +105,15 @@ function toggleMarking() {
         drag = false;
 
     if(isMarking) {
+        if(swipe)
+            swipe.disabled = true;
         document.getElementById("hard").classList.add("active");
         document.getElementById('student-canvas').style.cursor = "crosshair";
-    } else
+    } else {
+        if(swipe)
+            swipe.disabled = false;
         document.getElementById("hard").classList.remove("active");
+    }
 }
 
 function questionButtonClicked(){

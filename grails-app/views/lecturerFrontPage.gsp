@@ -11,12 +11,12 @@
             <div class="jumbotron">
                 <div class="container">
                     <h1 class="display-3">nquire</h1>
-                    <p>Welcome to <em>nquire!</em> This product is one
+                    <p>Welcome to <em>nquire</em>! This product is one
                     of the leading innovations in the field of
-                    university level teaching. We, the<em>nquire</em>-team,
+                    university level teaching. We, the <em>nquire</em>-team,
                     envision every lecture to be an interactive discussion
                     between students and professor. With this tool, lectures
-                    will improved through iteration, based on feedback from
+                    will improve through iteration, based on feedback from
                     the students.</p>
                 </div>
             </div>

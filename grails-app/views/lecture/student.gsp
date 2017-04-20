@@ -105,6 +105,7 @@
     <asset:javascript src="pdf.js" />
     <asset:javascript src="pdfRenderer.js"/>
     <asset:javascript src="student.js"/>
+    <asset:javascript src="swipe.js"/>
     <asset:javascript src="Drawing/functions.js" />
     <asset:javascript src="Drawing/student_canvas.js" />
     <g:javascript>
