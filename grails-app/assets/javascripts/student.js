@@ -49,10 +49,19 @@ function initStudent() {
     }
 
     socket.onerror = function(e) {
-
+        console.log(e);
     }
+
     socket.onclose = function(e) {
-        console.log("Connection closed.");
+        switch(e.code) {
+            case 4000:
+                window.location = window.location.protocol + "//" +  window.location.hostname + (location.port ? ':' + location.port : '') + "?status=1";
+                break;
+            default:
+                console.log("Connection closed with code " + e.code + ": " + e.reason);
+                alert("Connection to server lost. Please reload the page.");
+                break;
+        }
     }
 
     window.onkeydown = function(e){
@@ -88,9 +97,10 @@ function toggleMarking() {
     if(!isMarking)
         drag = false;
 
-    if(isMarking)
+    if(isMarking) {
         document.getElementById("hard").classList.add("active");
-    else
+        document.getElementById('student-canvas').style.cursor = "crosshair";
+    } else
         document.getElementById("hard").classList.remove("active");
 }
 
@@ -111,6 +121,7 @@ function slowerButtonClicked(){
 
         socket.send(message)
     }
+    doButtonCooldown();
 }
 function fasterButtonClicked(){
     if(new Date().getTime() - lastPaceFeedback > 60*1000) {
@@ -123,7 +134,26 @@ function fasterButtonClicked(){
 
         socket.send(message);
     }
+    doButtonCooldown();
 }
+
+function doButtonCooldown() {
+    var btnFaster = document.getElementById("faster");
+    var btnSlower = document.getElementById("slower");
+
+    // Hide tooltips; otherwise they're shown during entire cooldown
+    $(btnFaster).tooltip('hide');
+    $(btnSlower).tooltip('hide');
+
+    btnFaster.disabled = true;
+    btnSlower.disabled = true;
+
+    setTimeout(function() {
+        btnFaster.disabled = false;
+        btnSlower.disabled = false;
+    }, 60000);
+}
+
 function modalSaveButtonClicked(){
     var form = document.forms['questionForm'];
 
@@ -148,11 +178,12 @@ function forceSendQuestion() {
 }
 
 function mouseMoveHandler(){
-    document.getElementById("buttons-container").style.display = "block";
+    var btnContainer = document.getElementById("buttons-container");
+    btnContainer.style.transform = "translate(-50%, 0)";
 
     clearTimeout(timeout);
     timeout = setTimeout(function(){
-        document.getElementById("buttons-container").style.display = "none";
+        btnContainer.style.transform = "translate(-50%, 200%)";
     },2000)
 
 }

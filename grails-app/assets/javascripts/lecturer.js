@@ -13,6 +13,8 @@ var timeout;
 
 var class_hidden = "hidden";
 var class_new_question = "new_question";
+var new_question_badge;
+var new_question_badge_2;
 
 var socket;
 
@@ -102,10 +104,20 @@ function initSockets() {
         }
     };
 
-    socket.onerror = function(e) {};
+    socket.onerror = function(e) {
+        console.log(e);
+    };
 
     socket.onclose = function(e) {
-        console.log("Connection closed.");
+        switch(e.code) {
+            case 4000:
+
+                break;
+            default:
+                console.log("Connection closed with code " + e.code + ": " + e.reason);
+                alert("Connection to server lost. Please reload the page.");
+                break;
+        }
     };
 }
 
@@ -130,7 +142,7 @@ function addQuestion(question) {
     if (document.getElementById("question_container")){
         document.getElementById("question_container").scrollTop = document.getElementById("question_container").scrollHeight;
     }
-};
+}
 
 //Sets a question to read, so it is not considdered new
 function setQuestionRead(id){
@@ -142,8 +154,8 @@ function setQuestionRead(id){
 function notifyNewQuestion() {
     // Hvis questions er displayed skal ikke knappen få "new" taggen
     if (getQuestionsToggled()) {return 0;}
-    var new_question_badge = document.getElementById("question-number");
-    var new_question_badge_2 = document.getElementById("question-badge");
+    new_question_badge = document.getElementById("question-number");
+    new_question_badge_2 = document.getElementById("question-badge");
 
     if(getNewQuestions() > 0) {
         document.getElementById("question-popup").classList.remove("hidden");
@@ -152,18 +164,18 @@ function notifyNewQuestion() {
     new_question_badge.innerHTML = getNewQuestions();
     new_question_badge_2.innerHTML = getNewQuestions();
     return 1;
-};
+}
 
-//Check whether questions are displayed
+//Returns true if questions are hidden, as by default
 function getQuestionsToggled() {
     return question_container.classList.contains(class_hidden);
-};
+}
 
 //Remove the new_question class from all question elements
 function resetNewQuestions(){
     var new_questions = document.getElementsByClassName(class_new_question);
-    var new_question_badge = document.getElementById("question-number");
-    var new_question_badge_2 = document.getElementById("question-badge");
+    new_question_badge = document.getElementById("question-number");
+    new_question_badge_2 = document.getElementById("question-badge");
 
     var readIds = new Array();
 
@@ -182,14 +194,16 @@ function resetNewQuestions(){
         type: "setQuestionsRead",
         questions: readIds
     });
-    socket.send(msg)
-};
+    socket.send(msg);
+
+    return new_questions;
+}
 
 //Reset the questions array
 function clearAllQuestions() {
     questions = [];
     setDefaultQuestion();
-};
+}
 
 //Adds the default question "no questions yet"
 function setDefaultQuestion() {
@@ -197,19 +211,19 @@ function setDefaultQuestion() {
         '<div id="default_question" class="question">' +
             'No questions yet' +
         '</div>';
-};
+}
 
 //Hard removal of default question, part of add question routine
 function removeDefaultQuestion(){
     var default_question = document.getElementById("default_question");
     if(default_question)
         default_question.parentElement.removeChild(default_question);
-};
+}
 
 //Get the amount of new questions
 function getNewQuestions(){
     return document.getElementsByClassName(class_new_question).length;
-};
+}
 
 //sets the position of the pace bar (0-100)
 function setPaceValue(value) {

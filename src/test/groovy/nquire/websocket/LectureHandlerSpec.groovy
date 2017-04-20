@@ -147,7 +147,7 @@ class LectureHandlerSpec extends Specification {
 
         then:
         session.hasClosed
-        session.closeStatus == CloseStatus.GOING_AWAY
+        session.closeStatus.code == 4000
     }
 
     def "test LectureHandler.handleQuestion() with matched question"() {

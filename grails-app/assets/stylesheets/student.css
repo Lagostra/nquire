@@ -12,7 +12,7 @@ html{
 
 #the-canvas {
     margin: auto;
-    display:Block;
+    display: block;
 }
 
 body {
@@ -43,12 +43,32 @@ body {
 #buttons-container{
     position: fixed;
     left: 50%;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, 200%);
     background-color: RGBA(0,0,0,0.5);
     bottom: 0px;
     padding:10px;
     border-radius: 10px 10px 0px 0px;
 }
+
+    .btn-cooldown {
+        position: relative;
+    }
+
+    .btn-cooldown:disabled:after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        width: 100%;
+        left: 0;
+        height: 6px;
+        background: rgba(0, 0, 0, 0.6);
+        animation: cooldown 60s linear;
+    }
+
+        @keyframes cooldown {
+            0% { width: 100%; }
+            100% { width: 0; }
+        }
 
 #loading-container {
     position: fixed;
