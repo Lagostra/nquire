@@ -19,6 +19,9 @@ function initStudentCanvas(){
     canvas.addEventListener("mousedown", mouseDown);
     canvas.addEventListener("mousemove", mouseMove);
     canvas.addEventListener("mouseup", mouseUp);
+    canvas.addEventListener("touchstart", mouseDown);
+    canvas.addEventListener("touchmove", mouseMove);
+    canvas.addEventListener("touchend", mouseUp);
     window.addEventListener("keydown", keyPress);
     drag = false;
     tempRect = {x: 0, y: 0, w: 0, h: 0, sequence: 0};
@@ -37,7 +40,14 @@ function mouseDown(event){
 
     if(!drag){
         drag = true;
-        tempRect.x = (event.offsetX/contextWidth); tempRect.y = (event.offsetY/contextHeight);
+        if(event.offsetX) {
+            tempRect.x = (event.offsetX/contextWidth);
+            tempRect.y = (event.offsetY/contextHeight);
+        } else {
+            tempRect.x = (event.touches[0].pageX - canvas.clientLeft)/contextWidth;
+            tempRect.y = (event.touches[0].pageY - canvas.clientTop)/contextHeight;
+        }
+
         tempRect.w = 0; tempRect.h = 0;
         tempRect.sequence = seqArray[currentPage - 1];
     }
@@ -108,7 +118,15 @@ function mouseUp(event){
 // Changes the size of the temporarily drawn rectangle to match the mouse position
 function mouseMove(event){
     if(drag){
-        tempRect.w = (event.offsetX/contextWidth) - tempRect.x; tempRect.h = (event.offsetY/contextHeight) - tempRect.y;
+        if(event.offsetX) {
+            tempRect.w = (event.offsetX/contextWidth) - tempRect.x;
+            tempRect.h = (event.offsetY/contextHeight) - tempRect.y;
+        } else {
+            var x = event.touches[0].pageX - canvas.clientLeft;
+            var y = event.touches[0].pageY - canvas.clientTop;
+            tempRect.w = (x/contextWidth) - tempRect.x;
+            tempRect.h = (y/contextHeight) - tempRect.y;
+        }
         drawTemp();
     }
 }

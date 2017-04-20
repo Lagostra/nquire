@@ -54,6 +54,6 @@ class User implements Serializable {
 
 	static mapping = {
 		password column: '`password`'
-		presentations column: 'Owner_Id'
+		presentations column: 'Owner_Id', sort: 'dateCreated', order: 'desc'
 	}
 }

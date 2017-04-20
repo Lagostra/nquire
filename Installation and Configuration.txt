@@ -1,0 +1,39 @@
+Installation
+============
+
+No installation is required; simply unzip the source code to a directory of your choice.
+
+
+
+Configuration
+=============
+
+Some configuration is required to enable all features of the software.
+
+1. Create a directory where uploaded presentations are to be stored. 
+   Make sure that permissions are set so that the application has read and write access to the directory.
+2. Create a new directory inside the previous one named "thumbnails".
+3. Open (or create if it does not exist) the file "grails-app/conf/application-development.yml", and add/edit
+   the key "presentationRoot" to the fully qualified path of the directory you created in step 1.
+   This will look like the following: "presentationRoot: /path/to/your/directory"
+
+   You are now ready to run the software!
+
+
+
+Running the server
+==================
+
+To run the application server, do the following steps:
+
+1. Open a command/terminal window in the location of your application files.
+2. If on a windows system, run the following command: "grailsw.bat run"
+   If on Unix-like syste, run the following command: "./grailsw run"
+
+Gradle will now download all dependencies, and after a while, you will get the following message:
+"Grails application running at http://localhost:8080 in environment: development"
+The server is now running in development mode, and uses an in-memory database, which means that
+no database configuration is necessary.
+
+You can now navigate to "http://localhost:8080" in your browser to access the application.
+For your convenience, a user with username "test" and password "password" is automatically set up.

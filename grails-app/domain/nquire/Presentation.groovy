@@ -11,6 +11,7 @@ class Presentation {
 
     String title;
     String fileName;
+    Date dateCreated;
 
     def grailsApplication
 
