@@ -38,8 +38,8 @@ function update(){
 function renderBoxes(){
     for(var id in studentCanvasArray[currentPage - 1]){
         var renderArray = splitAllRects(studentCanvasArray[currentPage - 1][id]);
-        for(var i = 0; i < studentCanvasArray[currentPage - 1][id].length; i++){
-            var r = studentCanvasArray[currentPage - 1][id][i];
+        for(var i = 0; i < renderArray.length; i++){
+            var r = renderArray[i];
             draw(r);
         }
     }
