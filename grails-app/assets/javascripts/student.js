@@ -150,19 +150,19 @@ function fasterButtonClicked(){
 }
 
 function doButtonCooldown() {
-    var btnFaster = document.getElementById("faster");
-    var btnSlower = document.getElementById("slower");
+    var btnFast = document.getElementById("fast");
+    var btnSlow = document.getElementById("slow");
 
     // Hide tooltips; otherwise they're shown during entire cooldown
-    $(btnFaster).tooltip('hide');
-    $(btnSlower).tooltip('hide');
+    $(btnFast).tooltip('hide');
+    $(btnSlow).tooltip('hide');
 
-    btnFaster.disabled = true;
-    btnSlower.disabled = true;
+    btnFast.disabled = true;
+    btnSlow.disabled = true;
 
     setTimeout(function() {
-        btnFaster.disabled = false;
-        btnSlower.disabled = false;
+        btnFast.disabled = false;
+        btnSlow.disabled = false;
     }, 60000);
 }
 

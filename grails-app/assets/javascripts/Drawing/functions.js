@@ -138,7 +138,6 @@ function removeDuplicates(rectArray){
 // Takes in an input of rectangles that may overlap or be equal, and returns an array of non-overlapping rectangles
 // where no two rectangles are equal that covers the same area.
 function splitAllRects(rectArray){
-    return rectArray;
     var rects = removeDuplicates(rectArray);
     var b = false;
     for(var i = rects.length - 1; i > 0; i--){

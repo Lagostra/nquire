@@ -92,11 +92,11 @@
             <img style="height:22px;" src="${resource(dir: 'images', file: "speech-bubble.svg")}" alt="Grails"/>
         </button>
 
-        <button id="slower" class="btn btn-default btn-lg btn-danger btn-cooldown" type="button" data-toggle="tooltip" title="I want the lecture to go SLOWER!" onclick="slowerButtonClicked()">
+        <button id="slow" class="btn btn-default btn-lg btn-danger btn-cooldown" type="button" data-toggle="tooltip" title="Too slow!" onclick="fasterButtonClicked()">
             <img style="height:23px;" src="${resource(dir: 'images', file: "snail.svg")}" alt="Grails"/>
         </button>
 
-        <button id="faster" class="btn btn-default btn-lg btn-warning btn-cooldown" type="button" data-toggle="tooltip" title="I want the lecture to go FASTER!" onclick="fasterButtonClicked()">
+        <button id="fast" class="btn btn-default btn-lg btn-warning btn-cooldown" type="button" data-toggle="tooltip" title="Too fast!" onclick="slowerButtonClicked()">
             <img style="height:23px;" src="${resource(dir: 'images', file: "rabbit.svg")}" alt="Grails"/>
         </button>
     </div>
