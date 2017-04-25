@@ -29,6 +29,8 @@ function updateStudentCanvas(studentId, currentPage, array){
 
 // Update the alpha value for each drawn canvas on the page, clear the canvas and call for a render
 function update(){
+    if(studentCanvasArray.length == 0)
+        return;
     fullAlpha = (0.25 / Object.keys(studentCanvasArray[currentPage - 1]).length);
     context.clearRect(0, 0, canvas.width, canvas.height);
     renderBoxes();
