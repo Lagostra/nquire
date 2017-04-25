@@ -79,6 +79,34 @@
     right: 0;
 }
 
+    #btn-previous, #btn-next {
+        display: none;
+        z-index: 1000000;
+
+        font-size: 3em;
+        color: white;
+        text-shadow:    -1px -1px 5px black,
+                        -1px  1px 5px black,
+                        1px  -1px 5px black,
+                        1px   1px 5px black;
+
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    #btn-previous:hover, #btn-next:hover {
+        cursor: pointer;
+    }
+
+    #btn-previous {
+        left: 20px;
+    }
+
+    #btn-next {
+        right: 20px;
+    }
+
     #the-canvas {
         margin: auto;
         display: block;

@@ -79,6 +79,8 @@
 
     <div style="position: fixed;"><span >Page: <span id="page_num"></span> / <span id="page_count"></span></span></div>
     <div id="presentation-container">
+        <span id="btn-previous" class="glyphicon glyphicon-chevron-left"></span>
+        <span id="btn-next" class="glyphicon glyphicon-chevron-right"></span>
         <canvas id="the-canvas"></canvas>
         <canvas id="student-canvas"></canvas>
     </div>

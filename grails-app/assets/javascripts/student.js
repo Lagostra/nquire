@@ -75,6 +75,10 @@ function initStudent() {
         }
     }
 
+    // Handlers for previous and next chevron buttons
+    document.getElementById("btn-previous").onclick = renderPreviousPage;
+    document.getElementById("btn-next").onclick = renderNextPage;
+
     // Event handlers for swiping
     swipe = new Swipe();
     swipe.setOnSwipeLeft(renderNextPage);
@@ -193,9 +197,14 @@ function mouseMoveHandler(){
     var btnContainer = document.getElementById("buttons-container");
     btnContainer.style.transform = "translate(-50%, 0)";
 
+    document.getElementById("btn-previous").style.display = "block";
+    document.getElementById("btn-next").style.display = "block";
+
     clearTimeout(timeout);
     timeout = setTimeout(function(){
         btnContainer.style.transform = "translate(-50%, 200%)";
+        document.getElementById("btn-previous").style.display = "none";
+        document.getElementById("btn-next").style.display = "none";
     },2000)
 
 }
