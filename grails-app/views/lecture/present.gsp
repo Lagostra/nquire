@@ -105,8 +105,12 @@
 
     </div>
 
+    <span id="btn-previous" class="glyphicon glyphicon-chevron-left"></span>
+    <span id="btn-next" class="glyphicon glyphicon-chevron-right"></span>
+
     <!-- Container for the presentation canvas -->
     <div id="presentation-container" style="z-index: -10;">
+
         <canvas id="the-canvas"></canvas>
         <canvas id="lecturer-canvas"></canvas>
     </div>

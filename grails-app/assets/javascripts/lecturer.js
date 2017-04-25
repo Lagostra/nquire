@@ -20,6 +20,8 @@ var socket;
 
 //Initionalizes the script so it has valid members, starts web sockets
 function initLecturer() {
+    document.body.onmousemove = mouseMoveHandler;
+
     /*ELEMENTS*/
     question_container = document.getElementById("question_container");
     default_question = document.getElementById("default_question");
@@ -44,6 +46,10 @@ function initLecturer() {
             renderPage(currentPage);
         }
     }
+
+    // Handlers for previous and next chevron buttons
+    document.getElementById("btn-previous").onclick = renderPreviousPage;
+    document.getElementById("btn-next").onclick = renderNextPage;
 }
 
 //Sets up web socets, called as part of the init routine
@@ -300,4 +306,16 @@ function onKey(e) {
             socket.send(JSON.stringify({type: "pageChange", page: currentPage}));
             break;
     }
+}
+
+function mouseMoveHandler(){
+    document.getElementById("btn-previous").style.display = "block";
+    document.getElementById("btn-next").style.display = "block";
+
+    clearTimeout(timeout);
+    timeout = setTimeout(function(){
+        document.getElementById("btn-previous").style.display = "none";
+        document.getElementById("btn-next").style.display = "none";
+    },2000)
+
 }

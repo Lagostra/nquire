@@ -81,7 +81,7 @@
 
     #btn-previous, #btn-next {
         display: none;
-        z-index: 1000000;
+        z-index: 10;
 
         font-size: 3em;
         color: white;
