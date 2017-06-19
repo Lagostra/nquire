@@ -116,8 +116,8 @@ environments:
         dataSource:
             driverClassName: com.mysql.jdbc.Driver
             dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-            username: nquire
-            password: TbUg5cmodyHtpD60pyDY
+            username: 
+            password: 
 
             dbCreate: update
             url: jdbc:mysql://127.0.0.1:3306/nquire?useSSL=false
