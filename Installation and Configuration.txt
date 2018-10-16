@@ -30,7 +30,7 @@ To run the application server, do the following steps:
 
 1. Open a command/terminal window in the location where you unzipped the package.
 2. If on a windows system, run the following command: "grailsw.bat run"
-   If on Unix-like syste, run the following command: "./grailsw run"
+   If on Unix-like system, run the following command: "./grailsw run"
 
 Gradle will now download all dependencies, and after a while, you will get the following message:
 "Grails application running at http://localhost:8080 in environment: development"
